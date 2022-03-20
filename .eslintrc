@@ -7,11 +7,6 @@
     "ignorePatterns": [
         "build/"
     ],
-    "settings": {
-        "jest": {
-            "version": 26
-        }
-    },
     "rules": {
         "no-await-in-loop": "warn",
         "no-duplicate-imports": "warn",

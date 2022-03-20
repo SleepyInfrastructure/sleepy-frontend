@@ -5,9 +5,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 /* Styles */
 import "./style/default.scss";
-import "./style/themes/default.scss";
-import "./style/slick/slick.scss";
-import "./style/slick/slick-theme.scss";
+import "./style/variables.scss";
 /* Components */
 import App from "./components/app";
 
