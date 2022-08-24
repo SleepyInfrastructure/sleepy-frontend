@@ -1,23 +1,8 @@
-/* Counter */
-export function increaseCounter(value: number): ReduxAction {
-    return {
-        type: "INCREASE_COUNTER",
-        data: value,
-    };
-}
-
-export function resetCounter(): ReduxAction {
-    return {
-        type: "RESET_COUNTER",
-        data: {},
-    };
-}
-
 /* Users */
-export function addUser(user: User): ReduxAction {
+export function createUser(username: string, password: string): ReduxAction {
     return {
-        type: "ADD_USER",
-        data: user,
+        type: "CREATE_USER",
+        data: { username, password },
     };
 }
 
@@ -34,16 +19,225 @@ export function fetchUserSuccess(user: User): ReduxAction {
     };
 }
 
-export function updateUser(user: User): ReduxAction {
+/* Sessions */
+export function createSession(type: string, username?: string, password?: string): ReduxAction {
     return {
-        type: "UPDATE_USER",
-        data: user,
+        type: "CREATE_SESSION",
+        data: { type, username, password },
+    };
+}
+export function createSessionSuccess(session: Session): ReduxAction {
+    return {
+        type: "CREATE_SESSION_SUCCESS",
+        data: session,
     };
 }
 
-export function removeUser(id: string): ReduxAction {
+export function deleteSession(): ReduxAction {
     return {
-        type: "REMOVE_USER",
+        type: "DELETE_SESSION",
+        data: {},
+    };
+}
+
+/* Servers */
+export function createServer(name: string): ReduxAction {
+    return {
+        type: "CREATE_SERVER",
+        data: { name },
+    };
+}
+export function createServerSuccess(server: ServerStructured): ReduxAction {
+    return {
+        type: "CREATE_SERVER_SUCCESS",
+        data: server,
+    };
+}
+
+export function fetchServer(id: string): ReduxAction {
+    return {
+        type: "FETCH_SERVER",
         data: id,
+    };
+}
+export function fetchServerSuccess(server: Server): ReduxAction {
+    return {
+        type: "FETCH_SERVER_SUCCESS",
+        data: server,
+    };
+}
+
+export function fetchServerStructured(id: string): ReduxAction {
+    return {
+        type: "FETCH_SERVER_STRUCTURED",
+        data: id,
+    };
+}
+export function fetchServerStructuredSuccess(serverStructured: ServerStructured): ReduxAction {
+    return {
+        type: "FETCH_SERVER_STRUCTURED_SUCCESS",
+        data: serverStructured,
+    };
+}
+
+export function fetchAllServersStructured(): ReduxAction {
+    return {
+        type: "FETCH_ALL_SERVERS_STRUCTURED",
+        data: {},
+    };
+}
+export function fetchAllServersStructuredSuccess(servers: ServerStructured[]): ReduxAction {
+    return {
+        type: "FETCH_ALL_SERVERS_STRUCTURED_SUCCESS",
+        data: servers,
+    };
+}
+
+/* Networks */
+export function fetchNetwork(id: string): ReduxAction {
+    return {
+        type: "FETCH_NETWORK",
+        data: id,
+    };
+}
+export function fetchNetworkSuccess(network: Network): ReduxAction {
+    return {
+        type: "FETCH_NETWORK_SUCCESS",
+        data: network,
+    };
+}
+
+/* Disks */
+export function fetchDisk(id: string): ReduxAction {
+    return {
+        type: "FETCH_DISK",
+        data: id,
+    };
+}
+export function fetchDiskSuccess(disk: Disk): ReduxAction {
+    return {
+        type: "FETCH_DISK_SUCCESS",
+        data: disk,
+    };
+}
+
+export function fetchAllDisksStructured(): ReduxAction {
+    return {
+        type: "FETCH_ALL_DISKS_STRUCTURED",
+        data: {},
+    };
+}
+export function fetchAllDisksStructuredSuccess(disks: DiskStructured[]): ReduxAction {
+    return {
+        type: "FETCH_ALL_DISKS_STRUCTURED_SUCCESS",
+        data: disks,
+    };
+}
+
+/* Partitions */
+export function fetchPartition(id: string): ReduxAction {
+    return {
+        type: "FETCH_PARTITION",
+        data: id,
+    };
+}
+export function fetchPartitionSuccess(partition: Partition): ReduxAction {
+    return {
+        type: "FETCH_PARTITION_SUCCESS",
+        data: partition,
+    };
+}
+
+/* Containers */
+export function fetchContainer(id: string): ReduxAction {
+    return {
+        type: "FETCH_CONTAINER",
+        data: id,
+    };
+}
+export function fetchContainerSuccess(container: Container): ReduxAction {
+    return {
+        type: "FETCH_CONTAINER_SUCCESS",
+        data: container,
+    };
+}
+
+/* Containers */
+export function fetchDatabase(id: string): ReduxAction {
+    return {
+        type: "FETCH_DATABASE",
+        data: id,
+    };
+}
+export function fetchDatabaseSuccess(database: Database): ReduxAction {
+    return {
+        type: "FETCH_DATABASE_SUCCESS",
+        data: database,
+    };
+}
+
+/* Daemon Tokens */
+export function createServerDaemonToken(id: string): ReduxAction {
+    return {
+        type: "CREATE_SERVER_DAEMON_TOKEN",
+        data: id,
+    };
+}
+export function createServerDaemonTokenSuccess(token: DaemonToken): ReduxAction {
+    return {
+        type: "CREATE_SERVER_DAEMON_TOKEN_SUCCESS",
+        data: token,
+    };
+}
+
+export function deleteDaemonToken(id: string): ReduxAction {
+    return {
+        type: "DELETE_DAEMON_TOKEN",
+        data: id,
+    };
+}
+export function deleteDaemonTokenSuccess(id: string): ReduxAction {
+    return {
+        type: "DELETE_DAEMON_TOKEN_SUCCESS",
+        data: id,
+    };
+}
+
+export function fetchServerDaemonTokens(id: string): ReduxAction {
+    return {
+        type: "FETCH_SERVER_DAEMON_TOKENS",
+        data: id,
+    };
+}
+export function fetchServerDaemonTokensSuccess(tokens: DaemonToken[]): ReduxAction {
+    return {
+        type: "FETCH_SERVER_DAEMON_TOKENS_SUCCESS",
+        data: tokens,
+    };
+}
+
+/* Websocket */
+export function connectWebsocket(): ReduxAction {
+    return {
+        type: "CONNECT_WEBSOCKET",
+        data: {},
+    };
+}
+export function fetchAllDaemonsSuccess(daemons: Daemon[]): ReduxAction {
+    return {
+        type: "FETCH_ALL_DAEMONS_SUCCESS",
+        data: daemons,
+    };
+}
+export function daemonRequestRefresh(id: string): ReduxAction {
+    return {
+        type: "DAEMON_REQUEST_REFRESH",
+        data: id,
+    };
+}
+export function daemonRequestDatabaseBackup(id: string, database: string): ReduxAction {
+    return {
+        type: "DAEMON_REQUEST_DATABASE_BACKUP",
+        data: { id, database },
     };
 }

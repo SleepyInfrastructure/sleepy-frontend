@@ -1,11 +1,33 @@
 import { bindActionCreators } from "redux";
 
 export const INITIAL: ReduxState = {
-    counter: 0,
+    session: null,
     users: new Map(),
+    servers: new Map(),
+    serverConfigs: new Map(),
+    networks: new Map(),
+    disks: new Map(),
+    partitions: new Map(),
+    containers: new Map(),
+    databases: new Map(),
+    statistics: new Map(),
+    diskStatistics: new Map(),
+    daemons: new Map(),
+    daemonTokens: new Map(),
 };
 export enum ResourceType {
     USER = "user",
+    SERVER = "server",
+    SERVER_CONFIG = "server-config",
+    SERVER_STRUCTURED = "server-structured",
+    NETWORK = "network",
+    DISK = "disk",
+    DISK_STRUCTURED = "disk-structured",
+    PARTITION = "partition",
+    CONTAINER = "container",
+    DATABASE = "database",
+    DAEMON = "deamon",
+    DAEMON_TOKEN = "deamonToken",
     UNKNOWN = "unknown",
 }
 
@@ -24,10 +46,159 @@ export function mapDispatch(actions: Record<string, any>): any {
 }
 
 export function cacheResource(state: ReduxState, resource: any, resourceType: ResourceType): ReduxState {
+    return cacheResources(state, [ resource ], resourceType);
+}
+
+export function cacheResources(state: ReduxState, resources: any[], resourceType: ResourceType): ReduxState {
     switch (resourceType) {
-        case ResourceType.USER: {
-            state.users.set(resource.id, resource);
-            return { ...state, users: state.users };
+        case ResourceType.SERVER: {
+            const newResources = new Map(state.servers);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, servers: newResources };
+        }
+
+        case ResourceType.SERVER_CONFIG: {
+            const newResources = new Map(state.serverConfigs);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, serverConfigs: newResources };
+        }
+        
+        case ResourceType.SERVER_STRUCTURED: {
+            const newServerConfigs = new Map(state.serverConfigs);
+            resources.forEach(server => {
+                newServerConfigs.set(server.config.id, server.config);
+                delete server.config;
+            });
+
+            const newNetworks = new Map(state.networks);
+            resources.forEach(server => {
+                newNetworks.set(server.network.id, server.network);
+                delete server.network;
+            });
+            
+            const newDisks = new Map(state.disks);
+            resources.forEach(server => {
+                server.disks.forEach((disk: any) => {
+                    newDisks.set(disk.id, disk);
+                });
+                delete server.disks;
+            });
+            
+            const newPartitions = new Map(state.partitions);
+            resources.forEach(server => {
+                server.partitions.forEach((partition: any) => {
+                    newPartitions.set(partition.id, partition);
+                });
+                delete server.partitions;
+            });
+            
+            const newContainers = new Map(state.containers);
+            resources.forEach(server => {
+                server.containers.forEach((container: any) => {
+                    newContainers.set(container.id, container);
+                });
+                delete server.containers;
+            });
+            
+            const newDatabases = new Map(state.databases);
+            resources.forEach(server => {
+                server.databases.forEach((database: any) => {
+                    newDatabases.set(database.id, database);
+                });
+                delete server.databases;
+            });
+            
+            const newStatistics = new Map(state.statistics);
+            resources.forEach(server => {
+                server.statistics.forEach((statistic: any) => {
+                    newStatistics.set(statistic.id, statistic);
+                });
+                delete server.statistics;
+            });
+            
+            const newServers = new Map(state.servers);
+            resources.forEach(server => {
+                newServers.set(server.id, server);
+            });
+
+            return { ...state, servers: newServers, serverConfigs: newServerConfigs, networks: newNetworks, disks: newDisks, partitions: newPartitions, containers: newContainers, databases: newDatabases, statistics: newStatistics };
+        }
+
+        case ResourceType.NETWORK: {
+            const newResources = new Map(state.networks);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, networks: newResources };
+        }
+
+        case ResourceType.DISK: {
+            const newResources = new Map(state.disks);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, disks: newResources };
+        }
+        
+        case ResourceType.DISK_STRUCTURED: {
+            const newStatistics = new Map(state.diskStatistics);
+            resources.forEach(disk => {
+                disk.statistics.forEach((statistic: any) => {
+                    newStatistics.set(statistic.id, statistic);
+                });
+                delete disk.statistics;
+            });
+            
+            const newDisks = new Map(state.disks);
+            resources.forEach(disk => {
+                newDisks.set(disk.id, disk);
+            });
+
+            return { ...state, disks: newDisks, diskStatistics: newStatistics };
+        }
+
+        case ResourceType.PARTITION: {
+            const newResources = new Map(state.partitions);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, partitions: newResources };
+        }
+
+        case ResourceType.CONTAINER: {
+            const newResources = new Map(state.containers);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, containers: newResources };
+        }
+
+        case ResourceType.DATABASE: {
+            const newResources = new Map(state.databases);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, databases: newResources };
+        }
+
+        case ResourceType.DAEMON: {
+            const newResources = new Map(state.daemons);
+            resources.forEach(resource => {
+                newResources.set(resource.server, resource);
+            });
+            return { ...state, daemons: newResources };
+        }
+
+        case ResourceType.DAEMON_TOKEN: {
+            const newResources = new Map(state.daemonTokens);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, daemonTokens: newResources };
         }
     }
 

@@ -1,0 +1,35 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.page {
+    min-height: calc(100% - 56px);
+    background-color: var(--color-background);
+    padding: 20px;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+}
+
+.page-title-wrapper {
+    @extend %align-y;
+    height: 32px;
+    grid-gap: 10px;
+}
+
+.page-title {
+    font-size: 30px;
+    color: #ffffff;
+}

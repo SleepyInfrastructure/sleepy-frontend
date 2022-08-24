@@ -1,7 +1,7 @@
 {
-    "name": "foxxy-frontend",
+    "name": "sleepy",
     "version": "0.0.0",
-    "description": "A customizable web front-end template.",
+    "description": "A flexible interface for managing servers.",
     "license": "GPL-3.0-or-later",
     "author": {
         "name": "LamkasDev",
@@ -32,10 +32,10 @@
         "preact": "^10.6.4",
         "preact-cli": "^3.3.3",
         "preact-render-to-string": "^5.1.4",
+        "preact-router": "^4.1.0",
         "prettier": "2.5.1",
         "react-redux": "^7.2.6",
-        "react-router": "^6.2.1",
-        "react-router-dom": "^6.2.1",
+        "recharts": "^2.1.13",
         "redux": "^4.1.2",
         "sass": "^1.48.0",
         "sass-loader": "^10.1.1",

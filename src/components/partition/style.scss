@@ -1,0 +1,55 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.partition-title-wrapper {
+    @extend %align-y;
+}
+
+.partition-title {
+    color: var(--color-primary-text);
+    font-size: 16px;
+}
+
+.partition-content {
+    @extend %align-y;
+    padding-left: 5px;
+    grid-gap: 8px;
+}
+
+.partition-bar-percentage {
+    color: #ff7680;
+    font-size: 12px;
+}
+
+.partition-bar {
+    height: 8px;
+    width: 180px;
+    background-color: var(--color-background);
+    border: 0;
+    border-radius: 20px;
+}
+
+.partition-bar-fill {
+    display: block;
+    height: 100%;
+    background-color: var(--color-secondary);
+    border-radius: 20px;
+}
+
+/* Icons */
+.partition-icon {
+    width: 24px;
+    height: 24px;
+    transform: scale(0.65);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M21 3v18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1zM5 16v4h14v-4H5zm10 1h2v2h-2v-2z' fill='rgba(255, 54, 69)'/%3E%3C/svg%3E");
+}

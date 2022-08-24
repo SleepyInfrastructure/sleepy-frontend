@@ -1,0 +1,65 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.server-content-token-links {
+    display: flex;
+    grid-gap: 8px;
+}
+
+.server-content-tokens-fetch {
+    color: #66f;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.server-content-tokens-create {
+    color: #63d083;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.server-content-tokens-delete {
+    color: #ff7680;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.server-tokens {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+}
+
+.server-tokens-no-fetch {
+    color: #6f6f6f;
+}
+
+.server-token {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 4px;
+    color: #fd2b3b;
+}
+
+.server-token-header {
+    display: flex;
+    grid-gap: 4px;
+}
+
+.server-token-timestamp {
+    color: #fd2b3b;
+}
+
+.server-token-timestamp-highlight {
+    color: #ff7680;
+}

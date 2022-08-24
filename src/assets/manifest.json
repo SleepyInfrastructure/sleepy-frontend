@@ -1,6 +1,6 @@
 {
-    "name": "foxxy-frontend",
-    "short_name": "foxxy-frontend",
+    "name": "Sleepy",
+    "short_name": "Sleepy",
     "start_url": "/",
     "display": "standalone",
     "orientation": "portrait",

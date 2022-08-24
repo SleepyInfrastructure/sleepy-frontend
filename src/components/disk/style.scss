@@ -1,0 +1,36 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.disk-title-wrapper {
+    @extend %align-y;
+}
+
+.disk-title {
+    color: var(--color-primary-text);
+    font-size: 16px;
+}
+
+.disk-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+    grid-gap: 2px;
+}
+
+/* Icons */
+.disk-icon {
+    width: 24px;
+    height: 24px;
+    transform: scale(0.65);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M21 3v18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1zM5 16v4h14v-4H5zm10 1h2v2h-2v-2z' fill='rgba(255, 54, 69)'/%3E%3C/svg%3E");
+}
