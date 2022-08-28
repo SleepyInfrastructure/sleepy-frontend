@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -33,7 +33,7 @@ const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (p
             </div>
             <div className={style["installing-daemon-instructions"]}>
                 <div className={style["installing-daemon-instruction"]}>1) <span className={style["installing-daemon-instruction-highlight"]}>
-                    Clone the <span className={style["installing-daemon-instruction-link"]} onClick={() => { window.open("test", "null"); }}>daemon repository</span> into <span className={style["installing-daemon-instruction-code"]}>/opt/sleepy-daemon</span> on your server.
+                    Clone the <span className={style["installing-daemon-instruction-link"]} onClick={() => { window.open("https://github.com/SleepyInfrastructure/sleepy-daemon", "null"); }}>daemon repository</span> into <span className={style["installing-daemon-instruction-code"]}>/opt/sleepy-daemon</span> on your server.
                     </span>
                 </div>
                 <div className={style["installing-daemon-instruction"]}>2) <span className={style["installing-daemon-instruction-highlight"]}>

@@ -47,6 +47,14 @@ export async function createServer(name: string): Promise<ServerStructured | und
 
     return response.body;
 }
+export async function editServer(edit: ServerEdit): Promise<ServerStructured | undefined> {
+    const response: APIResponse = await post({ path: `/servers/edit`, body: JSON.stringify(edit) });
+    if (response.status !== 200) {
+        return undefined;
+    }
+
+    return response.body;
+}
 export async function fetchServer(id: string): Promise<Server | undefined> {
     const response: APIResponse = await get({ path: `/servers/fetch?id=${id}` });
     if (response.status !== 200) {
@@ -89,7 +97,6 @@ export async function fetchDisk(id: string): Promise<Disk | undefined> {
 
     return response.body;
 }
-
 export async function fetchAllDisksStructured(): Promise<DiskStructured[]> {
     const response: APIResponse = await get({ path: `/disks/all/structured/fetch` });
     if (response.status !== 200) {
@@ -112,6 +119,39 @@ export async function fetchContainer(id: string): Promise<Container | undefined>
     const response: APIResponse = await get({ path: `/containers/fetch?id=${id}` });
     if (response.status !== 200) {
         return undefined;
+    }
+
+    return response.body;
+}
+
+export async function createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): Promise<UptimeEndpoint | undefined> {
+    const response: APIResponse = await post({ path: `/uptimeEndpoints/create`, body: JSON.stringify({ name, host, requestEndpoint }) });
+    if (response.status !== 200) {
+        return undefined;
+    }
+
+    return response.body;
+}
+export async function editUptimeEndpoint(edit: UptimeEndpointEdit): Promise<UptimeEndpoint | undefined> {
+    const response: APIResponse = await post({ path: `/uptimeEndpoints/edit`, body: JSON.stringify(edit) });
+    if (response.status !== 200) {
+        return undefined;
+    }
+
+    return response.body;
+}
+export async function fetchUptimeEndpoint(id: string): Promise<UptimeEndpoint | undefined> {
+    const response: APIResponse = await get({ path: `/uptimeEndpoints/fetch?id=${id}` });
+    if (response.status !== 200) {
+        return undefined;
+    }
+
+    return response.body;
+}
+export async function fetchAllUptimeEndpointsStructured(): Promise<UptimeEndpointStructured[]> {
+    const response: APIResponse = await get({ path: `/uptimeEndpoints/all/structured/fetch` });
+    if (response.status !== 200) {
+        return [];
     }
 
     return response.body;

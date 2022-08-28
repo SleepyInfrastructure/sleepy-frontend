@@ -9,6 +9,8 @@ type AppConnectedProps = {
     partitions: Map<string, Partition>;
     containers: Map<string, Container>;
     databases: Map<string, Database>;
+    uptimeEndpoints: Map<string, UptimeEndpoint>;
+    uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
     daemons: Map<string, Daemon>;

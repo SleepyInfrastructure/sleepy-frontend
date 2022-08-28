@@ -1,6 +1,5 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -10,13 +9,6 @@ import style from "./style.scss";
 import baseStyle from "../style.scss";
 
 const Settings: FunctionalComponent<SettingsConnectedProps> = (props: SettingsConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.session]);
-    const servers = Array.from(props.servers.values());
-
     return (
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>

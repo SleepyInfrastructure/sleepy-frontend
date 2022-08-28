@@ -16,6 +16,9 @@ import Register from "../routes/register";
 import CreateServer from "../routes/create-server";
 import Server from "../routes/server";
 import InstallingDaemon from "../routes/installing-daemon";
+import EditServer from "../routes/edit-server";
+import CreateUptimeEndpoint from "../routes/create-uptime-endpoint";
+import EditUptimeEndpoint from "../routes/edit-uptime-endpoint";
 
 const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
     useEffect(() => {
@@ -27,14 +30,17 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
         <div id="app">
             <Header session={props.session} actions={props.actions} />
             <Router>
-                <Home path="/" session={props.session} servers={props.servers} serverConfigs={props.serverConfigs} networks={props.networks} disks={props.disks} partitions={props.partitions} containers={props.containers} databases={props.databases} daemons={props.daemons} statistics={props.statistics} diskStatistics={props.diskStatistics} actions={props.actions} />
+                <Home path="/" {...props} />
                 <Login path="/login" actions={props.actions} />
                 <Register path="/register" actions={props.actions} />
-                <Settings path="/settings" session={props.session} users={props.users} servers={props.servers} networks={props.networks} actions={props.actions} />
+                <Settings path="/settings" session={props.session} actions={props.actions} />
                 <Tokens path="/tokens" session={props.session} servers={props.servers} daemonTokens={props.daemonTokens} actions={props.actions} />
-                <CreateServer path="/create-server" servers={props.servers} actions={props.actions} />
-                <Server path="/server/:id" session={props.session} servers={props.servers} serverConfigs={props.serverConfigs} networks={props.networks} disks={props.disks} partitions={props.partitions} containers={props.containers} databases={props.databases} daemons={props.daemons} statistics={props.statistics} diskStatistics={props.diskStatistics} actions={props.actions} />
+                <CreateServer path="/create-server" session={props.session} servers={props.servers} actions={props.actions} />
+                <EditServer path="/edit-server/:id" session={props.session} servers={props.servers} actions={props.actions} />
+                <Server path="/server/:id" {...props} />
                 <InstallingDaemon path="/installing-daemon/:id" session={props.session} servers={props.servers} daemonTokens={props.daemonTokens} actions={props.actions} />
+                <CreateUptimeEndpoint path="/create-uptime-endpoint" session={props.session} uptimeEndpoints={props.uptimeEndpoints} actions={props.actions} />
+                <EditUptimeEndpoint path="/edit-uptime-endpoint/:id" session={props.session} uptimeEndpoints={props.uptimeEndpoints} actions={props.actions} />
             </Router>
         </div>
     );

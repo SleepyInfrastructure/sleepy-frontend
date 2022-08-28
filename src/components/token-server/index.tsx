@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 /* Styles */
 import serverStyle from "../server/style.scss";
 import style from "./style.scss";

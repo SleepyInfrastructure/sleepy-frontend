@@ -7,7 +7,7 @@ export function formatTimestamp(e: number) {
     return new Date(e * 1000).toLocaleTimeString([], { hour: "2-digit", minute:"2-digit" });
 }
 
-export function getServerConnectedProps(e: Server, props: AlmostAllProps): ServerConnectedProps {
+export function getServerConnectedProps(e: Server, props: ServersProps): ServerConnectedProps {
     // this is stupid
     const disks = Array.from(props.disks.values());
     const partitions = Array.from(props.partitions.values());

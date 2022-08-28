@@ -12,10 +12,10 @@ const MemoryChart: FunctionalComponent<MemoryChartConnectedProps> = (props: Memo
     const [displayPercentages, setDisplayPercentages] = useState(true);
     const memMax = Math.max(displayPhysical ? props.item.memory : 0, displaySwap ? props.item.swap : 0, 0)
 
-    return <div className={style["server-chart"]}>
-        <div className={style["server-chart-header"]}>
+    return <div className={style.chart}>
+        <div className={style["chart-header"]}>
             <div className={style["memory-icon"]} />
-            <div className={style["server-chart-title"]}>Memory Usage</div>
+            <div className={style["chart-title"]}>Memory Usage</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">
             <LineChart data={props.statistics} margin={{ top: 10, bottom: 10, left: 10, right: 10 }}>
@@ -28,18 +28,18 @@ const MemoryChart: FunctionalComponent<MemoryChartConnectedProps> = (props: Memo
                 {displaySwap ? <Line name="Swap" type="monotone" dataKey={displayPercentages ? "swap" : (e: Statistic) => props.item.swap * (e.swap / 100)} stroke="#3bb4ff" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
             </LineChart>
         </ResponsiveContainer>
-        <div className={style["server-chart-footer"]}>
-            <div className={style["server-chart-footer-switch"]} onClick={() => { setDisplayPhysical(!displayPhysical); }}>
+        <div className={style["chart-footer"]}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setDisplayPhysical(!displayPhysical); }}>
                 <div className={style["circle-icon"]} data={displayPhysical ? "true" : "false"} style={{ background: "#3bff6f" }} />
-                <div className={style["server-chart-footer-switch-text"]} data={displayPhysical ? "true" : "false"} style={{ color: "#3bff6f" }} >Physical</div>
+                <div className={style["chart-footer-switch-text"]} data={displayPhysical ? "true" : "false"} style={{ color: "#3bff6f" }} >Physical</div>
             </div>
-            <div className={style["server-chart-footer-switch"]} onClick={() => { setDisplaySwap(!displaySwap); }}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setDisplaySwap(!displaySwap); }}>
                 <div className={style["circle-icon"]} data={displaySwap ? "true" : "false"} style={{ background: "#3bb4ff" }} />
-                <div className={style["server-chart-footer-switch-text"]} data={displaySwap ? "true" : "false"} style={{ color: "#3bb4ff" }}>Swap</div>
+                <div className={style["chart-footer-switch-text"]} data={displaySwap ? "true" : "false"} style={{ color: "#3bb4ff" }}>Swap</div>
             </div>
-            <div className={style["server-chart-footer-switch"]} onClick={() => { setDisplayPercentages(!displayPercentages); }}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setDisplayPercentages(!displayPercentages); }}>
                 <div className={style["circle-icon"]} style={{ background: "#f5a142" }} />
-                <div className={style["server-chart-footer-switch-text"]} style={{ color: "#f5a142" }}>{displayPercentages ? "Percentages" : "Amount"}</div>
+                <div className={style["chart-footer-switch-text"]} style={{ color: "#f5a142" }}>{displayPercentages ? "Percentages" : "Amount"}</div>
             </div>
         </div>
     </div>;

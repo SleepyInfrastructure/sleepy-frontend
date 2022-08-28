@@ -12,10 +12,10 @@ const DiskChart: FunctionalComponent<DiskChartConnectedProps> = (props: DiskChar
     const isModeSpeed = mode === "SPEED";
     const isModeLatency = mode === "LATENCY";
 
-    return <div className={style["server-chart"]}>
-        <div className={style["server-chart-header"]}>
+    return <div className={style.chart}>
+        <div className={style["chart-header"]}>
             <div className={style["disk-icon"]} />
-            <div className={style["server-chart-title"]}>{props.item.model !== undefined ? `${props.item.model} (${props.item.name})` : props.item.name}</div>
+            <div className={style["chart-title"]}>{props.item.model !== undefined ? `${props.item.model} (${props.item.name})` : props.item.name}</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">
             <LineChart data={statistics} margin={{ top: 10, bottom: 10, left: 20, right: 20 }}>
@@ -31,14 +31,14 @@ const DiskChart: FunctionalComponent<DiskChartConnectedProps> = (props: DiskChar
                 <Line name="Write" type="monotone" dataKey={isModeSpeed ? "write" : "writeLatency"} stroke="#3bb4ff" activeDot={{ r: 4 }} dot={{ r: 0 }} />
             </LineChart>
         </ResponsiveContainer>
-        <div className={style["server-chart-footer"]}>
-            <div className={style["server-chart-footer-switch"]} onClick={() => { setMode("SPEED"); }}>
+        <div className={style["chart-footer"]}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setMode("SPEED"); }}>
                 <div className={style["circle-icon"]} data={isModeSpeed ? "true" : "false"} style={{ background: "#3bff6f" }} />
-                <div className={style["server-chart-footer-switch-text"]} data={isModeSpeed ? "true" : "false"} style={{ color: "#3bff6f" }} >Speed</div>
+                <div className={style["chart-footer-switch-text"]} data={isModeSpeed ? "true" : "false"} style={{ color: "#3bff6f" }} >Speed</div>
             </div>
-            <div className={style["server-chart-footer-switch"]} onClick={() => { setMode("LATENCY"); }}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setMode("LATENCY"); }}>
                 <div className={style["circle-icon"]} data={isModeLatency ? "true" : "false"} style={{ background: "#3bb4ff" }} />
-                <div className={style["server-chart-footer-switch-text"]} data={isModeLatency ? "true" : "false"} style={{ color: "#3bb4ff" }}>Latency</div>
+                <div className={style["chart-footer-switch-text"]} data={isModeLatency ? "true" : "false"} style={{ color: "#3bb4ff" }}>Latency</div>
             </div>
         </div>
     </div>;

@@ -15,8 +15,10 @@ type ReduxState = {
     partitions: Map<string, Partition>;
     containers: Map<string, Container>;
     databases: Map<string, Database>;
+    uptimeEndpoints: Map<string, UptimeEndpoint>;
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
+    uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
     daemons: Map<string, Daemon>;
     daemonTokens: Map<string, DaemonToken>;
 };
@@ -27,6 +29,7 @@ type ConnectedActions = {
     createSession(type: string, username?: string, password?: string): ReduxAction;
     deleteSession(): ReduxAction;
     createServer(name: string): ReduxAction;
+    editServer(edit: ServerEdit): ReduxAction;
     fetchServer(id: string): ReduxAction;
     fetchServerStructured(id: string): ReduxAction;
     fetchAllServersStructured(): ReduxAction;
@@ -36,6 +39,10 @@ type ConnectedActions = {
     fetchPartition(id: string): ReduxAction;
     fetchContainer(id: string): ReduxAction;
     fetchDatabase(id: string): ReduxAction;
+    createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction;
+    editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction;
+    fetchUptimeEndpoint(id: string): ReduxAction;
+    fetchAllUptimeEndpointsStructured(): ReduxAction;
     connectWebsocket(): ReduxAction;
     daemonRequestRefresh(id: string): ReduxAction;
     daemonRequestDatabaseBackup(id: string, database: string): ReduxAction;

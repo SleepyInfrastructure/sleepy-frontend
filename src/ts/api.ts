@@ -33,6 +33,7 @@ type Server = {
     color: string;
     memory: number;
     swap: number;
+    netInterfaces: string[];
 };
 
 type ServerConfig = {
@@ -137,6 +138,27 @@ type Database = {
     name: string;
 };
 
+type UptimeEndpoint = {
+    id: string;
+    author: string | null;
+    name: string;
+    host: string | null;
+    requestEndpoint: string | null;
+};
+
+type UptimeEndpointStructured = UptimeEndpoint & {
+    statistics: UptimeEndpointStatistic[];
+};
+
+type UptimeEndpointStatistic = {
+    id: string;
+    author: string;
+    parent: string;
+    timestamp: number;
+    pingTime: number | null;
+    requestTime: number | null;
+};
+
 type Daemon = {
     author: string;
     server: string;
@@ -148,4 +170,17 @@ type DaemonToken = {
     server: string;
     timestamp: number;
     used: number;
+};
+
+/* Edits */
+type ServerEdit = {
+    id: string;
+    name: string;
+};
+
+type UptimeEndpointEdit = {
+    id: string;
+    name: string;
+    host?: string;
+    requestEndpoint?: string;
 };

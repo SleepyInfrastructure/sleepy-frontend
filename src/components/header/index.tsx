@@ -7,7 +7,7 @@ import style from "./style.scss";
 const Header: FunctionalComponent<HeaderConnectedProps> = (props: HeaderConnectedProps) => {
     return (
         <header class={style.header}>
-            <img class={style["header-icon"]} src={"/assets/icons/icon-32x32.webp"} />
+            <img alt="logo" class={style["header-icon"]} src={"/assets/icons/icon-32x32.webp"} />
             <h1 class={style["header-title"]}>Sleepy</h1>
             {
                 props.session !== null ?

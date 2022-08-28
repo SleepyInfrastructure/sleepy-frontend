@@ -53,7 +53,18 @@ export function createServerSuccess(server: ServerStructured): ReduxAction {
         data: server,
     };
 }
-
+export function editServer(edit: ServerEdit): ReduxAction {
+    return {
+        type: "EDIT_SERVER",
+        data: edit
+    };
+}
+export function editServerSuccess(server: Server): ReduxAction {
+    return {
+        type: "EDIT_SERVER_SUCCESS",
+        data: server,
+    };
+}
 export function fetchServer(id: string): ReduxAction {
     return {
         type: "FETCH_SERVER",
@@ -162,7 +173,7 @@ export function fetchContainerSuccess(container: Container): ReduxAction {
     };
 }
 
-/* Containers */
+/* Databases */
 export function fetchDatabase(id: string): ReduxAction {
     return {
         type: "FETCH_DATABASE",
@@ -173,6 +184,56 @@ export function fetchDatabaseSuccess(database: Database): ReduxAction {
     return {
         type: "FETCH_DATABASE_SUCCESS",
         data: database,
+    };
+}
+
+/* Uptime endpoints */
+export function createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction {
+    return {
+        type: "CREATE_UPTIME_ENDPOINT",
+        data: { name, host, requestEndpoint },
+    };
+}
+export function createUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
+    return {
+        type: "CREATE_UPTIME_ENDPOINT_SUCCESS",
+        data: endpoint,
+    };
+}
+export function editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction {
+    return {
+        type: "EDIT_UPTIME_ENDPOINT",
+        data: edit
+    };
+}
+export function editUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
+    return {
+        type: "EDIT_UPTIME_ENDPOINT_SUCCESS",
+        data: endpoint,
+    };
+}
+export function fetchUptimeEndpoint(id: string): ReduxAction {
+    return {
+        type: "FETCH_UPTIME_ENDPOINT",
+        data: id,
+    };
+}
+export function fetchUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
+    return {
+        type: "FETCH_UPTIME_ENDPOINT_SUCCESS",
+        data: endpoint,
+    };
+}
+export function fetchAllUptimeEndpointsStructured(): ReduxAction {
+    return {
+        type: "FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED",
+        data: {},
+    };
+}
+export function fetchAllUptimeEndpointsStructuredSuccess(endpoints: UptimeEndpointStructured[]): ReduxAction {
+    return {
+        type: "FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED_SUCCESS",
+        data: endpoints,
     };
 }
 

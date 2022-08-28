@@ -6,10 +6,10 @@ import { formatTimestamp } from "../../../scripts/util/util";
 import style from "../style.scss";
 
 const CPUChart: FunctionalComponent<CPUChartConnectedProps> = (props: CPUChartConnectedProps) => {
-    return <div className={style["server-chart"]}>
-        <div className={style["server-chart-header"]}>
+    return <div className={style.chart}>
+        <div className={style["chart-header"]}>
             <div className={style["cpu-icon"]} />
-            <div className={style["server-chart-title"]}>CPU Usage</div>
+            <div className={style["chart-title"]}>CPU Usage</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">
             <LineChart data={props.statistics} margin={{ top: 10, bottom: 10 }}>

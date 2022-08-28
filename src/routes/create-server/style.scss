@@ -12,6 +12,9 @@
 
 /* Content */
 .create-server-form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
     margin-top: 10px;
 }
 
@@ -35,6 +38,9 @@
 }
 .create-server-form-input::placeholder {
     color: gray;
+}
+.create-server-form-input:disabled {
+    filter: grayscale(1);
 }
 
 .create-server-form-error {

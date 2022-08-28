@@ -12,18 +12,22 @@ import style from "./style.scss";
 import Button from "../../components/ui/button";
 
 const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: CreateServerConnectedProps) => {
-    const [name, setName] = useState("");
-    const [satisfies, setSatisfies] = useState(false);
-    const [createdName, setCreatedName] = useState("");
     useEffect(() => {
-        setSatisfies(name.length >= 3);
-    }, [name]);
-    if(createdName !== "") {
-        const server = Array.from(props.servers.values()).find(e => e.name === createdName);
-        if(server !== undefined) {
-            location.href = `/server/${server.id}`;
+        if(props.session !== null) {
+            props.actions.fetchAllServersStructured();
         }
+    }, [props.session]);
+    const [satisfies, setSatisfies] = useState(false);
+    const servers = Array.from(props.servers.values());
+
+    const [name, setName] = useState("");
+    const nameSatisfies = () => {
+        return name.length < 3 ? "(is not atleast 3 characters)" : (servers.some(e => e.name === name) ? "(server with same name exists)" : "(satisfies)");
     }
+
+    useEffect(() => {
+        setSatisfies(nameSatisfies() === "(satisfies)");
+    }, [name]);
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
@@ -35,9 +39,9 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
                 <div className={style["create-server-form-row"]}>
                     <div className={style["create-server-form-text"]}>Server name: </div>
                     <input className={style["create-server-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={style["create-server-form-error"]} data={name.length >= 3 ? "false" : "true"}>(is atleast 3 characters)</div>
+                    <div className={style["create-server-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
                 </div>
-                <Button disabled={!satisfies} className={style["create-server-form-button"]} secondary onClick={() => { props.actions.createServer(name); setCreatedName(name); }}>
+                <Button disabled={!satisfies} className={style["create-server-form-button"]} secondary onClick={() => { props.actions.createServer(name); setTimeout(() => { location.href = "/"; }, 1000); }}>
                     Create!
                 </Button>
             </div>

@@ -10,8 +10,10 @@ export const INITIAL: ReduxState = {
     partitions: new Map(),
     containers: new Map(),
     databases: new Map(),
+    uptimeEndpoints: new Map(),
     statistics: new Map(),
     diskStatistics: new Map(),
+    uptimeEndpointStatistics: new Map(),
     daemons: new Map(),
     daemonTokens: new Map(),
 };
@@ -26,6 +28,8 @@ export enum ResourceType {
     PARTITION = "partition",
     CONTAINER = "container",
     DATABASE = "database",
+    UPTIME_ENDPOINT = "uptime-endpoint",
+    UPTIME_ENDPOINT_STRUCTURED = "uptime-endpoint-structured",
     DAEMON = "deamon",
     DAEMON_TOKEN = "deamonToken",
     UNKNOWN = "unknown",
@@ -175,6 +179,31 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 newResources.set(resource.id, resource);
             });
             return { ...state, containers: newResources };
+        }
+
+        case ResourceType.UPTIME_ENDPOINT: {
+            const newResources = new Map(state.uptimeEndpoints);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, uptimeEndpoints: newResources };
+        }
+
+        case ResourceType.UPTIME_ENDPOINT_STRUCTURED: {
+            const newStatistics = new Map(state.uptimeEndpointStatistics);
+            resources.forEach(endpoint => {
+                endpoint.statistics.forEach((statistic: any) => {
+                    newStatistics.set(statistic.id, statistic);
+                });
+                delete endpoint.statistics;
+            });
+            
+            const newEndpoints = new Map(state.uptimeEndpoints);
+            resources.forEach(endpoint => {
+                newEndpoints.set(endpoint.id, endpoint);
+            });
+
+            return { ...state, uptimeEndpoints: newEndpoints, uptimeEndpointStatistics: newStatistics };
         }
 
         case ResourceType.DATABASE: {

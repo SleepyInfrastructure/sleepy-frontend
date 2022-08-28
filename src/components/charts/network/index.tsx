@@ -10,10 +10,10 @@ const NetworkChart: FunctionalComponent<NetworkChartConnectedProps> = (props: Ne
     const [displayDownload, setDisplayDownload] = useState(true);
     const [displayUpload, setDisplayUpload] = useState(true);
 
-    return <div className={style["server-chart"]}>
-        <div className={style["server-chart-header"]}>
+    return <div className={style.chart}>
+        <div className={style["chart-header"]}>
             <div className={style["network-icon"]} />
-            <div className={style["server-chart-title"]}>Network Usage</div>
+            <div className={style["chart-title"]}>Network Usage</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">
             <LineChart data={props.statistics} margin={{ top: 10, bottom: 10, left: 20, right: 20 }}>
@@ -24,14 +24,14 @@ const NetworkChart: FunctionalComponent<NetworkChartConnectedProps> = (props: Ne
                 {displayUpload ? <Line name="Upload" type="monotone" dataKey="tx" stroke="#3bb4ff" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
             </LineChart>
         </ResponsiveContainer>
-        <div className={style["server-chart-footer"]}>
-            <div className={style["server-chart-footer-switch"]} onClick={() => { setDisplayDownload(!displayDownload); }}>
+        <div className={style["chart-footer"]}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setDisplayDownload(!displayDownload); }}>
                 <div className={style["circle-icon"]} data={displayDownload ? "true" : "false"} style={{ background: "#3bff6f" }} />
-                <div className={style["server-chart-footer-switch-text"]} data={displayDownload ? "true" : "false"} style={{ color: "#3bff6f" }} >Download</div>
+                <div className={style["chart-footer-switch-text"]} data={displayDownload ? "true" : "false"} style={{ color: "#3bff6f" }} >Download</div>
             </div>
-            <div className={style["server-chart-footer-switch"]} onClick={() => { setDisplayUpload(!displayUpload); }}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setDisplayUpload(!displayUpload); }}>
                 <div className={style["circle-icon"]} data={displayUpload ? "true" : "false"} style={{ background: "#3bb4ff" }} />
-                <div className={style["server-chart-footer-switch-text"]} data={displayUpload ? "true" : "false"} style={{ color: "#3bb4ff" }}>Upload</div>
+                <div className={style["chart-footer-switch-text"]} data={displayUpload ? "true" : "false"} style={{ color: "#3bb4ff" }}>Upload</div>
             </div>
         </div>
     </div>;

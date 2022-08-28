@@ -1,6 +1,5 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { humanFileSize } from "../../scripts/util/util";
 /* Styles */
 import style from "./style.scss";
 

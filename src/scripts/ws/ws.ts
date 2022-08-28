@@ -2,6 +2,9 @@ import { Dispatch } from "redux";
 import { fetchAllDaemonsSuccess, fetchServerStructured } from "../../redux/actions";
 
 let socket: WebSocket | null;
+function getWsEndpoint() {
+    return location.host === "sleepy.lamkas.dev" ? "wss://daemon.sleepy.lamkas.dev" : "ws://localhost:9002";
+}
 
 export enum DaemonWebsocketMessageType {
     AUTH_SUCCESS = "AUTH_SUCCESS",
@@ -18,7 +21,7 @@ export enum DaemonWebsocketMessageType {
 }
 
 export function connectWebsocket(dispatch: Dispatch<ReduxAction>) {
-    socket = new WebSocket("ws://localhost:23365/socket");
+    socket = new WebSocket(`${getWsEndpoint()}/socket`);
     socket.onclose = () => {
         socket = null;
     };

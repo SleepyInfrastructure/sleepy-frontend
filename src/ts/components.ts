@@ -42,6 +42,11 @@ type DatabaseConnectedProps = {
     actions: ConnectedActions;
 };
 
+type UptimeEndpointConnectedProps = {
+    item: UptimeEndpointStructured;
+    actions: ConnectedActions;
+};
+
 /* Charts */
 type CPUChartConnectedProps = {
     statistics: Statistic[];
@@ -58,4 +63,8 @@ type DiskChartConnectedProps = {
 
 type NetworkChartConnectedProps = {
     statistics: Statistic[];
+};
+
+type UptimeEndpointChartConnectedProps = {
+    item: UptimeEndpointStructured;
 };
