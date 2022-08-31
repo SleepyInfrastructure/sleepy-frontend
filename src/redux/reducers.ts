@@ -1,10 +1,10 @@
 /* Redux */
 import { Dispatch } from "redux";
 /* Redux */
-import { createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, deleteDaemonTokenSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllDisksStructuredSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
+import { createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, deleteDaemonTokenSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllDisksStructuredSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
 import { cacheResource, cacheResources, ResourceType } from "./util";
 /* API */
-import { createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editServer, editUptimeEndpoint, fetchAllDisksStructured, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
+import { createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editServer, editUptimeEndpoint, fetchAllDisksStructured, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
 import { connectWebsocket, DaemonWebsocketMessageType, sendWebsocketMessage } from "../scripts/ws/ws";
 
 const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> = {
@@ -74,6 +74,11 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
 
     FETCH_CONTAINER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         state = cacheResource(state, action.data, ResourceType.CONTAINER);
+        return state;
+    },
+
+    FETCH_CONTAINER_PROJECT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        state = cacheResource(state, action.data, ResourceType.CONTAINER_PROJECT);
         return state;
     },
 
@@ -231,6 +236,15 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         }
 
         dispatch(fetchContainerSuccess(container));
+    },
+
+    FETCH_CONTAINER_PROJECT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        const containerProject = await fetchContainerProject(action.data);
+        if (containerProject === undefined) {
+            return;
+        }
+
+        dispatch(fetchContainerProjectSuccess(containerProject));
     },
 
     CREATE_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

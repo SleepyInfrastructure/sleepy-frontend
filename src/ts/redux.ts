@@ -14,6 +14,7 @@ type ReduxState = {
     disks: Map<string, Disk>;
     partitions: Map<string, Partition>;
     containers: Map<string, Container>;
+    containerProjects: Map<string, ContainerProject>;
     databases: Map<string, Database>;
     uptimeEndpoints: Map<string, UptimeEndpoint>;
     statistics: Map<string, Statistic>;
@@ -38,6 +39,7 @@ type ConnectedActions = {
     fetchAllDisksStructured(): ReduxAction;
     fetchPartition(id: string): ReduxAction;
     fetchContainer(id: string): ReduxAction;
+    fetchContainerProject(id: string): ReduxAction;
     fetchDatabase(id: string): ReduxAction;
     createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction;
     editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction;

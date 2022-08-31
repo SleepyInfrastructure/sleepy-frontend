@@ -124,6 +124,15 @@ export async function fetchContainer(id: string): Promise<Container | undefined>
     return response.body;
 }
 
+export async function fetchContainerProject(id: string): Promise<ContainerProject | undefined> {
+    const response: APIResponse = await get({ path: `/containerProjects/fetch?id=${id}` });
+    if (response.status !== 200) {
+        return undefined;
+    }
+
+    return response.body;
+}
+
 export async function createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): Promise<UptimeEndpoint | undefined> {
     const response: APIResponse = await post({ path: `/uptimeEndpoints/create`, body: JSON.stringify({ name, host, requestEndpoint }) });
     if (response.status !== 200) {

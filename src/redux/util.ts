@@ -9,6 +9,7 @@ export const INITIAL: ReduxState = {
     disks: new Map(),
     partitions: new Map(),
     containers: new Map(),
+    containerProjects: new Map(),
     databases: new Map(),
     uptimeEndpoints: new Map(),
     statistics: new Map(),
@@ -27,6 +28,7 @@ export enum ResourceType {
     DISK_STRUCTURED = "disk-structured",
     PARTITION = "partition",
     CONTAINER = "container",
+    CONTAINER_PROJECT = "container-project",
     DATABASE = "database",
     UPTIME_ENDPOINT = "uptime-endpoint",
     UPTIME_ENDPOINT_STRUCTURED = "uptime-endpoint-structured",
@@ -108,6 +110,14 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.containers;
             });
             
+            const newContainersProjects = new Map(state.containerProjects);
+            resources.forEach(server => {
+                server.containerProjects.forEach((containerProject: any) => {
+                    newContainersProjects.set(containerProject.id, containerProject);
+                });
+                delete server.containerProjects;
+            });
+            
             const newDatabases = new Map(state.databases);
             resources.forEach(server => {
                 server.databases.forEach((database: any) => {
@@ -129,7 +139,18 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 newServers.set(server.id, server);
             });
 
-            return { ...state, servers: newServers, serverConfigs: newServerConfigs, networks: newNetworks, disks: newDisks, partitions: newPartitions, containers: newContainers, databases: newDatabases, statistics: newStatistics };
+            return {
+                ...state,
+                servers: newServers,
+                serverConfigs: newServerConfigs,
+                networks: newNetworks,
+                disks: newDisks,
+                partitions: newPartitions,
+                containers: newContainers,
+                containerProjects: newContainersProjects,
+                databases: newDatabases,
+                statistics: newStatistics
+            };
         }
 
         case ResourceType.NETWORK: {
@@ -179,6 +200,14 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 newResources.set(resource.id, resource);
             });
             return { ...state, containers: newResources };
+        }
+
+        case ResourceType.CONTAINER_PROJECT: {
+            const newResources = new Map(state.containerProjects);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, containerProjects: newResources };
         }
 
         case ResourceType.UPTIME_ENDPOINT: {

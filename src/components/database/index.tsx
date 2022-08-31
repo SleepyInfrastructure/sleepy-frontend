@@ -10,7 +10,7 @@ const Database: FunctionalComponent<DatabaseConnectedProps> = (props: DatabaseCo
                 <div className={style["database-icon"]} />
                 <div className={style["database-title"]}>{props.item.name}</div>
                 <a className={style["database-link"]} onClick={() => {
-                    props.actions.daemonRequestDatabaseBackup(props.item.parent, props.item.name);
+                    props.actions.daemonRequestDatabaseBackup(props.item.server, props.item.name);
                 }}>(Request Backup)</a>
             </div>
         </div>

@@ -173,6 +173,20 @@ export function fetchContainerSuccess(container: Container): ReduxAction {
     };
 }
 
+/* Containers */
+export function fetchContainerProject(id: string): ReduxAction {
+    return {
+        type: "FETCH_CONTAINER_PROJECT",
+        data: id,
+    };
+}
+export function fetchContainerProjectSuccess(containerProject: ContainerProject): ReduxAction {
+    return {
+        type: "FETCH_CONTAINER_PROJECT_SUCCESS",
+        data: containerProject,
+    };
+}
+
 /* Databases */
 export function fetchDatabase(id: string): ReduxAction {
     return {

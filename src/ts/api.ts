@@ -57,7 +57,7 @@ type ServerStructured = Server & {
 type Statistic = {
     id: string;
     author: string;
-    parent: string;
+    server: string;
     timestamp: number;
     rx: number;
     tx: number;
@@ -76,7 +76,7 @@ type Disk = {
     id: string;
     ptuuid: string | null;
     author: string | null;
-    parent: string;
+    server: string;
     name: string;
     ssd: boolean;
     size: number;
@@ -121,7 +121,8 @@ type DiskWithPartitionsStructured = DiskStructured & {
 type Container = {
     id: string;
     author: string | null;
-    parent: string;
+    server: string;
+    parent: string | null;
     image: string;
     creation: number;
     ports: string;
@@ -131,10 +132,23 @@ type Container = {
     networks: string;
 };
 
+type ContainerProject = {
+    id: string;
+    author: string | null;
+    server: string;
+    name: string;
+    status: string;
+    path: string;
+};
+
+type ContainerProjectStructured = ContainerProject & {
+    containers: Container[];
+};
+
 type Database = {
     id: string;
     author: string | null;
-    parent: string;
+    server: string;
     name: string;
 };
 
