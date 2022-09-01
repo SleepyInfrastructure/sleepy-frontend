@@ -12,8 +12,8 @@ export enum DaemonWebsocketMessageType {
     DAEMONS = "DAEMONS",
     DAEMONS_REPLY = "DAEMONS_REPLY",
     
-    DAEMON_CLIENT_REQUEST_REFRESH = "DAEMON_CLIENT_REQUEST_REFRESH",
-    DAEMON_CLIENT_REQUEST_REFRESH_REPLY = "DAEMON_CLIENT_REQUEST_REFRESH_REPLY",
+    DAEMON_CLIENT_REQUEST_RESOURCES = "DAEMON_CLIENT_REQUEST_RESOURCES",
+    DAEMON_CLIENT_REQUEST_RESOURCES_REPLY = "DAEMON_CLIENT_REQUEST_RESOURCES_REPLY",
 
     DAEMON_CLIENT_REQUEST_DATABASE_BACKUP = "DAEMON_CLIENT_REQUEST_DATABASE_BACKUP",
 
@@ -45,7 +45,7 @@ export function connectWebsocket(dispatch: Dispatch<ReduxAction>) {
                 dispatch(fetchAllDaemonsSuccess(message.items));
                 break;
 
-            case DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_REFRESH_REPLY:
+            case DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_RESOURCES_REPLY:
                 dispatch(fetchServerStructured(message.id));
                 break;
         }

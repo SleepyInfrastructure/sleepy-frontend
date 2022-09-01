@@ -304,9 +304,9 @@ export function fetchAllDaemonsSuccess(daemons: Daemon[]): ReduxAction {
         data: daemons,
     };
 }
-export function daemonRequestRefresh(id: string): ReduxAction {
+export function daemonRequestResources(id: string): ReduxAction {
     return {
-        type: "DAEMON_REQUEST_REFRESH",
+        type: "DAEMON_REQUEST_RESOURCES",
         data: id,
     };
 }
