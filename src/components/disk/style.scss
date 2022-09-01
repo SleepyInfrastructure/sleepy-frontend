@@ -11,10 +11,15 @@
 }
 
 /* Content */
+.disk {
+    padding: 15px;
+    background-color: var(--color-background);
+    border-radius: 10px;
+}
+
 .disk-title-wrapper {
     @extend %align-y;
 }
-
 .disk-title {
     color: var(--color-primary-text);
     font-size: 16px;
@@ -23,8 +28,12 @@
 .disk-content {
     display: flex;
     flex-direction: column;
-    padding-left: 25px;
-    grid-gap: 2px;
+}
+.disk-content-items {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    margin-top: 10px;
 }
 
 /* Icons */

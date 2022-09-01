@@ -11,6 +11,12 @@
 }
 
 /* Content */
+.partition {
+    padding: 15px;
+    background-color: var(--color-primary-light);
+    border-radius: 10px;
+}
+
 .partition-title-wrapper {
     @extend %align-y;
 }
@@ -21,16 +27,21 @@
 }
 
 .partition-content {
-    @extend %align-y;
-    padding-left: 5px;
-    grid-gap: 8px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    margin-top: 5px;
+    grid-gap: 2px;
 }
 
+.partition-bar-wrapper {
+    @extend %align-y;
+    grid-gap: 8px;
+}
 .partition-bar-percentage {
     color: #ff7680;
     font-size: 12px;
 }
-
 .partition-bar {
     height: 8px;
     width: 180px;
@@ -38,12 +49,19 @@
     border: 0;
     border-radius: 20px;
 }
-
 .partition-bar-fill {
     display: block;
     height: 100%;
     background-color: var(--color-secondary);
     border-radius: 20px;
+}
+
+.partition-row {
+    color: #ff7680;
+    font-size: 12px;
+}
+.partition-row-highlight {
+    color: var(--color-primary-text);
 }
 
 /* Icons */

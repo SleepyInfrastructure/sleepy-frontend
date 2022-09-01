@@ -14,7 +14,9 @@ const Disk: FunctionalComponent<DiskConnectedProps> = (props: DiskConnectedProps
                 <div className={style["disk-title"]}>{props.item.model} ({humanFileSize(props.item.size)})</div>
             </div>
             <div className={style["disk-content"]}>
-                {props.item.partitions.map((e, i) => <Partition key={i} item={e} actions={props.actions} />)}
+                {props.item.partitions.length < 1 ? null :<div className={style["disk-content-items"]}>
+                    {props.item.partitions.map((e, i) => <Partition key={i} item={e} actions={props.actions} />)}
+                </div>}
             </div>
         </div>
     );

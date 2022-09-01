@@ -12,10 +12,13 @@ const Partition: FunctionalComponent<PartitionConnectedProps> = (props: Partitio
                 <div className={style["partition-title"]}>{props.item.name} ({humanFileSize(props.item.size)})</div>
             </div>
             <div className={style["partition-content"]}>
-                <div className={style["partition-bar-percentage"]}>{props.item.used === null ? "Unknown" : `${Math.round((props.item.used / props.item.size) * 100)} %`}</div>
-                <div className={style["partition-bar"]}>
-                    <span className={style["partition-bar-fill"]} style={`width: ${((props.item.used ?? 0) / props.item.size) * 100}%`} />
+                <div className={style["partition-bar-wrapper"]}>
+                    <div className={style["partition-bar-percentage"]}>{props.item.used === null ? "Unknown" : `${Math.round((props.item.used / props.item.size) * 100)} %`}</div>
+                    <div className={style["partition-bar"]}>
+                        <span className={style["partition-bar-fill"]} style={`width: ${((props.item.used ?? 0) / props.item.size) * 100}%`} />
+                    </div>
                 </div>
+                <div className={style["partition-row"]}><span className={style["partition-row-highlight"]}>{props.item.used === null ? "??" : humanFileSize(props.item.size - props.item.used)}</span> remaining</div>
             </div>
         </div>
     );
