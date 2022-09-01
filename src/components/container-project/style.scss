@@ -11,3 +11,9 @@
 }
 
 /* Content */
+.container-content-items {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    margin-top: 10px;
+}

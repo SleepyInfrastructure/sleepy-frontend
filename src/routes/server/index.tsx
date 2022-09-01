@@ -18,6 +18,7 @@ const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: Serv
         if(props.session !== null) {
             props.actions.fetchServerStructured(props.id);
             props.actions.fetchAllDisksStructured();
+            props.actions.fetchAllContainersStructured();
             props.actions.connectWebsocket();
         }
     }, [props.session]);

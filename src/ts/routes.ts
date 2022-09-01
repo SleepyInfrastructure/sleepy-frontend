@@ -7,6 +7,7 @@ type ServersProps = {
     disks: Map<string, Disk>;
     partitions: Map<string, Partition>;
     containers: Map<string, Container>;
+    containerStatistics: Map<string, ContainerStatistic>;
     containerProjects: Map<string, ContainerProject>;
     databases: Map<string, Database>;
     statistics: Map<string, Statistic>;

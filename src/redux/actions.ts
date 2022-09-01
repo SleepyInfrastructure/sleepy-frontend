@@ -173,6 +173,19 @@ export function fetchContainerSuccess(container: Container): ReduxAction {
     };
 }
 
+export function fetchAllContainersStructured(): ReduxAction {
+    return {
+        type: "FETCH_ALL_CONTAINERS_STRUCTURED",
+        data: {},
+    };
+}
+export function fetchAllContainersStructuredSuccess(containers: ContainerStructured[]): ReduxAction {
+    return {
+        type: "FETCH_ALL_CONTAINERS_STRUCTURED_SUCCESS",
+        data: containers,
+    };
+}
+
 /* Containers */
 export function fetchContainerProject(id: string): ReduxAction {
     return {

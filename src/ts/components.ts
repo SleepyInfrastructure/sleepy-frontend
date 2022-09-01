@@ -9,7 +9,7 @@ type ServerConnectedProps = {
     config: ServerConfig | null;
     network: Network | null;
     disks: DiskWithPartitionsStructured[];
-    containers: Container[];
+    containers: ContainerStructured[];
     containerProjects: ContainerProject[];
     databases: Database[];
     statistics: Statistic[];
@@ -34,12 +34,13 @@ type PartitionConnectedProps = {
 };
 
 type ContainerConnectedProps = {
-    item: Container;
+    item: ContainerStructured;
+    dark?: boolean;
     actions: ConnectedActions;
 };
 
 type ContainerProjectConnectedProps = {
-    item: ContainerProjectStructured;
+    item: ContainerProjectStructuredExtra;
     actions: ConnectedActions;
 };
 

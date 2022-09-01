@@ -132,6 +132,23 @@ type Container = {
     networks: string;
 };
 
+type ContainerStructured = Container & {
+    statistics: ContainerStatistic[];
+};
+
+type ContainerStatistic = {
+    id: string;
+    author: string;
+    parent: string;
+    timestamp: number;
+    rx: number;
+    tx: number;
+    cpu: number;
+    memory: number;
+    read: number;
+    write: number;
+};
+
 type ContainerProject = {
     id: string;
     author: string | null;
@@ -143,6 +160,10 @@ type ContainerProject = {
 
 type ContainerProjectStructured = ContainerProject & {
     containers: Container[];
+};
+
+type ContainerProjectStructuredExtra = ContainerProject & {
+    containers: ContainerStructured[];
 };
 
 type Database = {

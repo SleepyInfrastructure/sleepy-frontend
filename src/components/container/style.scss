@@ -12,9 +12,12 @@
 
 /* Content */
 .container {
-    padding: 10px;
+    padding: 15px;
     background-color: var(--color-background);
     border-radius: 10px;
+}
+.container[data="dark"] {
+    background-color: var(--color-primary-light);
 }
 
 .container-title-wrapper {
@@ -22,7 +25,6 @@
     grid-gap: 4px;
     margin-bottom: 4px;
 }
-
 .container-title {
     color: var(--color-primary-text);
     font-size: 18px;
@@ -31,6 +33,11 @@
 .container-content {
     display: flex;
     flex-direction: column;
+}
+.container-content-stats {
+    display: flex;
+    grid-gap: 8px;
+    color: #66f;
 }
 
 .container-content-row {

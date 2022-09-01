@@ -14,11 +14,10 @@ import MemoryChart from "../charts/memory";
 import ContainerProject from "../container-project";
 
 const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnectedProps) => {
-    const [disksOpen, setDisksOpen] = useState(false);
+    const [disksOpen, setDisksOpen] = useState(true);
     const [containersOpen, setContainersOpen] = useState(true);
     const [databasesOpen, setDatabasesOpen] = useState(false);
     const statistics = props.statistics.sort((a, b) => a.timestamp - b.timestamp);
-    console.log(props.containerProjects);
 
     return (
         <div className={style.server}>

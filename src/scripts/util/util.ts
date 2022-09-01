@@ -12,6 +12,7 @@ export function getServerConnectedProps(e: Server, props: ServersProps): ServerC
     const disks = Array.from(props.disks.values());
     const partitions = Array.from(props.partitions.values());
     const containers = Array.from(props.containers.values());
+    const containerStatistics = Array.from(props.containerStatistics.values());
     const containerProjects = Array.from(props.containerProjects.values());
     const databases = Array.from(props.databases.values());
     const statistics = Array.from(props.statistics.values());
@@ -20,9 +21,11 @@ export function getServerConnectedProps(e: Server, props: ServersProps): ServerC
     const config = props.serverConfigs.get(e.config);
     const network = e.network === null ? undefined : props.networks.get(e.network);
     const serverDisks = disks.filter(el => el.server === e.id).map(el => {
-        return { ...el, partitions: partitions.filter(ele => ele.parent === el.id), statistics: diskStatistics.filter(ele => ele.parent === el.id) }
+        return { ...el, partitions: partitions.filter(ele => ele.parent === el.id), statistics: diskStatistics.filter(ele => ele.parent === el.id) };
     });
-    const serverContainers = containers.filter(el => el.server === e.id);
+    const serverContainers = containers.filter(el => el.server === e.id).map(el => {
+        return { ...el, statistics: containerStatistics.filter(ele => ele.parent === el.id) };
+    });
     const serverContainerProjects = containerProjects.filter(el => el.server === e.id);
     const serverDatabases = databases.filter(el => el.server === e.id);
     const serverStatistics = statistics.filter(el => el.server === e.id);

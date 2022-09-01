@@ -123,6 +123,14 @@ export async function fetchContainer(id: string): Promise<Container | undefined>
 
     return response.body;
 }
+export async function fetchAllContainersStructured(): Promise<ContainerStructured[]> {
+    const response: APIResponse = await get({ path: `/containers/all/structured/fetch` });
+    if (response.status !== 200) {
+        return [];
+    }
+
+    return response.body;
+}
 
 export async function fetchContainerProject(id: string): Promise<ContainerProject | undefined> {
     const response: APIResponse = await get({ path: `/containerProjects/fetch?id=${id}` });

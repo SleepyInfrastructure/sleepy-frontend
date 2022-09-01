@@ -19,6 +19,7 @@ const Home: FunctionalComponent<HomeConnectedProps> = (props: HomeConnectedProps
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
             props.actions.fetchAllDisksStructured();
+            props.actions.fetchAllContainersStructured();
             props.actions.fetchAllUptimeEndpointsStructured();
             props.actions.connectWebsocket();
         }
