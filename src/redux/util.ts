@@ -8,6 +8,8 @@ export const INITIAL: ReduxState = {
     networks: new Map(),
     disks: new Map(),
     partitions: new Map(),
+    zfsPools: new Map(),
+    zfsPartitions: new Map(),
     containers: new Map(),
     containerStatistics: new Map(),
     containerProjects: new Map(),
@@ -27,13 +29,20 @@ export enum ResourceType {
     NETWORK = "network",
     DISK = "disk",
     DISK_STRUCTURED = "disk-structured",
+    DISK_STATISTIC = "disk-statistic",
     PARTITION = "partition",
+    ZFS_POOL = "zfs-pool",
+    ZFS_POOL_STRUCTURED = "zfs-pool-structured",
+    ZFS_PARTITION = "zfs-partition",
     CONTAINER = "container",
     CONTAINER_STRUCTURED = "container-structured",
+    CONTAINER_STATISTIC = "container-statistic",
     CONTAINER_PROJECT = "container-project",
     DATABASE = "database",
+    STATISTIC = "statistic",
     UPTIME_ENDPOINT = "uptime-endpoint",
     UPTIME_ENDPOINT_STRUCTURED = "uptime-endpoint-structured",
+    UPTIME_ENDPOINT_STATISTIC = "uptime-endpoint-statistic",
     DAEMON = "deamon",
     DAEMON_TOKEN = "deamonToken",
     UNKNOWN = "unknown",
@@ -66,6 +75,32 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
             });
             return { ...state, servers: newResources };
         }
+        
+        case ResourceType.SERVER_STRUCTURED: {
+            const newServers = new Map(state.servers);
+            resources.forEach(server => {
+                state = cacheResource(state, server.config, ResourceType.SERVER_CONFIG);
+                delete server.config;
+                state = cacheResource(state, server.network, ResourceType.NETWORK);
+                delete server.network;
+                state = cacheResources(state, server.disks, ResourceType.DISK_STRUCTURED);
+                delete server.disks;
+                state = cacheResources(state, server.zfsPools, ResourceType.ZFS_POOL_STRUCTURED);
+                delete server.zfsPools;
+                state = cacheResources(state, server.containers, ResourceType.CONTAINER_STRUCTURED);
+                delete server.containers;
+                state = cacheResources(state, server.containerProjects, ResourceType.CONTAINER_PROJECT);
+                delete server.containerProjects;
+                state = cacheResources(state, server.databases, ResourceType.DATABASE);
+                delete server.databases;
+                state = cacheResources(state, server.statistics, ResourceType.STATISTIC);
+                delete server.statistics;
+
+                newServers.set(server.id, server);
+            });
+
+            return { ...state, servers: newServers };
+        }
 
         case ResourceType.SERVER_CONFIG: {
             const newResources = new Map(state.serverConfigs);
@@ -73,86 +108,6 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 newResources.set(resource.id, resource);
             });
             return { ...state, serverConfigs: newResources };
-        }
-        
-        case ResourceType.SERVER_STRUCTURED: {
-            const newServerConfigs = new Map(state.serverConfigs);
-            resources.forEach(server => {
-                newServerConfigs.set(server.config.id, server.config);
-                delete server.config;
-            });
-
-            const newNetworks = new Map(state.networks);
-            resources.forEach(server => {
-                newNetworks.set(server.network.id, server.network);
-                delete server.network;
-            });
-            
-            const newDisks = new Map(state.disks);
-            resources.forEach(server => {
-                server.disks.forEach((disk: any) => {
-                    newDisks.set(disk.id, disk);
-                });
-                delete server.disks;
-            });
-            
-            const newPartitions = new Map(state.partitions);
-            resources.forEach(server => {
-                server.partitions.forEach((partition: any) => {
-                    newPartitions.set(partition.id, partition);
-                });
-                delete server.partitions;
-            });
-            
-            const newContainers = new Map(state.containers);
-            resources.forEach(server => {
-                server.containers.forEach((container: any) => {
-                    newContainers.set(container.id, container);
-                });
-                delete server.containers;
-            });
-            
-            const newContainersProjects = new Map(state.containerProjects);
-            resources.forEach(server => {
-                server.containerProjects.forEach((containerProject: any) => {
-                    newContainersProjects.set(containerProject.id, containerProject);
-                });
-                delete server.containerProjects;
-            });
-            
-            const newDatabases = new Map(state.databases);
-            resources.forEach(server => {
-                server.databases.forEach((database: any) => {
-                    newDatabases.set(database.id, database);
-                });
-                delete server.databases;
-            });
-            
-            const newStatistics = new Map(state.statistics);
-            resources.forEach(server => {
-                server.statistics.forEach((statistic: any) => {
-                    newStatistics.set(statistic.id, statistic);
-                });
-                delete server.statistics;
-            });
-            
-            const newServers = new Map(state.servers);
-            resources.forEach(server => {
-                newServers.set(server.id, server);
-            });
-
-            return {
-                ...state,
-                servers: newServers,
-                serverConfigs: newServerConfigs,
-                networks: newNetworks,
-                disks: newDisks,
-                partitions: newPartitions,
-                containers: newContainers,
-                containerProjects: newContainersProjects,
-                databases: newDatabases,
-                statistics: newStatistics
-            };
         }
 
         case ResourceType.NETWORK: {
@@ -172,20 +127,24 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
         }
         
         case ResourceType.DISK_STRUCTURED: {
-            const newStatistics = new Map(state.diskStatistics);
-            resources.forEach(disk => {
-                disk.statistics.forEach((statistic: any) => {
-                    newStatistics.set(statistic.id, statistic);
-                });
-                delete disk.statistics;
-            });
-            
             const newDisks = new Map(state.disks);
             resources.forEach(disk => {
+                state = cacheResources(state, disk.partitions, ResourceType.PARTITION);
+                delete disk.partitions;
+                state = cacheResources(state, disk.statistics, ResourceType.DISK_STATISTIC);
+                delete disk.statistics;
                 newDisks.set(disk.id, disk);
             });
 
-            return { ...state, disks: newDisks, diskStatistics: newStatistics };
+            return { ...state, disks: newDisks };
+        }
+
+        case ResourceType.DISK_STATISTIC: {
+            const newResources = new Map(state.diskStatistics);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, diskStatistics: newResources };
         }
 
         case ResourceType.PARTITION: {
@@ -194,6 +153,33 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 newResources.set(resource.id, resource);
             });
             return { ...state, partitions: newResources };
+        }
+
+        case ResourceType.ZFS_POOL: {
+            const newResources = new Map(state.zfsPools);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, zfsPools: newResources };
+        }
+        
+        case ResourceType.ZFS_POOL_STRUCTURED: {
+            const newZfsPools = new Map(state.zfsPools);
+            resources.forEach(pool => {
+                state = cacheResources(state, pool.partitions, ResourceType.ZFS_PARTITION);
+                delete pool.partitions;
+                newZfsPools.set(pool.id, pool);
+            });
+
+            return { ...state, zfsPools: newZfsPools };
+        }
+
+        case ResourceType.ZFS_PARTITION: {
+            const newResources = new Map(state.zfsPartitions);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, zfsPartitions: newResources };
         }
 
         case ResourceType.CONTAINER: {
@@ -205,22 +191,23 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
         }
         
         case ResourceType.CONTAINER_STRUCTURED: {
-            const newStatistics = new Map(state.containerStatistics);
-            resources.forEach(container => {
-                container.statistics.forEach((statistic: any) => {
-                    newStatistics.set(statistic.id, statistic);
-                });
-                delete container.statistics;
-            });
-            
             const newContainers = new Map(state.containers);
             resources.forEach(container => {
+                state = cacheResources(state, container.statistics, ResourceType.CONTAINER_STATISTIC);
+                delete container.statistics;
                 newContainers.set(container.id, container);
             });
 
-            return { ...state, containers: newContainers, containerStatistics: newStatistics };
+            return { ...state, containers: newContainers };
         }
 
+        case ResourceType.CONTAINER_STATISTIC: {
+            const newResources = new Map(state.containerStatistics);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, containerStatistics: newResources };
+        }
 
         case ResourceType.CONTAINER_PROJECT: {
             const newResources = new Map(state.containerProjects);
@@ -228,6 +215,22 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 newResources.set(resource.id, resource);
             });
             return { ...state, containerProjects: newResources };
+        }
+
+        case ResourceType.DATABASE: {
+            const newResources = new Map(state.databases);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, databases: newResources };
+        }
+
+        case ResourceType.STATISTIC: {
+            const newResources = new Map(state.statistics);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, statistics: newResources };
         }
 
         case ResourceType.UPTIME_ENDPOINT: {
@@ -239,28 +242,22 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
         }
 
         case ResourceType.UPTIME_ENDPOINT_STRUCTURED: {
-            const newStatistics = new Map(state.uptimeEndpointStatistics);
-            resources.forEach(endpoint => {
-                endpoint.statistics.forEach((statistic: any) => {
-                    newStatistics.set(statistic.id, statistic);
-                });
-                delete endpoint.statistics;
-            });
-            
             const newEndpoints = new Map(state.uptimeEndpoints);
             resources.forEach(endpoint => {
+                state = cacheResources(state, endpoint.statistics, ResourceType.UPTIME_ENDPOINT_STATISTIC)
+                delete endpoint.statistics;
                 newEndpoints.set(endpoint.id, endpoint);
             });
 
-            return { ...state, uptimeEndpoints: newEndpoints, uptimeEndpointStatistics: newStatistics };
+            return { ...state, uptimeEndpoints: newEndpoints };
         }
 
-        case ResourceType.DATABASE: {
-            const newResources = new Map(state.databases);
+        case ResourceType.UPTIME_ENDPOINT_STATISTIC: {
+            const newResources = new Map(state.uptimeEndpointStatistics);
             resources.forEach(resource => {
-                newResources.set(resource.id, resource);
+                newResources.set(resource.server, resource);
             });
-            return { ...state, databases: newResources };
+            return { ...state, uptimeEndpointStatistics: newResources };
         }
 
         case ResourceType.DAEMON: {

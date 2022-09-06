@@ -38,7 +38,7 @@ const SmallServer: FunctionalComponent<ServerConnectedProps> = (props: ServerCon
                 <div className={baseStyle["server-daemon"]}>Daemon: <span className={baseStyle["server-daemon-highlight-green"]}>Connected</span>
                     <a className={baseStyle["server-daemon-highlight-link"]} onClick={() => {
                         if(props.daemon === null) { return; }
-                        props.actions.daemonRequestRefresh(props.daemon?.server);
+                        props.actions.daemonRequestResources(props.daemon?.server, ["CONTAINERS", "DISKS"]);
                     }}>(Request Refresh)</a>
                 </div>}
                 {props.network === null ? null :

@@ -1,6 +1,6 @@
 /* Base */
 type HeaderConnectedProps = {
-    session: Session;
+    session: Session | null;
     actions: ConnectedActions;
 };
 
@@ -8,7 +8,8 @@ type ServerConnectedProps = {
     item: Server;
     config: ServerConfig | null;
     network: Network | null;
-    disks: DiskWithPartitionsStructured[];
+    disks: DiskConnectedPropsItem[];
+    zfsPools: ZFSPoolConnectedPropsItem[];
     containers: ContainerStructured[];
     containerProjects: ContainerProject[];
     databases: Database[];
@@ -24,13 +25,38 @@ type TokenServerConnectedProps = {
 };
 
 type DiskConnectedProps = {
-    item: DiskWithPartitions;
+    item: DiskConnectedPropsItem;
     actions: ConnectedActions;
 };
 
+type DiskConnectedPropsItem = Omit<DiskStructured, "partitions"> & {
+    partitions: PartitionConnectedPropsItem[];
+};
+
 type PartitionConnectedProps = {
-    item: Partition;
+    item: PartitionConnectedPropsItem;
     actions: ConnectedActions;
+};
+
+type PartitionConnectedPropsItem = {
+    id: string;
+    name: string;
+    size: number;
+    used: number | null;
+    zfs?: string;
+};
+
+type ZFSPoolConnectedProps = {
+    item: ZFSPoolConnectedPropsItem;
+    actions: ConnectedActions;
+};
+
+type ZFSPoolConnectedPropsItem = Omit<ZFSPoolStructured, "partitions"> & {
+    partitions: ZFSPartitionConnectedPropsItem[];
+};
+
+type ZFSPartitionConnectedPropsItem = ZFSPartition & {
+    partition?: Partition;
 };
 
 type ContainerConnectedProps = {
@@ -39,8 +65,17 @@ type ContainerConnectedProps = {
     actions: ConnectedActions;
 };
 
+type ContainerProjectStats = {
+    cpu: number;
+    memory: number;
+    network: number;
+    disk: number;
+    status: string;
+    time: number;
+};
+
 type ContainerProjectConnectedProps = {
-    item: ContainerProjectStructuredExtra;
+    item: ContainerProjectStructured;
     actions: ConnectedActions;
 };
 
@@ -65,7 +100,7 @@ type MemoryChartConnectedProps = {
 };
 
 type DiskChartConnectedProps = {
-    item: DiskWithPartitionsStructured;
+    item: DiskConnectedPropsItem;
 };
 
 type NetworkChartConnectedProps = {

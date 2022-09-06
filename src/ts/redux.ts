@@ -13,6 +13,8 @@ type ReduxState = {
     networks: Map<string, Network>;
     disks: Map<string, Disk>;
     partitions: Map<string, Partition>;
+    zfsPools: Map<string, ZFSPool>;
+    zfsPartitions: Map<string, ZFSPartition>;
     containers: Map<string, Container>;
     containerStatistics: Map<string, ContainerStatistic>;
     containerProjects: Map<string, ContainerProject>;
@@ -37,10 +39,8 @@ type ConnectedActions = {
     fetchAllServersStructured(): ReduxAction;
     fetchNetwork(id: string): ReduxAction;
     fetchDisk(id: string): ReduxAction;
-    fetchAllDisksStructured(): ReduxAction;
     fetchPartition(id: string): ReduxAction;
     fetchContainer(id: string): ReduxAction;
-    fetchAllContainersStructured(): ReduxAction;
     fetchContainerProject(id: string): ReduxAction;
     fetchDatabase(id: string): ReduxAction;
     createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction;
@@ -48,7 +48,7 @@ type ConnectedActions = {
     fetchUptimeEndpoint(id: string): ReduxAction;
     fetchAllUptimeEndpointsStructured(): ReduxAction;
     connectWebsocket(): ReduxAction;
-    daemonRequestRefresh(id: string): ReduxAction;
+    daemonRequestResources(id: string, resources: string[]): ReduxAction;
     daemonRequestDatabaseBackup(id: string, database: string): ReduxAction;
     createServerDaemonToken(id: string): ReduxAction;
     deleteDaemonToken(id: string): ReduxAction;

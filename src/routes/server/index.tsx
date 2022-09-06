@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect } from "react";
+import { getServerConnectedProps } from "../../scripts/util/server";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -9,7 +10,6 @@ import * as actions from "../../redux/actions";
 import baseStyle from "../style.scss";
 import style from "./style.scss";
 import Server from "../../components/server";
-import { getServerConnectedProps } from "../../scripts/util/util";
 /* Components */
 
 const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: ServerRouteConnectedProps) => {
@@ -17,8 +17,6 @@ const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: Serv
         if(props.id === undefined) { return; }
         if(props.session !== null) {
             props.actions.fetchServerStructured(props.id);
-            props.actions.fetchAllDisksStructured();
-            props.actions.fetchAllContainersStructured();
             props.actions.connectWebsocket();
         }
     }, [props.session]);

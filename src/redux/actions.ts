@@ -132,19 +132,6 @@ export function fetchDiskSuccess(disk: Disk): ReduxAction {
     };
 }
 
-export function fetchAllDisksStructured(): ReduxAction {
-    return {
-        type: "FETCH_ALL_DISKS_STRUCTURED",
-        data: {},
-    };
-}
-export function fetchAllDisksStructuredSuccess(disks: DiskStructured[]): ReduxAction {
-    return {
-        type: "FETCH_ALL_DISKS_STRUCTURED_SUCCESS",
-        data: disks,
-    };
-}
-
 /* Partitions */
 export function fetchPartition(id: string): ReduxAction {
     return {
@@ -170,19 +157,6 @@ export function fetchContainerSuccess(container: Container): ReduxAction {
     return {
         type: "FETCH_CONTAINER_SUCCESS",
         data: container,
-    };
-}
-
-export function fetchAllContainersStructured(): ReduxAction {
-    return {
-        type: "FETCH_ALL_CONTAINERS_STRUCTURED",
-        data: {},
-    };
-}
-export function fetchAllContainersStructuredSuccess(containers: ContainerStructured[]): ReduxAction {
-    return {
-        type: "FETCH_ALL_CONTAINERS_STRUCTURED_SUCCESS",
-        data: containers,
     };
 }
 
@@ -251,6 +225,7 @@ export function fetchUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxActio
         data: endpoint,
     };
 }
+
 export function fetchAllUptimeEndpointsStructured(): ReduxAction {
     return {
         type: "FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED",
@@ -317,10 +292,10 @@ export function fetchAllDaemonsSuccess(daemons: Daemon[]): ReduxAction {
         data: daemons,
     };
 }
-export function daemonRequestResources(id: string): ReduxAction {
+export function daemonRequestResources(id: string, resources: string[]): ReduxAction {
     return {
         type: "DAEMON_REQUEST_RESOURCES",
-        data: id,
+        data: { id, resources },
     };
 }
 export function daemonRequestDatabaseBackup(id: string, database: string): ReduxAction {

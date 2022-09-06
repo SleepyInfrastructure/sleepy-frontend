@@ -1,11 +1,13 @@
 /* Types */
 type ServersProps = {
-    session: Session;
+    session: Session | null;
     servers: Map<string, Server>;
     serverConfigs: Map<string, ServerConfig>;
     networks: Map<string, Network>;
     disks: Map<string, Disk>;
     partitions: Map<string, Partition>;
+    zfsPools: Map<string, ZFSPool>;
+    zfsPartitions: Map<string, ZFSPartition>;
     containers: Map<string, Container>;
     containerStatistics: Map<string, ContainerStatistic>;
     containerProjects: Map<string, ContainerProject>;
@@ -34,14 +36,14 @@ type RegisterConnectedProps = {
 
 type SettingsConnectedProps = {
     path: string;
-    session: Session;
+    session: Session | null;
 
     actions: ConnectedActions;
 };
 
 type TokensConnectedProps = {
     path: string;
-    session: Session;
+    session: Session | null;
     servers: Map<string, Server>;
     daemonTokens: Map<string, DaemonToken>;
 
@@ -50,7 +52,7 @@ type TokensConnectedProps = {
 
 type CreateServerConnectedProps = {
     path: string;
-    session: Session;
+    session: Session | null;
     servers: Map<string, Server>;
 
     actions: ConnectedActions;
@@ -59,7 +61,7 @@ type CreateServerConnectedProps = {
 type EditServerConnectedProps = {
     path: string;
     id?: string;
-    session: Session;
+    session: Session | null;
     servers: Map<string, Server>;
 
     actions: ConnectedActions;
@@ -73,7 +75,7 @@ type ServerRouteConnectedProps = ServersProps & {
 type InstallingDaemonConnectedProps = {
     path: string;
     id?: string;
-    session: Session;
+    session: Session | null;
     servers: Map<string, Server>;
     daemonTokens: Map<string, DaemonToken>;
 
@@ -82,7 +84,7 @@ type InstallingDaemonConnectedProps = {
 
 type CreateUptimeEndpointConnectedProps = {
     path: string;
-    session: Session;
+    session: Session | null;
     uptimeEndpoints: Map<string, UptimeEndpoint>;
 
     actions: ConnectedActions;
@@ -91,7 +93,7 @@ type CreateUptimeEndpointConnectedProps = {
 type EditUptimeEndpointConnectedProps = {
     path: string;
     id?: string;
-    session: Session;
+    session: Session | null;
     uptimeEndpoints: Map<string, UptimeEndpoint>;
 
     actions: ConnectedActions;

@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect } from "react";
+import { getServerConnectedProps } from "../../scripts/util/server";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -11,15 +12,12 @@ import style from "./style.scss";
 /* Components */
 import SmallServer from "../../components/small-server";
 import Button from "../../components/ui/button";
-import { getServerConnectedProps } from "../../scripts/util/util";
 import UptimeEndpoint from "../../components/uptime-endpoint";
 
 const Home: FunctionalComponent<HomeConnectedProps> = (props: HomeConnectedProps) => {
     useEffect(() => {
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
-            props.actions.fetchAllDisksStructured();
-            props.actions.fetchAllContainersStructured();
             props.actions.fetchAllUptimeEndpointsStructured();
             props.actions.connectWebsocket();
         }

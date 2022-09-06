@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useState } from "react";
+import { formatTimestampLong } from "../../scripts/util/util";
 /* Styles */
 import serverStyle from "../server/style.scss";
 import style from "./style.scss";
@@ -27,8 +28,8 @@ const TokenServer: FunctionalComponent<TokenServerConnectedProps> = (props: Toke
                                 <a className={style["server-content-tokens-delete"]} onClick={() => { props.actions.deleteDaemonToken(e.id); }}>(Delete)</a>
                             </div>
                             <div className={style["server-token-timestamps"]}>
-                                <div className={style["server-token-timestamp"]}>Created - <span className={style["server-token-timestamp-highlight"]}>{(new Date(e.timestamp * 1000).toLocaleString())}</span></div>
-                                <div className={style["server-token-timestamp"]}>Last used - <span className={style["server-token-timestamp-highlight"]}>{(new Date(e.used * 1000).toLocaleString())}</span></div>
+                                <div className={style["server-token-timestamp"]}>Created - <span className={style["server-token-timestamp-highlight"]}>{formatTimestampLong(e.timestamp)}</span></div>
+                                <div className={style["server-token-timestamp"]}>Last used - <span className={style["server-token-timestamp-highlight"]}>{formatTimestampLong(e.used * 1000)}</span></div>
                             </div>
                         </div>;
                     })}

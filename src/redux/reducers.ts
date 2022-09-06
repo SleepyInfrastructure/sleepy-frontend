@@ -1,10 +1,10 @@
 /* Redux */
 import { Dispatch } from "redux";
 /* Redux */
-import { createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, deleteDaemonTokenSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllContainersStructuredSuccess, fetchAllDisksStructuredSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
+import { createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, deleteDaemonTokenSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
 import { cacheResource, cacheResources, ResourceType } from "./util";
 /* API */
-import { createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editServer, editUptimeEndpoint, fetchAllContainersStructured, fetchAllDisksStructured, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
+import { createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editServer, editUptimeEndpoint, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
 import { connectWebsocket, DaemonWebsocketMessageType, sendWebsocketMessage } from "../scripts/ws/ws";
 
 const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> = {
@@ -220,11 +220,6 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         dispatch(fetchDiskSuccess(disk));
     },
 
-    FETCH_ALL_DISKS_STRUCTURED: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
-        const disks = await fetchAllDisksStructured();
-        dispatch(fetchAllDisksStructuredSuccess(disks));
-    },
-
     FETCH_PARTITION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         const partition = await fetchPartition(action.data);
         if (partition === undefined) {
@@ -241,11 +236,6 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         }
 
         dispatch(fetchContainerSuccess(container));
-    },
-
-    FETCH_ALL_CONTAINERS_STRUCTURED: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
-        const containers = await fetchAllContainersStructured();
-        dispatch(fetchAllContainersStructuredSuccess(containers));
     },
 
     FETCH_CONTAINER_PROJECT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
@@ -294,7 +284,7 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
     },
 
     DAEMON_REQUEST_RESOURCES: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_RESOURCES, id: action.data });
+        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_RESOURCES, ...action.data });
     },
 
     DAEMON_REQUEST_DATABASE_BACKUP: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

@@ -97,14 +97,6 @@ export async function fetchDisk(id: string): Promise<Disk | undefined> {
 
     return response.body;
 }
-export async function fetchAllDisksStructured(): Promise<DiskStructured[]> {
-    const response: APIResponse = await get({ path: `/disks/all/structured/fetch` });
-    if (response.status !== 200) {
-        return [];
-    }
-
-    return response.body;
-}
 
 export async function fetchPartition(id: string): Promise<Partition | undefined> {
     const response: APIResponse = await get({ path: `/partitions/fetch?id=${id}` });
@@ -119,14 +111,6 @@ export async function fetchContainer(id: string): Promise<Container | undefined>
     const response: APIResponse = await get({ path: `/containers/fetch?id=${id}` });
     if (response.status !== 200) {
         return undefined;
-    }
-
-    return response.body;
-}
-export async function fetchAllContainersStructured(): Promise<ContainerStructured[]> {
-    const response: APIResponse = await get({ path: `/containers/all/structured/fetch` });
-    if (response.status !== 200) {
-        return [];
     }
 
     return response.body;

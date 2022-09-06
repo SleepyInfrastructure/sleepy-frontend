@@ -5,6 +5,7 @@ import { useState } from "react";
 import style from "./style.scss";
 /* Components */
 import Disk from "../disk";
+import ZFSPool from "../zfs-pool";
 import Container from "../container";
 import Database from "../database";
 import DiskChart from "../charts/disk";
@@ -18,6 +19,10 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
     const [containersOpen, setContainersOpen] = useState(true);
     const [databasesOpen, setDatabasesOpen] = useState(false);
     const statistics = props.statistics.sort((a, b) => a.timestamp - b.timestamp);
+    const containerProjects = props.containerProjects.map((e) => {
+        const containers = props.containers.filter(el => el.parent === e.id);
+        return { ...e, containers };
+    });
 
     return (
         <div className={style.server}>
@@ -45,7 +50,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
                 <div className={style["server-daemon"]}>Daemon: <span className={style["server-daemon-highlight-green"]}>Connected</span>
                     <a className={style["server-daemon-highlight-link"]} onClick={() => {
                         if(props.daemon === null) { return; }
-                        props.actions.daemonRequestRefresh(props.daemon?.server);
+                        props.actions.daemonRequestResources(props.daemon?.server, ["CONTAINERS", "DISKS"]);
                     }}>(Request Refresh)</a>
                 </div>}
                 {props.network === null ? null :
@@ -62,6 +67,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
                     </div>
                     {!disksOpen ? null : <div className={style["server-section"]}>
                         {props.disks.map((e, i) => <Disk key={i} item={e} actions={props.actions} />)}
+                        {props.zfsPools.map((e, i) => <ZFSPool key={i} item={e} actions={props.actions} />)}
                     </div>}
                 </div>
                 <div className={style["server-section-wrapper"]}>
@@ -70,10 +76,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
                         <div className={style["server-section-arrow"]} data={containersOpen ? "true" : "false"} />
                     </div>
                     {!containersOpen ? null : <div className={style["server-section"]}>
-                        {props.containerProjects.map((e, i) => {
-                            const containers = props.containers.filter(el => el.parent === e.id);
-                            return <ContainerProject key={i} item={{ ...e, containers }} actions={props.actions} />
-                        })}
+                        {containerProjects.map((e, i) => <ContainerProject key={i} item={e} actions={props.actions} />)}
                         {props.containers.filter(e => e.parent === null).map((e, i) => <Container key={i} item={e} actions={props.actions} />)}
                     </div>}
                 </div>
