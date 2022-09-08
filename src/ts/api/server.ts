@@ -21,6 +21,7 @@ type ServerConfig = {
 type ServerStructured = Server & {
     config: ServerConfig;
     network: Network;
+    software: Software[];
     disks: DiskStructured[];
     zfsPools: ZFSPoolStructured[];
     containers: ContainerStructured[];
@@ -33,6 +34,8 @@ type Statistic = {
     author: string;
     server: string;
     timestamp: number;
+    cpuSystem: number;
+    cpuUser: number;
     rx: number;
     tx: number;
     memory: number;
@@ -46,6 +49,11 @@ type Network = {
     ipv4: string | null;
 };
 
+type Software = {
+    name: string;
+    version: string;
+};
+
 type Database = {
     id: string;
     author: string | null;
@@ -53,8 +61,12 @@ type Database = {
     name: string;
 };
 
-/* Edits */
-type ServerEdit = {
-    id: string;
+/* Calls */
+type ServerCreate = {
     name: string;
+    color: string;
+}; 
+
+type ServerEdit = ServerCreate & {
+    id: string;
 }; 

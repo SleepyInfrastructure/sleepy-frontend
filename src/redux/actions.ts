@@ -41,13 +41,13 @@ export function deleteSession(): ReduxAction {
 }
 
 /* Servers */
-export function createServer(name: string): ReduxAction {
+export function createServer(create: ServerCreate): ReduxAction {
     return {
         type: "CREATE_SERVER",
-        data: { name },
+        data: create,
     };
 }
-export function createServerSuccess(server: ServerStructured): ReduxAction {
+export function createServerSuccess(server: Server): ReduxAction {
     return {
         type: "CREATE_SERVER_SUCCESS",
         data: server,

@@ -1,11 +1,15 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
+import { useState } from "react";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { formatTimestampShort } from "../../../scripts/util/util";
 /* Styles */
 import style from "../style.scss";
 
 const CPUChart: FunctionalComponent<CPUChartConnectedProps> = (props: CPUChartConnectedProps) => {
+    const [displayTotal, setDisplayTotal] = useState(true);
+    const [displaySystem, setDisplaySystem] = useState(true);
+
     return <div className={style.chart}>
         <div className={style["chart-header"]}>
             <div className={style["cpu-icon"]} />
@@ -16,9 +20,20 @@ const CPUChart: FunctionalComponent<CPUChartConnectedProps> = (props: CPUChartCo
                 <XAxis dataKey="timestamp" tickFormatter={formatTimestampShort} tickMargin={8} padding={{ right: 20 }} tick={{ fill: "#ff3645" }} />
                 <YAxis tickFormatter={(e: number) => `${e.toFixed(0)}%`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "#ff3645" }} domain={[0, 100]} />
                 <Tooltip labelFormatter={formatTimestampShort} formatter={(e: number) => `${e.toFixed(2)}%`} labelStyle={{ color: "#ff3645" }} contentStyle={{ background: "#202020", border: 0 }} wrapperStyle={{ border: 0 }} />
-                <Line name="CPU" type="monotone" dataKey="cpu" stroke="#3bff6f" activeDot={{ r: 4 }} dot={{ r: 0 }} />
+                {displayTotal ? <Line name="CPU" type="monotone" dataKey={displaySystem ? ((e: Statistic) => e.cpuSystem + e.cpuUser) : "cpuUser"} stroke="#3bff6f" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
+                {displaySystem ? <Line name="CPU (System)" type="monotone" dataKey="cpuSystem" stroke="#3bb4ff" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
             </LineChart>
         </ResponsiveContainer>
+        <div className={style["chart-footer"]}>
+            <div className={style["chart-footer-switch"]} onClick={() => { setDisplayTotal(!displayTotal); }}>
+                <div className={style["circle-icon"]} data={displayTotal ? "true" : "false"} style={{ background: "#3bff6f" }} />
+                <div className={style["chart-footer-switch-text"]} data={displayTotal ? "true" : "false"} style={{ color: "#3bff6f" }}>Total</div>
+            </div>
+            <div className={style["chart-footer-switch"]} onClick={() => { setDisplaySystem(!displaySystem); }}>
+                <div className={style["circle-icon"]} data={displaySystem ? "true" : "false"} style={{ background: "#3bb4ff" }} />
+                <div className={style["chart-footer-switch-text"]} data={displaySystem ? "true" : "false"} style={{ color: "#3bb4ff" }}>System</div>
+            </div>
+        </div>
     </div>;
 };
 

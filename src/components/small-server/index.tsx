@@ -1,5 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
+import { REFRESH_ALL } from "../../ts/api/const";
 /* Styles */
 import baseStyle from "../server/style.scss";
 import style from "./style.scss";
@@ -16,7 +17,7 @@ const SmallServer: FunctionalComponent<ServerConnectedProps> = (props: ServerCon
         <div className={baseStyle.server}>
             <div className={baseStyle["server-header"]}>
                 <div className={baseStyle["server-icon"]} style={{ background: `#${props.item.color}` }} />
-                <a href={`/server/${props.item.id}`} className={baseStyle["server-name"]}>{props.item.name}</a>
+                <a href={`/server/${props.item.id}`} className={baseStyle["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</a>
                 <a href={`/edit-server/${props.item.id}`} className={baseStyle["server-link"]}>(Edit)</a>
             </div>
             {statistics.length === 0 ? null :
@@ -38,7 +39,7 @@ const SmallServer: FunctionalComponent<ServerConnectedProps> = (props: ServerCon
                 <div className={baseStyle["server-daemon"]}>Daemon: <span className={baseStyle["server-daemon-highlight-green"]}>Connected</span>
                     <a className={baseStyle["server-daemon-highlight-link"]} onClick={() => {
                         if(props.daemon === null) { return; }
-                        props.actions.daemonRequestResources(props.daemon?.server, ["CONTAINERS", "DISKS"]);
+                        props.actions.daemonRequestResources(props.daemon?.server, REFRESH_ALL);
                     }}>(Request Refresh)</a>
                 </div>}
                 {props.network === null ? null :

@@ -28,7 +28,7 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
     },
 
     CREATE_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.SERVER_STRUCTURED);
+        state = cacheResource(state, action.data, ResourceType.SERVER);
         return state;
     },
 
@@ -162,7 +162,7 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
     },
 
     CREATE_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const server = await createServer(action.data.name);
+        const server = await createServer(action.data);
         if (server === undefined) {
             return;
         }

@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useState } from "react";
+import { REFRESH_ALL } from "../../ts/api/const";
 /* Styles */
 import style from "./style.scss";
 /* Components */
@@ -28,7 +29,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
         <div className={style.server}>
             <div className={style["server-header"]}>
                 <div className={style["server-icon"]} style={{ background: `#${props.item.color}` }} />
-                <a href={`/server/${props.item.id}`} className={style["server-name"]}>{props.item.name}</a>
+                <a href={`/server/${props.item.id}`} className={style["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</a>
                 <a href={`/edit-server/${props.item.id}`} className={style["server-link"]}>(Edit)</a>
             </div>
             {statistics.length === 0 ? null :
@@ -50,7 +51,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
                 <div className={style["server-daemon"]}>Daemon: <span className={style["server-daemon-highlight-green"]}>Connected</span>
                     <a className={style["server-daemon-highlight-link"]} onClick={() => {
                         if(props.daemon === null) { return; }
-                        props.actions.daemonRequestResources(props.daemon?.server, ["CONTAINERS", "DISKS"]);
+                        props.actions.daemonRequestResources(props.daemon?.server, REFRESH_ALL);
                     }}>(Request Refresh)</a>
                 </div>}
                 {props.network === null ? null :
@@ -65,7 +66,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
                         <a className={style["server-section-title"]} data={disksOpen ? "true" : "false"}>Disks</a>
                         <div className={style["server-section-arrow"]} data={disksOpen ? "true" : "false"} />
                     </div>
-                    {!disksOpen ? null : <div className={style["server-section"]}>
+                    {!disksOpen || (props.disks.length + props.zfsPools.length < 1) ? null : <div className={style["server-section"]}>
                         {props.disks.map((e, i) => <Disk key={i} item={e} actions={props.actions} />)}
                         {props.zfsPools.map((e, i) => <ZFSPool key={i} item={e} actions={props.actions} />)}
                     </div>}
@@ -75,7 +76,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
                         <a className={style["server-section-title"]} data={containersOpen ? "true" : "false"}>Containers</a>
                         <div className={style["server-section-arrow"]} data={containersOpen ? "true" : "false"} />
                     </div>
-                    {!containersOpen ? null : <div className={style["server-section"]}>
+                    {!containersOpen || (containerProjects.length + props.containers.length < 1) ? null : <div className={style["server-section"]}>
                         {containerProjects.map((e, i) => <ContainerProject key={i} item={e} actions={props.actions} />)}
                         {props.containers.filter(e => e.parent === null).map((e, i) => <Container key={i} item={e} actions={props.actions} />)}
                     </div>}
@@ -85,7 +86,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
                         <a className={style["server-section-title"]} data={databasesOpen ? "true" : "false"}>Databases</a>
                         <div className={style["server-section-arrow"]}  data={databasesOpen ? "true" : "false"} />
                     </div>
-                    {!databasesOpen ? null : <div className={style["server-section"]}>
+                    {!databasesOpen || (props.databases.length < 1) ? null : <div className={style["server-section"]}>
                         {props.databases.map((e, i) => <Database key={i} item={e} actions={props.actions} />)}
                     </div>}
                 </div>

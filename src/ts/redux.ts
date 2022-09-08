@@ -11,6 +11,7 @@ type ReduxState = {
     servers: Map<string, Server>;
     serverConfigs: Map<string, ServerConfig>;
     networks: Map<string, Network>;
+    software: Map<string, Software>;
     disks: Map<string, Disk>;
     partitions: Map<string, Partition>;
     zfsPools: Map<string, ZFSPool>;
@@ -32,7 +33,7 @@ type ConnectedActions = {
     fetchUser(id: string): ReduxAction;
     createSession(type: string, username?: string, password?: string): ReduxAction;
     deleteSession(): ReduxAction;
-    createServer(name: string): ReduxAction;
+    createServer(create: ServerCreate): ReduxAction;
     editServer(edit: ServerEdit): ReduxAction;
     fetchServer(id: string): ReduxAction;
     fetchServerStructured(id: string): ReduxAction;

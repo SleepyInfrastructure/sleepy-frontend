@@ -6,6 +6,7 @@ export const INITIAL: ReduxState = {
     servers: new Map(),
     serverConfigs: new Map(),
     networks: new Map(),
+    software: new Map(),
     disks: new Map(),
     partitions: new Map(),
     zfsPools: new Map(),
@@ -27,6 +28,7 @@ export enum ResourceType {
     SERVER_CONFIG = "server-config",
     SERVER_STRUCTURED = "server-structured",
     NETWORK = "network",
+    SOFTWARE = "software",
     DISK = "disk",
     DISK_STRUCTURED = "disk-structured",
     DISK_STATISTIC = "disk-statistic",
@@ -83,6 +85,8 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.config;
                 state = cacheResource(state, server.network, ResourceType.NETWORK);
                 delete server.network;
+                state = cacheResources(state, server.software, ResourceType.SOFTWARE);
+                delete server.software;
                 state = cacheResources(state, server.disks, ResourceType.DISK_STRUCTURED);
                 delete server.disks;
                 state = cacheResources(state, server.zfsPools, ResourceType.ZFS_POOL_STRUCTURED);
@@ -116,6 +120,14 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 newResources.set(resource.id, resource);
             });
             return { ...state, networks: newResources };
+        }
+
+        case ResourceType.SOFTWARE: {
+            const newResources = new Map(state.software);
+            resources.forEach(resource => {
+                newResources.set(resource.id, resource);
+            });
+            return { ...state, software: newResources };
         }
 
         case ResourceType.DISK: {

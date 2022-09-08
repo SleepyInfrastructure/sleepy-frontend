@@ -26,6 +26,8 @@
 
 .create-server-form-text {
     color: var(--color-primary-text);
+    width: 120px;
+    text-align: right;
 }
 
 .create-server-form-input {
@@ -56,6 +58,17 @@
 .create-server-form-button {
     width: 200px;
     margin-top: 20px;
+}
+
+.create-server-form-color-picker {
+    width: 160px !important;
+    height: 160px !important;
+    margin: 5px;
+}
+.create-server-form-color-picker-stripe {
+    width: 20px;
+    height: 160px;
+    border-radius: 5px;
 }
 
 /* Icons */

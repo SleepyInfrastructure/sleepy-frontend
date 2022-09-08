@@ -39,15 +39,15 @@ export async function deleteSession(): Promise<boolean> {
     return response.status === 200;
 }
 
-export async function createServer(name: string): Promise<ServerStructured | undefined> {
-    const response: APIResponse = await post({ path: `/servers/create`, body: JSON.stringify({ name }) });
+export async function createServer(create: ServerCreate): Promise<Server | undefined> {
+    const response: APIResponse = await post({ path: `/servers/create`, body: JSON.stringify(create) });
     if (response.status !== 200) {
         return undefined;
     }
 
     return response.body;
 }
-export async function editServer(edit: ServerEdit): Promise<ServerStructured | undefined> {
+export async function editServer(edit: ServerEdit): Promise<Server | undefined> {
     const response: APIResponse = await post({ path: `/servers/edit`, body: JSON.stringify(edit) });
     if (response.status !== 200) {
         return undefined;

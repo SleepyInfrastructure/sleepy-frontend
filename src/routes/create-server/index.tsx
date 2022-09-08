@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect, useState } from "react";
+import { HexColorPicker } from "react-colorful";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -21,6 +22,7 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
     const servers = Array.from(props.servers.values());
 
     const [name, setName] = useState("");
+    const [color, setColor] = useState("#ff3645");
     const nameSatisfies = () => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (servers.some(e => e.name === name) ? "(server with same name exists)" : "(satisfies)");
     }
@@ -41,7 +43,12 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
                     <input className={style["create-server-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
                     <div className={style["create-server-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
                 </div>
-                <Button disabled={!satisfies} className={style["create-server-form-button"]} secondary onClick={() => { props.actions.createServer(name); setTimeout(() => { location.href = "/"; }, 1000); }}>
+                <div className={style["create-server-form-row"]}>
+                    <div className={style["create-server-form-text"]}>Server color: </div>
+                    <HexColorPicker className={style["create-server-form-color-picker"]} color={color} onChange={setColor} />
+                    <div className={style["create-server-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
+                </div>
+                <Button disabled={!satisfies} className={style["create-server-form-button"]} secondary onClick={() => { props.actions.createServer({ name, color }); setTimeout(() => { location.href = "/"; }, 1000); }}>
                     Create!
                 </Button>
             </div>

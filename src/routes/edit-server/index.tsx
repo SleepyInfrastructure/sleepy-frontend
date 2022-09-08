@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect, useState } from "react";
+import { HexColorPicker } from "react-colorful";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -21,24 +22,23 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const servers = Array.from(props.servers.values());
+    const server = props.id !== undefined ? props.servers.get(props.id) : undefined;
 
     const [name, setName] = useState("");
+    const [color, setColor] = useState("#ff3645");
     const nameSatisfies = () => {
-        return name.length < 3 ? "(is not atleast 3 characters)" : (servers.some(e => e.name === name) ? "(server with same name exists)" : "(satisfies)");
+        return name.length < 3 ? "(is not atleast 3 characters)" : (servers.some(e => e.name !== server?.name && e.name === name) ? "(server with same name exists)" : "(satisfies)");
     }
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
     }, [name]);
-    if(props.id === undefined) {
-        return null;
-    }
-    const server = props.servers.get(props.id);
     if(server === undefined) {
         return null;
     }
     if(!didSetDefaults) {
         setName(server.name);
+        setColor(`#${server.color}`);
         setDidSetDefaults(true);
     }
 
@@ -58,10 +58,16 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
                     <input className={formStyle["create-server-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
                     <div className={formStyle["create-server-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
                 </div>
+                <div className={formStyle["create-server-form-row"]}>
+                    <div className={formStyle["create-server-form-text"]}>Server color: </div>
+                    <HexColorPicker className={formStyle["create-server-form-color-picker"]} color={color} onChange={setColor} />
+                    <div className={formStyle["create-server-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
+                </div>
                 <Button disabled={!satisfies} className={formStyle["create-server-form-button"]} secondary onClick={() => {
                     props.actions.editServer({
                         id: server.id,
-                        name
+                        name,
+                        color: color.substring(1)
                     });
                     setTimeout(() => { location.href = "/"; }, 1000);
                 }}>
