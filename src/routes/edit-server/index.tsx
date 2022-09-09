@@ -8,7 +8,7 @@ import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
-import formStyle from "../create-server/style.scss";
+import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
@@ -45,25 +45,25 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-title-wrapper"]}>
-                <div className={formStyle["server-icon"]} />
+                <div className={style["server-icon"]} />
                 <div className={baseStyle["page-title"]}>Edit Server</div>
             </div>
-            <div className={formStyle["create-server-form"]}>
-                <div className={formStyle["create-server-form-row"]}>
-                    <div className={formStyle["create-server-form-text"]}>Server ID: </div>
-                    <input className={formStyle["create-server-form-input"]} value={server.id} disabled />
+            <div className={formStyle["page-form"]}>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Server ID: </div>
+                    <input className={formStyle["page-form-input"]} value={server.id} disabled />
                 </div>
-                <div className={formStyle["create-server-form-row"]}>
-                    <div className={formStyle["create-server-form-text"]}>Server name: </div>
-                    <input className={formStyle["create-server-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["create-server-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Server name: </div>
+                    <input className={formStyle["page-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
+                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
                 </div>
-                <div className={formStyle["create-server-form-row"]}>
-                    <div className={formStyle["create-server-form-text"]}>Server color: </div>
-                    <HexColorPicker className={formStyle["create-server-form-color-picker"]} color={color} onChange={setColor} />
-                    <div className={formStyle["create-server-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Server color: </div>
+                    <HexColorPicker className={formStyle["page-form-color-picker"]} color={color} onChange={setColor} />
+                    <div className={formStyle["page-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
                 </div>
-                <Button disabled={!satisfies} className={formStyle["create-server-form-button"]} secondary onClick={() => {
+                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
                     props.actions.editServer({
                         id: server.id,
                         name,

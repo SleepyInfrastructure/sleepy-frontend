@@ -10,7 +10,7 @@ export function getServerConnectedProps(e: Server, props: ServersProps): ServerC
     const databases = Array.from(props.databases.values());
     const statistics = Array.from(props.statistics.values());
     const diskStatistics = Array.from(props.diskStatistics.values());
-
+    
     const config = props.serverConfigs.get(e.config);
     const network = e.network === null ? undefined : props.networks.get(e.network);
     const serverDisks = disks.filter(el => el.server === e.id).map(el => {

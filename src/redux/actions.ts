@@ -1,3 +1,10 @@
+export function fetchPreferences(): ReduxAction {
+    return {
+        type: "FETCH_PREFERENCES",
+        data: {},
+    };
+}
+
 /* Users */
 export function createUser(username: string, password: string): ReduxAction {
     return {
@@ -105,6 +112,32 @@ export function fetchAllServersStructuredSuccess(servers: ServerStructured[]): R
 }
 
 /* Networks */
+export function createNetwork(create: NetworkCreate): ReduxAction {
+    return {
+        type: "CREATE_NETWORK",
+        data: create,
+    };
+}
+export function createNetworkSuccess(network: Network): ReduxAction {
+    return {
+        type: "CREATE_NETWORK_SUCCESS",
+        data: network,
+    };
+}
+
+export function editNetwork(edit: NetworkEdit): ReduxAction {
+    return {
+        type: "EDIT_NETWORK",
+        data: edit,
+    };
+}
+export function editNetworkSuccess(network: Network): ReduxAction {
+    return {
+        type: "EDIT_NETWORK_SUCCESS",
+        data: network,
+    };
+}
+
 export function fetchNetwork(id: string): ReduxAction {
     return {
         type: "FETCH_NETWORK",

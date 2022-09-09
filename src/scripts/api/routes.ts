@@ -80,6 +80,22 @@ export async function fetchAllServersStructured(): Promise<ServerStructured[]> {
     return response.body;
 }
 
+export async function createNetwork(create: NetworkCreate): Promise<Network | undefined> {
+    const response: APIResponse = await post({ path: `/networks/create`, body: JSON.stringify(create) });
+    if (response.status !== 200) {
+        return undefined;
+    }
+
+    return response.body;
+}
+export async function editNetwork(edit: NetworkEdit): Promise<Network | undefined> {
+    const response: APIResponse = await post({ path: `/networks/edit`, body: JSON.stringify(edit) });
+    if (response.status !== 200) {
+        return undefined;
+    }
+
+    return response.body;
+}
 export async function fetchNetwork(id: string): Promise<Network | undefined> {
     const response: APIResponse = await get({ path: `/networks/fetch?id=${id}` });
     if (response.status !== 200) {

@@ -17,6 +17,7 @@ type ServerConnectedProps = {
     daemon: Daemon | null;
     actions: ConnectedActions;
 };
+type ServerContentConnectedProps = ServerConnectedProps;
 
 type TokenServerConnectedProps = {
     item: Server;

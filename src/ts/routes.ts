@@ -1,4 +1,11 @@
 /* Types */
+type RouteProps = {
+    path: string;
+    session: Session | null;
+    id?: string;
+    actions: ConnectedActions;
+};
+
 type ServersProps = {
     session: Session | null;
     servers: Map<string, Server>;
@@ -24,79 +31,40 @@ type HomeConnectedProps = ServersProps & {
     uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
 };
 
-type LoginConnectedProps = {
-    path: string;
-    actions: ConnectedActions;
-};
+type LoginConnectedProps = RouteProps;
+type RegisterConnectedProps = RouteProps;
+type SettingsConnectedProps = RouteProps;
 
-type RegisterConnectedProps = {
-    path: string;
-    actions: ConnectedActions;
-};
-
-type SettingsConnectedProps = {
-    path: string;
-    session: Session | null;
-
-    actions: ConnectedActions;
-};
-
-type TokensConnectedProps = {
-    path: string;
-    session: Session | null;
+type TokensConnectedProps = RouteProps & {
     servers: Map<string, Server>;
     daemonTokens: Map<string, DaemonToken>;
-
-    actions: ConnectedActions;
 };
 
-type CreateServerConnectedProps = {
-    path: string;
-    session: Session | null;
+type CreateServerConnectedProps = RouteProps & {
     servers: Map<string, Server>;
-
-    actions: ConnectedActions;
 };
 
-type EditServerConnectedProps = {
-    path: string;
-    id?: string;
-    session: Session | null;
+type EditServerConnectedProps = RouteProps & {
     servers: Map<string, Server>;
-
-    actions: ConnectedActions;
 };
 
-type ServerRouteConnectedProps = ServersProps & {
-    path: string;
-    id?: string;
-};
+type ServerRouteConnectedProps = RouteProps & ServersProps;
 
-type InstallingDaemonConnectedProps = {
-    path: string;
-    id?: string;
-    session: Session | null;
+type InstallingDaemonConnectedProps = RouteProps & {
     servers: Map<string, Server>;
     daemonTokens: Map<string, DaemonToken>;
-
-    actions: ConnectedActions;
 };
 
-type CreateUptimeEndpointConnectedProps = {
-    path: string;
-    session: Session | null;
+type CreateUptimeEndpointConnectedProps = RouteProps & {
     uptimeEndpoints: Map<string, UptimeEndpoint>;
-
-    actions: ConnectedActions;
 };
 
-type EditUptimeEndpointConnectedProps = {
-    path: string;
-    id?: string;
-    session: Session | null;
+type EditUptimeEndpointConnectedProps = RouteProps & {
     uptimeEndpoints: Map<string, UptimeEndpoint>;
+};
 
-    actions: ConnectedActions;
+type EditNetworkConnectedProps = RouteProps & {
+    networks: Map<string, Network>;
 };
 
 

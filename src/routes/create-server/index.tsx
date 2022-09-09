@@ -8,6 +8,7 @@ import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
+import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
@@ -37,18 +38,21 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
                 <div className={style["server-icon"]} />
                 <div className={baseStyle["page-title"]}>Create Server</div>
             </div>
-            <div className={style["create-server-form"]}>
-                <div className={style["create-server-form-row"]}>
-                    <div className={style["create-server-form-text"]}>Server name: </div>
-                    <input className={style["create-server-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={style["create-server-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
+            <div className={formStyle["page-form"]}>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Server name: </div>
+                    <input className={formStyle["page-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
+                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
                 </div>
-                <div className={style["create-server-form-row"]}>
-                    <div className={style["create-server-form-text"]}>Server color: </div>
-                    <HexColorPicker className={style["create-server-form-color-picker"]} color={color} onChange={setColor} />
-                    <div className={style["create-server-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Server color: </div>
+                    <HexColorPicker className={formStyle["page-form-color-picker"]} color={color} onChange={setColor} />
+                    <div className={formStyle["page-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
                 </div>
-                <Button disabled={!satisfies} className={style["create-server-form-button"]} secondary onClick={() => { props.actions.createServer({ name, color }); setTimeout(() => { location.href = "/"; }, 1000); }}>
+                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
+                        props.actions.createServer({ name, color });
+                        setTimeout(() => { location.href = "/"; }, 1000);
+                    }}>
                     Create!
                 </Button>
             </div>

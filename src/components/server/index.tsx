@@ -1,7 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useState } from "react";
-import { REFRESH_ALL } from "../../ts/api/const";
 /* Styles */
 import style from "./style.scss";
 /* Components */
@@ -14,6 +13,7 @@ import CPUChart from "../charts/cpu";
 import NetworkChart from "../charts/network";
 import MemoryChart from "../charts/memory";
 import ContainerProject from "../container-project";
+import ServerContent from "../server-content";
 
 const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnectedProps) => {
     const [disksOpen, setDisksOpen] = useState(true);
@@ -24,6 +24,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
         const containers = props.containers.filter(el => el.parent === e.id);
         return { ...e, containers };
     });
+    console.log(props.network);
 
     return (
         <div className={style.server}>
@@ -41,25 +42,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
             <div className={style["server-charts"]}>
                 {props.disks.map((e, i) => e.statistics.length === 0 ? null : <DiskChart key={i} item={e} />)}
             </div>
-            <div className={style["server-content"]}>
-                {props.daemon === null ?
-                <div className={style["server-daemon"]}>Daemon: <span className={style["server-daemon-highlight-red"]}>Not Connected</span>
-                    <a className={style["server-daemon-highlight-link"]} onClick={() => {
-                        location.href = `/installing-daemon/${props.item.id}`;
-                    }}>(Install)</a>
-                </div> :
-                <div className={style["server-daemon"]}>Daemon: <span className={style["server-daemon-highlight-green"]}>Connected</span>
-                    <a className={style["server-daemon-highlight-link"]} onClick={() => {
-                        if(props.daemon === null) { return; }
-                        props.actions.daemonRequestResources(props.daemon?.server, REFRESH_ALL);
-                    }}>(Request Refresh)</a>
-                </div>}
-                {props.network === null ? null :
-                <div className={style["server-network"]}>
-                    <div className={style["server-network-title"]}>Network: <span className={style["server-network-title-highlight"]}>{props.network.ipv4}</span></div>
-                    <div className={style["server-network-ssh"]}>SSH: {<a className={style["server-network-ssh-highlight"]} href={`http://localhost:8888/?hostname=${props.network.ipv4}&username=${props.item.name}`} target="_blank" rel="noreferrer">Connect</a>}</div>
-                </div>}
-            </div>
+            <ServerContent {...props} />
             <div className={style["server-sections"]}>
                 <div className={style["server-section-wrapper"]}>
                     <div className={style["server-section-title-wrapper"]} onClick={() => { setDisksOpen(!disksOpen); }}>

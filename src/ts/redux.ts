@@ -26,9 +26,11 @@ type ReduxState = {
     uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
     daemons: Map<string, Daemon>;
     daemonTokens: Map<string, DaemonToken>;
+    preferences: AppPreferences;
 };
 
 type ConnectedActions = {
+    fetchPreferences(): ReduxAction;
     createUser(username: string, password: string): ReduxAction;
     fetchUser(id: string): ReduxAction;
     createSession(type: string, username?: string, password?: string): ReduxAction;
@@ -38,13 +40,15 @@ type ConnectedActions = {
     fetchServer(id: string): ReduxAction;
     fetchServerStructured(id: string): ReduxAction;
     fetchAllServersStructured(): ReduxAction;
+    createNetwork(create: NetworkCreate): ReduxAction;
+    editNetwork(edit: NetworkEdit): ReduxAction;
     fetchNetwork(id: string): ReduxAction;
     fetchDisk(id: string): ReduxAction;
     fetchPartition(id: string): ReduxAction;
     fetchContainer(id: string): ReduxAction;
     fetchContainerProject(id: string): ReduxAction;
     fetchDatabase(id: string): ReduxAction;
-    createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction;
+    createUptimeEndpoint(create: UptimeEndpointCreate): ReduxAction;
     editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction;
     fetchUptimeEndpoint(id: string): ReduxAction;
     fetchAllUptimeEndpointsStructured(): ReduxAction;

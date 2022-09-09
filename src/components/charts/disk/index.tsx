@@ -19,13 +19,13 @@ const DiskChart: FunctionalComponent<DiskChartConnectedProps> = (props: DiskChar
         </div>
         <ResponsiveContainer width="100%" height="85%">
             <LineChart data={statistics} margin={{ top: 10, bottom: 10, left: 20, right: 20 }}>
-                <XAxis dataKey="timestamp" tickFormatter={formatTimestampShort} tickMargin={8} padding={{ right: 20 }} tick={{ fill: "#ff3645" }} />
+                <XAxis dataKey="timestamp" tickFormatter={formatTimestampShort} tickMargin={8} padding={{ right: 20 }} tick={{ fill: "var(--color-primary-text)" }} />
                 {isModeSpeed ?
-                    <YAxis tickFormatter={(e: number) => `${humanFileSize(e)}/s`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "#ff3645" }} domain={[0, 100]} /> :
-                    <YAxis tickFormatter={(e: number) => `${e} ms`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "#ff3645" }} />}
+                    <YAxis tickFormatter={(e: number) => `${humanFileSize(e)}/s`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "var(--color-primary-text)" }} domain={[0, 100]} /> :
+                    <YAxis tickFormatter={(e: number) => `${e} ms`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "var(--color-primary-text)" }} />}
                 {isModeSpeed ?
-                    <Tooltip labelFormatter={formatTimestampShort} formatter={(e: number) => `${humanFileSize(e)}/s`} labelStyle={{ color: "#ff3645" }} contentStyle={{ background: "#202020", border: 0 }} wrapperStyle={{ border: 0 }} /> :
-                    <Tooltip labelFormatter={formatTimestampShort} formatter={(e: number) => `${e} ms`} labelStyle={{ color: "#ff3645" }} contentStyle={{ background: "#202020", border: 0 }} wrapperStyle={{ border: 0 }} />
+                    <Tooltip labelFormatter={formatTimestampShort} formatter={(e: number) => `${humanFileSize(e)}/s`} labelStyle={{ color: "var(--color-primary-text)" }} contentStyle={{ background: "var(--color-primary-dark)", border: 0 }} wrapperStyle={{ border: 0 }} /> :
+                    <Tooltip labelFormatter={formatTimestampShort} formatter={(e: number) => `${e} ms`} labelStyle={{ color: "var(--color-primary-text)" }} contentStyle={{ background: "var(--color-primary-dark)", border: 0 }} wrapperStyle={{ border: 0 }} />
                 }
                 <Line name="Read" type="monotone" dataKey={isModeSpeed ? "read" : "readLatency"} stroke="#3bff6f" activeDot={{ r: 4 }} dot={{ r: 0 }} />
                 <Line name="Write" type="monotone" dataKey={isModeSpeed ? "write" : "writeLatency"} stroke="#3bb4ff" activeDot={{ r: 4 }} dot={{ r: 0 }} />

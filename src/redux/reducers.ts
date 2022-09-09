@@ -1,13 +1,25 @@
 /* Redux */
 import { Dispatch } from "redux";
 /* Redux */
-import { createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, deleteDaemonTokenSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
-import { cacheResource, cacheResources, ResourceType } from "./util";
+import { createNetworkSuccess, createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, deleteDaemonTokenSuccess, editNetworkSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
+import { cacheResource, cacheResources, INITIAL, ResourceType } from "./util";
 /* API */
-import { createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editServer, editUptimeEndpoint, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
+import { createNetwork, createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editNetwork, editServer, editUptimeEndpoint, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
 import { connectWebsocket, DaemonWebsocketMessageType, sendWebsocketMessage } from "../scripts/ws/ws";
+import { AppPreferencesTheme } from "../ts/const";
 
 const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> = {
+    FETCH_PREFERENCES: (state: ReduxState, action: ReduxAction): ReduxState => {
+        const preferences = INITIAL.preferences;
+
+        const theme = localStorage.getItem("theme");
+        if (theme !== null) {
+            preferences.theme = theme as AppPreferencesTheme;
+        }
+
+        return { ...state, preferences };
+    },
+
     CREATE_USER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         state = cacheResource(state, action.data, ResourceType.USER);
         return state;
@@ -49,6 +61,16 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
 
     FETCH_ALL_SERVERS_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         state = cacheResources(state, action.data, ResourceType.SERVER_STRUCTURED);
+        return state;
+    },
+
+    CREATE_NETWORK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        state = cacheResource(state, action.data, ResourceType.NETWORK);
+        return state;
+    },
+
+    EDIT_NETWORK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        state = cacheResource(state, action.data, ResourceType.NETWORK);
         return state;
     },
 
@@ -200,6 +222,24 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
     FETCH_ALL_SERVERS_STRUCTURED: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
         const servers = await fetchAllServersStructured();
         dispatch(fetchAllServersStructuredSuccess(servers));
+    },
+
+    CREATE_NETWORK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        const network = await createNetwork(action.data);
+        if (network === undefined) {
+            return;
+        }
+
+        dispatch(createNetworkSuccess(network));
+    },
+
+    EDIT_NETWORK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        const network = await editNetwork(action.data);
+        if (network === undefined) {
+            return;
+        }
+
+        dispatch(editNetworkSuccess(network));
     },
 
     FETCH_NETWORK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

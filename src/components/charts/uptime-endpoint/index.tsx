@@ -18,9 +18,9 @@ const UptimeEndpointChart: FunctionalComponent<UptimeEndpointChartConnectedProps
         </div>
         <ResponsiveContainer width="100%" height="85%">
             <LineChart data={statistics} margin={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-                <XAxis dataKey="timestamp" tickFormatter={formatTimestampShort} tickMargin={8} padding={{ right: 20 }} tick={{ fill: "#ff3645" }} />
-                <YAxis tickFormatter={(e: number) => `${e.toFixed(0)} ms`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "#ff3645" }} />
-                <Tooltip labelFormatter={formatTimestampShort} formatter={(e: number) => `${e.toFixed(0)} ms`} labelStyle={{ color: "#ff3645" }} contentStyle={{ background: "#202020", border: 0 }} wrapperStyle={{ border: 0 }} />
+                <XAxis dataKey="timestamp" tickFormatter={formatTimestampShort} tickMargin={8} padding={{ right: 20 }} tick={{ fill: "var(--color-primary-text)" }} />
+                <YAxis tickFormatter={(e: number) => `${e.toFixed(0)} ms`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "var(--color-primary-text)" }} />
+                <Tooltip labelFormatter={formatTimestampShort} formatter={(e: number) => `${e.toFixed(0)} ms`} labelStyle={{ color: "var(--color-primary-text)" }} contentStyle={{ background: "var(--color-primary-dark)", border: 0 }} wrapperStyle={{ border: 0 }} />
                 {props.item.host === null || !displayPing ? null : <Line name="Ping" type="monotone" dataKey="pingTime" stroke="#3bff6f" activeDot={{ r: 4 }} dot={{ r: 0 }} />}
                 {props.item.requestEndpoint === null || !displayRequestTime ? null : <Line name="Request time" type="monotone" dataKey="requestTime" stroke="#ff8121" activeDot={{ r: 4 }} dot={{ r: 0 }} />}
             </LineChart>

@@ -1,0 +1,72 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.page-form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+    margin-top: 10px;
+}
+
+.page-form-row {
+    @extend %align-y;
+    grid-gap: 10px;
+    font-size: 18px;
+}
+
+.page-form-text {
+    color: var(--color-primary-text);
+    width: 120px;
+    text-align: right;
+}
+
+.page-form-input {
+    width: 200px;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-text);
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+}
+.page-form-input::placeholder {
+    color: gray;
+}
+.page-form-input:disabled {
+    filter: grayscale(1);
+}
+
+.page-form-error {
+    font-size: 14px;
+}
+.page-form-error[data="false"] {
+    color: #2fd72f;
+}
+.page-form-error[data="true"] {
+    color: var(--color-primary-text);
+}
+
+.page-form-button {
+    width: 200px;
+    margin-top: 20px;
+}
+
+.page-form-color-picker {
+    width: 160px !important;
+    height: 160px !important;
+    margin: 5px;
+}
+.page-form-color-picker-stripe {
+    width: 20px;
+    height: 160px;
+    border-radius: 5px;
+}

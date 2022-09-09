@@ -59,9 +59,12 @@ type DaemonToken = {
 };
 
 /* Edits */
-type UptimeEndpointEdit = {
-    id: string;
+type UptimeEndpointCreate = {
     name: string;
     host?: string;
     requestEndpoint?: string;
+};
+
+type UptimeEndpointEdit = UptimeEndpointCreate & {
+    id: string;
 };

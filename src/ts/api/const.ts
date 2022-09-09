@@ -1,1 +1,0 @@
-export const REFRESH_ALL = ["GENERAL", "CONTAINERS", "DISKS"];

@@ -42,13 +42,6 @@ type Statistic = {
     swap: number;
 };
 
-type Network = {
-    id: string;
-    author: string | null;
-    name: string;
-    ipv4: string | null;
-};
-
 type Software = {
     name: string;
     version: string;

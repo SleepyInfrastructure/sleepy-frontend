@@ -1,4 +1,5 @@
 import { bindActionCreators } from "redux";
+import { AppPreferencesTheme } from "../ts/const";
 
 export const INITIAL: ReduxState = {
     session: null,
@@ -21,6 +22,9 @@ export const INITIAL: ReduxState = {
     uptimeEndpointStatistics: new Map(),
     daemons: new Map(),
     daemonTokens: new Map(),
+    preferences: {
+        theme: AppPreferencesTheme.DARK
+    }
 };
 export enum ResourceType {
     USER = "user",
@@ -84,7 +88,7 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 state = cacheResource(state, server.config, ResourceType.SERVER_CONFIG);
                 delete server.config;
                 state = cacheResource(state, server.network, ResourceType.NETWORK);
-                delete server.network;
+                server.network = server.network.id;
                 state = cacheResources(state, server.software, ResourceType.SOFTWARE);
                 delete server.software;
                 state = cacheResources(state, server.disks, ResourceType.DISK_STRUCTURED);

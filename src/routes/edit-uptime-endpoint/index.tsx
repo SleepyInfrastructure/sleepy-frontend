@@ -7,7 +7,7 @@ import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
-import formStyle from "../create-server/style.scss";
+import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
@@ -50,27 +50,27 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
                 <div className={formStyle["server-icon"]} />
                 <div className={baseStyle["page-title"]}>Edit Uptime Endpoint</div>
             </div>
-            <div className={formStyle["create-server-form"]}>
-                <div className={formStyle["create-server-form-row"]}>
-                    <div className={formStyle["create-server-form-text"]}>Endpoint ID: </div>
-                    <input className={formStyle["create-server-form-input"]} value={uptimeEndpoint.id} disabled />
+            <div className={formStyle["page-form"]}>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Endpoint ID: </div>
+                    <input className={formStyle["page-form-input"]} value={uptimeEndpoint.id} disabled />
                 </div>
-                <div className={formStyle["create-server-form-row"]}>
-                    <div className={formStyle["create-server-form-text"]}>Endpoint name: </div>
-                    <input className={formStyle["create-server-form-input"]} placeholder="my-endpoint..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["create-server-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Endpoint name: </div>
+                    <input className={formStyle["page-form-input"]} placeholder="my-endpoint..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
+                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
                 </div>
-                <div className={formStyle["create-server-form-row"]}>
-                    <div className={formStyle["create-server-form-text"]}>Endpoint host: </div>
-                    <input className={formStyle["create-server-form-input"]} placeholder="https://..." onInput={(e) => { setHost(e.currentTarget.value); }} value={host} />
-                    <div className={formStyle["create-server-form-error"]} data={hostSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{hostSatisfies(host, requestEndpoint)}</div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Endpoint host: </div>
+                    <input className={formStyle["page-form-input"]} placeholder="https://..." onInput={(e) => { setHost(e.currentTarget.value); }} value={host} />
+                    <div className={formStyle["page-form-error"]} data={hostSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{hostSatisfies(host, requestEndpoint)}</div>
                 </div>
-                <div className={formStyle["create-server-form-row"]}>
-                    <div className={formStyle["create-server-form-text"]}>Endpoint request url: </div>
-                    <input className={formStyle["create-server-form-input"]} placeholder="xxx.com..." onInput={(e) => { setRequestEndpoint(e.currentTarget.value); }} value={requestEndpoint} />
-                    <div className={formStyle["create-server-form-error"]} data={endpointSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{endpointSatisfies(host, requestEndpoint)}</div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Endpoint request url: </div>
+                    <input className={formStyle["page-form-input"]} placeholder="xxx.com..." onInput={(e) => { setRequestEndpoint(e.currentTarget.value); }} value={requestEndpoint} />
+                    <div className={formStyle["page-form-error"]} data={endpointSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{endpointSatisfies(host, requestEndpoint)}</div>
                 </div>
-                <Button disabled={!satisfies} className={formStyle["create-server-form-button"]} secondary onClick={() => {
+                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
                     props.actions.editUptimeEndpoint({
                         id: uptimeEndpoint.id,
                         name,
