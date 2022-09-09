@@ -1,20 +1,10 @@
-import { get, post, sendDelete } from "./api";
+import { createResource, deleteResource, editResource, fetchResource, fetchResources, post, sendDelete } from "./api";
 
-export async function createUser(username: string, password: string): Promise<User | undefined> {
-    const response: APIResponse = await post({ path: `/users/create`, body: JSON.stringify({ username, password }) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+export async function createUser(create: UserCreate): Promise<User | undefined> {
+    return await createResource("/users", create);
 }
 export async function fetchUser(id: string): Promise<User | undefined> {
-    const response: APIResponse = await get({ path: `/users/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/users", id);
 }
 
 export async function createSession(type: string, username?: string, password?: string): Promise<Session | undefined> {
@@ -40,159 +30,68 @@ export async function deleteSession(): Promise<boolean> {
 }
 
 export async function createServer(create: ServerCreate): Promise<Server | undefined> {
-    const response: APIResponse = await post({ path: `/servers/create`, body: JSON.stringify(create) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await createResource("/servers", create);
 }
 export async function editServer(edit: ServerEdit): Promise<Server | undefined> {
-    const response: APIResponse = await post({ path: `/servers/edit`, body: JSON.stringify(edit) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await editResource("/servers", edit);
 }
 export async function fetchServer(id: string): Promise<Server | undefined> {
-    const response: APIResponse = await get({ path: `/servers/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/servers", id);
 }
 export async function fetchServerStructured(id: string): Promise<ServerStructured | undefined> {
-    const response: APIResponse = await get({ path: `/server/structured/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/server/structured", id);
 }
 export async function fetchAllServersStructured(): Promise<ServerStructured[]> {
-    const response: APIResponse = await get({ path: `/servers/all/structured/fetch` });
-    if (response.status !== 200) {
-        return [];
-    }
-
-    return response.body;
+    return await fetchResources("/servers/all/structured");
 }
 
 export async function createNetwork(create: NetworkCreate): Promise<Network | undefined> {
-    const response: APIResponse = await post({ path: `/networks/create`, body: JSON.stringify(create) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await createResource("/networks", create);
 }
 export async function editNetwork(edit: NetworkEdit): Promise<Network | undefined> {
-    const response: APIResponse = await post({ path: `/networks/edit`, body: JSON.stringify(edit) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await editResource("/networks", edit);
 }
 export async function fetchNetwork(id: string): Promise<Network | undefined> {
-    const response: APIResponse = await get({ path: `/networks/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/networks", id);
 }
 
 export async function fetchDisk(id: string): Promise<Disk | undefined> {
-    const response: APIResponse = await get({ path: `/disks/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/disks", id);
 }
 
 export async function fetchPartition(id: string): Promise<Partition | undefined> {
-    const response: APIResponse = await get({ path: `/partitions/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/partitions", id);
 }
 
 export async function fetchContainer(id: string): Promise<Container | undefined> {
-    const response: APIResponse = await get({ path: `/containers/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/containers", id);
 }
 
 export async function fetchContainerProject(id: string): Promise<ContainerProject | undefined> {
-    const response: APIResponse = await get({ path: `/containerProjects/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/containerProjects", id);
 }
 
-export async function createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): Promise<UptimeEndpoint | undefined> {
-    const response: APIResponse = await post({ path: `/uptimeEndpoints/create`, body: JSON.stringify({ name, host, requestEndpoint }) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+export async function createUptimeEndpoint(create: UptimeEndpointCreate): Promise<UptimeEndpoint | undefined> {
+    return await createResource("/uptimeEndpoints", create);
 }
 export async function editUptimeEndpoint(edit: UptimeEndpointEdit): Promise<UptimeEndpoint | undefined> {
-    const response: APIResponse = await post({ path: `/uptimeEndpoints/edit`, body: JSON.stringify(edit) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await editResource("/uptimeEndpoints", edit);
 }
 export async function fetchUptimeEndpoint(id: string): Promise<UptimeEndpoint | undefined> {
-    const response: APIResponse = await get({ path: `/uptimeEndpoints/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await fetchResource("/uptimeEndpoints", id);
 }
 export async function fetchAllUptimeEndpointsStructured(): Promise<UptimeEndpointStructured[]> {
-    const response: APIResponse = await get({ path: `/uptimeEndpoints/all/structured/fetch` });
-    if (response.status !== 200) {
-        return [];
-    }
-
-    return response.body;
+    return await fetchResources("/uptimeEndpoints/all/structured");
 }
 
 export async function createServerDaemonToken(id: string): Promise<DaemonToken | undefined> {
-    const response: APIResponse = await post({ path: `/server/daemon/tokens/create`, body: JSON.stringify({ id }) });
-    if (response.status !== 200) {
-        return undefined;
-    }
-
-    return response.body;
+    return await createResource("/server/daemon/tokens/create", { id });
 }
 
 export async function deleteDeamonToken(id: string): Promise<boolean> {
-    const response: APIResponse = await sendDelete({ path: `/daemon/tokens/delete`, body: JSON.stringify({ id }) });
-    return response.status === 200;
+    return await deleteResource("/daemon/tokens", id);
 }
 
 export async function fetchServerDaemonTokens(id: string): Promise<DaemonToken[]> {
-    const response: APIResponse = await get({ path: `/server/daemon/tokens/fetch?id=${id}` });
-    if (response.status !== 200) {
-        return [];
-    }
-
-    return response.body;
+    return await fetchResources("/server/daemon/tokens", id);
 }

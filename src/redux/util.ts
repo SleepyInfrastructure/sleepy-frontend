@@ -1,4 +1,4 @@
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { AppPreferencesTheme } from "../ts/const";
 
 export const INITIAL: ReduxState = {
@@ -68,19 +68,22 @@ export function mapDispatch(actions: Record<string, any>): any {
     });
 }
 
+export function saveResources(state: ReduxState, key: KeysOfType<ReduxState, Map<string, object>>, resources: any[]) {
+    const newResources = new Map(state[key] as Map<string, object>);
+    resources.forEach(resource => {
+        newResources.set(resource.id, resource);
+    });
+    return { ...state, [key]: newResources };
+}
+
 export function cacheResource(state: ReduxState, resource: any, resourceType: ResourceType): ReduxState {
     return cacheResources(state, [ resource ], resourceType);
 }
 
 export function cacheResources(state: ReduxState, resources: any[], resourceType: ResourceType): ReduxState {
     switch (resourceType) {
-        case ResourceType.SERVER: {
-            const newResources = new Map(state.servers);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, servers: newResources };
-        }
+        case ResourceType.SERVER:
+            return saveResources(state, "servers", resources);
         
         case ResourceType.SERVER_STRUCTURED: {
             const newServers = new Map(state.servers);
@@ -110,37 +113,17 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
             return { ...state, servers: newServers };
         }
 
-        case ResourceType.SERVER_CONFIG: {
-            const newResources = new Map(state.serverConfigs);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, serverConfigs: newResources };
-        }
+        case ResourceType.SERVER_CONFIG:
+            return saveResources(state, "serverConfigs", resources);
 
-        case ResourceType.NETWORK: {
-            const newResources = new Map(state.networks);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, networks: newResources };
-        }
+        case ResourceType.NETWORK:
+            return saveResources(state, "networks", resources);
 
-        case ResourceType.SOFTWARE: {
-            const newResources = new Map(state.software);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, software: newResources };
-        }
+        case ResourceType.SOFTWARE:
+            return saveResources(state, "software", resources);
 
-        case ResourceType.DISK: {
-            const newResources = new Map(state.disks);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, disks: newResources };
-        }
+        case ResourceType.DISK:
+            return saveResources(state, "disks", resources);
         
         case ResourceType.DISK_STRUCTURED: {
             const newDisks = new Map(state.disks);
@@ -155,29 +138,14 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
             return { ...state, disks: newDisks };
         }
 
-        case ResourceType.DISK_STATISTIC: {
-            const newResources = new Map(state.diskStatistics);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, diskStatistics: newResources };
-        }
+        case ResourceType.DISK_STATISTIC:
+            return saveResources(state, "diskStatistics", resources);
 
-        case ResourceType.PARTITION: {
-            const newResources = new Map(state.partitions);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, partitions: newResources };
-        }
+        case ResourceType.PARTITION:
+            return saveResources(state, "partitions", resources);
 
-        case ResourceType.ZFS_POOL: {
-            const newResources = new Map(state.zfsPools);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, zfsPools: newResources };
-        }
+        case ResourceType.ZFS_POOL:
+            return saveResources(state, "zfsPools", resources);
         
         case ResourceType.ZFS_POOL_STRUCTURED: {
             const newZfsPools = new Map(state.zfsPools);
@@ -190,21 +158,11 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
             return { ...state, zfsPools: newZfsPools };
         }
 
-        case ResourceType.ZFS_PARTITION: {
-            const newResources = new Map(state.zfsPartitions);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, zfsPartitions: newResources };
-        }
+        case ResourceType.ZFS_PARTITION:
+            return saveResources(state, "zfsPartitions", resources);
 
-        case ResourceType.CONTAINER: {
-            const newResources = new Map(state.containers);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, containers: newResources };
-        }
+        case ResourceType.CONTAINER:
+            return saveResources(state, "containers", resources);
         
         case ResourceType.CONTAINER_STRUCTURED: {
             const newContainers = new Map(state.containers);
@@ -217,45 +175,20 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
             return { ...state, containers: newContainers };
         }
 
-        case ResourceType.CONTAINER_STATISTIC: {
-            const newResources = new Map(state.containerStatistics);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, containerStatistics: newResources };
-        }
+        case ResourceType.CONTAINER_STATISTIC:
+            return saveResources(state, "containerStatistics", resources);
 
-        case ResourceType.CONTAINER_PROJECT: {
-            const newResources = new Map(state.containerProjects);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, containerProjects: newResources };
-        }
+        case ResourceType.CONTAINER_PROJECT:
+            return saveResources(state, "containerProjects", resources);
 
-        case ResourceType.DATABASE: {
-            const newResources = new Map(state.databases);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, databases: newResources };
-        }
+        case ResourceType.DATABASE:
+            return saveResources(state, "databases", resources);
 
-        case ResourceType.STATISTIC: {
-            const newResources = new Map(state.statistics);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, statistics: newResources };
-        }
+        case ResourceType.STATISTIC:
+            return saveResources(state, "statistics", resources);
 
-        case ResourceType.UPTIME_ENDPOINT: {
-            const newResources = new Map(state.uptimeEndpoints);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, uptimeEndpoints: newResources };
-        }
+        case ResourceType.UPTIME_ENDPOINT:
+            return saveResources(state, "uptimeEndpoints", resources);
 
         case ResourceType.UPTIME_ENDPOINT_STRUCTURED: {
             const newEndpoints = new Map(state.uptimeEndpoints);
@@ -268,30 +201,29 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
             return { ...state, uptimeEndpoints: newEndpoints };
         }
 
-        case ResourceType.UPTIME_ENDPOINT_STATISTIC: {
-            const newResources = new Map(state.uptimeEndpointStatistics);
-            resources.forEach(resource => {
-                newResources.set(resource.server, resource);
-            });
-            return { ...state, uptimeEndpointStatistics: newResources };
-        }
+        case ResourceType.UPTIME_ENDPOINT_STATISTIC:
+            return saveResources(state, "uptimeEndpointStatistics", resources);
 
-        case ResourceType.DAEMON: {
-            const newResources = new Map(state.daemons);
-            resources.forEach(resource => {
-                newResources.set(resource.server, resource);
-            });
-            return { ...state, daemons: newResources };
-        }
+        case ResourceType.DAEMON:
+            return saveResources(state, "daemons", resources);
 
-        case ResourceType.DAEMON_TOKEN: {
-            const newResources = new Map(state.daemonTokens);
-            resources.forEach(resource => {
-                newResources.set(resource.id, resource);
-            });
-            return { ...state, daemonTokens: newResources };
-        }
+        case ResourceType.DAEMON_TOKEN:
+            return saveResources(state, "daemonTokens", resources);
     }
 
     return state;
+}
+
+export async function reducerFetch<T, J>(dispatch: Dispatch<ReduxAction>, data: T, fetchFunc: (data: T) => Promise<J | undefined>, successFunc: (resource: J) => ReduxAction) {
+    const resource = await fetchFunc(data);
+    if (resource === undefined) {
+        return;
+    }
+
+    dispatch(successFunc(resource));
+}
+
+export async function reducerFetchMultiple<T, J>(dispatch: Dispatch<ReduxAction>, data: T, fetchFunc: (data: T) => Promise<J[]>, successFunc: (resource: J[]) => ReduxAction) {
+    const resources = await fetchFunc(data);
+    dispatch(successFunc(resources));
 }

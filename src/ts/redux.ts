@@ -31,7 +31,7 @@ type ReduxState = {
 
 type ConnectedActions = {
     fetchPreferences(): ReduxAction;
-    createUser(username: string, password: string): ReduxAction;
+    createUser(create: UserCreate): ReduxAction;
     fetchUser(id: string): ReduxAction;
     createSession(type: string, username?: string, password?: string): ReduxAction;
     deleteSession(): ReduxAction;

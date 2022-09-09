@@ -1,339 +1,190 @@
-export function fetchPreferences(): ReduxAction {
+function getAction(type: string, data: any): ReduxAction {
     return {
-        type: "FETCH_PREFERENCES",
-        data: {},
-    };
+        type, data
+    }
+}
+
+/* Preferences */
+export function fetchPreferences(): ReduxAction {
+    return getAction("FETCH_PREFERENCES", {});
 }
 
 /* Users */
-export function createUser(username: string, password: string): ReduxAction {
-    return {
-        type: "CREATE_USER",
-        data: { username, password },
-    };
+export function createUser(create: UserCreate): ReduxAction {
+    return getAction("CREATE_USER", create);
 }
-
+export function createUserSuccess(user: User): ReduxAction {
+    return getAction("CREATE_USER_SUCCESS", user);
+}
 export function fetchUser(id: string): ReduxAction {
-    return {
-        type: "FETCH_USER",
-        data: id,
-    };
+    return getAction("FETCH_USER", id);
 }
 export function fetchUserSuccess(user: User): ReduxAction {
-    return {
-        type: "FETCH_USER_SUCCESS",
-        data: user,
-    };
+    return getAction("FETCH_USER_SUCCESS", user);
 }
 
 /* Sessions */
 export function createSession(type: string, username?: string, password?: string): ReduxAction {
-    return {
-        type: "CREATE_SESSION",
-        data: { type, username, password },
-    };
+    return getAction("CREATE_SESSION", { type, username, password });
 }
 export function createSessionSuccess(session: Session): ReduxAction {
-    return {
-        type: "CREATE_SESSION_SUCCESS",
-        data: session,
-    };
+    return getAction("CREATE_SESSION_SUCCESS", session);
 }
-
 export function deleteSession(): ReduxAction {
-    return {
-        type: "DELETE_SESSION",
-        data: {},
-    };
+    return getAction("DELETE_SESSION", {});
 }
 
 /* Servers */
 export function createServer(create: ServerCreate): ReduxAction {
-    return {
-        type: "CREATE_SERVER",
-        data: create,
-    };
+    return getAction("CREATE_SERVER", create);
 }
 export function createServerSuccess(server: Server): ReduxAction {
-    return {
-        type: "CREATE_SERVER_SUCCESS",
-        data: server,
-    };
+    return getAction("CREATE_SERVER_SUCCESS", server);
 }
 export function editServer(edit: ServerEdit): ReduxAction {
-    return {
-        type: "EDIT_SERVER",
-        data: edit
-    };
+    return getAction("EDIT_SERVER", edit);
 }
 export function editServerSuccess(server: Server): ReduxAction {
-    return {
-        type: "EDIT_SERVER_SUCCESS",
-        data: server,
-    };
+    return getAction("EDIT_SERVER_SUCCESS", server);
 }
 export function fetchServer(id: string): ReduxAction {
-    return {
-        type: "FETCH_SERVER",
-        data: id,
-    };
+    return getAction("FETCH_SERVER", id);
 }
 export function fetchServerSuccess(server: Server): ReduxAction {
-    return {
-        type: "FETCH_SERVER_SUCCESS",
-        data: server,
-    };
+    return getAction("FETCH_SERVER_SUCCESS", server);
 }
-
 export function fetchServerStructured(id: string): ReduxAction {
-    return {
-        type: "FETCH_SERVER_STRUCTURED",
-        data: id,
-    };
+    return getAction("FETCH_SERVER_STRUCTURED", id);
 }
 export function fetchServerStructuredSuccess(serverStructured: ServerStructured): ReduxAction {
-    return {
-        type: "FETCH_SERVER_STRUCTURED_SUCCESS",
-        data: serverStructured,
-    };
+    return getAction("FETCH_SERVER_STRUCTURED_SUCCESS", serverStructured);
 }
 
 export function fetchAllServersStructured(): ReduxAction {
-    return {
-        type: "FETCH_ALL_SERVERS_STRUCTURED",
-        data: {},
-    };
+    return getAction("FETCH_ALL_SERVERS_STRUCTURED", {});
 }
 export function fetchAllServersStructuredSuccess(servers: ServerStructured[]): ReduxAction {
-    return {
-        type: "FETCH_ALL_SERVERS_STRUCTURED_SUCCESS",
-        data: servers,
-    };
+    return getAction("FETCH_ALL_SERVERS_STRUCTURED_SUCCESS", servers);
 }
 
 /* Networks */
 export function createNetwork(create: NetworkCreate): ReduxAction {
-    return {
-        type: "CREATE_NETWORK",
-        data: create,
-    };
+    return getAction("CREATE_NETWORK", create);
 }
 export function createNetworkSuccess(network: Network): ReduxAction {
-    return {
-        type: "CREATE_NETWORK_SUCCESS",
-        data: network,
-    };
+    return getAction("CREATE_NETWORK_SUCCESS", network);
 }
-
 export function editNetwork(edit: NetworkEdit): ReduxAction {
-    return {
-        type: "EDIT_NETWORK",
-        data: edit,
-    };
+    return getAction("EDIT_NETWORK", edit);
 }
 export function editNetworkSuccess(network: Network): ReduxAction {
-    return {
-        type: "EDIT_NETWORK_SUCCESS",
-        data: network,
-    };
+    return getAction("EDIT_NETWORK_SUCCESS", network);
 }
-
 export function fetchNetwork(id: string): ReduxAction {
-    return {
-        type: "FETCH_NETWORK",
-        data: id,
-    };
+    return getAction("FETCH_NETWORK", id);
 }
 export function fetchNetworkSuccess(network: Network): ReduxAction {
-    return {
-        type: "FETCH_NETWORK_SUCCESS",
-        data: network,
-    };
+    return getAction("FETCH_NETWORK_SUCCESS", network);
 }
 
 /* Disks */
 export function fetchDisk(id: string): ReduxAction {
-    return {
-        type: "FETCH_DISK",
-        data: id,
-    };
+    return getAction("FETCH_DISK", id);
 }
 export function fetchDiskSuccess(disk: Disk): ReduxAction {
-    return {
-        type: "FETCH_DISK_SUCCESS",
-        data: disk,
-    };
+    return getAction("FETCH_DISK_SUCCESS", disk);
 }
 
 /* Partitions */
 export function fetchPartition(id: string): ReduxAction {
-    return {
-        type: "FETCH_PARTITION",
-        data: id,
-    };
+    return getAction("FETCH_PARTITION", id);
 }
 export function fetchPartitionSuccess(partition: Partition): ReduxAction {
-    return {
-        type: "FETCH_PARTITION_SUCCESS",
-        data: partition,
-    };
+    return getAction("FETCH_PARTITION_SUCCESS", partition);
 }
 
 /* Containers */
 export function fetchContainer(id: string): ReduxAction {
-    return {
-        type: "FETCH_CONTAINER",
-        data: id,
-    };
+    return getAction("FETCH_CONTAINER", id);
 }
 export function fetchContainerSuccess(container: Container): ReduxAction {
-    return {
-        type: "FETCH_CONTAINER_SUCCESS",
-        data: container,
-    };
+    return getAction("FETCH_CONTAINER_SUCCESS", container);
 }
 
 /* Containers */
 export function fetchContainerProject(id: string): ReduxAction {
-    return {
-        type: "FETCH_CONTAINER_PROJECT",
-        data: id,
-    };
+    return getAction("FETCH_CONTAINER_PROJECT", id);
 }
 export function fetchContainerProjectSuccess(containerProject: ContainerProject): ReduxAction {
-    return {
-        type: "FETCH_CONTAINER_PROJECT_SUCCESS",
-        data: containerProject,
-    };
+    return getAction("FETCH_CONTAINER_PROJECT_SUCCESS", containerProject);
 }
 
 /* Databases */
 export function fetchDatabase(id: string): ReduxAction {
-    return {
-        type: "FETCH_DATABASE",
-        data: id,
-    };
+    return getAction("FETCH_DATABASE", id);
 }
 export function fetchDatabaseSuccess(database: Database): ReduxAction {
-    return {
-        type: "FETCH_DATABASE_SUCCESS",
-        data: database,
-    };
+    return getAction("FETCH_DATABASE_SUCCESS", database);
 }
 
 /* Uptime endpoints */
 export function createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction {
-    return {
-        type: "CREATE_UPTIME_ENDPOINT",
-        data: { name, host, requestEndpoint },
-    };
+    return getAction("CREATE_UPTIME_ENDPOINT", { name, host, requestEndpoint });
 }
 export function createUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
-    return {
-        type: "CREATE_UPTIME_ENDPOINT_SUCCESS",
-        data: endpoint,
-    };
+    return getAction("CREATE_UPTIME_ENDPOINT_SUCCESS", endpoint);
 }
 export function editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction {
-    return {
-        type: "EDIT_UPTIME_ENDPOINT",
-        data: edit
-    };
+    return getAction("EDIT_UPTIME_ENDPOINT", edit);
 }
 export function editUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
-    return {
-        type: "EDIT_UPTIME_ENDPOINT_SUCCESS",
-        data: endpoint,
-    };
+    return getAction("EDIT_UPTIME_ENDPOINT_SUCCESS", endpoint);
 }
 export function fetchUptimeEndpoint(id: string): ReduxAction {
-    return {
-        type: "FETCH_UPTIME_ENDPOINT",
-        data: id,
-    };
+    return getAction("FETCH_UPTIME_ENDPOINT", id);
 }
 export function fetchUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
-    return {
-        type: "FETCH_UPTIME_ENDPOINT_SUCCESS",
-        data: endpoint,
-    };
+    return getAction("FETCH_UPTIME_ENDPOINT_SUCCESS", endpoint);
 }
 
 export function fetchAllUptimeEndpointsStructured(): ReduxAction {
-    return {
-        type: "FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED",
-        data: {},
-    };
+    return getAction("FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED", {});
 }
 export function fetchAllUptimeEndpointsStructuredSuccess(endpoints: UptimeEndpointStructured[]): ReduxAction {
-    return {
-        type: "FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED_SUCCESS",
-        data: endpoints,
-    };
+    return getAction("FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED_SUCCESS", endpoints);
 }
 
 /* Daemon Tokens */
 export function createServerDaemonToken(id: string): ReduxAction {
-    return {
-        type: "CREATE_SERVER_DAEMON_TOKEN",
-        data: id,
-    };
+    return getAction("CREATE_SERVER_DAEMON_TOKEN", id);
 }
 export function createServerDaemonTokenSuccess(token: DaemonToken): ReduxAction {
-    return {
-        type: "CREATE_SERVER_DAEMON_TOKEN_SUCCESS",
-        data: token,
-    };
+    return getAction("CREATE_SERVER_DAEMON_TOKEN_SUCCESS", token);
 }
-
 export function deleteDaemonToken(id: string): ReduxAction {
-    return {
-        type: "DELETE_DAEMON_TOKEN",
-        data: id,
-    };
+    return getAction("DELETE_DAEMON_TOKEN", id);
 }
 export function deleteDaemonTokenSuccess(id: string): ReduxAction {
-    return {
-        type: "DELETE_DAEMON_TOKEN_SUCCESS",
-        data: id,
-    };
+    return getAction("DELETE_DAEMON_TOKEN_SUCCESS", id);
 }
 
 export function fetchServerDaemonTokens(id: string): ReduxAction {
-    return {
-        type: "FETCH_SERVER_DAEMON_TOKENS",
-        data: id,
-    };
+    return getAction("FETCH_SERVER_DAEMON_TOKENS", id);
 }
 export function fetchServerDaemonTokensSuccess(tokens: DaemonToken[]): ReduxAction {
-    return {
-        type: "FETCH_SERVER_DAEMON_TOKENS_SUCCESS",
-        data: tokens,
-    };
+    return getAction("FETCH_SERVER_DAEMON_TOKENS_SUCCESS", tokens);
 }
 
 /* Websocket */
 export function connectWebsocket(): ReduxAction {
-    return {
-        type: "CONNECT_WEBSOCKET",
-        data: {},
-    };
+    return getAction("CONNECT_WEBSOCKET", {});
 }
 export function fetchAllDaemonsSuccess(daemons: Daemon[]): ReduxAction {
-    return {
-        type: "FETCH_ALL_DAEMONS_SUCCESS",
-        data: daemons,
-    };
+    return getAction("FETCH_ALL_DAEMONS_SUCCESS", daemons);
 }
 export function daemonRequestResources(id: string, resources: string[]): ReduxAction {
-    return {
-        type: "DAEMON_REQUEST_RESOURCES",
-        data: { id, resources },
-    };
+    return getAction("DAEMON_REQUEST_RESOURCES", { id, resources });
 }
 export function daemonRequestDatabaseBackup(id: string, database: string): ReduxAction {
-    return {
-        type: "DAEMON_REQUEST_DATABASE_BACKUP",
-        data: { id, database },
-    };
+    return getAction("DAEMON_REQUEST_DATABASE_BACKUP", { id, database });
 }

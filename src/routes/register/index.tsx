@@ -54,7 +54,7 @@ const Register: FunctionalComponent<RegisterConnectedProps> = (props: RegisterCo
                     <input className={formStyle["page-form-input"]} type="password" placeholder="..." onInput={(e) => { setPasswordAgain(e.currentTarget.value); }} value={passwordAgain} />
                     <div className={formStyle["page-form-error"]} data={passwordAgainMatches() === "(matches)" ? "false" : "true"}>{passwordAgainMatches()}</div>
                 </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => { props.actions.createSession("classic", username, password); }}>
+                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => { props.actions.createUser({ username, password }); }}>
                     Register!
                 </Button>
             </div>

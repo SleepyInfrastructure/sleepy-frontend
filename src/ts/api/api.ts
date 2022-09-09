@@ -58,13 +58,17 @@ type DaemonToken = {
     used: number;
 };
 
-/* Edits */
+/* Calls */
+type UserCreate = {
+    username: string;
+    password: string;
+};
+
 type UptimeEndpointCreate = {
     name: string;
     host?: string;
     requestEndpoint?: string;
 };
-
 type UptimeEndpointEdit = UptimeEndpointCreate & {
     id: string;
 };

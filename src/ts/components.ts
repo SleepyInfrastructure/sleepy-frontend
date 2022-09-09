@@ -18,6 +18,7 @@ type ServerConnectedProps = {
     actions: ConnectedActions;
 };
 type ServerContentConnectedProps = ServerConnectedProps;
+type ServerSectionsConnectedProps = ServerConnectedProps;
 
 type TokenServerConnectedProps = {
     item: Server;

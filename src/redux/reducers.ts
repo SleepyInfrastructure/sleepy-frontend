@@ -1,15 +1,15 @@
 /* Redux */
 import { Dispatch } from "redux";
 /* Redux */
-import { createNetworkSuccess, createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, deleteDaemonTokenSuccess, editNetworkSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
-import { cacheResource, cacheResources, INITIAL, ResourceType } from "./util";
+import { createNetworkSuccess, createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, createUserSuccess, deleteDaemonTokenSuccess, editNetworkSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
+import { cacheResource, cacheResources, INITIAL, reducerFetch, reducerFetchMultiple, ResourceType } from "./util";
 /* API */
 import { createNetwork, createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editNetwork, editServer, editUptimeEndpoint, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
 import { connectWebsocket, DaemonWebsocketMessageType, sendWebsocketMessage } from "../scripts/ws/ws";
 import { AppPreferencesTheme } from "../ts/const";
 
 const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> = {
-    FETCH_PREFERENCES: (state: ReduxState, action: ReduxAction): ReduxState => {
+    FETCH_PREFERENCES: (state: ReduxState): ReduxState => {
         const preferences = INITIAL.preferences;
 
         const theme = localStorage.getItem("theme");
@@ -21,13 +21,12 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
     },
 
     CREATE_USER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.USER);
-        return state;
+        location.href = "/";
+        return cacheResource(state, action.data, ResourceType.USER);
     },
 
     FETCH_USER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.USER);
-        return state;
+        return cacheResource(state, action.data, ResourceType.USER);
     },
 
     CREATE_SESSION_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
@@ -40,108 +39,87 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
     },
 
     CREATE_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.SERVER);
-        return state;
+        return cacheResource(state, action.data, ResourceType.SERVER);
     },
 
     EDIT_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.SERVER);
-        return state;
+        return cacheResource(state, action.data, ResourceType.SERVER);
     },
 
     FETCH_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.SERVER);
-        return state;
+        return cacheResource(state, action.data, ResourceType.SERVER);
     },
 
     FETCH_SERVER_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.SERVER_STRUCTURED);
-        return state;
+        return cacheResource(state, action.data, ResourceType.SERVER_STRUCTURED);
     },
 
     FETCH_ALL_SERVERS_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResources(state, action.data, ResourceType.SERVER_STRUCTURED);
-        return state;
+        return cacheResources(state, action.data, ResourceType.SERVER_STRUCTURED);
     },
 
     CREATE_NETWORK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.NETWORK);
-        return state;
+        return cacheResource(state, action.data, ResourceType.NETWORK);
     },
 
     EDIT_NETWORK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.NETWORK);
-        return state;
+        return cacheResource(state, action.data, ResourceType.NETWORK);
     },
 
     FETCH_NETWORK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.NETWORK);
-        return state;
+        return cacheResource(state, action.data, ResourceType.NETWORK);
     },
 
     FETCH_DISK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.DISK);
-        return state;
+        return cacheResource(state, action.data, ResourceType.DISK);
     },
 
     FETCH_ALL_DISKS_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResources(state, action.data, ResourceType.DISK_STRUCTURED);
-        return state;
+        return cacheResources(state, action.data, ResourceType.DISK_STRUCTURED);
     },
 
     FETCH_PARTITION_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.PARTITION);
-        return state;
+        return cacheResource(state, action.data, ResourceType.PARTITION);
     },
 
     FETCH_CONTAINER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.CONTAINER);
-        return state;
+        return cacheResource(state, action.data, ResourceType.CONTAINER);
     },
 
     FETCH_ALL_CONTAINERS_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResources(state, action.data, ResourceType.CONTAINER_STRUCTURED);
-        return state;
+        return cacheResources(state, action.data, ResourceType.CONTAINER_STRUCTURED);
     },
 
     FETCH_CONTAINER_PROJECT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.CONTAINER_PROJECT);
-        return state;
+        return cacheResource(state, action.data, ResourceType.CONTAINER_PROJECT);
     },
 
     CREATE_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
-        return state;
+        return cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
     },
 
     EDIT_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
-        return state;
+        return cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
     },
 
     FETCH_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
-        return state;
+        return cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
     },
 
     FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResources(state, action.data, ResourceType.UPTIME_ENDPOINT_STRUCTURED);
-        return state;
+        return cacheResources(state, action.data, ResourceType.UPTIME_ENDPOINT_STRUCTURED);
     },
 
     FETCH_ALL_DAEMONS_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResources(state, action.data, ResourceType.DAEMON);
-        return state;
+        return cacheResources(state, action.data, ResourceType.DAEMON);
     },
 
     FETCH_SERVER_DAEMON_TOKENS_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResources(state, action.data, ResourceType.DAEMON_TOKEN);
-        return state;
+        return cacheResources(state, action.data, ResourceType.DAEMON_TOKEN);
     },
 
     CREATE_SERVER_DAEMON_TOKEN_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        state = cacheResource(state, action.data, ResourceType.DAEMON_TOKEN);
-        return state;
+        return cacheResource(state, action.data, ResourceType.DAEMON_TOKEN);
     },
 
     DELETE_DAEMON_TOKEN_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
@@ -152,21 +130,11 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
 };
 const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction) => Promise<void>> = {
     CREATE_USER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const user = await createUser(action.data.username, action.data.password);
-        if (user === undefined) {
-            return;
-        }
-
-        location.href = "/";
+        await reducerFetch(dispatch, action.data, createUser, createUserSuccess);
     },
 
     FETCH_USER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const user = await fetchUser(action.data);
-        if (user === undefined) {
-            return;
-        }
-
-        dispatch(fetchUserSuccess(user));
+        await reducerFetch(dispatch, action.data, fetchUser, fetchUserSuccess);
     },
 
     CREATE_SESSION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
@@ -184,139 +152,67 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
     },
 
     CREATE_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const server = await createServer(action.data);
-        if (server === undefined) {
-            return;
-        }
-
-        dispatch(createServerSuccess(server));
+        await reducerFetch(dispatch, action.data, createServer, createServerSuccess);
     },
 
     EDIT_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const server = await editServer(action.data);
-        if (server === undefined) {
-            return;
-        }
-
-        dispatch(editServerSuccess(server));
+        await reducerFetch(dispatch, action.data, editServer, editServerSuccess);
     },
 
     FETCH_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const server = await fetchServer(action.data);
-        if (server === undefined) {
-            return;
-        }
-
-        dispatch(fetchServerSuccess(server));
+        await reducerFetch(dispatch, action.data, fetchServer, fetchServerSuccess);
     },
 
     FETCH_SERVER_STRUCTURED: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const server = await fetchServerStructured(action.data);
-        if (server === undefined) {
-            return;
-        }
-
-        dispatch(fetchServerStructuredSuccess(server));
+        await reducerFetch(dispatch, action.data, fetchServerStructured, fetchServerStructuredSuccess);
     },
 
     FETCH_ALL_SERVERS_STRUCTURED: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
-        const servers = await fetchAllServersStructured();
-        dispatch(fetchAllServersStructuredSuccess(servers));
+        await reducerFetchMultiple(dispatch, {}, fetchAllServersStructured, fetchAllServersStructuredSuccess);
     },
 
     CREATE_NETWORK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const network = await createNetwork(action.data);
-        if (network === undefined) {
-            return;
-        }
-
-        dispatch(createNetworkSuccess(network));
+        await reducerFetch(dispatch, action.data, createNetwork, createNetworkSuccess);
     },
 
     EDIT_NETWORK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const network = await editNetwork(action.data);
-        if (network === undefined) {
-            return;
-        }
-
-        dispatch(editNetworkSuccess(network));
+        await reducerFetch(dispatch, action.data, editNetwork, editNetworkSuccess);
     },
 
     FETCH_NETWORK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const network = await fetchNetwork(action.data);
-        if (network === undefined) {
-            return;
-        }
-
-        dispatch(fetchNetworkSuccess(network));
+        await reducerFetch(dispatch, action.data, fetchNetwork, fetchNetworkSuccess);
     },
 
     FETCH_DISK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const disk = await fetchDisk(action.data);
-        if (disk === undefined) {
-            return;
-        }
-
-        dispatch(fetchDiskSuccess(disk));
+        await reducerFetch(dispatch, action.data, fetchDisk, fetchDiskSuccess);
     },
 
     FETCH_PARTITION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const partition = await fetchPartition(action.data);
-        if (partition === undefined) {
-            return;
-        }
-
-        dispatch(fetchPartitionSuccess(partition));
+        await reducerFetch(dispatch, action.data, fetchPartition, fetchPartitionSuccess);
     },
 
     FETCH_CONTAINER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const container = await fetchContainer(action.data);
-        if (container === undefined) {
-            return;
-        }
-
-        dispatch(fetchContainerSuccess(container));
+        await reducerFetch(dispatch, action.data, fetchContainer, fetchContainerSuccess);
     },
 
     FETCH_CONTAINER_PROJECT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const containerProject = await fetchContainerProject(action.data);
-        if (containerProject === undefined) {
-            return;
-        }
-
-        dispatch(fetchContainerProjectSuccess(containerProject));
+        await reducerFetch(dispatch, action.data, fetchContainerProject, fetchContainerProjectSuccess);
     },
 
     CREATE_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const endpoint = await createUptimeEndpoint(action.data.name, action.data.host, action.data.requestEndpoint);
-        if (endpoint === undefined) {
-            return;
-        }
-
-        dispatch(createUptimeEndpointSuccess(endpoint));
+        await reducerFetch(dispatch, action.data, createUptimeEndpoint, createUptimeEndpointSuccess);
     },
 
     EDIT_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const endpoint = await editUptimeEndpoint(action.data);
-        if (endpoint === undefined) {
-            return;
-        }
-
-        dispatch(editUptimeEndpointSuccess(endpoint));
+        await reducerFetch(dispatch, action.data, editUptimeEndpoint, editUptimeEndpointSuccess);
     },
 
     FETCH_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const endpoint = await fetchUptimeEndpoint(action.data);
-        if (endpoint === undefined) {
-            return;
-        }
-
-        dispatch(fetchUptimeEndpointSuccess(endpoint));
+        await reducerFetch(dispatch, action.data, fetchUptimeEndpoint, fetchUptimeEndpointSuccess);
     },
 
     FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
-        const endpoints = await fetchAllUptimeEndpointsStructured();
-        dispatch(fetchAllUptimeEndpointsStructuredSuccess(endpoints));
+        await reducerFetchMultiple(dispatch, {}, fetchAllUptimeEndpointsStructured, fetchAllUptimeEndpointsStructuredSuccess);
     },
 
     CONNECT_WEBSOCKET: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
@@ -332,12 +228,7 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
     },
 
     CREATE_SERVER_DAEMON_TOKEN: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const token = await createServerDaemonToken(action.data);
-        if (token === undefined) {
-            return;
-        }
-
-        dispatch(createServerDaemonTokenSuccess(token));
+        await reducerFetch(dispatch, action.data, createServerDaemonToken, createServerDaemonTokenSuccess);
     },
 
     DELETE_DAEMON_TOKEN: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
@@ -348,8 +239,7 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
     },
 
     FETCH_SERVER_DAEMON_TOKENS: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        const daemonTokens = await fetchServerDaemonTokens(action.data);
-        dispatch(fetchServerDaemonTokensSuccess(daemonTokens));
+        await reducerFetchMultiple(dispatch, action.data, fetchServerDaemonTokens, fetchServerDaemonTokensSuccess);
     },
 };
 
