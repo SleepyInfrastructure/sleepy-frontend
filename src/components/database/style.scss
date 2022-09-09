@@ -11,6 +11,12 @@
 }
 
 /* Content */
+.database {
+    padding: 15px;
+    background-color: var(--color-background);
+    border-radius: 10px;
+}
+
 .database-title-wrapper {
     @extend %align-y;
 }

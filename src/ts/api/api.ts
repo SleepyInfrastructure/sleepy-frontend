@@ -64,11 +64,24 @@ type UserCreate = {
     password: string;
 };
 
+type DatabaseCreate = {
+    name: string;
+    server: string;
+};
+type DatabaseEdit = {
+    id: string;
+    name?: string;
+    server?: string;
+};
+
 type UptimeEndpointCreate = {
     name: string;
     host?: string;
     requestEndpoint?: string;
 };
-type UptimeEndpointEdit = UptimeEndpointCreate & {
+type UptimeEndpointEdit = {
     id: string;
+    name?: string;
+    host?: string;
+    requestEndpoint?: string;
 };

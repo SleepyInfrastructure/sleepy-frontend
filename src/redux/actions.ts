@@ -111,7 +111,7 @@ export function fetchContainerSuccess(container: Container): ReduxAction {
     return getAction("FETCH_CONTAINER_SUCCESS", container);
 }
 
-/* Containers */
+/* Container projects */
 export function fetchContainerProject(id: string): ReduxAction {
     return getAction("FETCH_CONTAINER_PROJECT", id);
 }
@@ -120,6 +120,18 @@ export function fetchContainerProjectSuccess(containerProject: ContainerProject)
 }
 
 /* Databases */
+export function createDatabase(create: DatabaseCreate): ReduxAction {
+    return getAction("CREATE_DATABASE", create);
+}
+export function createDatabaseSuccess(database: Database): ReduxAction {
+    return getAction("CREATE_DATABASE_SUCCESS", database);
+}
+export function editDatabase(edit: DatabaseEdit): ReduxAction {
+    return getAction("EDIT_DATABASE", edit);
+}
+export function editDatabaseSuccess(database: Database): ReduxAction {
+    return getAction("EDIT_DATABASE_SUCCESS", database);
+}
 export function fetchDatabase(id: string): ReduxAction {
     return getAction("FETCH_DATABASE", id);
 }

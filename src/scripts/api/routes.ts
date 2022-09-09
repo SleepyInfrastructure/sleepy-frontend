@@ -71,6 +71,16 @@ export async function fetchContainerProject(id: string): Promise<ContainerProjec
     return await fetchResource("/containerProjects", id);
 }
 
+export async function createDatabase(create: DatabaseCreate): Promise<Database | undefined> {
+    return await createResource("/databases", create);
+}
+export async function editDatabase(edit: DatabaseEdit): Promise<Database | undefined> {
+    return await editResource("/databases", edit);
+}
+export async function fetchDatabase(id: string): Promise<Database | undefined> {
+    return await fetchResource("/databases", id);
+}
+
 export async function createUptimeEndpoint(create: UptimeEndpointCreate): Promise<UptimeEndpoint | undefined> {
     return await createResource("/uptimeEndpoints", create);
 }

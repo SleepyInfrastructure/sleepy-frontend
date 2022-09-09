@@ -47,6 +47,8 @@ type ConnectedActions = {
     fetchPartition(id: string): ReduxAction;
     fetchContainer(id: string): ReduxAction;
     fetchContainerProject(id: string): ReduxAction;
+    createDatabase(create: DatabaseCreate): ReduxAction;
+    editDatabase(edit: DatabaseEdit): ReduxAction;
     fetchDatabase(id: string): ReduxAction;
     createUptimeEndpoint(create: UptimeEndpointCreate): ReduxAction;
     editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction;

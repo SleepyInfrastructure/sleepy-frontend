@@ -43,24 +43,24 @@ type TokensConnectedProps = RouteProps & {
 type CreateServerConnectedProps = RouteProps & {
     servers: Map<string, Server>;
 };
-
 type EditServerConnectedProps = RouteProps & {
     servers: Map<string, Server>;
 };
-
-type ServerRouteConnectedProps = RouteProps & ServersProps;
-
 type InstallingDaemonConnectedProps = RouteProps & {
     servers: Map<string, Server>;
     daemonTokens: Map<string, DaemonToken>;
 };
+type ServerRouteConnectedProps = RouteProps & ServersProps;
 
 type CreateUptimeEndpointConnectedProps = RouteProps & {
     uptimeEndpoints: Map<string, UptimeEndpoint>;
 };
-
 type EditUptimeEndpointConnectedProps = RouteProps & {
     uptimeEndpoints: Map<string, UptimeEndpoint>;
+};
+
+type CreateDatabaseConnectedProps = RouteProps & {
+    databases: Map<string, Database>;
 };
 
 type EditNetworkConnectedProps = RouteProps & {

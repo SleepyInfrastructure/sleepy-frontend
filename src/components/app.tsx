@@ -24,6 +24,7 @@ import EditUptimeEndpoint from "../routes/edit-uptime-endpoint";
 import * as dark from "../style/themes/dark";
 import * as light from "../style/themes/light";
 import EditNetwork from "../routes/edit-network";
+import CreateDatabase from "../routes/create-database";
 
 const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
     const [ruleID, setRuleID] = useState(-1);
@@ -77,6 +78,7 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
                 <CreateUptimeEndpoint path="/create-uptime-endpoint" session={props.session} uptimeEndpoints={props.uptimeEndpoints} actions={props.actions} />
                 <EditUptimeEndpoint path="/edit-uptime-endpoint/:id" session={props.session} uptimeEndpoints={props.uptimeEndpoints} actions={props.actions} />
                 <EditNetwork path="/edit-network/:id" session={props.session} networks={props.networks} actions={props.actions} />
+                <CreateDatabase path="/create-database/:id" session={props.session} databases={props.databases} actions={props.actions} />
             </Router>
         </div>
     );

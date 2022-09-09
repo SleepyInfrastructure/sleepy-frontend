@@ -1,10 +1,10 @@
 /* Redux */
 import { Dispatch } from "redux";
 /* Redux */
-import { createNetworkSuccess, createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, createUserSuccess, deleteDaemonTokenSuccess, editNetworkSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
+import { createDatabaseSuccess, createNetworkSuccess, createServerDaemonTokenSuccess, createServerSuccess, createSessionSuccess, createUptimeEndpointSuccess, createUserSuccess, deleteDaemonTokenSuccess, editDatabaseSuccess, editNetworkSuccess, editServerSuccess, editUptimeEndpointSuccess, fetchAllServersStructuredSuccess, fetchAllUptimeEndpointsStructuredSuccess, fetchContainerProjectSuccess, fetchContainerSuccess, fetchDatabaseSuccess, fetchDiskSuccess, fetchNetworkSuccess, fetchPartitionSuccess, fetchServerDaemonTokensSuccess, fetchServerStructuredSuccess, fetchServerSuccess, fetchUptimeEndpointSuccess, fetchUserSuccess } from "./actions";
 import { cacheResource, cacheResources, INITIAL, reducerFetch, reducerFetchMultiple, ResourceType } from "./util";
 /* API */
-import { createNetwork, createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editNetwork, editServer, editUptimeEndpoint, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
+import { createDatabase, createNetwork, createServer, createServerDaemonToken, createSession, createUptimeEndpoint, createUser, deleteDeamonToken, deleteSession, editDatabase, editNetwork, editServer, editUptimeEndpoint, fetchAllServersStructured, fetchAllUptimeEndpointsStructured, fetchContainer, fetchContainerProject, fetchDatabase, fetchDisk, fetchNetwork, fetchPartition, fetchServer, fetchServerDaemonTokens, fetchServerStructured, fetchUptimeEndpoint, fetchUser } from "../scripts/api/routes";
 import { connectWebsocket, DaemonWebsocketMessageType, sendWebsocketMessage } from "../scripts/ws/ws";
 import { AppPreferencesTheme } from "../ts/const";
 
@@ -92,6 +92,14 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
 
     FETCH_CONTAINER_PROJECT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResource(state, action.data, ResourceType.CONTAINER_PROJECT);
+    },
+
+    CREATE_DATABASE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResource(state, action.data, ResourceType.DATABASE);
+    },
+
+    FETCH_DATABASE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResource(state, action.data, ResourceType.DATABASE);
     },
 
     CREATE_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
@@ -197,6 +205,18 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     FETCH_CONTAINER_PROJECT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, fetchContainerProject, fetchContainerProjectSuccess);
+    },
+
+    FETCH_DATABASE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, fetchDatabase, fetchDatabaseSuccess);
+    },
+
+    EDIT_DATABASE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, editDatabase, editDatabaseSuccess);
+    },
+
+    CREATE_DATABASE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, createDatabase, createDatabaseSuccess);
     },
 
     CREATE_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

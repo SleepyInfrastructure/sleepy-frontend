@@ -14,7 +14,7 @@ import ContainerProject from "../container-project";
 const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props: ServerSectionsConnectedProps) => {
     const [disksOpen, setDisksOpen] = useState(true);
     const [containersOpen, setContainersOpen] = useState(true);
-    const [databasesOpen, setDatabasesOpen] = useState(false);
+    const [databasesOpen, setDatabasesOpen] = useState(true);
     const containerProjects = props.containerProjects.map((e) => {
         const containers = props.containers.filter(el => el.parent === e.id);
         return { ...e, containers };
@@ -46,7 +46,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 <div className={style["server-section-title-wrapper"]} onClick={() => { setDatabasesOpen(!databasesOpen); }}>
                     <a className={style["server-section-title"]} data={databasesOpen ? "true" : "false"}>Databases</a>
                     <div className={style["server-section-arrow"]}  data={databasesOpen ? "true" : "false"} />
-                    <a href={`/add-database/${props.item.id}`} className={baseStyle["server-link"]}>(Add)</a>
+                    <a href={`/create-database/${props.item.id}`} className={baseStyle["server-link"]}>(Add)</a>
                 </div>
                 {!databasesOpen || (props.databases.length < 1) ? null : <div className={style["server-section"]}>
                     {props.databases.map((e, i) => <Database key={i} item={e} actions={props.actions} />)}
