@@ -11,8 +11,12 @@ export function formatTimestampLong(e: number) {
     return new Date(e * 1000).toLocaleTimeString();
 }
 
-export function formatDuration(e: number) {
-    const s = Math.round((Date.now() / 1000) - e);
+export function formatDurationNow(start: number) {
+    return formatDuration(start, Date.now() / 1000);
+}
+
+export function formatDuration(start: number, end: number) {
+    const s = Math.round(end - start);
     if(s < 60) { return `${s} seconds`; }
     const time = {
         month: Math.floor(s / 2592000),

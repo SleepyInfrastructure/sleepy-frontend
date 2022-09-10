@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 /* Styles */
+import baseStyle from "../style.scss";
 import style from "./style.scss";
 /* Components */
 import UptimeEndpointChart from "../charts/uptime-endpoint";
@@ -11,7 +12,7 @@ const UptimeEndpoint: FunctionalComponent<UptimeEndpointConnectedProps> = (props
 
     return (
         <div className={style.endpoint}>
-            <div className={style["endpoint-header"]}>
+            <div className={baseStyle["panel-header"]}>
                 <div className={style["endpoint-icon"]} />
                 <div className={style["endpoint-name"]}>{props.item.name}</div>
                 <a href={`/edit-uptime-endpoint/${props.item.id}`} className={style["endpoint-link"]}>(Edit)</a>

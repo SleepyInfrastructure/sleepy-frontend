@@ -27,7 +27,7 @@ const Tokens: FunctionalComponent<TokensConnectedProps> = (props: TokensConnecte
                     <div className={style["token-icon"]} />
                     <div className={baseStyle["page-title"]}>Tokens</div>
                 </div>
-                <div class={style["tokens-servers"]}>
+                <div class={style["tokens-content"]}>
                     {servers.map((e, i) => {
                         const serverDaemonTokens = daemonTokens.filter(el => el.server === e.id);
                         return <TokenServer key={i} item={e} daemonTokens={serverDaemonTokens} actions={props.actions} />

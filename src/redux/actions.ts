@@ -166,6 +166,29 @@ export function fetchAllUptimeEndpointsStructuredSuccess(endpoints: UptimeEndpoi
     return getAction("FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED_SUCCESS", endpoints);
 }
 
+/* Tasks */
+export function fetchTask(id: string): ReduxAction {
+    return getAction("FETCH_TASK", id);
+}
+export function fetchTaskSuccess(task: Task): ReduxAction {
+    return getAction("FETCH_TASK_SUCCESS", task);
+}
+
+export function fetchAllTasks(): ReduxAction {
+    return getAction("FETCH_ALL_TASKS", {});
+}
+export function fetchAllTasksSuccess(tasks: Task[]): ReduxAction {
+    return getAction("FETCH_ALL_TASKS_SUCCESS", tasks);
+}
+
+/* Tasks */
+export function fetchUserFile(id: string): ReduxAction {
+    return getAction("FETCH_USER_FILE", id);
+}
+export function fetchUserFileSuccess(file: UserFile): ReduxAction {
+    return getAction("FETCH_USER_FILE_SUCCESS", file);
+}
+
 /* Daemon Tokens */
 export function createServerDaemonToken(id: string): ReduxAction {
     return getAction("CREATE_SERVER_DAEMON_TOKEN", id);

@@ -94,6 +94,17 @@ export async function fetchAllUptimeEndpointsStructured(): Promise<UptimeEndpoin
     return await fetchResources("/uptimeEndpoints/all/structured");
 }
 
+export async function fetchTask(id: string): Promise<Task | undefined> {
+    return await fetchResource("/tasks", id);
+}
+export async function fetchAllTasks(): Promise<Task[]> {
+    return await fetchResources("/tasks/all");
+}
+
+export async function fetchUserFile(id: string): Promise<UserFile | undefined> {
+    return await fetchResource("/user/files", id);
+}
+
 export async function createServerDaemonToken(id: string): Promise<DaemonToken | undefined> {
     return await createResource("/server/daemon/tokens/create", { id });
 }

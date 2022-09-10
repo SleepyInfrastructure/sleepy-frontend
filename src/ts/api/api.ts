@@ -58,6 +58,13 @@ type DaemonToken = {
     used: number;
 };
 
+type UserFile = {
+    id: string;
+    author: string;
+    type: string;
+    size: number;
+};
+
 /* Calls */
 type UserCreate = {
     username: string;

@@ -15,26 +15,26 @@ const TokenServer: FunctionalComponent<TokenServerConnectedProps> = (props: Toke
                 <div className={serverStyle["server-icon"]} style={{ background: `#${props.item.color}` }} />
                 <div className={serverStyle["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</div>
             </div>
-            <div className={serverStyle["server-content"]}>
-                <div className={style["server-content-token-links"]}>
-                    <a className={style["server-content-tokens-fetch"]} onClick={() => { props.actions.fetchServerDaemonTokens(props.item.id); setFetchedTokens(true); }}>Get tokens</a>
-                    <a className={style["server-content-tokens-create"]} onClick={() => { props.actions.createServerDaemonToken(props.item.id); }}>Create token</a>
+            <div className={style["token-server-content"]}>
+                <div className={style["token-server-links"]}>
+                    <a className={style["token-server-fetch"]} onClick={() => { props.actions.fetchServerDaemonTokens(props.item.id); setFetchedTokens(true); }}>Get tokens</a>
+                    <a className={style["token-server-create"]} onClick={() => { props.actions.createServerDaemonToken(props.item.id); }}>Create token</a>
                 </div>
-                <div className={serverStyle["server-tokens"]}>
+                <div className={style["token-server-tokens"]}>
                     {props.daemonTokens.map((e, i) => {
-                        return <div key={i} className={style["server-token"]}>
-                            <div className={style["server-token-header"]}>
-                                <div className={style["server-token"]}>{e.id}</div>
-                                <a className={style["server-content-tokens-delete"]} onClick={() => { props.actions.deleteDaemonToken(e.id); }}>(Delete)</a>
+                        return <div key={i} className={style["token-server-token"]}>
+                            <div className={style["token-server-token-header"]}>
+                                <div className={style["token-server-token-token"]}>{e.id}</div>
+                                <a className={style["token-server-delete"]} onClick={() => { props.actions.deleteDaemonToken(e.id); }}>(Delete)</a>
                             </div>
-                            <div className={style["server-token-timestamps"]}>
-                                <div className={style["server-token-timestamp"]}>Created - <span className={style["server-token-timestamp-highlight"]}>{formatTimestampLong(e.timestamp)}</span></div>
-                                <div className={style["server-token-timestamp"]}>Last used - <span className={style["server-token-timestamp-highlight"]}>{formatTimestampLong(e.used * 1000)}</span></div>
+                            <div className={style["token-server-token-timestamps"]}>
+                                <div className={style["token-server-token-timestamp"]}>Created - <span className={style["token-server-token-timestamp-highlight"]}>{formatTimestampLong(e.timestamp)}</span></div>
+                                <div className={style["token-server-token-timestamp"]}>Last used - <span className={style["token-server-token-timestamp-highlight"]}>{formatTimestampLong(e.used * 1000)}</span></div>
                             </div>
                         </div>;
                     })}
-                    {fetchedTokens ? (props.daemonTokens.length > 0 ? null : <div className={style["server-tokens-no-fetch"]}>No tokens...</div>) :
-                    <div className={style["server-tokens-no-fetch"]}>Tokens aren't showing up by default, make sure to get them.</div>}
+                    {fetchedTokens ? (props.daemonTokens.length > 0 ? null : <div className={style["token-server-no-fetch"]}>No tokens...</div>) :
+                    <div className={style["token-server-no-fetch"]}>Tokens aren't showing up by default, make sure to get them.</div>}
                 </div>
             </div>
         </div>

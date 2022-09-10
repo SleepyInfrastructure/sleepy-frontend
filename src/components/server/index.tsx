@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 /* Styles */
+import baseStyle from "../style.scss";
 import style from "./style.scss";
 /* Components */
 import DiskChart from "../charts/disk";
@@ -15,10 +16,10 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
 
     return (
         <div className={style.server}>
-            <div className={style["server-header"]}>
+            <div className={baseStyle["panel-header"]}>
                 <div className={style["server-icon"]} style={{ background: `#${props.item.color}` }} />
                 <a href={`/server/${props.item.id}`} className={style["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</a>
-                <a href={`/edit-server/${props.item.id}`} className={style["server-link"]}>(Edit)</a>
+                <a href={`/edit-server/${props.item.id}`} className={baseStyle["panel-link"]}>(Edit)</a>
             </div>
             {statistics.length === 0 ? null :
             <div className={style["server-charts"]}>

@@ -9,6 +9,7 @@ import * as actions from "../redux/actions";
 /* Components */
 import Header from "./header";
 import Home from "../routes/home";
+import Tasks from "../routes/tasks";
 import Settings from "../routes/settings";
 import { useEffect, useState } from "react";
 import Tokens from "../routes/tokens";
@@ -69,6 +70,7 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
                 <Home path="/" {...props} />
                 <Login path="/login" session={props.session} actions={props.actions} />
                 <Register path="/register" session={props.session} actions={props.actions} />
+                <Tasks path="/tasks" {...props} />
                 <Settings path="/settings" session={props.session} actions={props.actions} />
                 <Tokens path="/tokens" session={props.session} servers={props.servers} daemonTokens={props.daemonTokens} actions={props.actions} />
                 <CreateServer path="/create-server" session={props.session} servers={props.servers} actions={props.actions} />

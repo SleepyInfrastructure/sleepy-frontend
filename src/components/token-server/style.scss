@@ -11,55 +11,57 @@
 }
 
 /* Content */
-.server-content-token-links {
+.token-server-content {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+}
+
+.token-server-links {
     display: flex;
     grid-gap: 8px;
 }
 
-.server-content-tokens-fetch {
+.token-server-fetch {
     color: #66f;
     cursor: pointer;
     text-decoration: underline;
 }
-
-.server-content-tokens-create {
+.token-server-create {
     color: #63d083;
     cursor: pointer;
     text-decoration: underline;
 }
-
-.server-content-tokens-delete {
+.token-server-delete {
     color: #ff7680;
     cursor: pointer;
     text-decoration: underline;
 }
+.token-server-no-fetch {
+    color: #6f6f6f;
+}
 
-.server-tokens {
+.token-server-tokens {
     display: flex;
     flex-direction: column;
     grid-gap: 8px;
 }
 
-.server-tokens-no-fetch {
-    color: #6f6f6f;
-}
-
-.server-token {
+.token-server-token {
     display: flex;
     flex-direction: column;
     grid-gap: 4px;
-    color: #fd2b3b;
+    color: var(--color-primary-text);
 }
 
-.server-token-header {
+.token-server-token-header {
     display: flex;
     grid-gap: 4px;
 }
 
-.server-token-timestamp {
-    color: #fd2b3b;
+.token-server-token-timestamp {
+    color: var(--color-primary-text);
 }
-
-.server-token-timestamp-highlight {
+.token-server-token-timestamp-highlight {
     color: #ff7680;
 }

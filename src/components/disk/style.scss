@@ -1,39 +1,9 @@
-/* Macros */
-%align-y {
-    display: flex;
-    align-items: center;
-}
-
-%align-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /* Content */
-.disk {
-    padding: 15px;
-    background-color: var(--color-background);
-    border-radius: 10px;
-}
-
-.disk-title-wrapper {
-    @extend %align-y;
-}
-.disk-title {
-    color: var(--color-primary-text);
-    font-size: 16px;
-}
-
-.disk-content {
-    display: flex;
-    flex-direction: column;
-}
 .disk-content-items {
     display: flex;
     flex-direction: column;
     grid-gap: 8px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 /* Icons */

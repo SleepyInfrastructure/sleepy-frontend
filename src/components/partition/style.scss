@@ -11,30 +11,12 @@
 }
 
 /* Content */
-.partition {
-    padding: 15px;
-    background-color: var(--color-primary-light);
-    border-radius: 10px;
-}
-
-.partition-title-wrapper {
-    @extend %align-y;
-}
-
-.partition-title {
+.partition-name {
     color: var(--color-primary-text);
     font-size: 16px;
 }
-.partition-title[data="zfs"] {
+.partition-name[data="zfs"] {
     color: #66f;
-}
-
-.partition-content {
-    display: flex;
-    flex-direction: column;
-    margin-left: 5px;
-    margin-top: 5px;
-    grid-gap: 2px;
 }
 
 .partition-bar-wrapper {

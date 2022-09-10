@@ -20,21 +20,9 @@
     grid-gap: 5px;
 }
 
-.server-header {
-    @extend %align-y;
-    grid-gap: 5px;
-    margin-bottom: 5px;
-}
-
 .server-name {
     color: var(--color-primary-text);
     font-size: 22px;
-}
-
-.server-link {
-    color: #66f;
-    cursor: pointer;
-    margin-left: 5px;
 }
 
 .server-charts {

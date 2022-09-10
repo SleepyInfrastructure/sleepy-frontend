@@ -1,4 +1,4 @@
-import { formatDuration } from "./util";
+import { formatDurationNow } from "./util";
 
 export function getContainerProjectStats(item: ContainerProjectStructured): ContainerProjectStats {
     const cpu = item.containers.reduce((acc, curr) => {
@@ -23,7 +23,7 @@ export function getContainerProjectStats(item: ContainerProjectStructured): Cont
 
     return {
         cpu, memory, network, disk,
-        status: `${statusText} (${formatDuration(runningTime)})`,
+        status: `${statusText} (${formatDurationNow(runningTime)})`,
         time: runningTime
     }
 }

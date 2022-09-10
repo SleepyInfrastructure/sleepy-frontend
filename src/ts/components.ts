@@ -91,6 +91,15 @@ type UptimeEndpointConnectedProps = {
     actions: ConnectedActions;
 };
 
+type TaskConnectedProps = {
+    item: Task;
+    object?: any;
+    result?: any;
+    actions: ConnectedActions;
+};
+type TaskResultConnectedProps = TaskConnectedProps;
+type TaskObjectConnectedProps = TaskConnectedProps;
+
 /* Charts */
 type CPUChartConnectedProps = {
     statistics: Statistic[];

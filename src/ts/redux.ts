@@ -24,6 +24,8 @@ type ReduxState = {
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
     uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
+    tasks: Map<string, Task>;
+    userFiles: Map<string, UserFile>;
     daemons: Map<string, Daemon>;
     daemonTokens: Map<string, DaemonToken>;
     preferences: AppPreferences;
@@ -54,6 +56,9 @@ type ConnectedActions = {
     editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction;
     fetchUptimeEndpoint(id: string): ReduxAction;
     fetchAllUptimeEndpointsStructured(): ReduxAction;
+    fetchTask(id: string): ReduxAction;
+    fetchAllTasks(): ReduxAction;
+    fetchUserFile(id: string): ReduxAction;
     connectWebsocket(): ReduxAction;
     daemonRequestResources(id: string, resources: string[]): ReduxAction;
     daemonRequestDatabaseBackup(id: string, database: string): ReduxAction;

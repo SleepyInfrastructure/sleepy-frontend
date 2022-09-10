@@ -52,6 +52,7 @@ type Database = {
     author: string | null;
     server: string;
     name: string;
+    credentials: boolean;
 };
 
 /* Calls */

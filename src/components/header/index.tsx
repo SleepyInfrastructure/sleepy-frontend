@@ -15,6 +15,9 @@ const Header: FunctionalComponent<HeaderConnectedProps> = (props: HeaderConnecte
                     <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/">
                         Home
                     </Link>
+                    <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tasks">
+                        Tasks
+                    </Link>
                     <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/settings">
                         Settings
                     </Link>

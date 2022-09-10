@@ -1,61 +1,8 @@
-/* Macros */
-%align-y {
-    display: flex;
-    align-items: center;
-}
-
-%align-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /* Content */
-.container {
-    padding: 15px;
-    background-color: var(--color-background);
-    border-radius: 10px;
-}
-.container[data="dark"] {
-    background-color: var(--color-primary-light);
-}
-
-.container-title-wrapper {
-    @extend %align-y;
-    grid-gap: 4px;
-    margin-bottom: 4px;
-}
-.container-title {
-    color: var(--color-primary-text);
-    font-size: 18px;
-}
-
-.container-content {
-    display: flex;
-    flex-direction: column;
-}
 .container-content-stats {
     display: flex;
     grid-gap: 8px;
     color: #66f;
-}
-
-.container-content-row {
-    color: #ff7680;
-    font-size: 14px;
-}
-.container-content-row-highlight {
-    color: var(--color-primary-text);
-    font-size: 14px;
-}
-.container-content-row-highlight[data="true"] {
-    color: #3ece3e;
-}
-
-.container-content-buttons {
-    display: flex;
-    height: 50px;
-    padding: 10px 0px 5px 0px;
 }
 
 /* Icons */

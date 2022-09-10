@@ -20,17 +20,10 @@
     grid-gap: 5px;
 }
 
-.endpoint-header {
-    @extend %align-y;
-    grid-gap: 5px;
-    margin-bottom: 5px;
-}
-
 .endpoint-name {
     color: var(--color-primary-text);
     font-size: 22px;
 }
-
 .endpoint-link {
     color: #66f;
     cursor: pointer;

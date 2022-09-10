@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { fetchAllDaemonsSuccess, fetchServerStructured } from "../../redux/actions";
+import { fetchAllDaemonsSuccess, fetchServerStructured, fetchTaskSuccess } from "../../redux/actions";
 
 let socket: WebSocket | null;
 function getWsEndpoint() {
@@ -18,6 +18,8 @@ export enum DaemonWebsocketMessageType {
     DAEMON_CLIENT_REQUEST_DATABASE_BACKUP = "DAEMON_CLIENT_REQUEST_DATABASE_BACKUP",
 
     DAEMON_CLIENT_REQUEST_LIVE_STATS_REPLY = "DAEMON_CLIENT_REQUEST_LIVE_STATS_REPLY",
+
+    DAEMON_CLIENT_TASK_REPLY = "DAEMON_CLIENT_TASK_REPLY",
 }
 
 export function connectWebsocket(dispatch: Dispatch<ReduxAction>) {
@@ -47,6 +49,10 @@ export function connectWebsocket(dispatch: Dispatch<ReduxAction>) {
 
             case DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_RESOURCES_REPLY:
                 dispatch(fetchServerStructured(message.id));
+                break;
+
+            case DaemonWebsocketMessageType.DAEMON_CLIENT_TASK_REPLY:
+                dispatch(fetchTaskSuccess(message.task));
                 break;
         }
     }

@@ -2,6 +2,7 @@
 import { h, FunctionalComponent } from "preact";
 import { humanFileSize } from "../../scripts/util/util";
 /* Styles */
+import baseStyle from "../style.scss";
 import style from "./style.scss";
 
 const Partition: FunctionalComponent<PartitionConnectedProps> = (props: PartitionConnectedProps) => {
@@ -9,12 +10,12 @@ const Partition: FunctionalComponent<PartitionConnectedProps> = (props: Partitio
     const colorData = props.item.zfs ? "zfs" : undefined;
 
     return (
-        <div className={style.partition}>
-            <div className={style["partition-title-wrapper"]}>
+        <div className={baseStyle.panel} data="dark">
+            <div className={baseStyle["panel-header"]}>
                 <div className={style["partition-icon"]} data={colorData} />
-                <div className={style["partition-title"]} data={colorData}>{props.item.name} ({humanFileSize(props.item.size)})</div>
+                <div className={style["partition-name"]} data={colorData}>{props.item.name} ({humanFileSize(props.item.size)})</div>
             </div>
-            <div className={style["partition-content"]}>
+            <div className={baseStyle["partition-content"]}>
                 {props.item.used === null ? null : <div className={style["partition-bar-wrapper"]}>
                     <div className={style["partition-bar-percentage"]}>{Math.round((props.item.used / props.item.size) * 100)} %</div>
                     <div className={style["partition-bar"]}>

@@ -20,6 +20,8 @@ export const INITIAL: ReduxState = {
     statistics: new Map(),
     diskStatistics: new Map(),
     uptimeEndpointStatistics: new Map(),
+    tasks: new Map(),
+    userFiles: new Map(),
     daemons: new Map(),
     daemonTokens: new Map(),
     preferences: {
@@ -49,6 +51,8 @@ export enum ResourceType {
     UPTIME_ENDPOINT = "uptime-endpoint",
     UPTIME_ENDPOINT_STRUCTURED = "uptime-endpoint-structured",
     UPTIME_ENDPOINT_STATISTIC = "uptime-endpoint-statistic",
+    TASK = "task",
+    USER_FILE = "user-file",
     DAEMON = "deamon",
     DAEMON_TOKEN = "deamonToken",
     UNKNOWN = "unknown",
@@ -203,6 +207,12 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
 
         case ResourceType.UPTIME_ENDPOINT_STATISTIC:
             return saveResources(state, "uptimeEndpointStatistics", resources);
+
+        case ResourceType.TASK:
+            return saveResources(state, "tasks", resources);
+
+        case ResourceType.USER_FILE:
+            return saveResources(state, "userFiles", resources);
 
         case ResourceType.DAEMON:
             return saveResources(state, "daemons", resources);

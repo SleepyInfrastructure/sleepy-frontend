@@ -2,7 +2,7 @@
 import { h, FunctionalComponent } from "preact";
 import { useState } from "react";
 /* Styles */
-import baseStyle from "../server/style.scss";
+import baseStyle from "../style.scss";
 import style from "./style.scss";
 /* Components */
 import Disk from "../disk";
@@ -46,7 +46,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 <div className={style["server-section-title-wrapper"]} onClick={() => { setDatabasesOpen(!databasesOpen); }}>
                     <a className={style["server-section-title"]} data={databasesOpen ? "true" : "false"}>Databases</a>
                     <div className={style["server-section-arrow"]}  data={databasesOpen ? "true" : "false"} />
-                    <a href={`/create-database/${props.item.id}`} className={baseStyle["server-link"]}>(Add)</a>
+                    <a href={`/create-database/${props.item.id}`} className={baseStyle["panel-link"]}>(Add)</a>
                 </div>
                 {!databasesOpen || (props.databases.length < 1) ? null : <div className={style["server-section"]}>
                     {props.databases.map((e, i) => <Database key={i} item={e} actions={props.actions} />)}
