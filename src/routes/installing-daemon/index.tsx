@@ -27,7 +27,7 @@ const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (p
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
-            <div className={baseStyle["page-title-wrapper"]}>
+            <div className={baseStyle["page-header"]}>
                 <div className={style["server-icon"]} />
                 <div className={baseStyle["page-title"]}>Installing the daemon</div>
             </div>

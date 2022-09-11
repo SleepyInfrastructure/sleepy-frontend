@@ -44,7 +44,7 @@ const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: Edit
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
-            <div className={baseStyle["page-title-wrapper"]}>
+            <div className={baseStyle["page-header"]}>
                 <div className={style["network-icon"]} />
                 <div className={baseStyle["page-title"]}>Edit Network</div>
             </div>

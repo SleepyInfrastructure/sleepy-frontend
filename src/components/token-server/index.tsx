@@ -3,6 +3,7 @@ import { h, FunctionalComponent } from "preact";
 import { useState } from "react";
 import { formatTimestampLong } from "../../scripts/util/util";
 /* Styles */
+import baseStyle from "../style.scss";
 import serverStyle from "../server/style.scss";
 import style from "./style.scss";
 
@@ -10,10 +11,10 @@ const TokenServer: FunctionalComponent<TokenServerConnectedProps> = (props: Toke
     const [fetchedTokens, setFetchedTokens] = useState(false);
 
     return (
-        <div className={serverStyle.server}>
-            <div className={serverStyle["server-header"]}>
+        <div className={baseStyle.panel} data="big">
+            <div className={baseStyle["panel-header"]}>
                 <div className={serverStyle["server-icon"]} style={{ background: `#${props.item.color}` }} />
-                <div className={serverStyle["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</div>
+                <div className={baseStyle["panel-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</div>
             </div>
             <div className={style["token-server-content"]}>
                 <div className={style["token-server-links"]}>
@@ -34,7 +35,7 @@ const TokenServer: FunctionalComponent<TokenServerConnectedProps> = (props: Toke
                         </div>;
                     })}
                     {fetchedTokens ? (props.daemonTokens.length > 0 ? null : <div className={style["token-server-no-fetch"]}>No tokens...</div>) :
-                    <div className={style["token-server-no-fetch"]}>Tokens aren't showing up by default, make sure to get them.</div>}
+                    <div className={style["token-server-no-fetch"]}>Tokens aren't showing up by default, make sure to click above to get them.</div>}
                 </div>
             </div>
         </div>

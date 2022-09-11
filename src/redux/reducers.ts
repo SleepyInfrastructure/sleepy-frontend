@@ -2,7 +2,7 @@
 import { Dispatch } from "redux";
 /* Redux */
 import * as actions from "./actions";
-import { cacheResource, cacheResources, INITIAL, reducerFetch, reducerFetchMultiple, ResourceType } from "./util";
+import { cacheResource, cacheResources, INITIAL, reducerDelete, reducerFetch, reducerFetchMultiple, ResourceType } from "./util";
 /* API */
 import * as routes from "../scripts/api/routes";
 import { connectWebsocket, DaemonWebsocketMessageType, sendWebsocketMessage } from "../scripts/ws/ws";
@@ -44,6 +44,12 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
 
     EDIT_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResource(state, action.data, ResourceType.SERVER);
+    },
+
+    DELETE_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        const resources = new Map(state.servers);
+        resources.delete(action.data);
+        return { ...state, servers: resources };
     },
 
     FETCH_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
@@ -98,6 +104,12 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         return cacheResource(state, action.data, ResourceType.DATABASE);
     },
 
+    DELETE_DATABASE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        const resources = new Map(state.databases);
+        resources.delete(action.data);
+        return { ...state, databases: resources };
+    },
+
     FETCH_DATABASE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResource(state, action.data, ResourceType.DATABASE);
     },
@@ -110,12 +122,24 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         return cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
     },
 
+    DELETE_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        const resources = new Map(state.uptimeEndpoints);
+        resources.delete(action.data);
+        return { ...state, uptimeEndpoints: resources };
+    },
+
     FETCH_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
     },
 
     FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResources(state, action.data, ResourceType.UPTIME_ENDPOINT_STRUCTURED);
+    },
+
+    DELETE_TASK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        const resources = new Map(state.tasks);
+        resources.delete(action.data);
+        return { ...state, tasks: resources };
     },
 
     FETCH_TASK_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
@@ -179,6 +203,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await reducerFetch(dispatch, action.data, routes.editServer, actions.editServerSuccess);
     },
 
+    DELETE_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteServer, actions.deleteServerSuccess);
+    },
+
     FETCH_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.fetchServer, actions.fetchServerSuccess);
     },
@@ -227,6 +255,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await reducerFetch(dispatch, action.data, routes.editDatabase, actions.editDatabaseSuccess);
     },
 
+    DELETE_DATABASE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteDatabase, actions.deleteDatabaseSuccess);
+    },
+
     CREATE_DATABASE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.createDatabase, actions.createDatabaseSuccess);
     },
@@ -239,12 +271,20 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await reducerFetch(dispatch, action.data, routes.editUptimeEndpoint, actions.editUptimeEndpointSuccess);
     },
 
+    DELETE_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteUptimeEndpoint, actions.deleteUptimeEndpointSuccess);
+    },
+
     FETCH_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.fetchUptimeEndpoint, actions.fetchUptimeEndpointSuccess);
     },
 
     FETCH_ALL_UPTIME_ENDPOINTS_STRUCTURED: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
         await reducerFetchMultiple(dispatch, {}, routes.fetchAllUptimeEndpointsStructured, actions.fetchAllUptimeEndpointsStructuredSuccess);
+    },
+
+    DELETE_TASK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteTask, actions.deleteTaskSuccess);
     },
 
     FETCH_TASK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

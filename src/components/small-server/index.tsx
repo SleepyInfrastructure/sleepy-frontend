@@ -15,11 +15,12 @@ const SmallServer: FunctionalComponent<ServerConnectedProps> = (props: ServerCon
     const statistics = props.statistics.sort((a, b) => a.timestamp - b.timestamp);
 
     return (
-        <div className={serverStyle.server}>
+        <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
                 <div className={serverStyle["server-icon"]} style={{ background: `#${props.item.color}` }} />
                 <a href={`/server/${props.item.id}`} className={serverStyle["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</a>
                 <a href={`/edit-server/${props.item.id}`} className={baseStyle["panel-link"]}>(Edit)</a>
+                <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteServer(props.item.id); }}>(Delete)</a>
             </div>
             {statistics.length === 0 ? null :
             <div className={serverStyle["server-charts"]}>

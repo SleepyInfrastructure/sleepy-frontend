@@ -23,12 +23,11 @@
     grid-gap: 10px;
 }
 
-.page-title-wrapper {
+.page-header {
     @extend %align-y;
     height: 32px;
     grid-gap: 10px;
 }
-
 .page-title {
     font-size: 30px;
     color: var(--color-secondary-text);

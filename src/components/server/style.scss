@@ -11,15 +11,6 @@
 }
 
 /* Content */
-.server {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-primary-dark);
-    padding: 20px;
-    border-radius: 5px;
-    grid-gap: 5px;
-}
-
 .server-name {
     color: var(--color-primary-text);
     font-size: 22px;
@@ -29,6 +20,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 8px;
+    margin-top: 8px;
+}
+.server-charts:empty {
+    margin-top: 0px;
 }
 
 /* Icons */

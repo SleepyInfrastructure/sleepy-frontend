@@ -14,7 +14,8 @@
 .token-server-content {
     display: flex;
     flex-direction: column;
-    grid-gap: 8px;
+    grid-gap: 12px;
+    margin-top: 4px;
 }
 
 .token-server-links {
@@ -28,7 +29,7 @@
     text-decoration: underline;
 }
 .token-server-create {
-    color: #63d083;
+    color: #3ece3e;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -52,6 +53,9 @@
     flex-direction: column;
     grid-gap: 4px;
     color: var(--color-primary-text);
+    background-color: var(--color-primary-light);
+    padding: 12px;
+    border-radius: 10px;
 }
 
 .token-server-token-header {

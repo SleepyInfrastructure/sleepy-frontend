@@ -1,31 +1,9 @@
-/* Macros */
-%align-y {
-    display: flex;
-    align-items: center;
-}
-
-%align-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Content */
-.task {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-primary-dark);
-    padding: 20px;
-    border-radius: 5px;
-    grid-gap: 4px;
-}
-
-/* Icons */
 .task-icon {
     width: 24px;
     height: 24px;
     background: var(--color-secondary);
 }
-.task-icon[data="BACKUP_DATABASE"] {
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm9 12v2h6v-2h-6zm-3.586-3l-2.828 2.828L7 16.243 11.243 12 7 7.757 5.586 9.172 8.414 12z'/%3E%3C/svg%3E");
+.task-icon[data="BACKUP_DATABASE"],
+.task-icon[data="BACKUP_DATABASE_SCHEMA"]  {
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M21 9.5v3c0 2.485-4.03 4.5-9 4.5s-9-2.015-9-4.5v-3c0 2.485 4.03 4.5 9 4.5s9-2.015 9-4.5zm-18 5c0 2.485 4.03 4.5 9 4.5s9-2.015 9-4.5v3c0 2.485-4.03 4.5-9 4.5s-9-2.015-9-4.5v-3zm9-2.5c-4.97 0-9-2.015-9-4.5S7.03 3 12 3s9 2.015 9 4.5-4.03 4.5-9 4.5z'/%3E%3C/svg%3E");
 }

@@ -233,6 +233,15 @@ export async function reducerFetch<T, J>(dispatch: Dispatch<ReduxAction>, data: 
     dispatch(successFunc(resource));
 }
 
+export async function reducerDelete<T>(dispatch: Dispatch<ReduxAction>, data: T, deleteFunc: (data: T) => Promise<boolean>, successFunc: (data: T) => ReduxAction) {
+    const success = await deleteFunc(data);
+    if (!success) {
+        return;
+    }
+
+    dispatch(successFunc(data));
+}
+
 export async function reducerFetchMultiple<T, J>(dispatch: Dispatch<ReduxAction>, data: T, fetchFunc: (data: T) => Promise<J[]>, successFunc: (resource: J[]) => ReduxAction) {
     const resources = await fetchFunc(data);
     dispatch(successFunc(resources));

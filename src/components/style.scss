@@ -19,27 +19,49 @@
 .panel[data="dark"] {
     background-color: var(--color-primary-light);
 }
+.panel[data="darker"] {
+    background-color: var(--color-primary-dark);
+}
+.panel[data="big"] {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-primary-dark);
+    padding: 20px;
+    grid-gap: 4px;
+}
 
 .panel-header {
     @extend %align-y;
     grid-gap: 6px;
-    margin-bottom: 4px;
 }
 .panel-content {
     display: flex;
     flex-direction: column;
+    margin-top: 4px;
 }
 
 .panel-name {
     color: var(--color-primary-text);
     font-size: 18px;
 }
+.panel-name[data="alt"] {
+    color: var(--color-secondary-text);
+    font-size: 16px;
+}
 .panel-link {
     color: #66f;
     cursor: pointer;
     font-size: 14px;
     margin-left: 5px;
+    text-decoration: underline;
 }
+.panel-link[data="green"] {
+    color: #3ece3e;
+}
+.panel-link[data="red"] {
+    color: var(--color-primary-text);
+}
+
 .panel-content-row {
     color: #ff7680;
     font-size: 14px;

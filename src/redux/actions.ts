@@ -47,6 +47,12 @@ export function editServer(edit: ServerEdit): ReduxAction {
 export function editServerSuccess(server: Server): ReduxAction {
     return getAction("EDIT_SERVER_SUCCESS", server);
 }
+export function deleteServer(id: string): ReduxAction {
+    return getAction("DELETE_SERVER", id);
+}
+export function deleteServerSuccess(id: string): ReduxAction {
+    return getAction("DELETE_SERVER_SUCCESS", id);
+}
 export function fetchServer(id: string): ReduxAction {
     return getAction("FETCH_SERVER", id);
 }
@@ -132,6 +138,12 @@ export function editDatabase(edit: DatabaseEdit): ReduxAction {
 export function editDatabaseSuccess(database: Database): ReduxAction {
     return getAction("EDIT_DATABASE_SUCCESS", database);
 }
+export function deleteDatabase(id: string): ReduxAction {
+    return getAction("DELETE_DATABASE", id);
+}
+export function deleteDatabaseSuccess(id: string): ReduxAction {
+    return getAction("DELETE_DATABASE_SUCCESS", id);
+}
 export function fetchDatabase(id: string): ReduxAction {
     return getAction("FETCH_DATABASE", id);
 }
@@ -152,6 +164,12 @@ export function editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction {
 export function editUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
     return getAction("EDIT_UPTIME_ENDPOINT_SUCCESS", endpoint);
 }
+export function deleteUptimeEndpoint(id: string): ReduxAction {
+    return getAction("DELETE_UPTIME_ENDPOINT", id);
+}
+export function deleteUptimeEndpointSuccess(id: string): ReduxAction {
+    return getAction("DELETE_UPTIME_ENDPOINT_SUCCESS", id);
+}
 export function fetchUptimeEndpoint(id: string): ReduxAction {
     return getAction("FETCH_UPTIME_ENDPOINT", id);
 }
@@ -167,6 +185,12 @@ export function fetchAllUptimeEndpointsStructuredSuccess(endpoints: UptimeEndpoi
 }
 
 /* Tasks */
+export function deleteTask(id: string): ReduxAction {
+    return getAction("DELETE_TASK", id);
+}
+export function deleteTaskSuccess(id: string): ReduxAction {
+    return getAction("DELETE_TASK_SUCCESS", id);
+}
 export function fetchTask(id: string): ReduxAction {
     return getAction("FETCH_TASK", id);
 }
@@ -220,6 +244,6 @@ export function fetchAllDaemonsSuccess(daemons: Daemon[]): ReduxAction {
 export function daemonRequestResources(id: string, resources: string[]): ReduxAction {
     return getAction("DAEMON_REQUEST_RESOURCES", { id, resources });
 }
-export function daemonRequestDatabaseBackup(id: string, database: string): ReduxAction {
-    return getAction("DAEMON_REQUEST_DATABASE_BACKUP", { id, database });
+export function daemonRequestDatabaseBackup(id: string, database: string, data: boolean): ReduxAction {
+    return getAction("DAEMON_REQUEST_DATABASE_BACKUP", { id, database, data });
 }

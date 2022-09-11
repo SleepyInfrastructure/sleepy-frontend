@@ -12,10 +12,11 @@ import TaskResult from "../task-result";
 const Task: FunctionalComponent<TaskConnectedProps> = (props: TaskConnectedProps) => {
     const color = getTaskColor(props.item);
     return (
-        <div className={style.task}>
+        <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
                 <div className={style["task-icon"]} data={props.item.type} style={{ background: color }} />
                 <div className={baseStyle["panel-name"]} style={{ color }}>{getTaskName(props.item)}</div>
+                <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteTask(props.item.id); }}>(Delete)</a>
             </div>
             <div className={baseStyle["panel-content"]}>
                 <TaskObject {...props} />

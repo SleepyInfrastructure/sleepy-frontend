@@ -13,6 +13,7 @@ const TaskResult: FunctionalComponent<TaskResultConnectedProps> = (props: TaskRe
 
     switch(props.item.type) {
         case TaskType.BACKUP_DATABASE:
+        case TaskType.BACKUP_DATABASE_SCHEMA:
             return <div className={baseStyle["panel-content-row"]}>
                 Result: <span className={baseStyle["panel-content-row-highlight"]}>{props.result.id}</span>
                 <a href={`${getApiEndpoint()}${apiVersion}/user/files/access?id=${props.result.id}`} className={baseStyle["panel-link"]} download>(Download) [{humanFileSize(props.result.size)}]</a>

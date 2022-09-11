@@ -34,7 +34,7 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
-            <div className={baseStyle["page-title-wrapper"]}>
+            <div className={baseStyle["page-header"]}>
                 <div className={style["server-icon"]} />
                 <div className={baseStyle["page-title"]}>Create Server</div>
             </div>
@@ -50,7 +50,7 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
                     <div className={formStyle["page-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.createServer({ name, color });
+                        props.actions.createServer({ name, color: color.substring(1) });
                         setTimeout(() => { location.href = "/"; }, 1000);
                     }}>
                     Create!

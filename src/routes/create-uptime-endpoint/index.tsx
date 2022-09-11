@@ -35,7 +35,7 @@ const CreateUptimeEndpoint: FunctionalComponent<CreateUptimeEndpointConnectedPro
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
-            <div className={baseStyle["page-title-wrapper"]}>
+            <div className={baseStyle["page-header"]}>
                 <div className={style["endpoint-icon"]} />
                 <div className={baseStyle["page-title"]}>Create Uptime Endpoint</div>
             </div>

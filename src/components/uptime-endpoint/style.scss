@@ -16,7 +16,7 @@
     flex-direction: column;
     background-color: var(--color-primary-dark);
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     grid-gap: 5px;
 }
 
@@ -28,6 +28,10 @@
     color: #66f;
     cursor: pointer;
     margin-left: 5px;
+    text-decoration: underline;
+}
+.endpoint-link[data="red"] {
+    color: #ff7680;
 }
 
 .endpoint-content {

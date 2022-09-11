@@ -23,7 +23,7 @@ export async function createSession(type: string, username?: string, password?: 
     return response.body;
 }
 export async function deleteSession(): Promise<boolean> {
-    const response: APIResponse = await sendDelete({ path: `/sessions/delete`, body: JSON.stringify({}) });
+    const response: APIResponse = await sendDelete({ path: `/sessions/delete` });
     location.href = "/login";
 
     return response.status === 200;
@@ -34,6 +34,9 @@ export async function createServer(create: ServerCreate): Promise<Server | undef
 }
 export async function editServer(edit: ServerEdit): Promise<Server | undefined> {
     return await editResource("/servers", edit);
+}
+export async function deleteServer(id: string): Promise<boolean> {
+    return await deleteResource("/servers", id);
 }
 export async function fetchServer(id: string): Promise<Server | undefined> {
     return await fetchResource("/servers", id);
@@ -77,6 +80,9 @@ export async function createDatabase(create: DatabaseCreate): Promise<Database |
 export async function editDatabase(edit: DatabaseEdit): Promise<Database | undefined> {
     return await editResource("/databases", edit);
 }
+export async function deleteDatabase(id: string): Promise<boolean> {
+    return await deleteResource("/databases", id);
+}
 export async function fetchDatabase(id: string): Promise<Database | undefined> {
     return await fetchResource("/databases", id);
 }
@@ -87,6 +93,9 @@ export async function createUptimeEndpoint(create: UptimeEndpointCreate): Promis
 export async function editUptimeEndpoint(edit: UptimeEndpointEdit): Promise<UptimeEndpoint | undefined> {
     return await editResource("/uptimeEndpoints", edit);
 }
+export async function deleteUptimeEndpoint(id: string): Promise<boolean> {
+    return await deleteResource("/uptimeEndpoints", id);
+}
 export async function fetchUptimeEndpoint(id: string): Promise<UptimeEndpoint | undefined> {
     return await fetchResource("/uptimeEndpoints", id);
 }
@@ -94,6 +103,9 @@ export async function fetchAllUptimeEndpointsStructured(): Promise<UptimeEndpoin
     return await fetchResources("/uptimeEndpoints/all/structured");
 }
 
+export async function deleteTask(id: string): Promise<boolean> {
+    return await deleteResource("/tasks", id);
+}
 export async function fetchTask(id: string): Promise<Task | undefined> {
     return await fetchResource("/tasks", id);
 }

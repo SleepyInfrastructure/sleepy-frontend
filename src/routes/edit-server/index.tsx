@@ -44,7 +44,7 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
-            <div className={baseStyle["page-title-wrapper"]}>
+            <div className={baseStyle["page-header"]}>
                 <div className={style["server-icon"]} />
                 <div className={baseStyle["page-title"]}>Edit Server</div>
             </div>

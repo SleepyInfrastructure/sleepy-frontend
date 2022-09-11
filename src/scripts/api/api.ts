@@ -13,8 +13,8 @@ export async function post(descriptor: APIPostRequest): Promise<APIResponse> {
     return { status: response.status, body: response.json() };
 }
 
-export async function sendDelete(descriptor: APIPostRequest): Promise<APIResponse> {
-    const response: Response = await fetch(getApiEndpoint() + apiVersion + descriptor.path, { method: "DELETE", body: descriptor.body, credentials: "include", headers: { "Content-Type": "application/json" } });
+export async function sendDelete(descriptor: APIGetRequest): Promise<APIResponse> {
+    const response: Response = await fetch(getApiEndpoint() + apiVersion + descriptor.path, { method: "DELETE", credentials: "include", headers: { "Content-Type": "application/json" } });
     return { status: response.status, body: response.json() };
 }
 
@@ -54,7 +54,7 @@ export async function editResource<T>(path: string, item: any): Promise<T | unde
     return response.body;
 }
 
-export async function deleteResource<T>(path: string, id: string): Promise<boolean> {
-    const response: APIResponse = await get({ path: `${path}/delete?id=${id}` });
+export async function deleteResource(path: string, id: string): Promise<boolean> {
+    const response: APIResponse = await sendDelete({ path: `${path}/delete?id=${id}` });
     return response.status === 200;
 }

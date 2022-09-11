@@ -1,6 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect } from "react";
+import { TaskType } from "../../ts/const";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -10,7 +11,7 @@ import style from "./style.scss";
 import baseStyle from "../style.scss";
 /* Components */
 import Task from "../../components/task";
-import { TaskType } from "../../ts/const";
+import EmptyPanel from "../../components/empty-panel";
 
 const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedProps) => {
     useEffect(() => {
@@ -23,6 +24,7 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
         for(const task of Array.from(props.tasks.values())) {
             switch(task.type) {
                 case TaskType.BACKUP_DATABASE:
+                case TaskType.BACKUP_DATABASE_SCHEMA:
                     if(task.result !== null && props.userFiles.get(task.result) === undefined) {
                         props.actions.fetchUserFile(task.result);
                     }
@@ -35,7 +37,7 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
     return (
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>
-                <div className={baseStyle["page-title-wrapper"]}>
+                <div className={baseStyle["page-header"]}>
                     <div className={style["task-icon"]} />
                     <div className={baseStyle["page-title"]}>Tasks</div>
                 </div>
@@ -44,12 +46,14 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
                         let object, result;
                         switch(e.type) {
                             case TaskType.BACKUP_DATABASE:
+                            case TaskType.BACKUP_DATABASE_SCHEMA:
                                 object = e.object === null ? undefined : props.databases.get(e.object);
                                 result = e.result === null ? undefined : props.userFiles.get(e.result);
                                 break;
                         }
                         return <Task key={i} item={e} object={object} result={result} actions={props.actions} />
                     })}
+                    {tasks.length > 0 ? null : <EmptyPanel />}
                 </div>
             </div>
         </div>

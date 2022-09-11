@@ -32,7 +32,7 @@ const CreateDatabase: FunctionalComponent<CreateDatabaseConnectedProps> = (props
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
-            <div className={baseStyle["page-title-wrapper"]}>
+            <div className={baseStyle["page-header"]}>
                 <div className={style["database-icon"]} />
                 <div className={baseStyle["page-title"]}>Create Database</div>
             </div>

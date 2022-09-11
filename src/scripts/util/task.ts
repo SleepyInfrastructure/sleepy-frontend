@@ -10,7 +10,8 @@ export function getTaskStatus(task: Task) {
 }
 
 const name: Record<string, string> = {
-    [TaskType.BACKUP_DATABASE]: "Database Backup"
+    [TaskType.BACKUP_DATABASE]: "Database Backup",
+    [TaskType.BACKUP_DATABASE_SCHEMA]: "Schema Backup"
 };
 export function getTaskName(task: Task) {
     return name[task.type];
