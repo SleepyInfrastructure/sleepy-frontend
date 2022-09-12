@@ -18,6 +18,7 @@ type ServersProps = {
     containers: Map<string, Container>;
     containerStatistics: Map<string, ContainerStatistic>;
     containerProjects: Map<string, ContainerProject>;
+    containerLogs: Map<string, string[]>;
     databases: Map<string, Database>;
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
@@ -53,6 +54,7 @@ type InstallingDaemonConnectedProps = RouteProps & {
     daemonTokens: Map<string, DaemonToken>;
 };
 type ServerRouteConnectedProps = RouteProps & ServersProps;
+type ContainerRouteConnectedProps = RouteProps & ServersProps;
 
 type CreateUptimeEndpointConnectedProps = RouteProps & {
     uptimeEndpoints: Map<string, UptimeEndpoint>;

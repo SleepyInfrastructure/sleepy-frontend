@@ -15,6 +15,7 @@ export const INITIAL: ReduxState = {
     containers: new Map(),
     containerStatistics: new Map(),
     containerProjects: new Map(),
+    containerLogs: new Map(),
     databases: new Map(),
     uptimeEndpoints: new Map(),
     statistics: new Map(),

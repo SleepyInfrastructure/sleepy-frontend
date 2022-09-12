@@ -1,9 +1,9 @@
 import { Dispatch } from "redux";
-import { fetchAllDaemonsSuccess, fetchServerStructured, fetchTaskSuccess } from "../../redux/actions";
+import { addContainerLog, fetchAllDaemonsSuccess, fetchServerStructured, fetchTaskSuccess } from "../../redux/actions";
 
-let socket: WebSocket | null;
+let socket: WebSocket | null = null;
 function getWsEndpoint() {
-    return location.host === "sleepy.lamkas.dev" ? "wss://daemon.sleepy.lamkas.dev" : "ws://localhost:9002";
+    return location.host === "sleepy.lamkas.dev" ? "wss://api.sleepy.lamkas.dev" : "ws://localhost:9002";
 }
 
 export enum DaemonWebsocketMessageType {
@@ -20,9 +20,16 @@ export enum DaemonWebsocketMessageType {
     DAEMON_CLIENT_REQUEST_LIVE_STATS_REPLY = "DAEMON_CLIENT_REQUEST_LIVE_STATS_REPLY",
 
     DAEMON_CLIENT_TASK_REPLY = "DAEMON_CLIENT_TASK_REPLY",
+
+    DAEMON_CLIENT_CONNECT_CONTAINER_LOG = "DAEMON_CLIENT_CONNECT_CONTAINER_LOG",
+    DAEMON_CLIENT_CONTAINER_LOG_MESSAGE = "DAEMON_CLIENT_CONTAINER_LOG_MESSAGE",
 }
 
 export function connectWebsocket(dispatch: Dispatch<ReduxAction>) {
+    if(isConnected()) {
+        return;
+    }
+
     socket = new WebSocket(`${getWsEndpoint()}/socket`);
     socket.onclose = () => {
         socket = null;
@@ -54,8 +61,16 @@ export function connectWebsocket(dispatch: Dispatch<ReduxAction>) {
             case DaemonWebsocketMessageType.DAEMON_CLIENT_TASK_REPLY:
                 dispatch(fetchTaskSuccess(message.task));
                 break;
+
+            case DaemonWebsocketMessageType.DAEMON_CLIENT_CONTAINER_LOG_MESSAGE:
+                dispatch(addContainerLog(message.container, message.message));
+                break;
         }
     }
+}
+
+export function isConnected() {
+    return socket !== null;
 }
 
 export function sendWebsocketMessage(message: any) {

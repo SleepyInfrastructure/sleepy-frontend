@@ -3,7 +3,6 @@ import { h, FunctionalComponent } from "preact";
 /* Styles */
 import baseStyle from "../style.scss";
 import serverStyle from "../server/style.scss";
-import style from "./style.scss";
 /* Components */
 import DiskChart from "../charts/disk";
 import CPUChart from "../charts/cpu";

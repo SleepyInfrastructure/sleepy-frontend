@@ -7,7 +7,7 @@ import style from "./style.scss";
 /* Components */
 import Disk from "../disk";
 import ZFSPool from "../zfs-pool";
-import Container from "../container";
+import SmallContainer from "../small-container";
 import Database from "../database";
 import ContainerProject from "../container-project";
 
@@ -39,7 +39,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 </div>
                 {!containersOpen || (containerProjects.length + props.containers.length < 1) ? null : <div className={style["server-section"]}>
                     {containerProjects.map((e, i) => <ContainerProject key={i} item={e} actions={props.actions} />)}
-                    {props.containers.filter(e => e.parent === null).map((e, i) => <Container key={i} item={e} actions={props.actions} />)}
+                    {props.containers.filter(e => e.parent === null).map((e, i) => <SmallContainer key={i} item={e} logs={[]} actions={props.actions} />)}
                 </div>}
             </div>
             <div className={style["server-section-wrapper"]}>

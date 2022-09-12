@@ -19,6 +19,7 @@ type ReduxState = {
     containers: Map<string, Container>;
     containerStatistics: Map<string, ContainerStatistic>;
     containerProjects: Map<string, ContainerProject>;
+    containerLogs: Map<string, string[]>;
     databases: Map<string, Database>;
     uptimeEndpoints: Map<string, UptimeEndpoint>;
     statistics: Map<string, Statistic>;
@@ -66,6 +67,8 @@ type ConnectedActions = {
     connectWebsocket(): ReduxAction;
     daemonRequestResources(id: string, resources: string[]): ReduxAction;
     daemonRequestDatabaseBackup(id: string, database: string, data: boolean): ReduxAction;
+    daemonConnectContainerLog(id: string): ReduxAction;
+    addContainerLog(id: string, message: string): ReduxAction;
     createServerDaemonToken(id: string): ReduxAction;
     deleteDaemonToken(id: string): ReduxAction;
     fetchServerDaemonTokens(id: string): ReduxAction;

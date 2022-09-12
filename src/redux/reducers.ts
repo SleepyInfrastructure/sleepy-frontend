@@ -155,6 +155,7 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
     },
 
     FETCH_ALL_DAEMONS_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        state.daemons = new Map();
         return cacheResources(state, action.data, ResourceType.DAEMON);
     },
 
@@ -170,6 +171,15 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         const daemonTokens = new Map(state.daemonTokens);
         daemonTokens.delete(action.data);
         return { ...state, daemonTokens };
+    },
+
+    ADD_CONTAINER_LOG: (state: ReduxState, action: ReduxAction): ReduxState => {
+        const containerLogs = new Map(state.containerLogs);
+        if(!containerLogs.has(action.data.id)) {
+            containerLogs.set(action.data.id, []);
+        }
+        containerLogs.get(action.data.id)?.push(action.data.message);
+        return { ...state, containerLogs };
     },
 };
 const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction) => Promise<void>> = {
@@ -309,6 +319,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     DAEMON_REQUEST_DATABASE_BACKUP: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_DATABASE_BACKUP, ...action.data });
+    },
+
+    DAEMON_CONNECT_CONTAINER_LOG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_CONNECT_CONTAINER_LOG, ...action.data });
     },
 
     CREATE_SERVER_DAEMON_TOKEN: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

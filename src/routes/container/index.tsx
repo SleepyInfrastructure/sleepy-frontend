@@ -1,39 +1,42 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect } from "react";
-import { getServerConnectedProps } from "../../scripts/util/server";
+import { getContainerConnectedProps } from "../../scripts/util/server";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
-import Server from "../../components/server";
 /* Components */
+import Container from "../../components/container";
 
-const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: ServerRouteConnectedProps) => {
+const ContainerRoute: FunctionalComponent<ContainerRouteConnectedProps> = (props: ContainerRouteConnectedProps) => {
     useEffect(() => {
         if(props.id === undefined) { return; }
         if(props.session !== null) {
-            props.actions.fetchServerStructured(props.id);
+            props.actions.fetchAllServersStructured();
             props.actions.connectWebsocket();
         }
     }, [props.session]);
     if(props.id === undefined) {
         return null;
     }
-    const server = props.servers.get(props.id);
-    if(server === undefined) {
+    const container = props.containers.get(props.id);
+    if(container === undefined) {
         return null;
     }
-
+    const containerProps = getContainerConnectedProps(container, props);
+    console.log(props.daemons);
+    const logs = props.daemons.has(containerProps.item.server) ? containerProps.logs : ["Daemon is offline..."];
+    
     return (
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>
-                <Server {...getServerConnectedProps(server, props)} />
+                <Container {...containerProps} logs={logs} />
             </div>
         </div>
     );
 };
 
-export default connect(mapState, mapDispatch(actions))(ServerRoute);
+export default connect(mapState, mapDispatch(actions))(ContainerRoute);

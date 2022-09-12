@@ -53,3 +53,13 @@ export function getServerConnectedProps(e: Server, props: ServersProps): ServerC
         actions: props.actions
     }
 }
+
+export function getContainerConnectedProps(e: Container, props: ServersProps): ContainerConnectedProps {
+    const containerStatistics = Array.from(props.containerStatistics.values());
+
+    return {
+        item: { ...e, statistics: containerStatistics.filter(el => el.parent === e.id) },
+        logs: props.containerLogs.get(e.id) ?? [],
+        actions: props.actions
+    }
+}

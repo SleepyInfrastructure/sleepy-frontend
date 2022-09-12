@@ -17,6 +17,7 @@ import Login from "../routes/login";
 import Register from "../routes/register";
 import CreateServer from "../routes/create-server";
 import Server from "../routes/server";
+import Container from "../routes/container";
 import InstallingDaemon from "../routes/installing-daemon";
 import EditServer from "../routes/edit-server";
 import CreateUptimeEndpoint from "../routes/create-uptime-endpoint";
@@ -76,6 +77,7 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
                 <CreateServer path="/create-server" session={props.session} servers={props.servers} actions={props.actions} />
                 <EditServer path="/edit-server/:id" session={props.session} servers={props.servers} actions={props.actions} />
                 <Server path="/server/:id" {...props} />
+                <Container path="/container/:id" {...props} />
                 <InstallingDaemon path="/installing-daemon/:id" session={props.session} servers={props.servers} daemonTokens={props.daemonTokens} actions={props.actions} />
                 <CreateUptimeEndpoint path="/create-uptime-endpoint" session={props.session} uptimeEndpoints={props.uptimeEndpoints} actions={props.actions} />
                 <EditUptimeEndpoint path="/edit-uptime-endpoint/:id" session={props.session} uptimeEndpoints={props.uptimeEndpoints} actions={props.actions} />

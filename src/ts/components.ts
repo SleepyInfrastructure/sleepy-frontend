@@ -63,9 +63,10 @@ type ZFSPartitionConnectedPropsItem = ZFSPartition & {
 
 type ContainerConnectedProps = {
     item: ContainerStructured;
-    dark?: boolean;
+    logs: string[];
     actions: ConnectedActions;
 };
+type ContainerContentConnectedProps = ContainerConnectedProps;
 
 type ContainerProjectStats = {
     cpu: number;
@@ -99,6 +100,11 @@ type TaskConnectedProps = {
 };
 type TaskResultConnectedProps = TaskConnectedProps;
 type TaskObjectConnectedProps = TaskConnectedProps;
+
+type LogViewConnectedProps = {
+    logs: string[];
+    actions: ConnectedActions;
+};
 
 /* Charts */
 type CPUChartConnectedProps = {
