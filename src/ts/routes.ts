@@ -55,6 +55,7 @@ type InstallingDaemonConnectedProps = RouteProps & {
 };
 type ServerRouteConnectedProps = RouteProps & ServersProps;
 type ContainerRouteConnectedProps = RouteProps & ServersProps;
+type ContainerProjectRouteConnectedProps = RouteProps & ServersProps;
 
 type CreateUptimeEndpointConnectedProps = RouteProps & {
     uptimeEndpoints: Map<string, UptimeEndpoint>;

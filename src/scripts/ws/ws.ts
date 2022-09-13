@@ -63,7 +63,7 @@ export function connectWebsocket(dispatch: Dispatch<ReduxAction>) {
                 break;
 
             case DaemonWebsocketMessageType.DAEMON_CLIENT_CONTAINER_LOG_MESSAGE:
-                dispatch(addContainerLog(message.container, message.message));
+                dispatch(addContainerLog(message.id, message.message));
                 break;
         }
     }

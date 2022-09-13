@@ -20,7 +20,7 @@ const Container: FunctionalComponent<ContainerConnectedProps> = (props: Containe
         <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
                 <div className={style["container-icon"]} />
-                <a href={`/server/${props.item.id}`} className={baseStyle["panel-name"]}>{props.item.names}</a>
+                <a href={`/container-project/${props.item.id}`} className={baseStyle["panel-name"]}>{props.item.names}</a>
             </div>
             <ContainerContent {...props} />
             <LogView logs={props.logs} actions={props.actions} />

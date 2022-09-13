@@ -63,3 +63,19 @@ export function getContainerConnectedProps(e: Container, props: ServersProps): C
         actions: props.actions
     }
 }
+
+export function getContainerProjectConnectedProps(e: ContainerProject, props: ServersProps): ContainerProjectConnectedProps {
+    const containers = Array.from(props.containers.values());
+    const containerStatistics = Array.from(props.containerStatistics.values());
+
+    return {
+        item: {
+            ...e,
+            containers: containers.filter(el => el.parent === e.id).map(el => {
+                return { ...el, statistics: containerStatistics.filter(el => el.parent === e.id) }
+            })
+        },
+        logs: props.containerLogs.get(e.id) ?? [],
+        actions: props.actions
+    }
+}

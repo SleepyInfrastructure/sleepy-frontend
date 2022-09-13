@@ -1,7 +1,7 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect } from "react";
-import { getContainerConnectedProps } from "../../scripts/util/server";
+import { getContainerProjectConnectedProps } from "../../scripts/util/server";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -9,9 +9,9 @@ import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
 /* Components */
-import Container from "../../components/container";
+import ContainerProject from "../../components/container-project";
 
-const ContainerRoute: FunctionalComponent<ContainerRouteConnectedProps> = (props: ContainerRouteConnectedProps) => {
+const ContainerProjectRoute: FunctionalComponent<ContainerRouteConnectedProps> = (props: ContainerRouteConnectedProps) => {
     useEffect(() => {
         if(props.id === undefined) { return; }
         if(props.session !== null) {
@@ -22,20 +22,20 @@ const ContainerRoute: FunctionalComponent<ContainerRouteConnectedProps> = (props
     if(props.id === undefined) {
         return null;
     }
-    const container = props.containers.get(props.id);
-    if(container === undefined) {
+    const containerProject = props.containerProjects.get(props.id);
+    if(containerProject === undefined) {
         return null;
     }
-    const containerProps = getContainerConnectedProps(container, props);
-    const logs = props.daemons.has(containerProps.item.server) ? containerProps.logs : ["Daemon is offline..."];
+    const containerProjectProps = getContainerProjectConnectedProps(containerProject, props);
+    const logs = props.daemons.has(containerProjectProps.item.server) ? containerProjectProps.logs : ["Daemon is offline..."];
     
     return (
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>
-                <Container {...containerProps} logs={logs} />
+                <ContainerProject {...containerProjectProps} logs={logs} />
             </div>
         </div>
     );
 };
 
-export default connect(mapState, mapDispatch(actions))(ContainerRoute);
+export default connect(mapState, mapDispatch(actions))(ContainerProjectRoute);

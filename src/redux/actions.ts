@@ -248,7 +248,10 @@ export function daemonRequestDatabaseBackup(id: string, database: string, data: 
     return getAction("DAEMON_REQUEST_DATABASE_BACKUP", { id, database, data });
 }
 export function daemonConnectContainerLog(id: string): ReduxAction {
-    return getAction("DAEMON_CONNECT_CONTAINER_LOG", { id });
+    return getAction("DAEMON_CONNECT_CONTAINER_LOG", { id, project: false });
+}
+export function daemonConnectContainerProjectLog(id: string): ReduxAction {
+    return getAction("DAEMON_CONNECT_CONTAINER_LOG", { id, project: true });
 }
 export function addContainerLog(id: string, message: string): ReduxAction {
     return getAction("ADD_CONTAINER_LOG", { id, message });

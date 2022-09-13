@@ -33,6 +33,7 @@ type ReduxState = {
 };
 
 type ConnectedActions = {
+    setDimensions(w: number, h: number): ReduxAction;
     fetchPreferences(): ReduxAction;
     createUser(create: UserCreate): ReduxAction;
     fetchUser(id: string): ReduxAction;
@@ -68,6 +69,7 @@ type ConnectedActions = {
     daemonRequestResources(id: string, resources: string[]): ReduxAction;
     daemonRequestDatabaseBackup(id: string, database: string, data: boolean): ReduxAction;
     daemonConnectContainerLog(id: string): ReduxAction;
+    daemonConnectContainerProjectLog(id: string): ReduxAction;
     addContainerLog(id: string, message: string): ReduxAction;
     createServerDaemonToken(id: string): ReduxAction;
     deleteDaemonToken(id: string): ReduxAction;

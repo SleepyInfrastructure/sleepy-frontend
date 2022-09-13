@@ -9,7 +9,7 @@ import Disk from "../disk";
 import ZFSPool from "../zfs-pool";
 import SmallContainer from "../small-container";
 import Database from "../database";
-import ContainerProject from "../container-project";
+import SmallContainerProject from "../small-container-project";
 
 const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props: ServerSectionsConnectedProps) => {
     const [disksOpen, setDisksOpen] = useState(true);
@@ -38,7 +38,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     <div className={style["server-section-arrow"]} data={containersOpen ? "true" : "false"} />
                 </div>
                 {!containersOpen || (containerProjects.length + props.containers.length < 1) ? null : <div className={style["server-section"]}>
-                    {containerProjects.map((e, i) => <ContainerProject key={i} item={e} actions={props.actions} />)}
+                    {containerProjects.map((e, i) => <SmallContainerProject key={i} item={e} logs={[]} actions={props.actions} />)}
                     {props.containers.filter(e => e.parent === null).map((e, i) => <SmallContainer key={i} item={e} logs={[]} actions={props.actions} />)}
                 </div>}
             </div>

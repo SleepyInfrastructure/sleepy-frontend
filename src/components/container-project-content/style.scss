@@ -1,0 +1,19 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.container-content-items {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    margin-top: 10px;
+}

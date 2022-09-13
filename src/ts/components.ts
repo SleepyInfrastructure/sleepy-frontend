@@ -79,8 +79,10 @@ type ContainerProjectStats = {
 
 type ContainerProjectConnectedProps = {
     item: ContainerProjectStructured;
+    logs: string[];
     actions: ConnectedActions;
 };
+type ContainerProjectContentConnectedProps = ContainerProjectConnectedProps;
 
 type DatabaseConnectedProps = {
     item: Database;
