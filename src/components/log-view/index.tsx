@@ -51,6 +51,7 @@ const LogView: FunctionalComponent<LogViewConnectedProps> = (props: LogViewConne
                 <div className={baseStyle["panel-name"]}>Log</div>
                 <a className={baseStyle["panel-link"]} data="red" onClick={() => { setRows(Math.max(5, rows - 5)); }}>(Smaller)</a>
                 <a className={baseStyle["panel-link"]} data="green" onClick={() => { setRows(Math.min(50, rows + 5)); }}>(Bigger)</a>
+                {props.requestFile === undefined ? null :<a className={baseStyle["panel-link"]} data="blue" onClick={props.requestFile}>(Request Log)</a>}
             </div>
             <div className={baseStyle["panel-content"]}>
                 <XTerm className={style["log-view-terminal"]} addons={addons} ref={xtermRef} />

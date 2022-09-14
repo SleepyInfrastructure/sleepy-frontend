@@ -25,6 +25,7 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
             switch(task.type) {
                 case TaskType.BACKUP_DATABASE:
                 case TaskType.BACKUP_DATABASE_SCHEMA:
+                case TaskType.REQUEST_CONTAINER_LOG:
                     if(task.result !== null && props.userFiles.get(task.result) === undefined) {
                         props.actions.fetchUserFile(task.result);
                     }
@@ -48,6 +49,11 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
                             case TaskType.BACKUP_DATABASE:
                             case TaskType.BACKUP_DATABASE_SCHEMA:
                                 object = e.object === null ? undefined : props.databases.get(e.object);
+                                result = e.result === null ? undefined : props.userFiles.get(e.result);
+                                break;
+
+                            case TaskType.REQUEST_CONTAINER_LOG:
+                                object = e.object === null ? undefined : props.containers.get(e.object);
                                 result = e.result === null ? undefined : props.userFiles.get(e.result);
                                 break;
                         }

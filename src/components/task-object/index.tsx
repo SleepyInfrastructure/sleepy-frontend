@@ -16,6 +16,12 @@ const TaskObject: FunctionalComponent<TaskObjectConnectedProps> = (props: TaskOb
                 Database: <span className={baseStyle["panel-content-row-highlight"]}>{props.object.name}</span>
                 <a href={`/databases/${props.object.id}`} className={baseStyle["panel-link"]}>(Jump)</a>
             </div>;
+
+        case TaskType.REQUEST_CONTAINER_LOG:
+            return <div className={baseStyle["panel-content-row"]}>
+                Container: <span className={baseStyle["panel-content-row-highlight"]}>{props.object.names}</span>
+                <a href={`/containers/${props.object.id}`} className={baseStyle["panel-link"]}>(Jump)</a>
+            </div>;
     }
 
     return null;

@@ -321,6 +321,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_DATABASE_BACKUP, ...action.data });
     },
 
+    DAEMON_REQUEST_CONTAINER_LOG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_CONTAINER_LOG, ...action.data });
+    },
+
     DAEMON_CONNECT_CONTAINER_LOG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_CONNECT_CONTAINER_LOG, ...action.data });
     },

@@ -23,7 +23,7 @@ const Container: FunctionalComponent<ContainerConnectedProps> = (props: Containe
                 <a href={`/container-project/${props.item.id}`} className={baseStyle["panel-name"]}>{props.item.names}</a>
             </div>
             <ContainerContent {...props} />
-            <LogView logs={props.logs} actions={props.actions} />
+            <LogView logs={props.logs} actions={props.actions} requestFile={() => { props.actions.daemonRequestContainerLog(props.item.id); }} />
         </div>
     );
 };

@@ -105,6 +105,7 @@ type TaskObjectConnectedProps = TaskConnectedProps;
 
 type LogViewConnectedProps = {
     logs: string[];
+    requestFile?: () => void;
     actions: ConnectedActions;
 };
 

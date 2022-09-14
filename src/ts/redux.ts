@@ -68,6 +68,7 @@ type ConnectedActions = {
     connectWebsocket(): ReduxAction;
     daemonRequestResources(id: string, resources: string[]): ReduxAction;
     daemonRequestDatabaseBackup(id: string, database: string, data: boolean): ReduxAction;
+    daemonRequestContainerLog(id: string): ReduxAction;
     daemonConnectContainerLog(id: string): ReduxAction;
     daemonConnectContainerProjectLog(id: string): ReduxAction;
     addContainerLog(id: string, message: string): ReduxAction;
