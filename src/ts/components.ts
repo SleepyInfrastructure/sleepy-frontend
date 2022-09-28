@@ -110,23 +110,19 @@ type LogViewConnectedProps = {
 };
 
 /* Charts */
-type CPUChartConnectedProps = {
+type ChartConnectedProps = {
     statistics: Statistic[];
+    type: StatisticType;
 };
-
-type MemoryChartConnectedProps = {
+type CPUChartConnectedProps = ChartConnectedProps;
+type MemoryChartConnectedProps = ChartConnectedProps & {
     item: Server;
-    statistics: Statistic[];
 };
-
 type DiskChartConnectedProps = {
+    type: StatisticType;
     item: DiskConnectedPropsItem;
 };
-
-type NetworkChartConnectedProps = {
-    statistics: Statistic[];
-};
-
+type NetworkChartConnectedProps = ChartConnectedProps;
 type UptimeEndpointChartConnectedProps = {
     item: UptimeEndpointStructured;
 };

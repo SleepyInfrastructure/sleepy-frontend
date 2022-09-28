@@ -41,6 +41,9 @@ export async function deleteServer(id: string): Promise<boolean> {
 export async function fetchServer(id: string): Promise<Server | undefined> {
     return await fetchResource("/servers", id);
 }
+export async function fetchServerStatistics(data: { id: string, type: string }): Promise<Statistic[]> {
+    return await fetchResources(`/server/statistics/${data.type}`, data.id);
+}
 export async function fetchServerStructured(id: string): Promise<ServerStructured | undefined> {
     return await fetchResource("/server/structured", id);
 }

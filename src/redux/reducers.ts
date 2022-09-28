@@ -60,6 +60,10 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         return cacheResource(state, action.data, ResourceType.SERVER_STRUCTURED);
     },
 
+    FETCH_SERVER_STATISTICS_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResources(state, action.data, ResourceType.STATISTIC);
+    },
+
     FETCH_ALL_SERVERS_STRUCTURED_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResources(state, action.data, ResourceType.SERVER_STRUCTURED);
     },
@@ -221,12 +225,22 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await reducerFetch(dispatch, action.data, routes.fetchServer, actions.fetchServerSuccess);
     },
 
+    FETCH_SERVER_STATISTICS: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetchMultiple(dispatch, action.data, routes.fetchServerStatistics, actions.fetchServerStatisticsSuccess);
+    },
+
     FETCH_SERVER_STRUCTURED: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.fetchServerStructured, actions.fetchServerStructuredSuccess);
     },
 
     FETCH_ALL_SERVERS_STRUCTURED: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
-        await reducerFetchMultiple(dispatch, {}, routes.fetchAllServersStructured, actions.fetchAllServersStructuredSuccess);
+        await reducerFetchMultiple(dispatch, {}, routes.fetchAllServersStructured, (servers) => {
+            for(const server of servers) {
+                dispatch(actions.fetchServerStatistics({ id: server.id, type: "hour" }))
+            }
+
+            return actions.fetchAllServersStructuredSuccess(servers);
+        });
     },
 
     CREATE_NETWORK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

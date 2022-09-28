@@ -109,8 +109,6 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.containerProjects;
                 state = cacheResources(state, server.databases, ResourceType.DATABASE);
                 delete server.databases;
-                state = cacheResources(state, server.statistics, ResourceType.STATISTIC);
-                delete server.statistics;
 
                 newServers.set(server.id, server);
             });

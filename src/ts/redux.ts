@@ -43,6 +43,7 @@ type ConnectedActions = {
     editServer(edit: ServerEdit): ReduxAction;
     deleteServer(id: string): ReduxAction;
     fetchServer(id: string): ReduxAction;
+    fetchServerStatistics(data: { id: string, type: string }): ReduxAction;
     fetchServerStructured(id: string): ReduxAction;
     fetchAllServersStructured(): ReduxAction;
     createNetwork(create: NetworkCreate): ReduxAction;

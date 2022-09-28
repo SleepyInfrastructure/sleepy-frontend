@@ -3,10 +3,27 @@ export function humanFileSize(size: number) {
     return `${Number((size / Math.pow(1024, i)).toFixed(2)) * 1} ${['B', 'kB', 'MB', 'GB', 'TB'][i]}`;
 }
 
+export function formatTimestampChart(e: number, type: StatisticType) {
+    switch(type) {
+        case "MINUTE":
+            return "";
+
+        case "HOUR":
+            return formatTimestampShort(e);
+
+        case "DAY":
+            return new Date(e * 1000).toLocaleTimeString([], { hour: "2-digit" });
+
+        case "MONTH":
+            return new Date(e * 1000).toLocaleDateString([], { day: "2-digit", month: "2-digit" });
+
+        case "YEAR":
+            return new Date(e * 1000).toLocaleDateString([], { month: "short" });
+    }
+}
 export function formatTimestampShort(e: number) {
     return new Date(e * 1000).toLocaleTimeString([], { hour: "2-digit", minute:"2-digit" });
 }
-
 export function formatTimestampLong(e: number) {
     return new Date(e * 1000).toLocaleTimeString();
 }
@@ -14,7 +31,6 @@ export function formatTimestampLong(e: number) {
 export function formatDurationNow(start: number) {
     return formatDuration(start, Date.now() / 1000);
 }
-
 export function formatDuration(start: number, end: number) {
     const s = Math.round(end - start);
     if(s < 60) { return `${s} seconds`; }

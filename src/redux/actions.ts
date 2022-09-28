@@ -65,6 +65,12 @@ export function fetchServerStructured(id: string): ReduxAction {
 export function fetchServerStructuredSuccess(serverStructured: ServerStructured): ReduxAction {
     return getAction("FETCH_SERVER_STRUCTURED_SUCCESS", serverStructured);
 }
+export function fetchServerStatistics(data: { id: string, type: string }): ReduxAction {
+    return getAction("FETCH_SERVER_STATISTICS", data);
+}
+export function fetchServerStatisticsSuccess(statistics: Statistic[]): ReduxAction {
+    return getAction("FETCH_SERVER_STATISTICS_SUCCESS", statistics);
+}
 
 export function fetchAllServersStructured(): ReduxAction {
     return getAction("FETCH_ALL_SERVERS_STRUCTURED", {});
