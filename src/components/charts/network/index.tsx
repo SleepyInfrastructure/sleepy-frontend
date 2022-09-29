@@ -12,7 +12,7 @@ const NetworkChart: FunctionalComponent<NetworkChartConnectedProps> = (props: Ne
 
     return <div className={style.chart}>
         <div className={style["chart-header"]}>
-            <div className={style["network-icon"]} />
+            <div className={style["icon-network"]} />
             <div className={style["chart-title"]}>Network Usage</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">

@@ -13,7 +13,7 @@ const UptimeEndpoint: FunctionalComponent<UptimeEndpointConnectedProps> = (props
     return (
         <div className={style.endpoint}>
             <div className={baseStyle["panel-header"]}>
-                <div className={style["endpoint-icon"]} />
+                <div className={style["icon-endpoint"]} />
                 <div className={style["endpoint-name"]}>{props.item.name}</div>
                 <a href={`/edit-uptime-endpoint/${props.item.id}`} className={style["endpoint-link"]}>(Edit)</a>
                 <a className={style["endpoint-link"]} data="red" onClick={() => { props.actions.deleteUptimeEndpoint(props.item.id); }}>(Delete)</a>

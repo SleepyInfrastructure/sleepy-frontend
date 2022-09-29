@@ -14,7 +14,7 @@ const ZFSPool: FunctionalComponent<ZFSPoolConnectedProps> = (props: ZFSPoolConne
     return (
         <div className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
-                <div className={diskStyle["disk-icon"]} data="zfs" />
+                <div className={diskStyle["icon-disk"]} data="zfs" />
                 <div className={baseStyle["panel-name"]}>{props.item.name} ({humanFileSize(size)})</div>
             </div>
             <div className={baseStyle["panel-content"]}>

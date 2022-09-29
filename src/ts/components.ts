@@ -19,10 +19,14 @@ type ServerConnectedProps = {
 };
 type ServerContentConnectedProps = ServerConnectedProps;
 type ServerSectionsConnectedProps = ServerConnectedProps;
-
 type TokenServerConnectedProps = {
     item: Server;
     daemonTokens: DaemonToken[];
+    actions: ConnectedActions;
+};
+
+type NetworkConnectedProps = {
+    item: Network;
     actions: ConnectedActions;
 };
 
@@ -30,7 +34,6 @@ type DiskConnectedProps = {
     item: DiskConnectedPropsItem;
     actions: ConnectedActions;
 };
-
 type DiskConnectedPropsItem = Omit<DiskStructured, "partitions"> & {
     partitions: PartitionConnectedPropsItem[];
 };
@@ -39,7 +42,6 @@ type PartitionConnectedProps = {
     item: PartitionConnectedPropsItem;
     actions: ConnectedActions;
 };
-
 type PartitionConnectedPropsItem = {
     id: string;
     name: string;
@@ -52,11 +54,9 @@ type ZFSPoolConnectedProps = {
     item: ZFSPoolConnectedPropsItem;
     actions: ConnectedActions;
 };
-
 type ZFSPoolConnectedPropsItem = Omit<ZFSPoolStructured, "partitions"> & {
     partitions: ZFSPartitionConnectedPropsItem[];
 };
-
 type ZFSPartitionConnectedPropsItem = ZFSPartition & {
     partition?: Partition;
 };
@@ -67,7 +67,6 @@ type ContainerConnectedProps = {
     actions: ConnectedActions;
 };
 type ContainerContentConnectedProps = ContainerConnectedProps;
-
 type ContainerProjectStats = {
     cpu: number;
     memory: number;
@@ -76,7 +75,6 @@ type ContainerProjectStats = {
     status: string;
     time: number;
 };
-
 type ContainerProjectConnectedProps = {
     item: ContainerProjectStructured;
     logs: string[];

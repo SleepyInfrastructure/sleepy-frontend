@@ -13,7 +13,7 @@ const UptimeEndpointChart: FunctionalComponent<UptimeEndpointChartConnectedProps
 
     return <div className={style.chart}>
         <div className={style["chart-header"]}>
-            <div className={style["endpoint-icon"]} />
+            <div className={style["icon-endpoint"]} />
             <div className={style["chart-title"]}>Ping</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">

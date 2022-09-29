@@ -47,7 +47,7 @@ const Home: FunctionalComponent<HomeConnectedProps> = (props: HomeConnectedProps
                 </div>
                 <div className={style["home-section"]}>
                     <div className={baseStyle["page-header"]}>
-                        <div className={style["endpoint-icon"]} />
+                        <div className={style["icon-endpoint"]} />
                         <div className={baseStyle["page-title"]}>Uptime Endpoints</div>
                     </div>
                     <div class={style["home-section-items"]}>

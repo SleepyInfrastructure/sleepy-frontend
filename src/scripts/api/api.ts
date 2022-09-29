@@ -2,6 +2,9 @@ export const apiVersion = "/v1";
 export function getApiEndpoint() {
     return location.host === "sleepy.lamkas.dev" ? "https://api.sleepy.lamkas.dev" : "http://localhost:9001";
 }
+export function getSSHEndpoint() {
+    return location.host === "sleepy.lamkas.dev" ? "https://ssh.sleepy.lamkas.dev" : "http://localhost:8888";
+}
 
 export async function get(descriptor: APIGetRequest): Promise<APIResponse> {
     const response: Response = await fetch(getApiEndpoint() + apiVersion + descriptor.path, { method: "GET", credentials: "include", headers: { "Content-Type": "application/json" } });

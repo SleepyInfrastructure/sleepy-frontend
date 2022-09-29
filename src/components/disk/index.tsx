@@ -11,7 +11,7 @@ const Disk: FunctionalComponent<DiskConnectedProps> = (props: DiskConnectedProps
     return (
         <div className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
-                <div className={style["disk-icon"]} />
+                <div className={style["icon-disk"]} />
                 <div className={baseStyle["panel-name"]}>{props.item.model} ({humanFileSize(props.item.size)})</div>
             </div>
             <div className={baseStyle["panel-content"]}>

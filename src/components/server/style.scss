@@ -1,38 +1,7 @@
-/* Macros */
-%align-y {
-    display: flex;
-    align-items: center;
-}
-
-%align-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Content */
 .server-name {
     color: var(--color-primary-text);
     font-size: 22px;
 }
-
-.server-charts-options {
-    display: flex;
-    margin-top: 10px;
-    grid-gap: 10px;
-}
-
-.server-charts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 8px;
-    margin-top: 8px;
-}
-.server-charts:empty {
-    margin-top: 0px;
-}
-
-/* Icons */
 .server-icon {
     width: 24px;
     height: 24px;

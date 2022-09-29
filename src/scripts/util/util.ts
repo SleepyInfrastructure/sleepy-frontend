@@ -3,7 +3,13 @@ export function humanFileSize(size: number) {
     return `${Number((size / Math.pow(1024, i)).toFixed(2)) * 1} ${['B', 'kB', 'MB', 'GB', 'TB'][i]}`;
 }
 
-export function formatTimestampChart(e: number, type: StatisticType) {
+export function formatTimestampChart(e: number | "auto", type: StatisticType) {
+    if(e === 0) {
+        return "";
+    } else if(e === "auto") {
+        return "No data";
+    }
+
     switch(type) {
         case "MINUTE":
             return "";

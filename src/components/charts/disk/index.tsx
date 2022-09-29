@@ -14,7 +14,7 @@ const DiskChart: FunctionalComponent<DiskChartConnectedProps> = (props: DiskChar
 
     return <div className={style.chart}>
         <div className={style["chart-header"]}>
-            <div className={style["disk-icon"]} />
+            <div className={style["icon-disk"]} />
             <div className={style["chart-title"]}>{props.item.model !== undefined ? `${props.item.model} (${props.item.name})` : props.item.name}</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">

@@ -19,7 +19,7 @@ const ContainerProject: FunctionalComponent<ContainerProjectConnectedProps> = (p
     return (
         <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
-                <div className={style["container-icon"]} />
+                <div className={style["icon-container"]} />
                 <a href={`/container-project/${props.item.id}`} className={baseStyle["panel-name"]}>{props.item.name}</a>
             </div>
             <ContainerProjectContent {...props} />

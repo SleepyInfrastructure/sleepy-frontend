@@ -3,6 +3,7 @@ import { h, FunctionalComponent } from "preact";
 /* Styles */
 import baseStyle from "../style.scss";
 import serverStyle from "../server/style.scss";
+import serverSectionsStyle from "../server-sections/style.scss";
 /* Components */
 import DiskChart from "../charts/disk";
 import CPUChart from "../charts/cpu";
@@ -21,16 +22,14 @@ const SmallServer: FunctionalComponent<ServerConnectedProps> = (props: ServerCon
                 <a href={`/edit-server/${props.item.id}`} className={baseStyle["panel-link"]}>(Edit)</a>
                 <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteServer(props.item.id); }}>(Delete)</a>
             </div>
-            {statistics.length === 0 ? null :
-            <div className={serverStyle["server-charts"]}>
-                <CPUChart type={"MINUTE"} statistics={statistics} />
-                <MemoryChart type={"MINUTE"} item={props.item} statistics={statistics} />
-                <NetworkChart type={"MINUTE"} statistics={statistics} />
-            </div>}
-            <div className={serverStyle["server-charts"]}>
-                {props.disks.map((e, i) => e.statistics.length === 0 ? null : <DiskChart key={i} item={e} type={"HOUR"} />)}
-            </div>
             <ServerContent {...props} />
+            {statistics.length === 0 ? null :
+            <div className={serverSectionsStyle["server-charts"]}>
+                <CPUChart type={"HOUR"} statistics={statistics} />
+                <MemoryChart type={"HOUR"} item={props.item} statistics={statistics} />
+                <NetworkChart type={"HOUR"} statistics={statistics} />
+                {props.disks.map((e, i) => e.statistics.length === 0 ? null : <DiskChart key={i} item={e} type={"HOUR"} />)}
+            </div>}
         </div>
     );
 };
