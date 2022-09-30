@@ -91,9 +91,16 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 </div>
                 {!chartsOpen ? null : <div className={style["server-charts"]}>
                     <CPUChart type={statType} statistics={statistics} />
-                    <MemoryChart type={statType} item={props.item} statistics={statistics} />
+                    <MemoryChart type={statType} statistics={statistics} memory={props.item.memory} swap={props.item.swap} />
                     <NetworkChart type={statType} statistics={statistics} />
-                    {props.disks.map((e, i) => e.statistics.length === 0 ? null : <DiskChart key={i} item={e} type={"HOUR"} />)}
+                    {props.disks.map((e, i) => {
+                        if(e.statistics.length === 0) {
+                            return null;
+                        }
+                        const statistics = e.statistics.filter(el => el.type === StatTypeMapping[statType]).sort((a, b) => a.timestamp - b.timestamp);
+                        const title = e.model !== undefined ? `${e.model} (${e.name})` : e.name;
+                        return <DiskChart key={i} type={statType} statistics={statistics} title={title} />;
+                    })}
                 </div>}
             </div>
             <div className={style["server-section"]}>
@@ -112,7 +119,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     <div className={style["server-section-title"]}>Toggles</div>
                 </div>
                 <div className={style["server-section-items"]}>
-                    <Button className={style["server-section-button"]} secondary={networksOpen} onClick={(e) => { processSwitch(e, "DISK"); }}>
+                    <Button className={style["server-section-button"]} secondary={networksOpen} onClick={(e) => { processSwitch(e, "NETWORK"); }}>
                         <div className={networkStyle["icon-network"]} style={networksOpen ? { background: "var(--color-secondary-text)" } : {}} />
                         Networks
                     </Button>

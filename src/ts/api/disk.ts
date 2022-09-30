@@ -19,8 +19,11 @@ type DiskStatistic = {
     author: string;
     parent: string;
     timestamp: number;
+    type: StatisticType;
     read: number;
     write: number;
+    readLatency: number;
+    writeLatency: number;
 };
 
 type Partition = {

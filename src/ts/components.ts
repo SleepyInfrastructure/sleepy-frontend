@@ -114,11 +114,13 @@ type ChartConnectedProps = {
 };
 type CPUChartConnectedProps = ChartConnectedProps;
 type MemoryChartConnectedProps = ChartConnectedProps & {
-    item: Server;
+    memory: number;
+    swap: number;
 };
 type DiskChartConnectedProps = {
     type: StatisticType;
-    item: DiskConnectedPropsItem;
+    title: string;
+    statistics: DiskStatistic[];
 };
 type NetworkChartConnectedProps = ChartConnectedProps;
 type UptimeEndpointChartConnectedProps = {

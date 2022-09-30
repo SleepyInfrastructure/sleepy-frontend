@@ -7,7 +7,6 @@ import { humanFileSize, formatTimestampChart } from "../../../scripts/util/util"
 import style from "../style.scss";
 
 const DiskChart: FunctionalComponent<DiskChartConnectedProps> = (props: DiskChartConnectedProps) => {
-    const statistics = props.item.statistics.sort((a, b) => a.timestamp - b.timestamp);
     const [mode, setMode] = useState("SPEED");
     const isModeSpeed = mode === "SPEED";
     const isModeLatency = mode === "LATENCY";
@@ -15,10 +14,10 @@ const DiskChart: FunctionalComponent<DiskChartConnectedProps> = (props: DiskChar
     return <div className={style.chart}>
         <div className={style["chart-header"]}>
             <div className={style["icon-disk"]} />
-            <div className={style["chart-title"]}>{props.item.model !== undefined ? `${props.item.model} (${props.item.name})` : props.item.name}</div>
+            <div className={style["chart-title"]}>{props.title}</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">
-            <LineChart data={statistics} margin={{ top: 10, bottom: 10, left: 20, right: 20 }}>
+            <LineChart data={props.statistics} margin={{ top: 10, bottom: 10, left: 20, right: 20 }}>
                 <XAxis dataKey="timestamp" tickFormatter={(e) => { return formatTimestampChart(e, props.type); }} tickMargin={8} padding={{ right: 20 }} tick={{ fill: "var(--color-primary-text)" }} />
                 {isModeSpeed ?
                     <YAxis tickFormatter={(e: number) => `${humanFileSize(e)}/s`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "var(--color-primary-text)" }} domain={[0, 100]} /> :

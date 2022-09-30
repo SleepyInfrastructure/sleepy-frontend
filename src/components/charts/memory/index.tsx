@@ -10,7 +10,7 @@ const MemoryChart: FunctionalComponent<MemoryChartConnectedProps> = (props: Memo
     const [displayPhysical, setDisplayPhysical] = useState(true);
     const [displaySwap, setDisplaySwap] = useState(true);
     const [displayPercentages, setDisplayPercentages] = useState(true);
-    const memMax = Math.max(displayPhysical ? props.item.memory : 0, displaySwap ? props.item.swap : 0, 0)
+    const memMax = Math.max(displayPhysical ? props.memory : 0, displaySwap ? props.swap : 0, 0)
 
     // TODO: add total amount when displaying amount tooltip
     return <div className={style.chart}>
@@ -25,8 +25,8 @@ const MemoryChart: FunctionalComponent<MemoryChartConnectedProps> = (props: Memo
                     <YAxis tickFormatter={(e: number) => `${e.toFixed(0)}%`} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "var(--color-primary-text)" }} domain={[0, 100]} /> :
                     <YAxis tickFormatter={(e: number) => humanFileSize(e)} tickMargin={8} padding={{ top: 20, bottom: 20 }} tick={{ fill: "var(--color-primary-text)" }} domain={[0, memMax]} />}
                 <Tooltip labelFormatter={(e) => { return formatTimestampChart(e, props.type); }} formatter={displayPercentages ? (e: number) => `${e.toFixed(2)}%` : (e: number) => humanFileSize(e)} labelStyle={{ color: "var(--color-primary-text)" }} contentStyle={{ background: "var(--color-primary-dark)", border: 0 }} wrapperStyle={{ border: 0 }} />
-                {displayPhysical ? <Line name="Physical" type="monotone" dataKey={displayPercentages ? "memory" : (e: Statistic) => props.item.memory * (e.memory / 100)} stroke="#3bff6f" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
-                {displaySwap ? <Line name="Swap" type="monotone" dataKey={displayPercentages ? "swap" : (e: Statistic) => props.item.swap * (e.swap / 100)} stroke="#3bb4ff" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
+                {displayPhysical ? <Line name="Physical" type="monotone" dataKey={displayPercentages ? "memory" : (e: Statistic) => props.memory * (e.memory / 100)} stroke="#3bff6f" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
+                {displaySwap ? <Line name="Swap" type="monotone" dataKey={displayPercentages ? "swap" : (e: Statistic) => props.swap * (e.swap / 100)} stroke="#3bb4ff" activeDot={{ r: 4 }} dot={{ r: 0 }} /> : null}
             </LineChart>
         </ResponsiveContainer>
         <div className={style["chart-footer"]}>
