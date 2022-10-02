@@ -21,6 +21,9 @@ type ReduxState = {
     containerProjects: Map<string, ContainerProject>;
     containerLogs: Map<string, string[]>;
     databases: Map<string, Database>;
+    smbInstances: Map<string, SMBInstance>;
+    smbShares: Map<string, SMBShare>;
+    smbUsers: Map<string, SMBUser>;
     uptimeEndpoints: Map<string, UptimeEndpoint>;
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
@@ -57,6 +60,18 @@ type ConnectedActions = {
     editDatabase(edit: DatabaseEdit): ReduxAction;
     deleteDatabase(id: string): ReduxAction;
     fetchDatabase(id: string): ReduxAction;
+    createSmbInstance(create: SMBInstanceCreate): ReduxAction;
+    editSmbInstance(edit: SMBInstanceEdit): ReduxAction;
+    deleteSmbInstance(id: string): ReduxAction;
+    fetchSmbInstance(id: string): ReduxAction;
+    createSmbShare(create: SMBShareCreate): ReduxAction;
+    editSmbShare(edit: SMBShareEdit): ReduxAction;
+    deleteSmbShare(id: string): ReduxAction;
+    fetchSmbShare(id: string): ReduxAction;
+    createSmbUser(create: SMBUserCreate): ReduxAction;
+    editSmbUser(edit: SMBUserEdit): ReduxAction;
+    deleteSmbUser(id: string): ReduxAction;
+    fetchSmbUser(id: string): ReduxAction;
     createUptimeEndpoint(create: UptimeEndpointCreate): ReduxAction;
     editUptimeEndpoint(edit: UptimeEndpointEdit): ReduxAction;
     deleteUptimeEndpoint(id: string): ReduxAction;
@@ -76,4 +91,5 @@ type ConnectedActions = {
     createServerDaemonToken(id: string): ReduxAction;
     deleteDaemonToken(id: string): ReduxAction;
     fetchServerDaemonTokens(id: string): ReduxAction;
+    daemonBuildSmbConfig(id: string): ReduxAction;
 };

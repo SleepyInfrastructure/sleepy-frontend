@@ -20,6 +20,9 @@ type ServersProps = {
     containerProjects: Map<string, ContainerProject>;
     containerLogs: Map<string, string[]>;
     databases: Map<string, Database>;
+    smbInstances: Map<string, SMBInstance>;
+    smbShares: Map<string, SMBShare>;
+    smbUsers: Map<string, SMBUser>;
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
     daemons: Map<string, Daemon>;
@@ -46,11 +49,8 @@ type TasksConnectedProps = RouteProps & AppConnectedProps;
 type CreateServerConnectedProps = RouteProps & {
     servers: Map<string, Server>;
 };
-type EditServerConnectedProps = RouteProps & {
-    servers: Map<string, Server>;
-};
-type InstallingDaemonConnectedProps = RouteProps & {
-    servers: Map<string, Server>;
+type EditServerConnectedProps = CreateServerConnectedProps;
+type InstallingDaemonConnectedProps = CreateServerConnectedProps & {
     daemonTokens: Map<string, DaemonToken>;
 };
 type ServerRouteConnectedProps = RouteProps & ServersProps;
@@ -60,13 +60,23 @@ type ContainerProjectRouteConnectedProps = RouteProps & ServersProps;
 type CreateUptimeEndpointConnectedProps = RouteProps & {
     uptimeEndpoints: Map<string, UptimeEndpoint>;
 };
-type EditUptimeEndpointConnectedProps = RouteProps & {
-    uptimeEndpoints: Map<string, UptimeEndpoint>;
-};
+type EditUptimeEndpointConnectedProps = CreateUptimeEndpointConnectedProps;
 
 type CreateDatabaseConnectedProps = RouteProps & {
     databases: Map<string, Database>;
 };
+type CreateSMBInstanceConnectedProps = RouteProps & {
+    smbInstances: Map<string, SMBInstance>;
+};
+type EditSMBInstanceConnectedProps = CreateSMBInstanceConnectedProps;
+type CreateSMBShareConnectedProps = RouteProps & {
+    smbShares: Map<string, SMBShare>;
+};
+type EditSMBShareConnectedProps = CreateSMBShareConnectedProps;
+type CreateSMBUserConnectedProps = RouteProps & {
+    smbUsers: Map<string, SMBUser>;
+};
+type EditSMBUserConnectedProps = CreateSMBUserConnectedProps;
 
 type EditNetworkConnectedProps = RouteProps & {
     networks: Map<string, Network>;

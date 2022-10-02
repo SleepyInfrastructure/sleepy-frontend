@@ -15,7 +15,7 @@ const Partition: FunctionalComponent<PartitionConnectedProps> = (props: Partitio
                 <div className={style["partition-icon"]} data={colorData} />
                 <div className={style["partition-name"]} data={colorData}>{props.item.name} ({humanFileSize(props.item.size)})</div>
             </div>
-            <div className={baseStyle["partition-content"]}>
+            <div className={baseStyle["panel-content"]}>
                 {props.item.used === null ? null : <div className={style["partition-bar-wrapper"]}>
                     <div className={style["partition-bar-percentage"]}>{Math.round((props.item.used / props.item.size) * 100)} %</div>
                     <div className={style["partition-bar"]}>

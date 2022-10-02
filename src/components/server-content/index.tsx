@@ -7,6 +7,9 @@ import style from "./style.scss";
 const ServerContent: FunctionalComponent<ServerContentConnectedProps> = (props: ServerContentConnectedProps) => {
     return (
         <div className={style["server-content"]}>
+            <div className={style["server-content-row"]}>
+                ID: <span className={style["server-daemon-highlight-red"]}>{props.item.id}</span>
+            </div>
             {props.daemon === null ?
             <div className={style["server-content-row"]}>
                 Daemon: <span className={style["server-daemon-highlight-red"]}>Not Connected</span>

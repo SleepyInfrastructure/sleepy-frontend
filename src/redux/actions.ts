@@ -157,6 +157,84 @@ export function fetchDatabaseSuccess(database: Database): ReduxAction {
     return getAction("FETCH_DATABASE_SUCCESS", database);
 }
 
+/* SMB Instances */
+export function createSmbInstance(create: SMBInstanceCreate): ReduxAction {
+    return getAction("CREATE_SMB_INSTANCE", create);
+}
+export function createSmbInstanceSuccess(instance: SMBInstance): ReduxAction {
+    return getAction("CREATE_SMB_INSTANCE_SUCCESS", instance);
+}
+export function editSmbInstance(edit: SMBInstanceEdit): ReduxAction {
+    return getAction("EDIT_SMB_INSTANCE", edit);
+}
+export function editSmbInstanceSuccess(instance: SMBInstance): ReduxAction {
+    return getAction("EDIT_SMB_INSTANCE_SUCCESS", instance);
+}
+export function deleteSmbInstance(id: string): ReduxAction {
+    return getAction("DELETE_SMB_INSTANCE", id);
+}
+export function deleteSmbInstanceSuccess(id: string): ReduxAction {
+    return getAction("DELETE_SMB_INSTANCE_SUCCESS", id);
+}
+export function fetchSmbInstance(id: string): ReduxAction {
+    return getAction("FETCH_SMB_INSTANCE", id);
+}
+export function fetchSmbInstanceSuccess(instance: SMBInstance): ReduxAction {
+    return getAction("FETCH_SMB_INSTANCE_SUCCESS", instance);
+}
+
+/* SMB Shares */
+export function createSmbShare(create: SMBShareCreate): ReduxAction {
+    return getAction("CREATE_SMB_SHARE", create);
+}
+export function createSmbShareSuccess(share: SMBShare): ReduxAction {
+    return getAction("CREATE_SMB_SHARE_SUCCESS", share);
+}
+export function editSmbShare(edit: SMBShareEdit): ReduxAction {
+    return getAction("EDIT_SMB_SHARE", edit);
+}
+export function editSmbShareSuccess(share: SMBShare): ReduxAction {
+    return getAction("EDIT_SMB_SHARE_SUCCESS", share);
+}
+export function deleteSmbShare(id: string): ReduxAction {
+    return getAction("DELETE_SMB_SHARE", id);
+}
+export function deleteSmbShareSuccess(id: string): ReduxAction {
+    return getAction("DELETE_SMB_SHARE_SUCCESS", id);
+}
+export function fetchSmbShare(id: string): ReduxAction {
+    return getAction("FETCH_SMB_SHARE", id);
+}
+export function fetchSmbShareSuccess(share: SMBShare): ReduxAction {
+    return getAction("FETCH_SMB_SHARE_SUCCESS", share);
+}
+
+/* SMB Users */
+export function createSmbUser(create: SMBUserCreate): ReduxAction {
+    return getAction("CREATE_SMB_USER", create);
+}
+export function createSmbUserSuccess(user: SMBUser): ReduxAction {
+    return getAction("CREATE_SMB_USER_SUCCESS", user);
+}
+export function editSmbUser(edit: SMBUserEdit): ReduxAction {
+    return getAction("EDIT_SMB_USER", edit);
+}
+export function editSmbUserSuccess(user: SMBUser): ReduxAction {
+    return getAction("EDIT_SMB_USER_SUCCESS", user);
+}
+export function deleteSmbUser(id: string): ReduxAction {
+    return getAction("DELETE_SMB_USER", id);
+}
+export function deleteSmbUserSuccess(id: string): ReduxAction {
+    return getAction("DELETE_SMB_USER_SUCCESS", id);
+}
+export function fetchSmbUser(id: string): ReduxAction {
+    return getAction("FETCH_SMB_USER", id);
+}
+export function fetchSmbUserSuccess(user: SMBUser): ReduxAction {
+    return getAction("FETCH_SMB_USER_SUCCESS", user);
+}
+
 /* Uptime endpoints */
 export function createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction {
     return getAction("CREATE_UPTIME_ENDPOINT", { name, host, requestEndpoint });
@@ -264,4 +342,7 @@ export function daemonConnectContainerProjectLog(id: string): ReduxAction {
 }
 export function addContainerLog(id: string, message: string): ReduxAction {
     return getAction("ADD_CONTAINER_LOG", { id, message });
+}
+export function daemonBuildSmbConfig(id: string): ReduxAction {
+    return getAction("DAEMON_BUILD_SMB_CONFIG", { id });
 }

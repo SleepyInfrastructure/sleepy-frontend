@@ -71,6 +71,45 @@ type UserCreate = {
     password: string;
 };
 
+type SMBInstanceCreate = {
+    name: string;
+    server: string;
+};
+type SMBInstanceEdit = {
+    id: string;
+    name?: string;
+};
+
+type SMBShareCreate = {
+    name: string;
+    parent: string;
+    path: string;
+    browsable: boolean;
+    readonly: boolean;
+    guest: boolean;
+    users: string[];
+    admins: string[];
+};
+type SMBShareEdit = {
+    id: string;
+    name?: string;
+    path?: string;
+    browsable?: boolean;
+    readonly?: boolean;
+    guest?: boolean;
+    users?: string[];
+    admins?: string[];
+};
+
+type SMBUserCreate = {
+    name: string;
+    parent: string;
+};
+type SMBUserEdit = {
+    id: string;
+    name?: string;
+};
+
 type DatabaseCreate = {
     name: string;
     server: string;

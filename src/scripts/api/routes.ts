@@ -90,6 +90,45 @@ export async function fetchDatabase(id: string): Promise<Database | undefined> {
     return await fetchResource("/databases", id);
 }
 
+export async function createSmbInstance(create: SMBInstanceCreate): Promise<SMBInstance | undefined> {
+    return await createResource("/smbInstances", create);
+}
+export async function editSmbInstance(edit: SMBInstanceEdit): Promise<SMBInstance | undefined> {
+    return await editResource("/smbInstances", edit);
+}
+export async function deleteSmbInstance(id: string): Promise<boolean> {
+    return await deleteResource("/smbInstances", id);
+}
+export async function fetchSmbInstance(id: string): Promise<SMBInstance | undefined> {
+    return await fetchResource("/smbInstances", id);
+}
+
+export async function createSmbShare(create: SMBShareCreate): Promise<SMBShare | undefined> {
+    return await createResource("/smbShares", create);
+}
+export async function editSmbShare(edit: SMBShareEdit): Promise<SMBShare | undefined> {
+    return await editResource("/smbShares", edit);
+}
+export async function deleteSmbShare(id: string): Promise<boolean> {
+    return await deleteResource("/smbShares", id);
+}
+export async function fetchSmbShare(id: string): Promise<SMBShare | undefined> {
+    return await fetchResource("/smbShares", id);
+}
+
+export async function createSmbUser(create: SMBUserCreate): Promise<SMBUser | undefined> {
+    return await createResource("/smbUsers", create);
+}
+export async function editSmbUser(edit: SMBUserEdit): Promise<SMBUser | undefined> {
+    return await editResource("/smbUsers", edit);
+}
+export async function deleteSmbUser(id: string): Promise<boolean> {
+    return await deleteResource("/smbUsers", id);
+}
+export async function fetchSmbUser(id: string): Promise<SMBUser | undefined> {
+    return await fetchResource("/smbUsers", id);
+}
+
 export async function createUptimeEndpoint(create: UptimeEndpointCreate): Promise<UptimeEndpoint | undefined> {
     return await createResource("/uptimeEndpoints", create);
 }

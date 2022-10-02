@@ -118,6 +118,14 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         return cacheResource(state, action.data, ResourceType.DATABASE);
     },
 
+    CREATE_SMB_INSTANCE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResource(state, action.data, ResourceType.SMB_INSTANCE);
+    },
+
+    FETCH_SMB_INSTANCE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResource(state, action.data, ResourceType.SMB_INSTANCE_STRUCTURED);
+    },
+
     CREATE_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
     },
@@ -287,6 +295,54 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await reducerFetch(dispatch, action.data, routes.createDatabase, actions.createDatabaseSuccess);
     },
 
+    FETCH_SMB_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.fetchSmbInstance, actions.fetchSmbInstanceSuccess);
+    },
+
+    EDIT_SMB_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.editSmbInstance, actions.editSmbInstanceSuccess);
+    },
+
+    DELETE_SMB_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteSmbInstance, actions.deleteSmbInstanceSuccess);
+    },
+
+    CREATE_SMB_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.createSmbInstance, actions.createSmbInstanceSuccess);
+    },
+
+    FETCH_SMB_SHARE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.fetchSmbShare, actions.fetchSmbShareSuccess);
+    },
+
+    EDIT_SMB_SHARE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.editSmbShare, actions.editSmbShareSuccess);
+    },
+
+    DELETE_SMB_SHARE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteSmbShare, actions.deleteSmbShareSuccess);
+    },
+
+    CREATE_SMB_SHARE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.createSmbShare, actions.createSmbShareSuccess);
+    },
+
+    FETCH_SMB_USER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.fetchSmbUser, actions.fetchSmbUserSuccess);
+    },
+
+    EDIT_SMB_USER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.editSmbUser, actions.editSmbUserSuccess);
+    },
+
+    DELETE_SMB_USER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteSmbUser, actions.deleteSmbUserSuccess);
+    },
+
+    CREATE_SMB_USER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.createSmbUser, actions.createSmbUserSuccess);
+    },
+
     CREATE_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.createUptimeEndpoint, actions.createUptimeEndpointSuccess);
     },
@@ -356,6 +412,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     FETCH_SERVER_DAEMON_TOKENS: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetchMultiple(dispatch, action.data, routes.fetchServerDaemonTokens, actions.fetchServerDaemonTokensSuccess);
+    },
+
+    DAEMON_BUILD_SMB_CONFIG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_BUILD_SMB_CONFIG, ...action.data });
     },
 };
 

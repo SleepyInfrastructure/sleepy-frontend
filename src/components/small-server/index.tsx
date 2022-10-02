@@ -24,7 +24,7 @@ const SmallServer: FunctionalComponent<ServerConnectedProps> = (props: ServerCon
             </div>
             <ServerContent {...props} />
             {statistics.length === 0 ? null :
-            <div className={serverSectionsStyle["server-charts"]}>
+            <div className={serverSectionsStyle["server-section-charts"]}>
                 <CPUChart type={"HOUR"} statistics={statistics} />
                 <MemoryChart type={"HOUR"} statistics={statistics} memory={props.item.memory} swap={props.item.swap} />
                 <NetworkChart type={"HOUR"} statistics={statistics} />

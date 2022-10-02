@@ -26,7 +26,7 @@ type ServerStructured = Server & {
     zfsPools: ZFSPoolStructured[];
     containers: ContainerStructured[];
     databases: Database[];
-    statistics: Statistic[];
+    smb: SMBInstanceStructured[];
 };
 
 type StatisticType = "MINUTE" | "HOUR" | "DAY" | "MONTH" | "YEAR";

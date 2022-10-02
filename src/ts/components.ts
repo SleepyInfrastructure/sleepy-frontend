@@ -4,6 +4,7 @@ type HeaderConnectedProps = {
     actions: ConnectedActions;
 };
 
+/* Server */
 type ServerConnectedProps = {
     item: Server;
     config: ServerConfig | null;
@@ -13,6 +14,7 @@ type ServerConnectedProps = {
     containers: ContainerStructured[];
     containerProjects: ContainerProject[];
     databases: Database[];
+    smb: SMBInstanceStructured[];
     statistics: Statistic[];
     daemon: Daemon | null;
     actions: ConnectedActions;
@@ -87,11 +89,27 @@ type DatabaseConnectedProps = {
     actions: ConnectedActions;
 };
 
+type SMBInstanceConnectedProps = {
+    item: SMBInstanceStructured;
+    actions: ConnectedActions;
+};
+type SMBShareConnectedProps = {
+    item: SMBShare;
+    users: SMBUser[];
+    actions: ConnectedActions;
+};
+type SMBUserConnectedProps = {
+    item: SMBUser;
+    actions: ConnectedActions;
+};
+
+/* Uptime Endpoints */
 type UptimeEndpointConnectedProps = {
     item: UptimeEndpointStructured;
     actions: ConnectedActions;
 };
 
+/* Tasks */
 type TaskConnectedProps = {
     item: Task;
     object?: any;

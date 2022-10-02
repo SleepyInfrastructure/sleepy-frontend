@@ -17,6 +17,9 @@ export const INITIAL: ReduxState = {
     containerProjects: new Map(),
     containerLogs: new Map(),
     databases: new Map(),
+    smbInstances: new Map(),
+    smbShares: new Map(),
+    smbUsers: new Map(),
     uptimeEndpoints: new Map(),
     statistics: new Map(),
     diskStatistics: new Map(),
@@ -30,33 +33,25 @@ export const INITIAL: ReduxState = {
     }
 };
 export enum ResourceType {
-    USER = "user",
-    SERVER = "server",
-    SERVER_CONFIG = "server-config",
-    SERVER_STRUCTURED = "server-structured",
-    NETWORK = "network",
-    SOFTWARE = "software",
-    DISK = "disk",
-    DISK_STRUCTURED = "disk-structured",
-    DISK_STATISTIC = "disk-statistic",
-    PARTITION = "partition",
-    ZFS_POOL = "zfs-pool",
-    ZFS_POOL_STRUCTURED = "zfs-pool-structured",
-    ZFS_PARTITION = "zfs-partition",
-    CONTAINER = "container",
-    CONTAINER_STRUCTURED = "container-structured",
-    CONTAINER_STATISTIC = "container-statistic",
-    CONTAINER_PROJECT = "container-project",
-    DATABASE = "database",
-    STATISTIC = "statistic",
-    UPTIME_ENDPOINT = "uptime-endpoint",
-    UPTIME_ENDPOINT_STRUCTURED = "uptime-endpoint-structured",
-    UPTIME_ENDPOINT_STATISTIC = "uptime-endpoint-statistic",
-    TASK = "task",
-    USER_FILE = "user-file",
-    DAEMON = "deamon",
-    DAEMON_TOKEN = "deamonToken",
-    UNKNOWN = "unknown",
+    USER,
+    SERVER, SERVER_STRUCTURED,
+    SERVER_CONFIG,
+    NETWORK,
+    SOFTWARE,
+    DISK, DISK_STRUCTURED, DISK_STATISTIC,
+    PARTITION,
+    ZFS_POOL, ZFS_POOL_STRUCTURED,
+    ZFS_PARTITION,
+    CONTAINER, CONTAINER_STRUCTURED, CONTAINER_STATISTIC,
+    CONTAINER_PROJECT,
+    DATABASE,
+    SMB_INSTANCE, SMB_INSTANCE_STRUCTURED, SMB_SHARE, SMB_USER,
+    STATISTIC,
+    UPTIME_ENDPOINT, UPTIME_ENDPOINT_STRUCTURED, UPTIME_ENDPOINT_STATISTIC,
+    TASK,
+    USER_FILE,
+    DAEMON, DAEMON_TOKEN,
+    UNKNOWN
 }
 
 export function mapState(state: ReduxState | undefined): ReduxState {
@@ -109,6 +104,8 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.containerProjects;
                 state = cacheResources(state, server.databases, ResourceType.DATABASE);
                 delete server.databases;
+                state = cacheResources(state, server.smb, ResourceType.SMB_INSTANCE_STRUCTURED);
+                delete server.smb;
 
                 newServers.set(server.id, server);
             });
@@ -186,6 +183,28 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
 
         case ResourceType.DATABASE:
             return saveResources(state, "databases", resources);
+
+        case ResourceType.SMB_INSTANCE:
+            return saveResources(state, "smbInstances", resources);
+        
+        case ResourceType.SMB_INSTANCE_STRUCTURED: {
+            const newSmbInstances = new Map(state.smbInstances);
+            resources.forEach(smbInstance => {
+                state = cacheResources(state, smbInstance.shares, ResourceType.SMB_SHARE);
+                delete smbInstance.shares;
+                state = cacheResources(state, smbInstance.users, ResourceType.SMB_USER);
+                delete smbInstance.users;
+                newSmbInstances.set(smbInstance.id, smbInstance);
+            });
+
+            return { ...state, smbInstances: newSmbInstances };
+        }
+
+        case ResourceType.SMB_SHARE:
+            return saveResources(state, "smbShares", resources);
+
+        case ResourceType.SMB_USER:
+            return saveResources(state, "smbUsers", resources);
 
         case ResourceType.STATISTIC:
             return saveResources(state, "statistics", resources);
