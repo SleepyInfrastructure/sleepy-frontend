@@ -90,6 +90,52 @@ input:checked + .page-form-switch-slider:before {
     transform: translateX(26px);
 }
 
+.page-form-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.page-form-dropdown-button {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-text);
+    padding: 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    transition: 0.6s;
+}
+.page-form-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-primary-dark);
+    color: var(--color-primary-text);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+.page-form-dropdown-content-item {
+    @extend %align-y;
+    grid-gap: 8px;
+    width: 200px;
+    color: var(--color-primary-text);
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.6s;
+}
+.page-form-dropdown-content-item[data="gray"] {
+    filter: grayscale(1);
+}
+.page-form-dropdown:hover .page-form-dropdown-content {
+    display: block;
+}
+.page-form-dropdown:hover .page-form-dropdown-button {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.page-form-dropdown-button[data="empty"] {
+    border-radius: 10px !important;
+}
+
 .page-form-error {
     font-size: 14px;
 }

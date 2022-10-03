@@ -25,6 +25,8 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
 
     const [name, setName] = useState("");
     const [path, setPath] = useState("");
+    const [users, setUsers] = useState<string[]>([]);
+    const [admins, setAdmins] = useState<string[]>([]);
     const nameSatisfies = () => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (smbShares.some(e => e.parent === share?.parent && e.name !== share?.name && e.name === name) ? "(share with same name exists)" : "(satisfies)");
     }
@@ -38,13 +40,17 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
     if(share === undefined) {
         return null;
     }
+    const smbAllUsers = Array.from(props.smbUsers.values()).filter(e => e.parent === share.parent);
+    const smbCurrentUsers = smbAllUsers.filter(e => users.includes(e.id));
+    const smbCurrentAdmins = smbAllUsers.filter(e => admins.includes(e.id));
     if(!didSetDefaults) {
         setName(share.name);
         setPath(share.path);
+        setUsers(share.users);
+        setAdmins(share.admins);
         setDidSetDefaults(true);
     }
-
-    // TODO: user selectors
+    
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
@@ -66,8 +72,56 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
                     <input className={formStyle["page-form-input"]} placeholder="/mnt/my-disk..." onInput={(e) => { setPath(e.currentTarget.value); }} value={path} />
                     <div className={formStyle["page-form-error"]} data={pathSatisfies() === "(satisfies)" ? "false" : "true"}>{pathSatisfies()}</div>
                 </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Share users: </div>
+                    <div className={formStyle["page-form-dropdown"]}>
+                        <div className={formStyle["page-form-dropdown-button"]} data={smbAllUsers.length < 1 ? "empty" : undefined}>{users.length < 1 ? "None" : smbCurrentUsers.map(e => e.name).join(", ")}</div>
+                        <div className={formStyle["page-form-dropdown-content"]}>
+                            {smbAllUsers.map((e, i) => {
+                                return <div key={i} className={formStyle["page-form-dropdown-content-item"]} onClick={() => {
+                                        if(users.includes(e.id)) {
+                                            users.splice(users.indexOf(e.id), 1);
+                                            setUsers([ ...users ]);
+                                            if(admins.includes(e.id)) {
+                                                admins.splice(admins.indexOf(e.id), 1);
+                                                setAdmins([ ...admins ]);
+                                            }
+                                        } else {
+                                            users.push(e.id);
+                                            setUsers([ ...users ]);
+                                        }
+                                    }} data={!users.includes(e.id) ? "gray" : undefined}>
+                                    <div className={style["icon-user"]} />
+                                    {e.name}
+                                </div>
+                            })}
+                        </div>
+                    </div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Share admins: </div>
+                    <div className={formStyle["page-form-dropdown"]}>
+                        <div className={formStyle["page-form-dropdown-button"]} data={smbCurrentUsers.length < 1 ? "empty" : undefined}>{admins.length < 1 ? "None" : smbCurrentAdmins.map(e => e.name).join(", ")}</div>
+                        <div className={formStyle["page-form-dropdown-content"]}>
+                            {smbCurrentUsers.map((e, i) => {
+                                return <div key={i} className={formStyle["page-form-dropdown-content-item"]} onClick={() => {
+                                        if(admins.includes(e.id)) {
+                                            admins.splice(admins.indexOf(e.id), 1);
+                                            setAdmins([ ...admins ]);
+                                        } else {
+                                            admins.push(e.id);
+                                            setAdmins([ ...admins ]);
+                                        }
+                                    }} data={!admins.includes(e.id) ? "gray" : undefined}>
+                                    <div className={style["icon-user"]} />
+                                    {e.name}
+                                </div>
+                            })}
+                        </div>
+                    </div>
+                </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                    props.actions.editSmbShare({ id: share.id, name, path });
+                    props.actions.editSmbShare({ id: share.id, name, path, users, admins });
                     setTimeout(() => { location.href = "/"; }, 1000);
                 }}>
                     Edit!

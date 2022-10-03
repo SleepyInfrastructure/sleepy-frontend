@@ -1,9 +1,12 @@
 /* Content */
 .disk-content-items {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     grid-gap: 8px;
     margin-top: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.disk-content-items:empty {
+    margin-top: 0px;
 }
 
 /* Icons */

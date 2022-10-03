@@ -24,6 +24,7 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
     const instance = props.id !== undefined ? props.smbInstances.get(props.id) : undefined;
 
     const [name, setName] = useState("");
+    const [recycle, setRecycle] = useState(true);
     const nameSatisfies = () => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (smbInstances.some(e => e.name !== instance?.name && e.name === name) ? "(instance with same name exists)" : "(satisfies)");
     }
@@ -36,6 +37,7 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
     }
     if(!didSetDefaults) {
         setName(instance.name);
+        setRecycle(instance.recycle);
         setDidSetDefaults(true);
     }
 
@@ -54,6 +56,13 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
                     <div className={formStyle["page-form-text"]}>Instance name: </div>
                     <input className={formStyle["page-form-input"]} placeholder="my-smb-instance..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
                     <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Bin enabled: </div>
+                    <div className={formStyle["page-form-switch"]} onClick={() => { setRecycle(!recycle); }}>
+                        <input type="checkbox" checked={recycle} />
+                        <div className={formStyle["page-form-switch-slider"]} />
+                    </div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
                     props.actions.editSmbInstance({ id: instance.id, name });

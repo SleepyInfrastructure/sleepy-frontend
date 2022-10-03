@@ -1,7 +1,10 @@
 /* Content */
 .container-content-items {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     grid-gap: 8px;
     margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+}
+.container-content-items:empty {
+    margin-top: 0px;
 }

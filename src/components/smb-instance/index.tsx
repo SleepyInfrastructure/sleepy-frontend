@@ -21,11 +21,15 @@ const SMBInstance: FunctionalComponent<SMBInstanceConnectedProps> = (props: SMBI
             <div className={baseStyle["panel-content"]}>
                 <div className={baseStyle["panel-content-row"]}>ID: <span className={baseStyle["panel-content-row-highlight"]}>{props.item.id}</span></div>
                 <div className={style["smb-content-items"]}>
-                    {props.item.shares.map((e, i) => {
-                        const users = props.item.users.filter(el => e.users.includes(el.id));
-                        return <SMBShare key={i} item={e} users={users} actions={props.actions} />;
-                    })}
-                    {props.item.users.map((e, i) => <SMBUser key={i} item={e} actions={props.actions} /> )}
+                    <div className={style["smb-content-shares"]}>
+                        {props.item.shares.map((e, i) => {
+                            const users = props.item.users.filter(el => e.users.includes(el.id));
+                            return <SMBShare key={i} item={e} users={users} actions={props.actions} />;
+                        })}
+                    </div>
+                    <div className={style["smb-content-users"]}>
+                        {props.item.users.map((e, i) => <SMBUser key={i} item={e} actions={props.actions} /> )}
+                    </div>
                 </div>
             </div>
         </div>

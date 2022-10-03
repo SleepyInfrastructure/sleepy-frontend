@@ -36,8 +36,9 @@
     color: var(--color-primary-text);
 }
 .server-section-header {
-    display: flex;
+    display: grid;
     grid-gap: 6px;
+    grid-template-columns: repeat(auto-fit, max(200px));
 }
 .server-section-items {
     display: flex;

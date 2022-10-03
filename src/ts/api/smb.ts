@@ -3,6 +3,7 @@ type SMBInstance = {
     author: string;
     server: string;
     name: string;
+    recycle: boolean;
 };
 
 type SMBInstanceStructured = SMBInstance & {

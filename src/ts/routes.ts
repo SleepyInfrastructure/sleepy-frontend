@@ -71,6 +71,7 @@ type CreateSMBInstanceConnectedProps = RouteProps & {
 type EditSMBInstanceConnectedProps = CreateSMBInstanceConnectedProps;
 type CreateSMBShareConnectedProps = RouteProps & {
     smbShares: Map<string, SMBShare>;
+    smbUsers: Map<string, SMBUser>;
 };
 type EditSMBShareConnectedProps = CreateSMBShareConnectedProps;
 type CreateSMBUserConnectedProps = RouteProps & {
