@@ -65,7 +65,7 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
                     </div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                    props.actions.editSmbInstance({ id: instance.id, name });
+                    props.actions.editSmbInstance({ id: instance.id, name, recycle });
                     setTimeout(() => { location.href = "/"; }, 1000);
                 }}>
                     Edit!

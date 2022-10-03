@@ -74,10 +74,12 @@ type UserCreate = {
 type SMBInstanceCreate = {
     name: string;
     server: string;
+    recycle: boolean;
 };
 type SMBInstanceEdit = {
     id: string;
     name?: string;
+    recycle?: boolean;
 };
 
 type SMBShareCreate = {

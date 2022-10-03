@@ -92,8 +92,8 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
                 <CreateDatabase path="/create-database/:id" session={props.session} databases={props.databases} actions={props.actions} />
                 <CreateSmbInstance path="/create-smb-instance/:id" session={props.session} smbInstances={props.smbInstances} actions={props.actions} />
                 <EditSmbInstance path="/edit-smb-instance/:id" session={props.session} smbInstances={props.smbInstances} actions={props.actions} />
-                <CreateSmbShare path="/create-smb-share/:id" session={props.session} smbShares={props.smbShares} actions={props.actions} />
-                <EditSmbShare path="/edit-smb-share/:id" session={props.session} smbShares={props.smbShares} actions={props.actions} />
+                <CreateSmbShare path="/create-smb-share/:id" session={props.session} smbShares={props.smbShares} smbUsers={props.smbUsers} actions={props.actions} />
+                <EditSmbShare path="/edit-smb-share/:id" session={props.session} smbShares={props.smbShares} smbUsers={props.smbUsers} actions={props.actions} />
                 <CreateSmbUser path="/create-smb-user/:id" session={props.session} smbUsers={props.smbUsers} actions={props.actions} />
                 <EditSmbUser path="/edit-smb-user/:id" session={props.session} smbUsers={props.smbUsers} actions={props.actions} />
             </Router>
