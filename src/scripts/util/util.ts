@@ -51,3 +51,19 @@ export function formatDuration(start: number, end: number) {
         .map(([key, val]) => `${val} ${key}${val !== 1 ? "s" : ""}`)
         .join(", ");
 }
+
+export function pickHex(color1: number[], color2: number[], weight: number) {
+    const w1 = weight;
+    const w2 = 1 - w1;
+    const rgb = [Math.round(color1[0] * w1 + color2[0] * w2),
+        Math.round(color1[1] * w1 + color2[1] * w2),
+        Math.round(color1[2] * w1 + color2[2] * w2)];
+    return rgbToHex(rgb[0], rgb[1], rgb[2]);
+}
+export function componentToHex(c: number) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? `0${hex}` : hex;
+}
+export function rgbToHex(r: number, g: number, b: number) {
+    return `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`;
+}

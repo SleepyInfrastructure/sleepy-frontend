@@ -27,3 +27,12 @@ export function getContainerProjectStats(item: ContainerProjectStructured): Cont
         time: runningTime
     }
 }
+
+export function showDockerPort(port: string): boolean {
+    console.log(port);
+    return !port.startsWith("0.0.0.0");
+}
+
+export function cleanDockerPort(port: string) {
+    return port;
+}

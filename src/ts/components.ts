@@ -11,8 +11,8 @@ type ServerConnectedProps = {
     network: Network | null;
     disks: DiskConnectedPropsItem[];
     zfsPools: ZFSPoolConnectedPropsItem[];
-    containers: ContainerStructured[];
-    containerProjects: ContainerProject[];
+    containers: ContainerConnectedProps[];
+    containerProjects: ContainerProjectConnectedProps[];
     databases: Database[];
     smb: SMBInstanceStructured[];
     statistics: Statistic[];
@@ -79,6 +79,7 @@ type ContainerProjectStats = {
 };
 type ContainerProjectConnectedProps = {
     item: ContainerProjectStructured;
+    statistics: ContainerProjectStats;
     logs: string[];
     actions: ConnectedActions;
 };

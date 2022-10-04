@@ -34,6 +34,7 @@ import EditUptimeEndpoint from "../routes/edit-uptime-endpoint";
 import * as dark from "../style/themes/dark";
 import * as light from "../style/themes/light";
 import EditNetwork from "../routes/edit-network";
+import ServerMap from "../routes/server-map";
 
 const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
     const [ruleID, setRuleID] = useState(-1);
@@ -83,6 +84,7 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
                 <CreateServer path="/create-server" session={props.session} servers={props.servers} actions={props.actions} />
                 <EditServer path="/edit-server/:id" session={props.session} servers={props.servers} actions={props.actions} />
                 <Server path="/server/:id" {...props} />
+                <ServerMap path="/server/:id/map" {...props} />
                 <Container path="/container/:id" {...props} />
                 <ContainerProject path="/container-project/:id" {...props} />
                 <InstallingDaemon path="/installing-daemon/:id" session={props.session} servers={props.servers} daemonTokens={props.daemonTokens} actions={props.actions} />

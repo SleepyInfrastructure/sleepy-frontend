@@ -17,6 +17,7 @@
     },
     "dependencies": {},
     "devDependencies": {
+        "@antv/g6": "^4.7.4",
         "@commitlint/cli": "^16.0.2",
         "@commitlint/config-conventional": "^16.0.0",
         "@types/react": "^17.0.38",

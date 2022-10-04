@@ -1,3 +1,5 @@
+import { getContainerProjectStats } from "./container";
+
 export function getServerConnectedProps(server: Server, props: ServersProps): ServerConnectedProps {
     // this is stupid
     const disks = Array.from(props.disks.values());
@@ -5,7 +7,6 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
     const zfsPools = Array.from(props.zfsPools.values());
     const zfsPartitions = Array.from(props.zfsPartitions.values());
     const containers = Array.from(props.containers.values());
-    const containerStatistics = Array.from(props.containerStatistics.values());
     const containerProjects = Array.from(props.containerProjects.values());
     const databases = Array.from(props.databases.values());
     const smbInstances = Array.from(props.smbInstances.values());
@@ -34,10 +35,8 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
             })
         };
     });
-    const serverContainers = containers.filter(e => e.server === server.id).map(e => {
-        return { ...e, statistics: containerStatistics.filter(el => el.parent === e.id) };
-    });
-    const serverContainerProjects = containerProjects.filter(e => e.server === server.id);
+    const serverContainers = containers.filter(e => e.server === server.id).map(e => getContainerConnectedProps(e, props));
+    const serverContainerProjects = containerProjects.filter(e => e.server === server.id).map(e => getContainerProjectConnectedProps(e, props));
     const serverDatabases = databases.filter(e => e.server === server.id);
     const serverSmbInstances = smbInstances.filter(e => e.server === server.id).map(e => {
         return {
@@ -48,7 +47,7 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
     });
     const serverStatistics = statistics.filter(el => el.server === server.id);
     const daemon = props.daemons.get(server.id);
-
+    
     return {
         item: server,
         config: config ?? null,
@@ -67,7 +66,6 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
 
 export function getContainerConnectedProps(e: Container, props: ServersProps): ContainerConnectedProps {
     const containerStatistics = Array.from(props.containerStatistics.values());
-
     return {
         item: { ...e, statistics: containerStatistics.filter(el => el.parent === e.id) },
         logs: props.containerLogs.get(e.id) ?? [],
@@ -78,14 +76,18 @@ export function getContainerConnectedProps(e: Container, props: ServersProps): C
 export function getContainerProjectConnectedProps(e: ContainerProject, props: ServersProps): ContainerProjectConnectedProps {
     const containers = Array.from(props.containers.values());
     const containerStatistics = Array.from(props.containerStatistics.values());
+    const item = {
+        ...e,
+        containers: containers.filter(el => el.parent === e.id).map(el => {
+            return { ...el, statistics: containerStatistics.filter(ele => ele.parent === el.id) }
+        })
+    };
 
     return {
         item: {
-            ...e,
-            containers: containers.filter(el => el.parent === e.id).map(el => {
-                return { ...el, statistics: containerStatistics.filter(el => el.parent === e.id) }
-            })
+            ...item,
         },
+        statistics: getContainerProjectStats(item),
         logs: props.containerLogs.get(e.id) ?? [],
         actions: props.actions
     }
