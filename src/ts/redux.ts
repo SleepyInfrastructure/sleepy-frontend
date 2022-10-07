@@ -32,6 +32,8 @@ type ReduxState = {
     userFiles: Map<string, UserFile>;
     daemons: Map<string, Daemon>;
     daemonTokens: Map<string, DaemonToken>;
+    publicServerListings: Map<string, PublicServerListing>;
+    publicServers: Map<string, PublicServer>;
     preferences: AppPreferences;
 };
 
@@ -92,4 +94,6 @@ type ConnectedActions = {
     deleteDaemonToken(id: string): ReduxAction;
     fetchServerDaemonTokens(id: string): ReduxAction;
     daemonBuildSmbConfig(id: string): ReduxAction;
+    fetchPublicServerListings(): ReduxAction;
+    fetchPublicServer(id: string): ReduxAction;
 };

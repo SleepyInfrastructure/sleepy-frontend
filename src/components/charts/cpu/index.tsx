@@ -12,7 +12,7 @@ const CPUChart: FunctionalComponent<CPUChartConnectedProps> = (props: CPUChartCo
 
     return <div className={style.chart}>
         <div className={style["chart-header"]}>
-            <div className={style["cpu-icon"]} />
+            <div className={style["icon-cpu"]} />
             <div className={style["chart-title"]}>CPU Usage</div>
         </div>
         <ResponsiveContainer width="100%" height="85%">
@@ -26,11 +26,11 @@ const CPUChart: FunctionalComponent<CPUChartConnectedProps> = (props: CPUChartCo
         </ResponsiveContainer>
         <div className={style["chart-footer"]}>
             <div className={style["chart-footer-switch"]} onClick={() => { setDisplayTotal(!displayTotal); }}>
-                <div className={style["circle-icon"]} data={displayTotal ? "true" : "false"} style={{ background: "#3bff6f" }} />
+                <div className={style["icon-circle"]} data={displayTotal ? "true" : "false"} style={{ background: "#3bff6f" }} />
                 <div className={style["chart-footer-switch-text"]} data={displayTotal ? "true" : "false"} style={{ color: "#3bff6f" }}>Total</div>
             </div>
             <div className={style["chart-footer-switch"]} onClick={() => { setDisplaySystem(!displaySystem); }}>
-                <div className={style["circle-icon"]} data={displaySystem ? "true" : "false"} style={{ background: "#3bb4ff" }} />
+                <div className={style["icon-circle"]} data={displaySystem ? "true" : "false"} style={{ background: "#3bb4ff" }} />
                 <div className={style["chart-footer-switch-text"]} data={displaySystem ? "true" : "false"} style={{ color: "#3bb4ff" }}>System</div>
             </div>
         </div>

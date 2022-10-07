@@ -12,9 +12,9 @@ const SMBShare: FunctionalComponent<SMBShareConnectedProps> = (props: SMBShareCo
     return (
         <div className={baseStyle.panel} data="dark">
             <div className={baseStyle["panel-header"]}>
-                <div className={style["share-icon"]} />
+                <div className={style["icon-share"]} />
                 <div className={style["share-name"]}>{props.item.name}</div>
-                <a className={baseStyle["panel-link"]} onClick={() => { location.href = `/edit-smb-share/${props.item.id}`; }}>(Edit)</a>
+                <a className={baseStyle["panel-link"]} href={`/edit-smb-share/${props.item.id}`}>(Edit)</a>
                 <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteSmbShare(props.item.id); }}>(Delete)</a>
             </div>
             <div className={baseStyle["panel-content"]}>

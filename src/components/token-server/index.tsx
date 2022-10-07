@@ -13,7 +13,7 @@ const TokenServer: FunctionalComponent<TokenServerConnectedProps> = (props: Toke
     return (
         <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
-                <div className={serverStyle["server-icon"]} style={{ background: `#${props.item.color}` }} />
+                <div className={serverStyle["icon-server"]} style={{ background: `#${props.item.color}` }} />
                 <div className={baseStyle["panel-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</div>
             </div>
             <div className={style["token-server-content"]}>

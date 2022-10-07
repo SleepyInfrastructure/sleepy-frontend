@@ -39,7 +39,7 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>
                 <div className={baseStyle["page-header"]}>
-                    <div className={style["task-icon"]} />
+                    <div className={style["icon-task"]} />
                     <div className={baseStyle["page-title"]}>Tasks</div>
                 </div>
                 <div class={style["tasks-content"]}>

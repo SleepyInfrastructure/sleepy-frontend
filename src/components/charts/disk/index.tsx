@@ -32,11 +32,11 @@ const DiskChart: FunctionalComponent<DiskChartConnectedProps> = (props: DiskChar
         </ResponsiveContainer>
         <div className={style["chart-footer"]}>
             <div className={style["chart-footer-switch"]} onClick={() => { setMode("SPEED"); }}>
-                <div className={style["circle-icon"]} data={isModeSpeed ? "true" : "false"} style={{ background: "#3bff6f" }} />
+                <div className={style["icon-circle"]} data={isModeSpeed ? "true" : "false"} style={{ background: "#3bff6f" }} />
                 <div className={style["chart-footer-switch-text"]} data={isModeSpeed ? "true" : "false"} style={{ color: "#3bff6f" }} >Speed</div>
             </div>
             <div className={style["chart-footer-switch"]} onClick={() => { setMode("LATENCY"); }}>
-                <div className={style["circle-icon"]} data={isModeLatency ? "true" : "false"} style={{ background: "#3bb4ff" }} />
+                <div className={style["icon-circle"]} data={isModeLatency ? "true" : "false"} style={{ background: "#3bb4ff" }} />
                 <div className={style["chart-footer-switch-text"]} data={isModeLatency ? "true" : "false"} style={{ color: "#3bb4ff" }}>Latency</div>
             </div>
         </div>

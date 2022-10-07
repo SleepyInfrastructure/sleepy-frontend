@@ -161,8 +161,8 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     {!networksOpen || props.network === null ? null : <Network item={props.network} actions={props.actions} />}
                     {!disksOpen || props.disks.length < 1 ? null : props.disks.map((e, i) => <Disk key={i} item={e} actions={props.actions} />)}
                     {!disksOpen || props.zfsPools.length < 1 ? null : props.zfsPools.map((e, i) => <ZFSPool key={i} item={e} actions={props.actions} />)}
-                    {!containersOpen || containerProjects.length < 1 ? null : containerProjects.map((e, i) => <SmallContainerProject key={i} item={e.item} logs={[]} actions={props.actions} />)}
-                    {!containersOpen || props.containers.length < 1 ? null : props.containers.filter(e => e.item.parent === null).map((e, i) => <SmallContainer key={i} item={e.item} logs={[]} actions={props.actions} />)}
+                    {!containersOpen || containerProjects.length < 1 ? null : containerProjects.map((e, i) => <SmallContainerProject key={i} {...e} />)}
+                    {!containersOpen || props.containers.length < 1 ? null : props.containers.filter(e => e.item.parent === null).map((e, i) => <SmallContainer key={i} {...e} />)}
                     {!databasesOpen || props.databases.length < 1 ? null : props.databases.map((e, i) => <Database key={i} item={e} actions={props.actions} />)}
                     {!smbOpen || props.smb.length < 1 ? null : props.smb.map((e, i) => <SMBInstance key={i} item={e} actions={props.actions} />)}
                 </div>

@@ -24,7 +24,7 @@ const Tokens: FunctionalComponent<TokensConnectedProps> = (props: TokensConnecte
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>
                 <div className={baseStyle["page-header"]}>
-                    <div className={style["token-icon"]} />
+                    <div className={style["icon-token"]} />
                     <div className={baseStyle["page-title"]}>Tokens</div>
                 </div>
                 <div class={style["tokens-content"]}>

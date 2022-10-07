@@ -8,10 +8,14 @@ import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
-import Server from "../../components/server";
 /* Components */
+import Server from "../../components/server";
 
 const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: ServerRouteConnectedProps) => {
+    let server: Server | undefined;
+    if(props.id !== undefined) {
+        server = props.servers.get(props.id);
+    }
     useEffect(() => {
         if(props.id === undefined) { return; }
         if(props.session !== null) {
@@ -19,10 +23,6 @@ const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: Serv
             props.actions.connectWebsocket();
         }
     }, [props.session]);
-    if(props.id === undefined) {
-        return null;
-    }
-    const server = props.servers.get(props.id);
     if(server === undefined) {
         return null;
     }

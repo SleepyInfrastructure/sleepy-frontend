@@ -346,3 +346,18 @@ export function addContainerLog(id: string, message: string): ReduxAction {
 export function daemonBuildSmbConfig(id: string): ReduxAction {
     return getAction("DAEMON_BUILD_SMB_CONFIG", { id });
 }
+
+/* Public */
+export function fetchPublicServerListings(): ReduxAction {
+    return getAction("FETCH_PUBLIC_SERVER_LISTINGS", {});
+}
+export function fetchPublicServerListingsSuccess(servers: PublicServerListing[]): ReduxAction {
+    return getAction("FETCH_PUBLIC_SERVER_LISTINGS_SUCCESS", servers);
+}
+
+export function fetchPublicServer(id: string): ReduxAction {
+    return getAction("FETCH_PUBLIC_SERVER", id);
+}
+export function fetchPublicServerSuccess(server: PublicServer): ReduxAction {
+    return getAction("FETCH_PUBLIC_SERVER_SUCCESS", server);
+}

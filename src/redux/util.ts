@@ -28,6 +28,8 @@ export const INITIAL: ReduxState = {
     userFiles: new Map(),
     daemons: new Map(),
     daemonTokens: new Map(),
+    publicServerListings: new Map(),
+    publicServers: new Map(),
     preferences: {
         theme: AppPreferencesTheme.DARK
     }
@@ -51,6 +53,7 @@ export enum ResourceType {
     TASK,
     USER_FILE,
     DAEMON, DAEMON_TOKEN,
+    PUBLIC_SERVER_LISTING, PUBLIC_SERVER_STRUCTURED,
     UNKNOWN
 }
 
@@ -106,6 +109,10 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.databases;
                 state = cacheResources(state, server.smb, ResourceType.SMB_INSTANCE_STRUCTURED);
                 delete server.smb;
+                if(server.public !== undefined) {
+                    state = cacheResource(state, server.public, ResourceType.PUBLIC_SERVER_LISTING);
+                    delete server.public;
+                }
 
                 newServers.set(server.id, server);
             });
@@ -237,6 +244,20 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
 
         case ResourceType.DAEMON_TOKEN:
             return saveResources(state, "daemonTokens", resources);
+
+        case ResourceType.PUBLIC_SERVER_LISTING:
+            return saveResources(state, "publicServerListings", resources);
+
+        case ResourceType.PUBLIC_SERVER_STRUCTURED: {
+            const newPublicServers = new Map(state.publicServers);
+            resources.forEach(publicServer => {
+                state = cacheResources(state, publicServer.statistics, ResourceType.STATISTIC)
+                delete publicServer.statistics;
+                newPublicServers.set(publicServer.id, publicServer);
+            });
+
+            return { ...state, publicServers: newPublicServers };
+        }
     }
 
     return state;

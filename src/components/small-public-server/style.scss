@@ -1,0 +1,9 @@
+.server-section-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 8px;
+    margin-top: 4px;
+}
+.server-section-charts:empty {
+    margin-top: 0px;
+}

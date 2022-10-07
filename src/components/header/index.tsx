@@ -6,35 +6,40 @@ import style from "./style.scss";
 
 const Header: FunctionalComponent<HeaderConnectedProps> = (props: HeaderConnectedProps) => {
     return (
-        <header class={style.header}>
-            <img alt="logo" class={style["header-icon"]} src={"/assets/icons/icon-32x32.webp"} />
-            <h1 class={style["header-title"]}>Sleepy</h1>
+        <header className={style.header}>
+            <div className={style["header-start"]} onClick={() => { location.href = "/"; }}>
+                <img alt="logo" className={style["header-icon"]} src="/assets/icons/icon-32x32.webp" />
+                <h1 className={style["header-title"]}>Sleepy</h1>
+            </div>
             {
                 props.session !== null ?
-                <nav class={style["header-nav"]}>
-                    <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/">
-                        Home
+                <nav className={style["header-nav"]}>
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/overview">
+                        Overview
                     </Link>
-                    <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tasks">
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tasks">
                         Tasks
                     </Link>
-                    <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/settings">
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/settings">
                         Settings
                     </Link>
-                    <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tokens">
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tokens">
                         Tokens
                     </Link>
-                    <div class={style["header-nav-link"]} onClick={() => { props.actions.deleteSession(); }}>
+                    <div className={style["header-nav-link"]} onClick={() => { props.actions.deleteSession(); }}>
                         Logout
                     </div>
                 </nav>
                 : 
-                <nav class={style["header-nav"]}>
-                    <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/login">
+                <nav className={style["header-nav"]}>
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/login">
                         Login
                     </Link>
-                    <Link class={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/register">
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/register">
                         Register
+                    </Link>
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/public-dashboards">
+                        Public Dashboards
                     </Link>
                 </nav>
             }

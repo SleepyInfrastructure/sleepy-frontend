@@ -12,7 +12,7 @@ const Partition: FunctionalComponent<PartitionConnectedProps> = (props: Partitio
     return (
         <div className={baseStyle.panel} data="dark">
             <div className={baseStyle["panel-header"]}>
-                <div className={style["partition-icon"]} data={colorData} />
+                <div className={style["icon-partition"]} data={colorData} />
                 <div className={style["partition-name"]} data={colorData}>{props.item.name} ({humanFileSize(props.item.size)})</div>
             </div>
             <div className={baseStyle["panel-content"]}>

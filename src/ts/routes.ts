@@ -23,29 +23,34 @@ type ServersProps = {
     smbInstances: Map<string, SMBInstance>;
     smbShares: Map<string, SMBShare>;
     smbUsers: Map<string, SMBUser>;
+    publicServerListings: Map<string, PublicServerListing>;
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
     daemons: Map<string, Daemon>;
     actions: ConnectedActions;
 };
 
-type HomeConnectedProps = ServersProps & {
-    path: string;
-    uptimeEndpoints: Map<string, UptimeEndpoint>;
-    uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
+type HomeConnectedProps = RouteProps;
+type PublicServersConnectedProps = RouteProps & {
+    publicServerListings: Map<string, PublicServerListing>;
+    publicServers: Map<string, PublicServer>;
+    statistics: Map<string, Statistic>;
 };
 
 type LoginConnectedProps = RouteProps;
 type RegisterConnectedProps = RouteProps;
 type SettingsConnectedProps = RouteProps;
-
 type TokensConnectedProps = RouteProps & {
     servers: Map<string, Server>;
     daemonTokens: Map<string, DaemonToken>;
 };
-
 type TasksConnectedProps = RouteProps & AppConnectedProps;
 
+type OverviewConnectedProps = ServersProps & {
+    path: string;
+    uptimeEndpoints: Map<string, UptimeEndpoint>;
+    uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
+};
 type CreateServerConnectedProps = RouteProps & {
     servers: Map<string, Server>;
 };

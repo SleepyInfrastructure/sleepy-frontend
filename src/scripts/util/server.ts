@@ -45,6 +45,7 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
             users: smbUsers.filter(el => el.parent === e.id)
         };
     });
+    const publicServerListing = props.publicServerListings.get(server.id);
     const serverStatistics = statistics.filter(el => el.server === server.id);
     const daemon = props.daemons.get(server.id);
     
@@ -58,6 +59,7 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
         containerProjects: serverContainerProjects,
         databases: serverDatabases,
         smb: serverSmbInstances,
+        public: publicServerListing ?? null,
         statistics: serverStatistics,
         daemon: daemon ?? null,
         actions: props.actions

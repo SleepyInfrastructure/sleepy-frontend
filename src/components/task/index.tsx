@@ -14,7 +14,7 @@ const Task: FunctionalComponent<TaskConnectedProps> = (props: TaskConnectedProps
     return (
         <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
-                <div className={style["task-icon"]} data={props.item.type} style={{ background: color }} />
+                <div className={style["icon-task"]} data={props.item.type} style={{ background: color }} />
                 <div className={baseStyle["panel-name"]} style={{ color }}>{getTaskName(props.item)}</div>
                 <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteTask(props.item.id); }}>(Delete)</a>
             </div>

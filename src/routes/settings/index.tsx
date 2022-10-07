@@ -13,7 +13,7 @@ const Settings: FunctionalComponent<SettingsConnectedProps> = (props: SettingsCo
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>
                 <div className={baseStyle["page-header"]}>
-                    <div className={style["server-icon"]} />
+                    <div className={style["icon-server"]} />
                     <div className={baseStyle["page-title"]}>Settings</div>
                 </div>
                 <div class={style["settings-section"]} />

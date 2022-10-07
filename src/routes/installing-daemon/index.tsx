@@ -28,20 +28,20 @@ const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (p
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["server-icon"]} />
+                <div className={style["icon-server"]} />
                 <div className={baseStyle["page-title"]}>Installing the daemon</div>
             </div>
             <div className={style["installing-daemon-instructions"]}>
                 <div className={style["installing-daemon-instruction"]}>1) <span className={style["installing-daemon-instruction-highlight"]}>
-                    Clone the <span className={style["installing-daemon-instruction-link"]} onClick={() => { window.open("https://github.com/SleepyInfrastructure/sleepy-daemon", "null"); }}>daemon repository</span> into <span className={style["installing-daemon-instruction-code"]}>/opt/sleepy-daemon</span> on your server.
+                    Clone the <a href="https://github.com/SleepyInfrastructure/sleepy-daemon" className={style["installing-daemon-instruction-link"]}>daemon repository</a> into <span className={style["installing-daemon-instruction-code"]}>/opt/sleepy-daemon/dev</span> on your server.
                     </span>
                 </div>
                 <div className={style["installing-daemon-instruction"]}>2) <span className={style["installing-daemon-instruction-highlight"]}>
-                    Run <span className={style["installing-daemon-instruction-code"]}>/app/build-xxx.sh</span> to build the daemon.
+                    Run <span className={style["installing-daemon-instruction-code"]}>scripts/build-xxx.sh</span> to build the daemon.
                     </span>
                 </div>
                 <div className={style["installing-daemon-instruction"]}>3) <span className={style["installing-daemon-instruction-highlight"]}>
-                    Copy <span className={style["installing-daemon-instruction-code"]}>/misc/config-example.json</span> into <span className={style["installing-daemon-instruction-code"]}>/config/current.json</span>.
+                    Copy <span className={style["installing-daemon-instruction-code"]}>misc/config-example.json</span> into <span className={style["installing-daemon-instruction-code"]}>/opt/sleepy-daemon/config/current.json</span>.
                     </span>
                 </div>
                 <div className={style["installing-daemon-instruction"]}>4) <span className={style["installing-daemon-instruction-highlight"]}>
@@ -54,11 +54,15 @@ const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (p
                     </span>
                 </div>
                 <div className={style["installing-daemon-instruction"]}>6) <span className={style["installing-daemon-instruction-highlight"]}>
-                    Replace the host with <span className={style["installing-daemon-instruction-code"]}>sleepy.lamkas.dev</span>.
+                    Make sure the hosts are setup correctly, leaving out only <span className={style["installing-daemon-instruction-code"]}>sleepy.lamkas.dev</span> ones.
                     </span>
                 </div>
                 <div className={style["installing-daemon-instruction"]}>7) <span className={style["installing-daemon-instruction-highlight"]}>
-                    Run <span className={style["installing-daemon-instruction-code"]}>launch-xxx.sh</span> to run the daemon.
+                    Copy <span className={style["installing-daemon-instruction-code"]}>misc/service-xxx.sh</span> into <span className={style["installing-daemon-instruction-code"]}>/opt/sleepy-daemon</span>.
+                    </span>
+                </div>
+                <div className={style["installing-daemon-instruction"]}>8) <span className={style["installing-daemon-instruction-highlight"]}>
+                    Run <span className={style["installing-daemon-instruction-code"]}>service-xxx.sh</span> to run the daemon.
                     </span>
                 </div>
             </div>

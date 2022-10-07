@@ -11,7 +11,7 @@ const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnecte
     return (
         <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
-                <div className={style["server-icon"]} style={{ background: `#${props.item.color}` }} />
+                <div className={style["icon-server"]} style={{ background: `#${props.item.color}` }} />
                 <a href={`/server/${props.item.id}`} className={style["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</a>
                 <a href={`/edit-server/${props.item.id}`} className={baseStyle["panel-link"]}>(Edit)</a>
                 <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteServer(props.item.id); }}>(Delete)</a>

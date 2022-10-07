@@ -29,7 +29,6 @@ export function getContainerProjectStats(item: ContainerProjectStructured): Cont
 }
 
 export function showDockerPort(port: string): boolean {
-    console.log(port);
     return !port.startsWith("0.0.0.0");
 }
 

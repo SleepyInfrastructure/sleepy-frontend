@@ -15,6 +15,7 @@ type ServerConnectedProps = {
     containerProjects: ContainerProjectConnectedProps[];
     databases: Database[];
     smb: SMBInstanceStructured[];
+    public: PublicServerListing | null;
     statistics: Statistic[];
     daemon: Daemon | null;
     actions: ConnectedActions;
@@ -101,6 +102,13 @@ type SMBShareConnectedProps = {
 };
 type SMBUserConnectedProps = {
     item: SMBUser;
+    actions: ConnectedActions;
+};
+
+/* Public */
+type PublicServerConnectedProps = {
+    item: PublicServer;
+    statistics: Statistic[];
     actions: ConnectedActions;
 };
 

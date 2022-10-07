@@ -27,6 +27,7 @@ type ServerStructured = Server & {
     containers: ContainerStructured[];
     databases: Database[];
     smb: SMBInstanceStructured[];
+    public: PublicServerListing;
 };
 
 type StatisticType = "MINUTE" | "HOUR" | "DAY" | "MONTH" | "YEAR";
@@ -55,6 +56,20 @@ type Database = {
     server: string;
     name: string;
     credentials: boolean;
+};
+
+/* Public */
+type PublicServerListing = {
+    id: string;
+    author: string;
+    statistics: boolean;
+};
+type PublicServer = {
+    id: string;
+    author: string;
+    name: string;
+    memory: number;
+    swap: number;
 };
 
 /* Calls */

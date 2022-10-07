@@ -35,7 +35,7 @@ const Register: FunctionalComponent<RegisterConnectedProps> = (props: RegisterCo
     return (
         <div class={baseStyle.page}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["auth-icon"]} />
+                <div className={style["icon-auth"]} />
                 <div className={baseStyle["page-title"]}>Register</div>
             </div>
             <div className={formStyle["page-form"]}>

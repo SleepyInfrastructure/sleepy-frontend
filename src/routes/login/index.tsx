@@ -31,7 +31,7 @@ const Login: FunctionalComponent<LoginConnectedProps> = (props: LoginConnectedPr
     return (
         <div class={baseStyle.page}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["auth-icon"]} />
+                <div className={style["icon-auth"]} />
                 <div className={baseStyle["page-title"]}>Login</div>
             </div>
             <div className={formStyle["page-form"]}>

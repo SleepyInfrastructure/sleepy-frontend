@@ -3,7 +3,7 @@ import { addContainerLog, fetchAllDaemonsSuccess, fetchServerStructured, fetchTa
 
 let socket: WebSocket | null = null;
 function getWsEndpoint() {
-    return location.host === "sleepy.lamkas.dev" ? "wss://api.sleepy.lamkas.dev" : "ws://localhost:9002";
+    return location.host === "sleepy.lamkas.dev" ? "wss://api.sleepy.lamkas.dev" : "wss://localhost:9002";
 }
 
 export enum DaemonWebsocketMessageType {

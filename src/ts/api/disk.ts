@@ -66,7 +66,6 @@ type ZFSPartition = {
     author: string | null;
     parent: string;
     server: string;
-    device: string;
     size: number;
     used: number;
 };

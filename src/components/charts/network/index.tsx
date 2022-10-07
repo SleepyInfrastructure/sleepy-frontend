@@ -26,11 +26,11 @@ const NetworkChart: FunctionalComponent<NetworkChartConnectedProps> = (props: Ne
         </ResponsiveContainer>
         <div className={style["chart-footer"]}>
             <div className={style["chart-footer-switch"]} onClick={() => { setDisplayDownload(!displayDownload); }}>
-                <div className={style["circle-icon"]} data={displayDownload ? "true" : "false"} style={{ background: "#3bff6f" }} />
+                <div className={style["icon-circle"]} data={displayDownload ? "true" : "false"} style={{ background: "#3bff6f" }} />
                 <div className={style["chart-footer-switch-text"]} data={displayDownload ? "true" : "false"} style={{ color: "#3bff6f" }} >Download</div>
             </div>
             <div className={style["chart-footer-switch"]} onClick={() => { setDisplayUpload(!displayUpload); }}>
-                <div className={style["circle-icon"]} data={displayUpload ? "true" : "false"} style={{ background: "#3bb4ff" }} />
+                <div className={style["icon-circle"]} data={displayUpload ? "true" : "false"} style={{ background: "#3bb4ff" }} />
                 <div className={style["chart-footer-switch-text"]} data={displayUpload ? "true" : "false"} style={{ color: "#3bb4ff" }}>Upload</div>
             </div>
         </div>

@@ -47,7 +47,7 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={formStyle["server-icon"]} />
+                <div className={formStyle["icon-server"]} />
                 <div className={baseStyle["page-title"]}>Edit Uptime Endpoint</div>
             </div>
             <div className={formStyle["page-form"]}>

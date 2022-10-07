@@ -10,7 +10,7 @@ const SMBUser: FunctionalComponent<SMBUserConnectedProps> = (props: SMBUserConne
             <div className={baseStyle["panel-header"]}>
                 <div className={style["icon-user"]} />
                 <div className={style["user-name"]}>{props.item.name}</div>
-                <a className={baseStyle["panel-link"]} onClick={() => { location.href = `/edit-smb-user/${props.item.id}`; }}>(Edit)</a>
+                <a className={baseStyle["panel-link"]} href={`/edit-smb-user/${props.item.id}`}>(Edit)</a>
                 <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteSmbUser(props.item.id); }}>(Delete)</a>
             </div>
             <div className={baseStyle["panel-content"]}>

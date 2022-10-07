@@ -1,0 +1,29 @@
+/* Macros */
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.public-servers-content {
+    display: flex;
+    grid-gap: 10px;
+}
+.home-title {
+    font-size: 32px;
+    color: var(--color-secondary-text);
+}
+.public-servers-section {
+    @extend %align-center;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+.public-servers-section-items {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    margin-top: 20px;
+    width: 100%;
+}

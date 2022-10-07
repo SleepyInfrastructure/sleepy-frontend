@@ -10,21 +10,17 @@ export async function fetchUser(id: string): Promise<User | undefined> {
 export async function createSession(type: string, username?: string, password?: string): Promise<Session | undefined> {
     const response: APIResponse = await post({ path: `/sessions/create`, body: JSON.stringify({ type, username, password }) });
     if (response.status !== 200) {
-        if(type === "token" && (location.pathname !== "/login" && location.pathname !== "/register")) {
-            location.href = "/login";
-        }
-
         return undefined;
     }
     if(type === "classic") {
-        location.href = "/";
+        location.href = "/overview";
     }
 
     return response.body;
 }
 export async function deleteSession(): Promise<boolean> {
     const response: APIResponse = await sendDelete({ path: `/sessions/delete` });
-    location.href = "/login";
+    location.href = "/";
 
     return response.status === 200;
 }
@@ -170,3 +166,12 @@ export async function deleteDeamonToken(id: string): Promise<boolean> {
 export async function fetchServerDaemonTokens(id: string): Promise<DaemonToken[]> {
     return await fetchResources("/server/daemon/tokens", id);
 }
+
+/* Public */
+export async function fetchPublicServerListings(): Promise<PublicServerListing[]> {
+    return await fetchResources("/servers/public");
+}
+export async function fetchPublicServer(id: string): Promise<PublicServer | undefined> {
+    return await fetchResource("/servers/public/structured", id);
+}
+

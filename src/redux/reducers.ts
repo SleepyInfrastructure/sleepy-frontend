@@ -21,7 +21,7 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
     },
 
     CREATE_USER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
-        location.href = "/";
+        location.href = "/overview";
         return cacheResource(state, action.data, ResourceType.USER);
     },
 
@@ -192,6 +192,14 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         }
         containerLogs.get(action.data.id)?.push(action.data.message);
         return { ...state, containerLogs };
+    },
+
+    FETCH_PUBLIC_SERVER_LISTINGS_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResources(state, action.data, ResourceType.PUBLIC_SERVER_LISTING);
+    },
+
+    FETCH_PUBLIC_SERVER_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResource(state, action.data, ResourceType.PUBLIC_SERVER_STRUCTURED);
     },
 };
 const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction) => Promise<void>> = {
@@ -416,6 +424,14 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     DAEMON_BUILD_SMB_CONFIG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_BUILD_SMB_CONFIG, ...action.data });
+    },
+
+    FETCH_PUBLIC_SERVER_LISTINGS: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetchMultiple(dispatch, action.data, routes.fetchPublicServerListings, actions.fetchPublicServerListingsSuccess);
+    },
+
+    FETCH_PUBLIC_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.fetchPublicServer, actions.fetchPublicServerSuccess);
     },
 };
 

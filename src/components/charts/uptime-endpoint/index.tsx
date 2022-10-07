@@ -27,11 +27,11 @@ const UptimeEndpointChart: FunctionalComponent<UptimeEndpointChartConnectedProps
         </ResponsiveContainer>
         <div className={style["chart-footer"]}>
             <div className={style["chart-footer-switch"]} onClick={() => { setDisplayPing(!displayPing); }}>
-                <div className={style["circle-icon"]} data={displayPing ? "true" : "false"} style={{ background: "#3bff6f" }} />
+                <div className={style["icon-circle"]} data={displayPing ? "true" : "false"} style={{ background: "#3bff6f" }} />
                 <div className={style["chart-footer-switch-text"]} data={displayPing ? "true" : "false"} style={{ color: "#3bff6f" }} >Ping</div>
             </div>
             <div className={style["chart-footer-switch"]} onClick={() => { setDisplayRequestTime(!displayRequestTime); }}>
-                <div className={style["circle-icon"]} data={displayRequestTime ? "true" : "false"} style={{ background: "#ff8121" }} />
+                <div className={style["icon-circle"]} data={displayRequestTime ? "true" : "false"} style={{ background: "#ff8121" }} />
                 <div className={style["chart-footer-switch-text"]} data={displayRequestTime ? "true" : "false"} style={{ color: "#ff8121" }}>Request Time</div>
             </div>
         </div>
