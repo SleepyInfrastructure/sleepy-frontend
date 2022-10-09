@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
 import { addContainerLog, fetchAllDaemonsSuccess, fetchServerStructured, fetchTaskSuccess } from "../../redux/actions";
 
-let socket: WebSocket | null = null;
-function getWsEndpoint() {
+export let socket: WebSocket | null = null;
+export function getWsEndpoint() {
     return location.host === "sleepy.lamkas.dev" ? "wss://api.sleepy.lamkas.dev" : "wss://localhost:9002";
 }
 

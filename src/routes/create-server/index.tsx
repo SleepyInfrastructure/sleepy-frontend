@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 /* Redux */
 import { connect } from "react-redux";
@@ -18,19 +18,19 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const servers = Array.from(props.servers.values());
 
     const [name, setName] = useState("");
     const [color, setColor] = useState("#ff3645");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (servers.some(e => e.name === name) ? "(server with same name exists)" : "(satisfies)");
-    }
+    }, [name, servers]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
-    }, [name]);
+    }, [nameSatisfies]);
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>

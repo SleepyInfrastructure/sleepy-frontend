@@ -26,7 +26,7 @@ export function createServerGraph(data: GraphBetterData, serverProps: ServerConn
                 color = pickHex(highLoadColor, lowLoadColor, Math.min(1, netLoad));
                 edgeSize = Math.max(edgeSize, Math.round(5 * netLoad));
             }
-            data.nodes.push({ id: e.id, x, y, label: e.names, labelCfg: { style: { fontSize } }, style: { fill: "#739dff", stroke: "#4e79de", color: "white" }, size, isLeaf: true, nodeType: "close" });
+            data.nodes.push({ id: e.id, x, y, label: e.name, labelCfg: { style: { fontSize } }, style: { fill: "#739dff", stroke: "#4e79de", color: "white" }, size, isLeaf: true, nodeType: "close" });
             data.edges.push({ source, target: e.id, color, size: edgeSize, edgeType: "close" });
             if(e.ports.length !== 0) {
                 const ports = e.ports.split(",").map(e => e.trim()).filter(e => showDockerPort(e)).map(e => cleanDockerPort(e));

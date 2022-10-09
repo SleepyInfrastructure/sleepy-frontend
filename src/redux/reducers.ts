@@ -6,7 +6,6 @@ import { cacheResource, cacheResources, INITIAL, reducerDelete, reducerFetch, re
 /* API */
 import * as routes from "../scripts/api/routes";
 import { connectWebsocket, DaemonWebsocketMessageType, sendWebsocketMessage } from "../scripts/ws/ws";
-import { AppPreferencesTheme } from "../ts/const";
 
 const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> = {
     FETCH_PREFERENCES: (state: ReduxState): ReduxState => {
@@ -14,7 +13,7 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
 
         const theme = localStorage.getItem("theme");
         if (theme !== null) {
-            preferences.theme = theme as AppPreferencesTheme;
+            preferences.theme = theme as "dark" | "light";
         }
 
         return { ...state, preferences };

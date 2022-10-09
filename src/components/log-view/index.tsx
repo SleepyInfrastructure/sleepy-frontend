@@ -23,7 +23,7 @@ const LogView: FunctionalComponent<LogViewConnectedProps> = (props: LogViewConne
                 }, 500)
             );
         });
-    }, [true]);
+    }, []);
 
     /* XTerm hooks */
     const xtermRef = useRef<XTerm>(null);

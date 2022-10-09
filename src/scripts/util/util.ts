@@ -11,19 +11,19 @@ export function formatTimestampChart(e: number | "auto", type: StatisticType) {
     }
 
     switch(type) {
-        case "MINUTE":
+        case StatisticType.MINUTE:
             return "";
 
-        case "HOUR":
+        case StatisticType.HOUR:
             return formatTimestampShort(e);
 
-        case "DAY":
+        case StatisticType.DAY:
             return new Date(e * 1000).toLocaleTimeString([], { hour: "2-digit" });
 
-        case "MONTH":
+        case StatisticType.MONTH:
             return new Date(e * 1000).toLocaleDateString([], { day: "2-digit", month: "2-digit" });
 
-        case "YEAR":
+        case StatisticType.YEAR:
             return new Date(e * 1000).toLocaleDateString([], { month: "short" });
     }
 }

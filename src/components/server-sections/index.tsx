@@ -2,7 +2,6 @@
 import { h, FunctionalComponent, Fragment } from "preact";
 import { useEffect, useState } from "react";
 /* Styles */
-import baseStyle from "../style.scss";
 import networkStyle from "../network/style.scss";
 import diskStyle from "../disk/style.scss";
 import containerStyle from "../container/style.scss";
@@ -23,13 +22,6 @@ import CPUChart from "../charts/cpu";
 import MemoryChart from "../charts/memory";
 import NetworkChart from "../charts/network";
 import DiskChart from "../charts/disk";
-const StatTypeMapping: Record<StatisticType, string> = {
-    MINUTE: "",
-    HOUR: "MINUTE",
-    DAY: "HOUR",
-    MONTH: "DAY",
-    YEAR: "MONTH"
-}
 
 const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props: ServerSectionsConnectedProps) => {
     const containerProjects = props.containerProjects.map((e) => {
@@ -38,15 +30,15 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
     });
 
     const [chartsOpen, setChartsOpen] = useState(true);
-    const [statType, setStatType] = useState<StatisticType>("HOUR");
+    const [statType, setStatType] = useState<StatisticType>(StatisticType.HOUR);
     const [fetchedTypes, setFetchedTypes] = useState<StatisticType[]>([]);
     useEffect(() => {
         if(!fetchedTypes.includes(statType)) {
             setFetchedTypes([...fetchedTypes, statType]);
             props.actions.fetchServerStatistics({ id: props.item.id, type: statType.toLowerCase() });
         }
-    }, [statType]);
-    const statistics = props.statistics.filter(e => e.type === StatTypeMapping[statType]).sort((a, b) => a.timestamp - b.timestamp);
+    }, [fetchedTypes, props.actions, props.item.id, statType]);
+    const statistics = props.statistics.filter(e => e.type === StatisticTypePreviousMapping[statType]).sort((a, b) => a.timestamp - b.timestamp);
 
     const [networksOpen, setNetworksOpen] = useState(true);
     const [disksOpen, setDisksOpen] = useState(true);
@@ -90,10 +82,10 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 <div className={style["server-section-header"]}>
                     <Button secondary={chartsOpen} onClick={() => { setChartsOpen(!chartsOpen); }}>Show</Button>
                     {!chartsOpen ? null : <Fragment>
-                        <Button secondary={statType === "HOUR"} onClick={() => { setStatType("HOUR") }}>Hour</Button>
-                        <Button secondary={statType === "DAY"} onClick={() => { setStatType("DAY") }}>Day</Button>
-                        <Button secondary={statType === "MONTH"} onClick={() => { setStatType("MONTH") }}>Month</Button>
-                        <Button secondary={statType === "YEAR"} onClick={() => { setStatType("YEAR") }}>Year</Button>
+                        <Button secondary={statType === StatisticType.HOUR} onClick={() => { setStatType(StatisticType.HOUR); }}>Hour</Button>
+                        <Button secondary={statType === StatisticType.DAY} onClick={() => { setStatType(StatisticType.DAY); }}>Day</Button>
+                        <Button secondary={statType === StatisticType.MONTH} onClick={() => { setStatType(StatisticType.MONTH); }}>Month</Button>
+                        <Button secondary={statType === StatisticType.YEAR} onClick={() => { setStatType(StatisticType.YEAR); }}>Year</Button>
                     </Fragment>}
                 </div>
                 {!chartsOpen ? null : <div className={style["server-section-charts"]}>
@@ -104,7 +96,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                         if(e.statistics.length === 0) {
                             return null;
                         }
-                        const statistics = e.statistics.filter(el => el.type === StatTypeMapping[statType]).sort((a, b) => a.timestamp - b.timestamp);
+                        const statistics = e.statistics.filter(el => el.type === StatisticTypePreviousMapping[statType]).sort((a, b) => a.timestamp - b.timestamp);
                         const title = e.model !== undefined ? `${e.model} (${e.name})` : e.name;
                         return <DiskChart key={i} type={statType} statistics={statistics} title={title} />;
                     })}

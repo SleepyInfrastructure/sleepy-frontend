@@ -22,7 +22,7 @@ const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: Serv
             props.actions.fetchServerStructured(props.id);
             props.actions.connectWebsocket();
         }
-    }, [props.session]);
+    }, [props.actions, props.id, props.session]);
     if(server === undefined) {
         return null;
     }

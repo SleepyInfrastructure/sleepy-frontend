@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 /* Redux */
 import { connect } from "react-redux";
@@ -18,7 +18,7 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const servers = Array.from(props.servers.values());
@@ -26,13 +26,13 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
 
     const [name, setName] = useState("");
     const [color, setColor] = useState("#ff3645");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (servers.some(e => e.name !== server?.name && e.name === name) ? "(server with same name exists)" : "(satisfies)");
-    }
+    }, [name, server?.name, servers]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
-    }, [name]);
+    }, [nameSatisfies]);
     if(server === undefined) {
         return null;
     }

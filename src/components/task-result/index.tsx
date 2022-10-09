@@ -2,7 +2,6 @@
 import { h, FunctionalComponent } from "preact";
 import { apiVersion, getApiEndpoint } from "../../scripts/api/api";
 import { humanFileSize } from "../../scripts/util/util";
-import { TaskType } from "../../ts/const";
 /* Styles */
 import baseStyle from "../style.scss";
 

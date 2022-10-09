@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -17,20 +17,20 @@ const EditSmbUser: FunctionalComponent<EditSMBUserConnectedProps> = (props: Edit
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const smbUsers = Array.from(props.smbUsers.values());
     const user = props.id !== undefined ? props.smbUsers.get(props.id) : undefined;
 
     const [name, setName] = useState("");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (smbUsers.some(e => e.parent === user?.parent && e.name !== user?.name && e.name === name) ? "(user with same name exists)" : "(satisfies)");
-    }
+    }, [name, smbUsers, user?.name, user?.parent]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
-    }, [name]);
+    }, [nameSatisfies]);
     if(user === undefined) {
         return null;
     }

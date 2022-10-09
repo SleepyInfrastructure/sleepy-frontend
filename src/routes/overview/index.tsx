@@ -22,7 +22,7 @@ const Overview: FunctionalComponent<OverviewConnectedProps> = (props: OverviewCo
             props.actions.fetchAllUptimeEndpointsStructured();
             props.actions.connectWebsocket();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const servers = Array.from(props.servers.values());
     const uptimeEndpoints = Array.from(props.uptimeEndpoints.values());
     const uptimeEndpointStatistics = Array.from(props.uptimeEndpointStatistics.values());

@@ -14,7 +14,12 @@ export function getContainerProjectStats(item: ContainerProjectStructured): Cont
         return acc + (curr.statistics.length > 0 ? curr.statistics[curr.statistics.length-1].read + curr.statistics[curr.statistics.length-1].write : 0);
     }, 0);
     const statusMap = item.containers.reduce((acc, curr) => {
-        acc.set(curr.status, acc.get(curr.status) ?? 1);
+        if(acc.has(curr.status)) {
+            acc.set(curr.status, acc.get(curr.status) + 1);
+        } else {
+            acc.set(curr.status, 1);
+        }
+        
         return acc;
     }, new Map());
     const statusText = Array.from(statusMap.keys()).map(e => `${e}(${statusMap.get(e)})`).join(", ");

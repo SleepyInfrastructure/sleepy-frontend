@@ -1,5 +1,4 @@
 import { bindActionCreators, Dispatch } from "redux";
-import { AppPreferencesTheme } from "../ts/const";
 
 export const INITIAL: ReduxState = {
     session: null,
@@ -31,7 +30,7 @@ export const INITIAL: ReduxState = {
     publicServerListings: new Map(),
     publicServers: new Map(),
     preferences: {
-        theme: AppPreferencesTheme.DARK
+        theme: "dark"
     }
 };
 export enum ResourceType {

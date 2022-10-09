@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -17,7 +17,7 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const smbShares = Array.from(props.smbShares.values());
@@ -25,18 +25,21 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
 
     const [name, setName] = useState("");
     const [path, setPath] = useState("");
+    const [browsable, setBrowsable] = useState(true);
+    const [readonly, setReadonly] = useState(false);
+    const [guest, setGuest] = useState(false);
     const [users, setUsers] = useState<string[]>([]);
     const [admins, setAdmins] = useState<string[]>([]);
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (smbShares.some(e => e.parent === share?.parent && e.name !== share?.name && e.name === name) ? "(share with same name exists)" : "(satisfies)");
-    }
-    const pathSatisfies = () => {
+    }, [name, share?.name, share?.parent, smbShares]);
+    const pathSatisfies = useCallback(() => {
         return path.length < 3 ? "(is not atleast 3 characters)" : "(satisfies)";
-    }
+    }, [path]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)" && pathSatisfies() === "(satisfies)");
-    }, [name, path]);
+    }, [nameSatisfies, pathSatisfies]);
     if(share === undefined) {
         return null;
     }
@@ -46,6 +49,9 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
     if(!didSetDefaults) {
         setName(share.name);
         setPath(share.path);
+        setBrowsable(share.browsable);
+        setReadonly(share.readonly);
+        setGuest(share.guest);
         setUsers(share.users);
         setAdmins(share.admins);
         setDidSetDefaults(true);
@@ -71,6 +77,27 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
                     <div className={formStyle["page-form-text"]}>Share path: </div>
                     <input className={formStyle["page-form-input"]} placeholder="/mnt/my-disk..." onInput={(e) => { setPath(e.currentTarget.value); }} value={path} />
                     <div className={formStyle["page-form-error"]} data={pathSatisfies() === "(satisfies)" ? "false" : "true"}>{pathSatisfies()}</div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Browsable: </div>
+                    <div className={formStyle["page-form-switch"]} onClick={() => { setBrowsable(!browsable); }}>
+                        <input type="checkbox" checked={browsable} />
+                        <div className={formStyle["page-form-switch-slider"]} />
+                    </div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Read-only: </div>
+                    <div className={formStyle["page-form-switch"]} onClick={() => { setReadonly(!readonly); }}>
+                        <input type="checkbox" checked={readonly} />
+                        <div className={formStyle["page-form-switch-slider"]} />
+                    </div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Allow guests: </div>
+                    <div className={formStyle["page-form-switch"]} onClick={() => { setGuest(!guest); }}>
+                        <input type="checkbox" checked={guest} />
+                        <div className={formStyle["page-form-switch-slider"]} />
+                    </div>
                 </div>
                 <div className={formStyle["page-form-row"]}>
                     <div className={formStyle["page-form-text"]}>Share users: </div>
@@ -121,7 +148,7 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
                     </div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                    props.actions.editSmbShare({ id: share.id, name, path, users, admins });
+                    props.actions.editSmbShare({ id: share.id, name, path, browsable, readonly, guest, users, admins });
                     setTimeout(() => { location.href = "/"; }, 1000);
                 }}>
                     Edit!

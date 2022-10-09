@@ -3,6 +3,11 @@ type HeaderConnectedProps = {
     session: Session | null;
     actions: ConnectedActions;
 };
+type PanelHeaderTagConnectedProps = {
+    icon: string;
+    tooltip: string;
+    text?: string;
+};
 
 /* Server */
 type ServerConnectedProps = {

@@ -1,7 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { useEffect } from "react";
-import { TaskType } from "../../ts/const";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -19,7 +18,7 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
             props.actions.fetchAllServersStructured();
             props.actions.fetchAllTasks();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     useEffect(() => {
         for(const task of Array.from(props.tasks.values())) {
             switch(task.type) {
@@ -32,7 +31,7 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
                     break;
             }
         }
-    }, [props.tasks]);
+    }, [props.actions, props.tasks, props.userFiles]);
     const tasks = Array.from(props.tasks.values()).sort((a, b) => b.start - a.start);
 
     return (

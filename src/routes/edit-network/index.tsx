@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -18,7 +18,7 @@ const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: Edit
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const networks = Array.from(props.networks.values());
@@ -26,13 +26,13 @@ const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: Edit
 
     const [name, setName] = useState("");
     const [ipv4, setIPV4] = useState("");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (networks.some(e => e.name !== network?.name && e.name === name) ? "(network with same name exists)" : "(satisfies)");
-    }
+    }, [name, network?.name, networks]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)" && ipv4Satisfies(ipv4) === "(satisfies)");
-    }, [name, ipv4]);
+    }, [ipv4, nameSatisfies]);
     if(network === undefined) {
         return null;
     }

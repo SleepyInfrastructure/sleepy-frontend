@@ -1,4 +1,4 @@
-const ValidIpAddressRegex = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\.?\\b){4}$";
+const ValidIpAddressRegex = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d).?\\b){4}$";
 
 export function hostSatisfies(host: string, endpoint: string) {
     if(host === "") { return endpoint === "" ? "(host or request endpoint has to be specified)" : "(satisfies)"; }

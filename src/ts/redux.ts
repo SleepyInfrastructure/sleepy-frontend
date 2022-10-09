@@ -11,7 +11,7 @@ type ReduxState = {
     servers: Map<string, Server>;
     serverConfigs: Map<string, ServerConfig>;
     networks: Map<string, Network>;
-    software: Map<string, Software>;
+    software: Map<string, ServerSoftware>;
     disks: Map<string, Disk>;
     partitions: Map<string, Partition>;
     zfsPools: Map<string, ZFSPool>;

@@ -15,14 +15,14 @@ import EmptyPanel from "../../components/empty-panel";
 const PublicServers: FunctionalComponent<PublicServersConnectedProps> = (props: PublicServersConnectedProps) => {
     useEffect(() => {
         props.actions.fetchPublicServerListings();
-    }, []);
+    }, [props.actions]);
     useEffect(() => {
         console.log(props.publicServerListings);
         const listings = Array.from(props.publicServerListings.values());
         for(let i = 0; i < 5 && i < listings.length; i++) {
             props.actions.fetchPublicServer(listings[i].id);
         }
-    }, [props.publicServerListings]);
+    }, [props.actions, props.publicServerListings]);
     const servers = Array.from(props.publicServers.values());
     const serverStatistics = Array.from(props.statistics.values());
     

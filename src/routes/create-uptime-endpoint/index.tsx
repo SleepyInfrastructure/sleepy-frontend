@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -18,20 +18,20 @@ const CreateUptimeEndpoint: FunctionalComponent<CreateUptimeEndpointConnectedPro
         if(props.session !== null) {
             props.actions.fetchAllUptimeEndpointsStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const uptimeEndpoints = Array.from(props.uptimeEndpoints.values());
 
     const [name, setName] = useState("");
     const [host, setHost] = useState("");
     const [requestEndpoint, setRequestEndpoint] = useState("");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (uptimeEndpoints.some(e => e.name === name) ? "(endpoint with same name exists)" : "(satisfies)");
-    }
+    }, [name, uptimeEndpoints]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)" && hostSatisfies(host, requestEndpoint) === "(satisfies)" && endpointSatisfies(host, requestEndpoint) === "(satisfies)");
-    }, [name, host, requestEndpoint]);
+    }, [host, nameSatisfies, requestEndpoint]);
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>

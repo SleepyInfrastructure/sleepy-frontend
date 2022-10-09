@@ -1,6 +1,5 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { TaskType } from "../../ts/const";
 /* Styles */
 import baseStyle from "../style.scss";
 

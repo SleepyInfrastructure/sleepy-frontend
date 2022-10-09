@@ -1,5 +1,3 @@
-import { TaskStatus, TaskType } from "../../ts/const";
-
 const status: Record<string, string> = {
     [TaskStatus.RUNNING]: "Running",
     [TaskStatus.FAILED]: "Failed",

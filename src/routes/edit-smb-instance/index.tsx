@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -17,7 +17,7 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const smbInstances = Array.from(props.smbInstances.values());
@@ -25,13 +25,13 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
 
     const [name, setName] = useState("");
     const [recycle, setRecycle] = useState(true);
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (smbInstances.some(e => e.name !== instance?.name && e.name === name) ? "(instance with same name exists)" : "(satisfies)");
-    }
+    }, [instance?.name, name, smbInstances]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
-    }, [name]);
+    }, [nameSatisfies]);
     if(instance === undefined) {
         return null;
     }

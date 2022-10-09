@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -17,18 +17,18 @@ const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: 
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const smbUsers = Array.from(props.smbUsers.values());
 
     const [name, setName] = useState("");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (smbUsers.some(e => e.parent === props.id && e.name === name) ? "(user with same name exists)" : "(satisfies)");
-    }
+    }, [name, props.id, smbUsers]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
-    }, [name]);
+    }, [nameSatisfies]);
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>

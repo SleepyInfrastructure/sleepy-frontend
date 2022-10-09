@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -8,7 +8,6 @@ import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
 import formStyle from "../form.scss";
-import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
 import { endpointSatisfies, hostSatisfies } from "../../scripts/util/satisfy";
@@ -18,7 +17,7 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
         if(props.session !== null) {
             props.actions.fetchAllUptimeEndpointsStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const uptimeEndpoints = Array.from(props.uptimeEndpoints.values());
@@ -27,13 +26,13 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
     const [name, setName] = useState("");
     const [host, setHost] = useState("");
     const [requestEndpoint, setRequestEndpoint] = useState("");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (uptimeEndpoints.some(e => e.name !== uptimeEndpoint?.name && e.name === name) ? "(endpoint with same name exists)" : "(satisfies)");
-    }
+    }, [name, uptimeEndpoint?.name, uptimeEndpoints]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)" && hostSatisfies(host, requestEndpoint) === "(satisfies)" && endpointSatisfies(host, requestEndpoint) === "(satisfies)");
-    }, [name, host, requestEndpoint]);
+    }, [host, requestEndpoint, nameSatisfies]);
     if(uptimeEndpoint === undefined) {
         return null;
     }
@@ -87,7 +86,3 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
 };
 
 export default connect(mapState, mapDispatch(actions))(EditUptimeEndpoint);
-function requestEndpointSatisfies() {
-    throw new Error("Function not implemented.");
-}
-

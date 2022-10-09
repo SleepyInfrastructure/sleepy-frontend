@@ -156,7 +156,7 @@ export async function fetchUserFile(id: string): Promise<UserFile | undefined> {
 }
 
 export async function createServerDaemonToken(id: string): Promise<DaemonToken | undefined> {
-    return await createResource("/server/daemon/tokens/create", { id });
+    return await createResource("/server/daemon/tokens", { id });
 }
 
 export async function deleteDeamonToken(id: string): Promise<boolean> {

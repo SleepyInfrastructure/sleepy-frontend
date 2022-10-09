@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -18,19 +18,19 @@ const Register: FunctionalComponent<RegisterConnectedProps> = (props: RegisterCo
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
-    const usernameSatisfies = () => {
+    const usernameSatisfies = useCallback(() => {
         return username.length < 3 ? "(is not atleast 3 characters)" : "(satisfies)";
-    }
-    const passwordSatisfies = () => {
+    }, [username.length]);
+    const passwordSatisfies = useCallback(() => {
         return password.length < 8 ? "(is not atleast 8 characters)" : "(satisfies)";
-    }
-    const passwordAgainMatches = () => {
+    }, [password.length]);
+    const passwordAgainMatches = useCallback(() => {
         return passwordAgain !== password ? "(password doesn't match)" : "(matches)";
-    }
+    }, [password, passwordAgain]);
 
     useEffect(() => {
-        setSatisfies(usernameSatisfies() === "(satisfies)" && passwordSatisfies() === "(satisfies)" && passwordAgainMatches() == "(matches)");
-    }, [username, password, passwordAgain]);
+        setSatisfies(usernameSatisfies() === "(satisfies)" && passwordSatisfies() === "(satisfies)" && passwordAgainMatches() === "(matches)");
+    }, [usernameSatisfies, passwordSatisfies, passwordAgainMatches]);
 
     return (
         <div class={baseStyle.page}>

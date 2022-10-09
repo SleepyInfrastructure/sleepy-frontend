@@ -15,7 +15,7 @@ const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (p
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     if(props.id === undefined) {
         return null;
     }

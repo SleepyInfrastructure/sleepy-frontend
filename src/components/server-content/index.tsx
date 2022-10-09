@@ -1,6 +1,5 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { REFRESH_ALL } from "../../ts/const";
 /* Styles */
 import style from "./style.scss";
 

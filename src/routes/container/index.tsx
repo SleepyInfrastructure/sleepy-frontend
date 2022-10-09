@@ -18,7 +18,7 @@ const ContainerRoute: FunctionalComponent<ContainerRouteConnectedProps> = (props
             props.actions.fetchAllServersStructured();
             props.actions.connectWebsocket();
         }
-    }, [props.session]);
+    }, [props.actions, props.id, props.session]);
     if(props.id === undefined) {
         return null;
     }

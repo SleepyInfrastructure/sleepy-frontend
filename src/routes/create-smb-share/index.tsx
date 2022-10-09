@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -17,7 +17,7 @@ const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const smbShares = Array.from(props.smbShares.values());
 
@@ -26,16 +26,16 @@ const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props
     const [browsable, setBrowsable] = useState(true);
     const [readonly, setReadonly] = useState(false);
     const [guest, setGuest] = useState(false);
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (smbShares.some(e => e.parent === props.id && e.name === name) ? "(share with same name exists)" : "(satisfies)");
-    }
-    const pathSatisfies = () => {
+    }, [name, props.id, smbShares]);
+    const pathSatisfies = useCallback(() => {
         return path.length < 3 ? "(is not atleast 3 characters)" : "(satisfies)";
-    }
+    }, [path.length]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)" && pathSatisfies() === "(satisfies)");
-    }, [name, path]);
+    }, [nameSatisfies, pathSatisfies]);
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>
@@ -53,6 +53,27 @@ const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props
                     <div className={formStyle["page-form-text"]}>Share path: </div>
                     <input className={formStyle["page-form-input"]} placeholder="/mnt/my-disk..." onInput={(e) => { setPath(e.currentTarget.value); }} value={path} />
                     <div className={formStyle["page-form-error"]} data={pathSatisfies() === "(satisfies)" ? "false" : "true"}>{pathSatisfies()}</div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Browsable: </div>
+                    <div className={formStyle["page-form-switch"]} onClick={() => { setBrowsable(!browsable); }}>
+                        <input type="checkbox" checked={browsable} />
+                        <div className={formStyle["page-form-switch-slider"]} />
+                    </div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Read-only: </div>
+                    <div className={formStyle["page-form-switch"]} onClick={() => { setReadonly(!readonly); }}>
+                        <input type="checkbox" checked={readonly} />
+                        <div className={formStyle["page-form-switch-slider"]} />
+                    </div>
+                </div>
+                <div className={formStyle["page-form-row"]}>
+                    <div className={formStyle["page-form-text"]}>Allow guests: </div>
+                    <div className={formStyle["page-form-switch"]} onClick={() => { setGuest(!guest); }}>
+                        <input type="checkbox" checked={guest} />
+                        <div className={formStyle["page-form-switch-slider"]} />
+                    </div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
                         props.actions.createSmbShare({ parent: props.id ?? "", name, path, browsable, readonly, guest, users: [], admins: [] });

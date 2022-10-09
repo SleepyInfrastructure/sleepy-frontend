@@ -1,7 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { Router } from "preact-router";
-import { AppPreferencesTheme } from "../ts/const";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../redux/util";
@@ -45,7 +44,7 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
     useEffect(() => {
         props.actions.fetchPreferences();
         props.actions.createSession("token", undefined, undefined);
-    }, [true]);
+    }, [props.actions]);
 
     // Preferences
     useEffect(() => {
@@ -63,11 +62,11 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
         }
 
         switch (props.preferences.theme) {
-            case AppPreferencesTheme.DARK:
+            case "dark":
                 setRuleID(item.insertRule(dark.default));
                 break;
 
-            case AppPreferencesTheme.LIGHT:
+            case "light":
                 setRuleID(item.insertRule(light.default));
                 break;
         }

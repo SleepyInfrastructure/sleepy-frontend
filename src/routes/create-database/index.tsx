@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -17,18 +17,18 @@ const CreateDatabase: FunctionalComponent<CreateDatabaseConnectedProps> = (props
         if(props.session !== null) {
             props.actions.fetchAllServersStructured();
         }
-    }, [props.session]);
+    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const databases = Array.from(props.databases.values());
 
     const [name, setName] = useState("");
-    const nameSatisfies = () => {
+    const nameSatisfies = useCallback(() => {
         return name.length < 3 ? "(is not atleast 3 characters)" : (databases.some(e => e.name === name) ? "(database with same name exists)" : "(satisfies)");
-    }
+    }, [databases, name]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
-    }, [name]);
+    }, [nameSatisfies]);
 
     return <div class={baseStyle.page}>
         <div className={baseStyle["page-content"]}>

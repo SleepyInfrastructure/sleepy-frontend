@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 /* Redux */
 import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
@@ -17,16 +17,16 @@ const Login: FunctionalComponent<LoginConnectedProps> = (props: LoginConnectedPr
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const usernameSatisfies = () => {
+    const usernameSatisfies = useCallback(() => {
         return username.length < 3 ? "(is not atleast 3 characters)" : "(satisfies)";
-    }
-    const passwordSatisfies = () => {
+    }, [username.length]);
+    const passwordSatisfies = useCallback(() => {
         return password.length < 8 ? "(is not atleast 8 characters)" : "(satisfies)";
-    }
+    }, [password.length]);
 
     useEffect(() => {
         setSatisfies(usernameSatisfies() === "(satisfies)" && passwordSatisfies() === "(satisfies)");
-    }, [username, password]);
+    }, [usernameSatisfies, passwordSatisfies]);
 
     return (
         <div class={baseStyle.page}>
