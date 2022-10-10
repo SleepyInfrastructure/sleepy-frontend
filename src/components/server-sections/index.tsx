@@ -1,4 +1,5 @@
 /* Base */
+import { StatisticTypePreviousMapping } from "../../ts/common/const";
 import { h, FunctionalComponent, Fragment } from "preact";
 import { useEffect, useState } from "react";
 /* Styles */
@@ -30,7 +31,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
     });
 
     const [chartsOpen, setChartsOpen] = useState(true);
-    const [statType, setStatType] = useState<StatisticType>(StatisticType.HOUR);
+    const [statType, setStatType] = useState<StatisticType>("HOUR");
     const [fetchedTypes, setFetchedTypes] = useState<StatisticType[]>([]);
     useEffect(() => {
         if(!fetchedTypes.includes(statType)) {
@@ -82,10 +83,10 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 <div className={style["server-section-header"]}>
                     <Button secondary={chartsOpen} onClick={() => { setChartsOpen(!chartsOpen); }}>Show</Button>
                     {!chartsOpen ? null : <Fragment>
-                        <Button secondary={statType === StatisticType.HOUR} onClick={() => { setStatType(StatisticType.HOUR); }}>Hour</Button>
-                        <Button secondary={statType === StatisticType.DAY} onClick={() => { setStatType(StatisticType.DAY); }}>Day</Button>
-                        <Button secondary={statType === StatisticType.MONTH} onClick={() => { setStatType(StatisticType.MONTH); }}>Month</Button>
-                        <Button secondary={statType === StatisticType.YEAR} onClick={() => { setStatType(StatisticType.YEAR); }}>Year</Button>
+                        <Button secondary={statType === "HOUR"} onClick={() => { setStatType("HOUR"); }}>Hour</Button>
+                        <Button secondary={statType === "DAY"} onClick={() => { setStatType("DAY"); }}>Day</Button>
+                        <Button secondary={statType === "MONTH"} onClick={() => { setStatType("MONTH"); }}>Month</Button>
+                        <Button secondary={statType === "YEAR"} onClick={() => { setStatType("YEAR"); }}>Year</Button>
                     </Fragment>}
                 </div>
                 {!chartsOpen ? null : <div className={style["server-section-charts"]}>

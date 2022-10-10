@@ -6,6 +6,7 @@ import store from "./redux/store";
 /* Styles */
 import "./style/default.scss";
 import "./style/variables.scss";
+import "./style/g6.scss";
 /* Components */
 import App from "./components/app";
 

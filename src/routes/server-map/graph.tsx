@@ -75,7 +75,26 @@ export function getGraphOptions(ref: HTMLElement): GraphOptions {
             }
         },
         modes: {
-          default: ["drag-canvas", "zoom-canvas"]
+            default: [
+                "drag-canvas",
+                "zoom-canvas",
+                {
+                    type: "tooltip",
+                    formatText: (model: any) => {
+                        const node = model as NodeConfig;
+                        return node.tooltip as string;
+                    },
+                    offset: 0
+                },
+                {
+                    type: "edge-tooltip",
+                    formatText: (model: any) => {
+                        const edge = model as EdgeConfig;
+                        return edge.tooltip as string;
+                    },
+                    offset: 0
+                },
+            ]
         },
         defaultNode: {
             type: "node",

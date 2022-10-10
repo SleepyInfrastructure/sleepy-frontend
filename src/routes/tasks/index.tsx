@@ -22,9 +22,9 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
     useEffect(() => {
         for(const task of Array.from(props.tasks.values())) {
             switch(task.type) {
-                case TaskType.BACKUP_DATABASE:
-                case TaskType.BACKUP_DATABASE_SCHEMA:
-                case TaskType.REQUEST_CONTAINER_LOG:
+                case "BACKUP_DATABASE":
+                case "BACKUP_DATABASE_SCHEMA":
+                case "REQUEST_CONTAINER_LOG":
                     if(task.result !== null && props.userFiles.get(task.result) === undefined) {
                         props.actions.fetchUserFile(task.result);
                     }
@@ -45,13 +45,13 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
                     {tasks.map((e, i) => {
                         let object, result;
                         switch(e.type) {
-                            case TaskType.BACKUP_DATABASE:
-                            case TaskType.BACKUP_DATABASE_SCHEMA:
+                            case "BACKUP_DATABASE":
+                            case "BACKUP_DATABASE_SCHEMA":
                                 object = e.object === null ? undefined : props.databases.get(e.object);
                                 result = e.result === null ? undefined : props.userFiles.get(e.result);
                                 break;
 
-                            case TaskType.REQUEST_CONTAINER_LOG:
+                            case "REQUEST_CONTAINER_LOG":
                                 object = e.object === null ? undefined : props.containers.get(e.object);
                                 result = e.result === null ? undefined : props.userFiles.get(e.result);
                                 break;
