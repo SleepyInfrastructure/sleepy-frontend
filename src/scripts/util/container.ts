@@ -1,3 +1,4 @@
+import { StatisticTimeMapping } from "../../ts/common/const";
 import { formatDurationNow } from "./util";
 
 export function getContainerProjectStats(item: ContainerProjectStructured): ContainerProjectStats {
@@ -7,9 +8,9 @@ export function getContainerProjectStats(item: ContainerProjectStructured): Cont
     const memory = item.containers.reduce((acc, curr) => {
         return acc + (curr.statistics.length > 0 ? curr.statistics[curr.statistics.length-1].memory : 0);
     }, 0);
-    const network = item.containers.reduce((acc, curr) => {
+    const network = Math.round(item.containers.reduce((acc, curr) => {
         return acc + (curr.statistics.length > 0 ? curr.statistics[curr.statistics.length-1].rx + curr.statistics[curr.statistics.length-1].tx : 0);
-    }, 0);
+    }, 0) / StatisticTimeMapping.MINUTE);
     const disk = item.containers.reduce((acc, curr) => {
         return acc + (curr.statistics.length > 0 ? curr.statistics[curr.statistics.length-1].read + curr.statistics[curr.statistics.length-1].write : 0);
     }, 0);
@@ -34,9 +35,9 @@ export function getContainerProjectStats(item: ContainerProjectStructured): Cont
 }
 
 export function showDockerPort(port: string): boolean {
-    return !port.startsWith("0.0.0.0");
+    return !port.startsWith(":::");
 }
 
 export function cleanDockerPort(port: string) {
-    return port;
+    return port.replace("0.0.0.0:", "");
 }

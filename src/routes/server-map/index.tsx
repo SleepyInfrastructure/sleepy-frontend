@@ -10,7 +10,7 @@ import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
 import style from "./style.scss";
-import { createServerGraph } from "./server";
+import { createServerGraph } from "./models/server";
 import { createGraph, GraphBetterData } from "./graph";
 /* Components */
 

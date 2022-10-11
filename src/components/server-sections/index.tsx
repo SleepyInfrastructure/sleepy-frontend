@@ -80,13 +80,25 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     <div className={style["icon-chart"]} />
                     <div className={style["server-section-title"]}>Charts</div>
                 </div>
-                <div className={style["server-section-header"]}>
-                    <Button secondary={chartsOpen} onClick={() => { setChartsOpen(!chartsOpen); }}>Show</Button>
+                <div className={style["server-section-charts-header"]}>
+                    <Button className={style["server-section-button"]} secondary={chartsOpen} onClick={() => { setChartsOpen(!chartsOpen); }}>Show</Button>
                     {!chartsOpen ? null : <Fragment>
-                        <Button secondary={statType === "HOUR"} onClick={() => { setStatType("HOUR"); }}>Hour</Button>
-                        <Button secondary={statType === "DAY"} onClick={() => { setStatType("DAY"); }}>Day</Button>
-                        <Button secondary={statType === "MONTH"} onClick={() => { setStatType("MONTH"); }}>Month</Button>
-                        <Button secondary={statType === "YEAR"} onClick={() => { setStatType("YEAR"); }}>Year</Button>
+                        <Button className={style["server-section-button"]} secondary={statType === "HOUR"} onClick={() => { setStatType("HOUR"); }}>
+                            <div className={style["icon-hour"]} data={statType === "HOUR" ? "active" : undefined} />
+                            Hour
+                        </Button>
+                        <Button className={style["server-section-button"]} secondary={statType === "DAY"} onClick={() => { setStatType("DAY"); }}>
+                            <div className={style["icon-day"]} data={statType === "DAY" ? "active" : undefined} />
+                            Day
+                        </Button>
+                        <Button className={style["server-section-button"]} secondary={statType === "MONTH"} onClick={() => { setStatType("MONTH"); }}>
+                            <div className={style["icon-month"]} data={statType === "MONTH" ? "active" : undefined} />
+                            Month
+                        </Button>
+                        <Button className={style["server-section-button"]} secondary={statType === "YEAR"} onClick={() => { setStatType("YEAR"); }}>
+                            <div className={style["icon-year"]} data={statType === "YEAR" ? "active" : undefined} />
+                            Year
+                        </Button>
                     </Fragment>}
                 </div>
                 {!chartsOpen ? null : <div className={style["server-section-charts"]}>
