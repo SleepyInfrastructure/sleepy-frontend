@@ -14,11 +14,6 @@ import Button from "../../components/ui/button";
 import { endpointSatisfies, hostSatisfies } from "../../scripts/util/satisfy";
 
 const CreateUptimeEndpoint: FunctionalComponent<CreateUptimeEndpointConnectedProps> = (props: CreateUptimeEndpointConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllUptimeEndpointsStructured();
-        }
-    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const uptimeEndpoints = Array.from(props.uptimeEndpoints.values());
 

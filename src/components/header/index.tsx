@@ -1,6 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { Link } from "preact-router";
+import { Link } from "preact-router/match";
 /* Styles */
 import style from "./style.scss";
 
@@ -17,8 +17,13 @@ const Header: FunctionalComponent<HeaderConnectedProps> = (props: HeaderConnecte
                     <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/overview">
                         Overview
                     </Link>
+                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/alerts">
+                        Alerts
+                        <span className={style["header-nav-link-text"]} data="red">({props.alerts})</span>
+                    </Link>
                     <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tasks">
                         Tasks
+                        <span className={style["header-nav-link-text"]} data="blue">({props.tasks})</span>
                     </Link>
                     <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/settings">
                         Settings

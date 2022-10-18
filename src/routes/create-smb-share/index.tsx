@@ -13,11 +13,6 @@ import style from "./style.scss";
 import Button from "../../components/ui/button";
 
 const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props: CreateSMBShareConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const smbShares = Array.from(props.smbShares.values());
 
@@ -76,7 +71,11 @@ const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props
                     </div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.createSmbShare({ parent: props.id ?? "", name, path, browsable, readonly, guest, users: [], admins: [] });
+                        props.actions.createSmbShare({
+                            parent: props.id ?? "", name, path,
+                            browsable: browsable === true, readonly: readonly === true, guest: guest === true,
+                            users: [], admins: []
+                        });
                         setTimeout(() => { location.href = `/smb-instance/${props.id}`; }, 1000);
                     }}>
                     Create!

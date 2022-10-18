@@ -45,6 +45,7 @@ type TokensConnectedProps = RouteProps & {
     daemonTokens: Map<string, DaemonToken>;
 };
 type TasksConnectedProps = RouteProps & AppConnectedProps;
+type AlertsConnectedProps = RouteProps & AppConnectedProps;
 
 type OverviewConnectedProps = ServersProps & {
     path: string;

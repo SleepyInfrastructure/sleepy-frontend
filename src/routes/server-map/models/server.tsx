@@ -1,8 +1,8 @@
-import { cleanDockerPort, showDockerPort } from "../../../scripts/util/container";
+import { cleanDockerPort } from "../../../scripts/util/container";
 import { humanFileSize, pickHex } from "../../../scripts/util/util";
-import { StatisticTimeMapping } from "../../../ts/common/const";
 import { GraphBetterData } from "../graph";
 import * as c from "./const";
+import * as cg from "../../../ts/common/const";
 
 export function createServerGraph(data: GraphBetterData, serverProps: ServerConnectedProps, x: number, y: number) {
     const server = serverProps.item;
@@ -21,8 +21,8 @@ export function createServerGraph(data: GraphBetterData, serverProps: ServerConn
                 size = Math.max(50, 360 * (container.statistics[0].memory / server.memory));
                 fontSize = Math.max(10, 55 * (container.statistics[0].memory / server.memory));
                 netLoad = (container.statistics[0].rx + container.statistics[0].tx);
-                color = pickHex(c.HIGH_LOAD_COLOR, c.LOAD_LOAD_COLOR, Math.min(1, netLoad / c.NET_HIGH_LOAD));
-                edgeSize = Math.max(edgeSize, Math.round(5 * netLoad / c.NET_HIGH_LOAD));
+                color = pickHex(c.HIGH_LOAD_COLOR, c.LOAD_LOAD_COLOR, Math.min(1, netLoad / cg.NET_HIGH_LOAD));
+                edgeSize = Math.max(edgeSize, Math.round(5 * netLoad / cg.NET_HIGH_LOAD));
             }
             const fill = container.status === "running" ? "#739dff" : "#6e6e6e";
             const stroke = container.status === "running" ? "#4e79de" : "#545454";
@@ -52,8 +52,8 @@ export function createServerGraph(data: GraphBetterData, serverProps: ServerConn
             let netLoad = 0;
             if(containerProject.item.status === "running") {
                 netLoad = containerProject.statistics.network;
-                color = pickHex(c.HIGH_LOAD_COLOR, c.LOAD_LOAD_COLOR, Math.min(1, netLoad / c.NET_HIGH_LOAD));
-                edgeSize = Math.max(2, Math.round(5 * netLoad / c.NET_HIGH_LOAD));
+                color = pickHex(c.HIGH_LOAD_COLOR, c.LOAD_LOAD_COLOR, Math.min(1, netLoad / cg.NET_HIGH_LOAD));
+                edgeSize = Math.max(2, Math.round(5 * netLoad / cg.NET_HIGH_LOAD));
             }
             const fill = containerProject.item.status === "running" ? "#4a80ff" : "#6e6e6e";
             const stroke = containerProject.item.status === "running" ? "#1749bf" : "#545454";
@@ -85,7 +85,7 @@ export function createServerGraph(data: GraphBetterData, serverProps: ServerConn
         };
         
         const existingPartitions: string[] = [];
-        for(const pool of serverProps.zfsPools) {
+        for(const pool of serverProps.zfs) {
             for(const partition of pool.partitions) {
                 if(partition.partition !== undefined) {
                     processPartition(partition.parent, partition.partition);
@@ -101,8 +101,8 @@ export function createServerGraph(data: GraphBetterData, serverProps: ServerConn
             let diskLoad = 0;
             if(disk.statistics.length > 0) {
                 diskLoad = (disk.statistics[0].read + disk.statistics[0].write);
-                color = pickHex(c.HIGH_LOAD_COLOR, c.LOAD_LOAD_COLOR, Math.min(1, diskLoad / c.DISK_HIGH_LOAD));
-                edgeSize = Math.max(edgeSize, Math.round(5 * diskLoad / c.DISK_HIGH_LOAD));
+                color = pickHex(c.HIGH_LOAD_COLOR, c.LOAD_LOAD_COLOR, Math.min(1, diskLoad / cg.DISK_HIGH_LOAD));
+                edgeSize = Math.max(edgeSize, Math.round(5 * diskLoad / cg.DISK_HIGH_LOAD));
             }
 
             const lastStatistic = disk.statistics[disk.statistics.length - 1];

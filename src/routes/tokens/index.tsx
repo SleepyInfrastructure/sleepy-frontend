@@ -12,11 +12,6 @@ import baseStyle from "../style.scss";
 import TokenServer from "../../components/token-server";
 
 const Tokens: FunctionalComponent<TokensConnectedProps> = (props: TokensConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.session]);
     const servers = Array.from(props.servers.values());
     const daemonTokens = Array.from(props.daemonTokens.values());
 

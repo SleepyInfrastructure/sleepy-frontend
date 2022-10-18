@@ -13,14 +13,9 @@ import Task from "../../components/task";
 import EmptyPanel from "../../components/empty-panel";
 
 const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedProps) => {
+    const tasks = Array.from(props.tasks.values()).sort((a, b) => b.start - a.start);
     useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-            props.actions.fetchAllTasks();
-        }
-    }, [props.actions, props.session]);
-    useEffect(() => {
-        for(const task of Array.from(props.tasks.values())) {
+        for(const task of tasks) {
             switch(task.type) {
                 case "BACKUP_DATABASE":
                 case "BACKUP_DATABASE_SCHEMA":
@@ -31,15 +26,14 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
                     break;
             }
         }
-    }, [props.actions, props.tasks, props.userFiles]);
-    const tasks = Array.from(props.tasks.values()).sort((a, b) => b.start - a.start);
+    }, [props.actions, tasks, props.userFiles]);
 
     return (
         <div class={baseStyle.page}>
             <div className={baseStyle["page-content"]}>
                 <div className={baseStyle["page-header"]}>
                     <div className={style["icon-task"]} />
-                    <div className={baseStyle["page-title"]}>Tasks</div>
+                    <div className={baseStyle["page-title"]}>Tasks ({tasks.length})</div>
                 </div>
                 <div class={style["tasks-content"]}>
                     {tasks.map((e, i) => {

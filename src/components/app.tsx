@@ -10,6 +10,7 @@ import Header from "./header";
 import Home from "../routes/home";
 import PublicServers from "../routes/public-servers";
 import Overview from "../routes/overview";
+import Alerts from "../routes/alerts";
 import Tasks from "../routes/tasks";
 import Settings from "../routes/settings";
 import { useEffect, useState } from "react";
@@ -43,8 +44,17 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
     // API calls
     useEffect(() => {
         props.actions.fetchPreferences();
-        props.actions.createSession("token", undefined, undefined);
+        props.actions.createSession("token");
     }, [props.actions]);
+    useEffect(() => {
+        if(props.session !== null) {
+            props.actions.fetchAllServersStructured();
+            props.actions.fetchAllUptimeEndpointsStructured();
+            props.actions.fetchAllAlerts();
+            props.actions.fetchAllTasks();
+            props.actions.connectWebsocket();
+        }
+    }, [props.actions, props.session]);
 
     // Preferences
     useEffect(() => {
@@ -72,15 +82,19 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
         }
     }, [props.preferences.theme]);
 
+    // Misc
+    const runTasks = Array.from(props.tasks.values()).filter(e => e.status === "RUNNING").length;
+
     return (
         <div id="app">
-            <Header session={props.session} actions={props.actions} />
+            <Header session={props.session} alerts={props.alerts.size} tasks={runTasks} actions={props.actions} />
             <Router>
                 <Home path="/" {...props} />
                 <PublicServers path="/public-dashboards" session={props.session} publicServers={props.publicServers} publicServerListings={props.publicServerListings} statistics={props.statistics} actions={props.actions} />
                 <Overview path="/overview" {...props} />
                 <Login path="/login" session={props.session} actions={props.actions} />
                 <Register path="/register" session={props.session} actions={props.actions} />
+                <Alerts path="/alerts" {...props} />
                 <Tasks path="/tasks" {...props} />
                 <Settings path="/settings" session={props.session} actions={props.actions} />
                 <Tokens path="/tokens" session={props.session} servers={props.servers} daemonTokens={props.daemonTokens} actions={props.actions} />

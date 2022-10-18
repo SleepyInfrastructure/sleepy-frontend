@@ -16,13 +16,6 @@ import UptimeEndpoint from "../../components/uptime-endpoint";
 import EmptyPanel from "../../components/empty-panel";
 
 const Overview: FunctionalComponent<OverviewConnectedProps> = (props: OverviewConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-            props.actions.fetchAllUptimeEndpointsStructured();
-            props.actions.connectWebsocket();
-        }
-    }, [props.actions, props.session]);
     const servers = Array.from(props.servers.values());
     const uptimeEndpoints = Array.from(props.uptimeEndpoints.values());
     const uptimeEndpointStatistics = Array.from(props.uptimeEndpointStatistics.values());

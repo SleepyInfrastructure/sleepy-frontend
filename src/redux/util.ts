@@ -24,6 +24,7 @@ export const INITIAL: ReduxState = {
     diskStatistics: new Map(),
     uptimeEndpointStatistics: new Map(),
     tasks: new Map(),
+    alerts: new Map(),
     userFiles: new Map(),
     daemons: new Map(),
     daemonTokens: new Map(),
@@ -50,6 +51,7 @@ export enum ResourceType {
     STATISTIC,
     UPTIME_ENDPOINT, UPTIME_ENDPOINT_STRUCTURED, UPTIME_ENDPOINT_STATISTIC,
     TASK,
+    ALERT,
     USER_FILE,
     DAEMON, DAEMON_TOKEN,
     PUBLIC_SERVER_LISTING, PUBLIC_SERVER_STRUCTURED,
@@ -98,8 +100,8 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.software;
                 state = cacheResources(state, server.disks, ResourceType.DISK_STRUCTURED);
                 delete server.disks;
-                state = cacheResources(state, server.zfsPools, ResourceType.ZFS_POOL_STRUCTURED);
-                delete server.zfsPools;
+                state = cacheResources(state, server.zfs, ResourceType.ZFS_POOL_STRUCTURED);
+                delete server.zfs;
                 state = cacheResources(state, server.containers, ResourceType.CONTAINER_STRUCTURED);
                 delete server.containers;
                 state = cacheResources(state, server.containerProjects, ResourceType.CONTAINER_PROJECT);
@@ -108,7 +110,7 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.databases;
                 state = cacheResources(state, server.smb, ResourceType.SMB_INSTANCE_STRUCTURED);
                 delete server.smb;
-                if(server.public !== undefined) {
+                if(server.public !== null) {
                     state = cacheResource(state, server.public, ResourceType.PUBLIC_SERVER_LISTING);
                     delete server.public;
                 }
@@ -234,6 +236,9 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
 
         case ResourceType.TASK:
             return saveResources(state, "tasks", resources);
+
+        case ResourceType.ALERT:
+            return saveResources(state, "alerts", resources);
 
         case ResourceType.USER_FILE:
             return saveResources(state, "userFiles", resources);

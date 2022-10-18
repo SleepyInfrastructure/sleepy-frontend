@@ -40,6 +40,11 @@
     grid-gap: 6px;
     margin-top: 4px;
 }
+.server-section-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-gap: 6px;
+}
 .server-section-button {
     grid-gap: 4px;
 }

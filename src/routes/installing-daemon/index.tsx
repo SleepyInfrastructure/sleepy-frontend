@@ -11,11 +11,6 @@ import style from "./style.scss";
 import TokenServer from "../../components/token-server";
 
 const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (props: InstallingDaemonConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     if(props.id === undefined) {
         return null;
     }

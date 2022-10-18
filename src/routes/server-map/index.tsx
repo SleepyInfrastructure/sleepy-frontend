@@ -41,12 +41,10 @@ const ServerMapRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: S
         graph.render();
     }, [props.id, props.servers, graph, server, props]);
     useEffect(() => {
-        if(props.id === undefined) { return; }
-        if(props.session !== null) {
+        if(props.id !== undefined && server === undefined) {
             props.actions.fetchServerStructured(props.id);
-            props.actions.connectWebsocket();
         }
-    }, [props.actions, props.id, props.session]);
+    }, [props.actions, props.id, server]);
     if(server === undefined) {
         return null;
     }

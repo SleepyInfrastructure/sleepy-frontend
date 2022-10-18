@@ -29,6 +29,7 @@ type ReduxState = {
     diskStatistics: Map<string, DiskStatistic>;
     uptimeEndpointStatistics: Map<string, UptimeEndpointStatistic>;
     tasks: Map<string, Task>;
+    alerts: Map<string, Alert>;
     userFiles: Map<string, UserFile>;
     daemons: Map<string, Daemon>;
     daemonTokens: Map<string, DaemonToken>;
@@ -82,6 +83,7 @@ type ConnectedActions = {
     deleteTask(id: string): ReduxAction;
     fetchTask(id: string): ReduxAction;
     fetchAllTasks(): ReduxAction;
+    fetchAllAlerts(): ReduxAction;
     fetchUserFile(id: string): ReduxAction;
     connectWebsocket(): ReduxAction;
     daemonRequestResources(id: string, resources: string[]): ReduxAction;

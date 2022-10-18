@@ -17,12 +17,10 @@ const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: Serv
         server = props.servers.get(props.id);
     }
     useEffect(() => {
-        if(props.id === undefined) { return; }
-        if(props.session !== null) {
+        if(props.id !== undefined && server === undefined) {
             props.actions.fetchServerStructured(props.id);
-            props.actions.connectWebsocket();
         }
-    }, [props.actions, props.id, props.session]);
+    }, [props.actions, props.id, server]);
     if(server === undefined) {
         return null;
     }

@@ -13,11 +13,6 @@ import style from "./style.scss";
 import Button from "../../components/ui/button";
 
 const CreateDatabase: FunctionalComponent<CreateDatabaseConnectedProps> = (props: CreateDatabaseConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const databases = Array.from(props.databases.values());
 

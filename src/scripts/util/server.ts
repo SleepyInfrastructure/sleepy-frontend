@@ -54,7 +54,7 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
         config: config ?? null,
         network: network ?? null,
         disks: serverDisks,
-        zfsPools: serverZfsPools,
+        zfs: serverZfsPools,
         containers: serverContainers,
         containerProjects: serverContainerProjects,
         databases: serverDatabases,

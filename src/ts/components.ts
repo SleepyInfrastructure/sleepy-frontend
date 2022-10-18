@@ -1,6 +1,8 @@
 /* Base */
 type HeaderConnectedProps = {
     session: Session | null;
+    alerts: number;
+    tasks: number;
     actions: ConnectedActions;
 };
 type PanelHeaderTagConnectedProps = {
@@ -15,7 +17,7 @@ type ServerConnectedProps = {
     config: ServerConfig | null;
     network: Network | null;
     disks: DiskConnectedPropsItem[];
-    zfsPools: ZFSPoolConnectedPropsItem[];
+    zfs: ZFSPoolConnectedPropsItem[];
     containers: ContainerConnectedProps[];
     containerProjects: ContainerProjectConnectedProps[];
     databases: Database[];
@@ -138,6 +140,14 @@ type LogViewConnectedProps = {
     requestFile?: () => void;
     actions: ConnectedActions;
 };
+
+/* Alert */
+type AlertConnectedProps = {
+    item: Alert;
+    object?: any;
+    actions: ConnectedActions;
+};
+type AlertObjectConnectedProps = AlertConnectedProps;
 
 /* Charts */
 type ChartConnectedProps = {

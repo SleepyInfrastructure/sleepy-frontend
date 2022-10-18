@@ -14,11 +14,6 @@ import Button from "../../components/ui/button";
 import { ipv4Satisfies } from "../../scripts/util/satisfy";
 
 const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: EditNetworkConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const networks = Array.from(props.networks.values());

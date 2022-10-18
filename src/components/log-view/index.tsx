@@ -54,7 +54,7 @@ const LogView: FunctionalComponent<LogViewConnectedProps> = (props: LogViewConne
                 {props.requestFile === undefined ? null :<a className={baseStyle["panel-link"]} data="blue" onClick={props.requestFile}>(Request Log)</a>}
             </div>
             <div className={baseStyle["panel-content"]}>
-                <XTerm className={style["log-view-terminal"]} addons={addons} ref={xtermRef} />
+                <XTerm className={style["log-view-terminal"]} addons={addons} ref={xtermRef} options={{ allowProposedApi: true }} />
             </div>
         </div>
     );

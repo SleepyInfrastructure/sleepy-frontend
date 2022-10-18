@@ -12,13 +12,6 @@ import baseStyle from "../style.scss";
 import ContainerProject from "../../components/container-project";
 
 const ContainerProjectRoute: FunctionalComponent<ContainerRouteConnectedProps> = (props: ContainerRouteConnectedProps) => {
-    useEffect(() => {
-        if(props.id === undefined) { return; }
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-            props.actions.connectWebsocket();
-        }
-    }, [props.actions, props.id, props.session]);
     if(props.id === undefined) {
         return null;
     }

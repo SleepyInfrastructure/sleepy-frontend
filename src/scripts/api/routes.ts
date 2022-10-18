@@ -38,10 +38,10 @@ export async function fetchServer(id: string): Promise<Server | undefined> {
     return await fetchResource("/servers", id);
 }
 export async function fetchServerStatistics(data: { id: string, type: string }): Promise<Statistic[]> {
-    return await fetchResources(`/server/statistics/${data.type}`, data.id);
+    return await fetchResources(`/servers/statistics/${data.type}`, data.id);
 }
 export async function fetchServerStructured(id: string): Promise<ServerStructured | undefined> {
-    return await fetchResource("/server/structured", id);
+    return await fetchResource("/servers/structured", id);
 }
 export async function fetchAllServersStructured(): Promise<ServerStructured[]> {
     return await fetchResources("/servers/all/structured");
@@ -151,12 +151,16 @@ export async function fetchAllTasks(): Promise<Task[]> {
     return await fetchResources("/tasks/all");
 }
 
+export async function fetchAllAlerts(): Promise<Alert[]> {
+    return await fetchResources("/alerts/all");
+}
+
 export async function fetchUserFile(id: string): Promise<UserFile | undefined> {
     return await fetchResource("/user/files", id);
 }
 
 export async function createServerDaemonToken(id: string): Promise<DaemonToken | undefined> {
-    return await createResource("/server/daemon/tokens", { id });
+    return await createResource("/servers/daemon/tokens", { id });
 }
 
 export async function deleteDeamonToken(id: string): Promise<boolean> {
@@ -164,7 +168,7 @@ export async function deleteDeamonToken(id: string): Promise<boolean> {
 }
 
 export async function fetchServerDaemonTokens(id: string): Promise<DaemonToken[]> {
-    return await fetchResources("/server/daemon/tokens", id);
+    return await fetchResources("/servers/daemon/tokens", id);
 }
 
 /* Public */

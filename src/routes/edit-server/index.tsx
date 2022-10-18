@@ -14,11 +14,6 @@ import style from "./style.scss";
 import Button from "../../components/ui/button";
 
 const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditServerConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const servers = Array.from(props.servers.values());

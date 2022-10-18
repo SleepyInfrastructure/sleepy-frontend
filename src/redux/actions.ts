@@ -290,6 +290,14 @@ export function fetchAllTasksSuccess(tasks: Task[]): ReduxAction {
 }
 
 /* Tasks */
+export function fetchAllAlerts(): ReduxAction {
+    return getAction("FETCH_ALL_ALERTS", {});
+}
+export function fetchAllAlertsSuccess(alerts: Alert[]): ReduxAction {
+    return getAction("FETCH_ALL_ALERTS_SUCCESS", alerts);
+}
+
+/* User files */
 export function fetchUserFile(id: string): ReduxAction {
     return getAction("FETCH_USER_FILE", id);
 }

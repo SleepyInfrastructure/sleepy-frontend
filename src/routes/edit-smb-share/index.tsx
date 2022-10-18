@@ -13,11 +13,6 @@ import style from "./style.scss";
 import Button from "../../components/ui/button";
 
 const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: EditSMBShareConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const smbShares = Array.from(props.smbShares.values());
@@ -148,7 +143,11 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
                     </div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                    props.actions.editSmbShare({ id: share.id, name, path, browsable, readonly, guest, users, admins });
+                    props.actions.editSmbShare({
+                        id: share.id, name, path,
+                        browsable: browsable === true, readonly: readonly === true, guest: guest === true,
+                        users, admins
+                    });
                     setTimeout(() => { location.href = "/"; }, 1000);
                 }}>
                     Edit!

@@ -13,11 +13,6 @@ import Button from "../../components/ui/button";
 import { endpointSatisfies, hostSatisfies } from "../../scripts/util/satisfy";
 
 const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> = (props: EditUptimeEndpointConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllUptimeEndpointsStructured();
-        }
-    }, [props.actions, props.session]);
     const [didSetDefaults, setDidSetDefaults] = useState(false);
     const [satisfies, setSatisfies] = useState(false);
     const uptimeEndpoints = Array.from(props.uptimeEndpoints.values());

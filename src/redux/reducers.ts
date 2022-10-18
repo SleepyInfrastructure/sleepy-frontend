@@ -161,6 +161,10 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         return cacheResources(state, action.data, ResourceType.TASK);
     },
 
+    FETCH_ALL_ALERTS_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResources(state, action.data, ResourceType.ALERT);
+    },
+
     FETCH_USER_FILE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResource(state, action.data, ResourceType.USER_FILE);
     },
@@ -380,6 +384,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     FETCH_ALL_TASKS: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
         await reducerFetchMultiple(dispatch, {}, routes.fetchAllTasks, actions.fetchAllTasksSuccess);
+    },
+
+    FETCH_ALL_ALERTS: async (dispatch: Dispatch<ReduxAction>): Promise<void> => {
+        await reducerFetchMultiple(dispatch, {}, routes.fetchAllAlerts, actions.fetchAllAlertsSuccess);
     },
 
     FETCH_USER_FILE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

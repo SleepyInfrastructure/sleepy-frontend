@@ -13,11 +13,6 @@ import style from "./style.scss";
 import Button from "../../components/ui/button";
 
 const CreateSMBInstance: FunctionalComponent<CreateSMBInstanceConnectedProps> = (props: CreateSMBInstanceConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const smbInstances = Array.from(props.smbInstances.values());
 

@@ -13,11 +13,6 @@ import style from "./style.scss";
 import Button from "../../components/ui/button";
 
 const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: CreateSMBUserConnectedProps) => {
-    useEffect(() => {
-        if(props.session !== null) {
-            props.actions.fetchAllServersStructured();
-        }
-    }, [props.actions, props.session]);
     const [satisfies, setSatisfies] = useState(false);
     const smbUsers = Array.from(props.smbUsers.values());
 
