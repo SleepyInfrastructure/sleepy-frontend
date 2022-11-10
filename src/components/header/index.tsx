@@ -3,6 +3,7 @@ import { h, FunctionalComponent } from "preact";
 import { Link } from "preact-router/match";
 /* Styles */
 import style from "./style.scss";
+import userStyle from "../smb-user/style.scss";
 
 const Header: FunctionalComponent<HeaderConnectedProps> = (props: HeaderConnectedProps) => {
     return (
@@ -12,25 +13,12 @@ const Header: FunctionalComponent<HeaderConnectedProps> = (props: HeaderConnecte
                 <h1 className={style["header-title"]}>Sleepy</h1>
             </div>
             {
-                props.session !== null ?
+                props.user !== null ?
                 <nav className={style["header-nav"]}>
-                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/overview">
-                        Overview
-                    </Link>
-                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/alerts">
-                        Alerts
-                        <span className={style["header-nav-link-text"]} data="red">({props.alerts})</span>
-                    </Link>
-                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tasks">
-                        Tasks
-                        <span className={style["header-nav-link-text"]} data="blue">({props.tasks})</span>
-                    </Link>
-                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/settings">
-                        Settings
-                    </Link>
-                    <Link className={style["header-nav-link"]} activeClassName={style["header-nav-link-active"]} href="/tokens">
-                        Tokens
-                    </Link>
+                    <div className={style["header-nav-profile"]}>
+                        <div className={userStyle["icon-user"]} />
+                        {props.user.username}
+                    </div>
                     <div className={style["header-nav-link"]} onClick={() => { props.actions.deleteSession(); }}>
                         Logout
                     </div>

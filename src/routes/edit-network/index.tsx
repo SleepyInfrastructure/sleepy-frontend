@@ -37,7 +37,7 @@ const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: Edit
         setDidSetDefaults(true);
     }
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-network"]} />
@@ -69,7 +69,7 @@ const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: Edit
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(EditNetwork);

@@ -25,7 +25,7 @@ const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: 
         setSatisfies(nameSatisfies() === "(satisfies)");
     }, [nameSatisfies]);
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-user"]} />
@@ -45,7 +45,7 @@ const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: 
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(CreateSMBUser);

@@ -26,7 +26,7 @@ const CreateSMBInstance: FunctionalComponent<CreateSMBInstanceConnectedProps> = 
         setSatisfies(nameSatisfies() === "(satisfies)");
     }, [nameSatisfies]);
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-smb"]} />
@@ -53,7 +53,7 @@ const CreateSMBInstance: FunctionalComponent<CreateSMBInstanceConnectedProps> = 
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(CreateSMBInstance);

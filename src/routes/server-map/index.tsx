@@ -9,7 +9,6 @@ import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
-import style from "./style.scss";
 import { createServerGraph } from "./models/server";
 import { createGraph, GraphBetterData } from "./graph";
 /* Components */
@@ -50,9 +49,7 @@ const ServerMapRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: S
     }
 
     return (
-        <div class={baseStyle.page}>
-            <div className={style["page-network"]} ref={onRefChange} />
-        </div>
+        <div className={baseStyle["page-content"]} data="no-padding" ref={onRefChange} />
     );
 };
 

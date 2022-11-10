@@ -16,18 +16,16 @@ const Tokens: FunctionalComponent<TokensConnectedProps> = (props: TokensConnecte
     const daemonTokens = Array.from(props.daemonTokens.values());
 
     return (
-        <div class={baseStyle.page}>
-            <div className={baseStyle["page-content"]}>
-                <div className={baseStyle["page-header"]}>
-                    <div className={style["icon-token"]} />
-                    <div className={baseStyle["page-title"]}>Tokens</div>
-                </div>
-                <div class={style["tokens-content"]}>
-                    {servers.map((e, i) => {
-                        const serverDaemonTokens = daemonTokens.filter(el => el.server === e.id);
-                        return <TokenServer key={i} item={e} daemonTokens={serverDaemonTokens} actions={props.actions} />
-                    })}
-                </div>
+        <div className={baseStyle["page-content"]}>
+            <div className={baseStyle["page-header"]}>
+                <div className={style["icon-token"]} />
+                <div className={baseStyle["page-title"]}>Tokens</div>
+            </div>
+            <div class={style["tokens-content"]}>
+                {servers.map((e, i) => {
+                    const serverDaemonTokens = daemonTokens.filter(el => el.server === e.id);
+                    return <TokenServer key={i} item={e} daemonTokens={serverDaemonTokens} actions={props.actions} />
+                })}
             </div>
         </div>
     );

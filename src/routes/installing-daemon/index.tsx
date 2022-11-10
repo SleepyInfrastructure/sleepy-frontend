@@ -20,7 +20,7 @@ const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (p
     }
     const daemonTokens = Array.from(props.daemonTokens.values()).filter(e => e.server === server.id);
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-server"]} />
@@ -62,7 +62,7 @@ const InstallingDaemon: FunctionalComponent<InstallingDaemonConnectedProps> = (p
                 </div>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(InstallingDaemon);

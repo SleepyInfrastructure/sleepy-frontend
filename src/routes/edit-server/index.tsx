@@ -37,7 +37,7 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
         setDidSetDefaults(true);
     }
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-server"]} />
@@ -66,7 +66,7 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(EditServer);

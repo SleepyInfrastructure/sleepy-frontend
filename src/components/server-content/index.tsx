@@ -2,10 +2,11 @@
 import { h, FunctionalComponent } from "preact";
 /* Styles */
 import style from "./style.scss";
+import sectionStyle from "../server-sections/style.scss";
 
 const ServerContent: FunctionalComponent<ServerContentConnectedProps> = (props: ServerContentConnectedProps) => {
     return (
-        <div className={style["server-content"]}>
+        <div>
             <div className={style["server-content-row"]}>
                 ID: <span className={style["server-daemon-highlight-red"]}>{props.item.id}</span>
                 <a className={style["server-content-link-right"]} data="purple" href={`/server/${props.item.id}/map`}>(Show map)</a>

@@ -35,8 +35,8 @@
 }
 
 .header-nav {
-    float: right;
-    font-size: 100%;
+    display: flex;
+    margin-left: auto;
 }
 .header-nav-link {
     display: inline-block;
@@ -46,9 +46,6 @@
     min-width: 50px;
     text-align: center;
     text-decoration: none;
-    will-change: background-color;
-
-    background: rgba(255, 255, 255, 0);
     color: #fff;
     cursor: pointer;
 }
@@ -69,4 +66,12 @@
 }
 .header-nav-link-text[data="blue"] {
     color: #66f;
+}
+
+.header-nav-profile {
+    @extend %align-y;
+    grid-gap: 4px;
+    height: 56px;
+    margin-right: 16px;
+    color: var(--color-primary-text);
 }

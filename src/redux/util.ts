@@ -86,6 +86,9 @@ export function cacheResource(state: ReduxState, resource: any, resourceType: Re
 
 export function cacheResources(state: ReduxState, resources: any[], resourceType: ResourceType): ReduxState {
     switch (resourceType) {
+        case ResourceType.USER:
+            return saveResources(state, "users", resources);
+
         case ResourceType.SERVER:
             return saveResources(state, "servers", resources);
         

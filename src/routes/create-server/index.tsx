@@ -27,7 +27,7 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
         setSatisfies(nameSatisfies() === "(satisfies)");
     }, [nameSatisfies]);
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-server"]} />
@@ -52,7 +52,7 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(CreateServer);

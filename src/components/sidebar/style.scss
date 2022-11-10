@@ -1,0 +1,33 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+%align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Content */
+.sidebar {
+    width: 148px;
+    background: var(--color-primary-light);
+}
+
+.sidebar-item {
+    @extend %align-y;
+    height: 40px;
+    color: var(--color-primary-text);
+    text-decoration: none;
+    font-size: 13px;
+    padding-left: 16px;
+}
+.sidebar-item:hover,
+.sidebar-item:active {
+    background: var(--color-primary-dark);
+}
+.sidebar-item-active {
+    background: var(--color-primary-dark);
+    color: var(--color-primary-text);
+}

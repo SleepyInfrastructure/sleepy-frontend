@@ -10,14 +10,12 @@ import baseStyle from "../style.scss";
 
 const Settings: FunctionalComponent<SettingsConnectedProps> = (props: SettingsConnectedProps) => {
     return (
-        <div class={baseStyle.page}>
-            <div className={baseStyle["page-content"]}>
-                <div className={baseStyle["page-header"]}>
-                    <div className={style["icon-server"]} />
-                    <div className={baseStyle["page-title"]}>Settings</div>
-                </div>
-                <div class={style["settings-section"]} />
+        <div className={baseStyle["page-content"]}>
+            <div className={baseStyle["page-header"]}>
+                <div className={style["icon-server"]} />
+                <div className={baseStyle["page-title"]}>Settings</div>
             </div>
+            <div class={style["settings-section"]} />
         </div>
     );
 };

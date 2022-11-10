@@ -1,14 +1,18 @@
 /* Base */
 type HeaderConnectedProps = {
-    session: Session | null;
-    alerts: number;
-    tasks: number;
+    user: User | null;
     actions: ConnectedActions;
 };
 type PanelHeaderTagConnectedProps = {
     icon: string;
     tooltip: string;
     text?: string;
+};
+type SidebarConnectedProps = {
+    servers: Map<string, Server>;
+    alerts: number;
+    tasks: number;
+    actions: ConnectedActions;
 };
 
 /* Server */

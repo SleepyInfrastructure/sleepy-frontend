@@ -1,6 +1,6 @@
 export default `* {
-    --color-primary: #262626;
-    --color-primary-light: #2b2b2b;
+    --color-primary: #1c1c1c;
+    --color-primary-light: #282828;
     --color-primary-dark: #202020;
     --color-primary-text: #ff3645;
 

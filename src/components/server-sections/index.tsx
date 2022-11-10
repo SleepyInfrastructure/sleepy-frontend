@@ -3,12 +3,13 @@ import { StatisticTypePreviousMapping } from "../../ts/common/const";
 import { h, FunctionalComponent, Fragment } from "preact";
 import { useEffect, useState } from "react";
 /* Styles */
+import baseStyle from "../style.scss";
+import style from "./style.scss";
 import networkStyle from "../network/style.scss";
 import diskStyle from "../disk/style.scss";
 import containerStyle from "../container/style.scss";
 import databaseStyle from "../database/style.scss";
 import smbStyle from "../smb-instance/style.scss";
-import style from "./style.scss";
 /* Components */
 import Button from "../ui/button";
 import Network from "../network";

@@ -32,7 +32,7 @@ const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props
         setSatisfies(nameSatisfies() === "(satisfies)" && pathSatisfies() === "(satisfies)");
     }, [nameSatisfies, pathSatisfies]);
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-smb"]} />
@@ -82,7 +82,7 @@ const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(CreateSMBShare);

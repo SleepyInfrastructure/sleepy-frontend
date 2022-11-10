@@ -29,31 +29,29 @@ const Tasks: FunctionalComponent<TasksConnectedProps> = (props: TasksConnectedPr
     }, [props.actions, tasks, props.userFiles]);
 
     return (
-        <div class={baseStyle.page}>
-            <div className={baseStyle["page-content"]}>
-                <div className={baseStyle["page-header"]}>
-                    <div className={style["icon-task"]} />
-                    <div className={baseStyle["page-title"]}>Tasks ({tasks.length})</div>
-                </div>
-                <div class={style["tasks-content"]}>
-                    {tasks.map((e, i) => {
-                        let object, result;
-                        switch(e.type) {
-                            case "BACKUP_DATABASE":
-                            case "BACKUP_DATABASE_SCHEMA":
-                                object = e.object === null ? undefined : props.databases.get(e.object);
-                                result = e.result === null ? undefined : props.userFiles.get(e.result);
-                                break;
+        <div className={baseStyle["page-content"]}>
+            <div className={baseStyle["page-header"]}>
+                <div className={style["icon-task"]} />
+                <div className={baseStyle["page-title"]}>Tasks ({tasks.length})</div>
+            </div>
+            <div class={style["tasks-content"]}>
+                {tasks.map((e, i) => {
+                    let object, result;
+                    switch(e.type) {
+                        case "BACKUP_DATABASE":
+                        case "BACKUP_DATABASE_SCHEMA":
+                            object = e.object === null ? undefined : props.databases.get(e.object);
+                            result = e.result === null ? undefined : props.userFiles.get(e.result);
+                            break;
 
-                            case "REQUEST_CONTAINER_LOG":
-                                object = e.object === null ? undefined : props.containers.get(e.object);
-                                result = e.result === null ? undefined : props.userFiles.get(e.result);
-                                break;
-                        }
-                        return <Task key={i} item={e} object={object} result={result} actions={props.actions} />
-                    })}
-                    {tasks.length > 0 ? null : <EmptyPanel />}
-                </div>
+                        case "REQUEST_CONTAINER_LOG":
+                            object = e.object === null ? undefined : props.containers.get(e.object);
+                            result = e.result === null ? undefined : props.userFiles.get(e.result);
+                            break;
+                    }
+                    return <Task key={i} item={e} object={object} result={result} actions={props.actions} />
+                })}
+                {tasks.length > 0 ? null : <EmptyPanel />}
             </div>
         </div>
     );

@@ -36,7 +36,7 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
         setDidSetDefaults(true);
     }
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-smb"]} />
@@ -67,7 +67,7 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(EditSmbInstance);

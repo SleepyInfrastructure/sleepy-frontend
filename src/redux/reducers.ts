@@ -224,7 +224,7 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
             return;
         }
 
-        dispatch(actions.createSessionSuccess(action.data));
+        dispatch(actions.createSessionSuccess(session));
         dispatch(actions.fetchUserSuccess(user));
     },
 

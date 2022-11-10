@@ -26,10 +26,8 @@ const ServerRoute: FunctionalComponent<ServerRouteConnectedProps> = (props: Serv
     }
 
     return (
-        <div class={baseStyle.page}>
-            <div className={baseStyle["page-content"]}>
-                <Server {...getServerConnectedProps(server, props)} />
-            </div>
+        <div className={baseStyle["page-content"]}>
+            <Server {...getServerConnectedProps(server, props)} />
         </div>
     );
 };

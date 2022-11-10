@@ -52,7 +52,7 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
         setDidSetDefaults(true);
     }
     
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-share"]} />
@@ -154,7 +154,7 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(EditSmbShare);

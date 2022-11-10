@@ -24,7 +24,7 @@ export default styled.button<Props>`
     transition: 0.2s ease opacity;
     transition: 0.2s ease background-color;
 
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-dark);
     color: var(--color-primary-text);
 
     border-radius: var(--button-border-radius);
@@ -32,7 +32,7 @@ export default styled.button<Props>`
     border: none;
 
     &:hover {
-        background-color: var(--color-primary-light);
+        background-color: var(--color-primary);
     }
     &:disabled {
         background-color: var(--color-primary) !important;
@@ -40,7 +40,7 @@ export default styled.button<Props>`
         opacity: 0.5;
     }
     &:active {
-        background-color: var(--color-primary-dark);
+        background-color: var(--color-primary);
     }
 
     ${(props) =>

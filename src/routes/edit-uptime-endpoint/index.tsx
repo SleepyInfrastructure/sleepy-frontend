@@ -8,6 +8,7 @@ import * as actions from "../../redux/actions";
 /* Styles */
 import baseStyle from "../style.scss";
 import formStyle from "../form.scss";
+import endpointStyle from "../../components/uptime-endpoint/style.scss";
 /* Components */
 import Button from "../../components/ui/button";
 import { endpointSatisfies, hostSatisfies } from "../../scripts/util/satisfy";
@@ -38,10 +39,10 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
         setDidSetDefaults(true);
     }
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={formStyle["icon-server"]} />
+                <div className={endpointStyle["icon-endpoint"]} />
                 <div className={baseStyle["page-title"]}>Edit Uptime Endpoint</div>
             </div>
             <div className={formStyle["page-form"]}>
@@ -77,7 +78,7 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(EditUptimeEndpoint);

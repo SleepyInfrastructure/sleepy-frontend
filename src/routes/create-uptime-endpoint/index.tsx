@@ -28,7 +28,7 @@ const CreateUptimeEndpoint: FunctionalComponent<CreateUptimeEndpointConnectedPro
         setSatisfies(nameSatisfies() === "(satisfies)" && hostSatisfies(host, requestEndpoint) === "(satisfies)" && endpointSatisfies(host, requestEndpoint) === "(satisfies)");
     }, [host, nameSatisfies, requestEndpoint]);
 
-    return <div class={baseStyle.page}>
+    return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-endpoint"]} />
@@ -62,7 +62,7 @@ const CreateUptimeEndpoint: FunctionalComponent<CreateUptimeEndpointConnectedPro
                 </Button>
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default connect(mapState, mapDispatch(actions))(CreateUptimeEndpoint);

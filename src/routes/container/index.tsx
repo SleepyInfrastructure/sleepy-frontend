@@ -23,10 +23,8 @@ const ContainerRoute: FunctionalComponent<ContainerRouteConnectedProps> = (props
     const logs = props.daemons.has(containerProps.item.server) ? containerProps.logs : ["Daemon is offline..."];
     
     return (
-        <div class={baseStyle.page}>
-            <div className={baseStyle["page-content"]}>
-                <Container {...containerProps} logs={logs} />
-            </div>
+        <div className={baseStyle["page-content"]}>
+            <Container {...containerProps} logs={logs} />
         </div>
     );
 };

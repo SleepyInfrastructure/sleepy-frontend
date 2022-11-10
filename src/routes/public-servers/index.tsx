@@ -27,19 +27,17 @@ const PublicServers: FunctionalComponent<PublicServersConnectedProps> = (props: 
     const serverStatistics = Array.from(props.statistics.values());
     
     return (
-        <div class={baseStyle.page}>
-            <div className={style["public-servers-content"]}>
-                <div className={style["public-servers-section"]}>
-                    <div className={style["home-title"]}>
-                        Public dashboards
-                    </div>
-                    <div className={style["public-servers-section-items"]}>
-                        {servers.map((e, i) => {
-                            const statistics = serverStatistics.filter(el => el.server === e.id);
-                            return statistics.length === 0 ? null : <SmallPublicServer key={i} item={e} statistics={statistics} actions={props.actions} />;
-                        })}
-                        {servers.length > 0 ? null : <EmptyPanel />}
-                    </div>
+        <div className={style["public-servers-content"]}>
+            <div className={style["public-servers-section"]}>
+                <div className={style["home-title"]}>
+                    Public dashboards
+                </div>
+                <div className={style["public-servers-section-items"]}>
+                    {servers.map((e, i) => {
+                        const statistics = serverStatistics.filter(el => el.server === e.id);
+                        return statistics.length === 0 ? null : <SmallPublicServer key={i} item={e} statistics={statistics} actions={props.actions} />;
+                    })}
+                    {servers.length > 0 ? null : <EmptyPanel />}
                 </div>
             </div>
         </div>

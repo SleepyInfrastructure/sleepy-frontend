@@ -29,10 +29,10 @@ export function createGraph(ref: HTMLElement): Graph {
     });
     window.addEventListener("resize", () => {
         if(graph !== null) {
-            graph.changeSize(window.innerWidth - 40, window.innerHeight - 96);
+            graph.changeSize(window.innerWidth - 128, window.innerHeight - 96);
         }
     });
-    graph.changeSize(window.innerWidth - 40, window.innerHeight - 96);
+    graph.changeSize(window.innerWidth - 128, window.innerHeight - 96);
 
     return graph;
 }

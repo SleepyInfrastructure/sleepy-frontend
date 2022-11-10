@@ -1,6 +1,5 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect } from "react";
 import { getContainerProjectConnectedProps } from "../../scripts/util/server";
 /* Redux */
 import { connect } from "react-redux";
@@ -23,10 +22,8 @@ const ContainerProjectRoute: FunctionalComponent<ContainerRouteConnectedProps> =
     const logs = props.daemons.has(containerProjectProps.item.server) ? containerProjectProps.logs : ["Daemon is offline..."];
     
     return (
-        <div class={baseStyle.page}>
-            <div className={baseStyle["page-content"]}>
-                <ContainerProject {...containerProjectProps} logs={logs} />
-            </div>
+        <div className={baseStyle["page-content"]}>
+            <ContainerProject {...containerProjectProps} logs={logs} />
         </div>
     );
 };
