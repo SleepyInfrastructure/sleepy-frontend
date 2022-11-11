@@ -10,7 +10,7 @@ const Partition: FunctionalComponent<PartitionConnectedProps> = (props: Partitio
     const colorData = props.item.zfs ? "zfs" : undefined;
 
     return (
-        <div className={baseStyle.panel} data="dark">
+        <div id={`partition-${props.item.id}`} className={baseStyle.panel} data="dark">
             <div className={baseStyle["panel-header"]}>
                 <div className={style["icon-partition"]} data={colorData} />
                 <div className={style["partition-name"]} data={colorData}>{props.item.name} ({humanFileSize(props.item.size)})</div>

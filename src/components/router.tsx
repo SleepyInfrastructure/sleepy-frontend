@@ -1,10 +1,6 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
 import { Router } from "preact-router";
-/* Redux */
-import { connect } from "react-redux";
-import { mapState, mapDispatch } from "../redux/util";
-import * as actions from "../redux/actions";
 /* Components */
 import Home from "../routes/home";
 import PublicServers from "../routes/public-servers";
@@ -32,6 +28,8 @@ import CreateUptimeEndpoint from "../routes/create-uptime-endpoint";
 import EditUptimeEndpoint from "../routes/edit-uptime-endpoint";
 import EditNetwork from "../routes/edit-network";
 import ServerMap from "../routes/server-map";
+import Servers from "../routes/servers";
+import UptimeEndpoints from "../routes/uptime-endpoints";
 
 const AppRouter: FunctionalComponent<any> = (props: AppConnectedProps) => {
     return (
@@ -62,6 +60,8 @@ const AppRouter: FunctionalComponent<any> = (props: AppConnectedProps) => {
             <EditSmbShare path="/edit-smb-share/:id" session={props.session} smbShares={props.smbShares} smbUsers={props.smbUsers} actions={props.actions} />
             <CreateSmbUser path="/create-smb-user/:id" session={props.session} smbUsers={props.smbUsers} actions={props.actions} />
             <EditSmbUser path="/edit-smb-user/:id" session={props.session} smbUsers={props.smbUsers} actions={props.actions} />
+            <Servers path="/servers" {...props} />
+            <UptimeEndpoints path="/uptime-endpoints" {...props} />
         </Router>
     );
 };

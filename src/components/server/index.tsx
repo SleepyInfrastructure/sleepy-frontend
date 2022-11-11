@@ -11,7 +11,7 @@ import ServerSections from "../server-sections";
 const Server: FunctionalComponent<ServerConnectedProps> = (props: ServerConnectedProps) => {
     return (
         <div className={style.server}>
-            <div className={sectionStyle["server-section"]}>
+            <div className={baseStyle.panel} data="big">
                 <div className={baseStyle["panel-header"]}>
                     <div className={style["icon-server"]} style={{ background: `#${props.item.color}` }} />
                     <a href={`/server/${props.item.id}`} className={style["server-name"]} style={{ color: `#${props.item.color}` }}>{props.item.name}</a>

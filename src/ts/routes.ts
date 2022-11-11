@@ -10,6 +10,8 @@ type ServersProps = {
     session: Session | null;
     servers: Map<string, Server>;
     serverConfigs: Map<string, ServerConfig>;
+    processes: Map<string, Process>;
+    software: Map<string, ServerSoftware>;
     networks: Map<string, Network>;
     disks: Map<string, Disk>;
     partitions: Map<string, Partition>;

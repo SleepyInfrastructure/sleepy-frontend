@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
-import baseStyle from "../style.scss";
 import style from "./style.scss";
 /* Components */
 import SmallPublicServer from "../../components/small-public-server";

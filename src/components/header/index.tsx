@@ -8,10 +8,6 @@ import userStyle from "../smb-user/style.scss";
 const Header: FunctionalComponent<HeaderConnectedProps> = (props: HeaderConnectedProps) => {
     return (
         <header className={style.header}>
-            <div className={style["header-start"]} onClick={() => { location.href = "/"; }}>
-                <img alt="logo" className={style["header-icon"]} src="/assets/icons/icon-32x32.webp" />
-                <h1 className={style["header-title"]}>Sleepy</h1>
-            </div>
             {
                 props.user !== null ?
                 <nav className={style["header-nav"]}>

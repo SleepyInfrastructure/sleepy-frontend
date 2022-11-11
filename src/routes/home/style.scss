@@ -26,10 +26,17 @@
     font-size: 32px;
     color: var(--color-secondary-text);
 }
-.home-subtitle{
+.home-subtitle {
     @extend %align-center;
     font-size: 18px;
     color: var(--color-secondary-text);
+}
+.home-subtitle[data="alt"] {
+    font-weight: 400;
+    color: var(--color-primary-text);
+}
+.home-subtitle[data="small"] {
+    font-size: 14px;
 }
 .home-link {
     color: #66f;

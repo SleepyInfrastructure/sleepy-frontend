@@ -2,6 +2,8 @@ import { getContainerProjectStats } from "./container";
 
 export function getServerConnectedProps(server: Server, props: ServersProps): ServerConnectedProps {
     // this is stupid
+    const processes = Array.from(props.processes.values());
+    const software = Array.from(props.software.values());
     const disks = Array.from(props.disks.values());
     const partitions = Array.from(props.partitions.values());
     const zfsPools = Array.from(props.zfsPools.values());
@@ -17,6 +19,8 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
     
     const config = props.serverConfigs.get(server.config);
     const network = server.network === null ? undefined : props.networks.get(server.network);
+    const serverProcesses = processes.filter(e => e.server === server.id);
+    const serverSoftware = software.filter(e => e.server === server.id);
     const serverDisks = disks.filter(e => e.server === server.id).map(e => {
         return {
             ...e,
@@ -53,6 +57,8 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
         item: server,
         config: config ?? null,
         network: network ?? null,
+        processes: serverProcesses,
+        software: serverSoftware,
         disks: serverDisks,
         zfs: serverZfsPools,
         containers: serverContainers,

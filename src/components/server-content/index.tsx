@@ -2,7 +2,6 @@
 import { h, FunctionalComponent } from "preact";
 /* Styles */
 import style from "./style.scss";
-import sectionStyle from "../server-sections/style.scss";
 
 const ServerContent: FunctionalComponent<ServerContentConnectedProps> = (props: ServerContentConnectedProps) => {
     return (

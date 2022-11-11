@@ -5,6 +5,7 @@ export const INITIAL: ReduxState = {
     users: new Map(),
     servers: new Map(),
     serverConfigs: new Map(),
+    processes: new Map(),
     networks: new Map(),
     software: new Map(),
     disks: new Map(),
@@ -39,6 +40,7 @@ export enum ResourceType {
     SERVER, SERVER_STRUCTURED,
     SERVER_CONFIG,
     NETWORK,
+    PROCESS,
     SOFTWARE,
     DISK, DISK_STRUCTURED, DISK_STATISTIC,
     PARTITION,
@@ -99,6 +101,8 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.config;
                 state = cacheResource(state, server.network, ResourceType.NETWORK);
                 server.network = server.network.id;
+                state = cacheResources(state, server.processes, ResourceType.PROCESS);
+                delete server.processes;
                 state = cacheResources(state, server.software, ResourceType.SOFTWARE);
                 delete server.software;
                 state = cacheResources(state, server.disks, ResourceType.DISK_STRUCTURED);
@@ -129,6 +133,9 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
 
         case ResourceType.NETWORK:
             return saveResources(state, "networks", resources);
+
+        case ResourceType.PROCESS:
+            return saveResources(state, "processes", resources);
 
         case ResourceType.SOFTWARE:
             return saveResources(state, "software", resources);

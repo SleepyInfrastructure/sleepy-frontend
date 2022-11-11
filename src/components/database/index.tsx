@@ -6,7 +6,7 @@ import style from "./style.scss";
 
 const Database: FunctionalComponent<DatabaseConnectedProps> = (props: DatabaseConnectedProps) => {
     return (
-        <div className={baseStyle.panel}>
+        <div id={`database-${props.item.id}`} className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
                 <div className={style["icon-database"]} />
                 <div className={baseStyle["panel-name"]}>{props.item.name}</div>

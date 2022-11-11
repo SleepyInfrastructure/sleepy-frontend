@@ -14,9 +14,10 @@
 .page-content {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 128px);
+    width: calc(100% - 148px);
     grid-gap: 10px;
     padding: 20px;
+    margin-left: 148px;
 }
 .page-content[data="no-padding"] {
     padding: 0px;

@@ -1,0 +1,36 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+/* Content */
+.panel {
+    padding: 12px;
+    background-color: var(--color-primary-dark);
+    border-radius: 10px;
+}
+
+.software-name {
+    color: var(--color-primary-text);
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.software-row {
+    color: #ff7680;
+    font-size: 11px;
+}
+.software-row-highlight {
+    color: #66f;
+}
+
+/* Icons */
+.icon-software {
+    width: 24px;
+    height: 24px;
+    background: var(--color-secondary);
+    transform: scale(0.65);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M3 3h8v8H3V3zm0 10h8v8H3v-8zM13 3h8v8h-8V3zm0 10h8v8h-8v-8z'/%3E%3C/svg%3E");
+}

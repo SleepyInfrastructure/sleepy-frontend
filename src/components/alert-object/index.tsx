@@ -1,6 +1,5 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { object } from "zod";
 /* Styles */
 import baseStyle from "../style.scss";
 
@@ -31,6 +30,7 @@ const AlertObject: FunctionalComponent<AlertObjectConnectedProps> = (props: Aler
                 </div>
                 <div className={baseStyle["panel-content-row"]}>
                     Disk: <span className={baseStyle["panel-content-row-highlight"]}>{props.object[0].name}</span>
+                    <a href={`/server/${props.object[0].server}#disk-${props.object[0].id}`} className={baseStyle["panel-link"]}>(Jump)</a>
                 </div>
             </div>;
 
@@ -38,11 +38,11 @@ const AlertObject: FunctionalComponent<AlertObjectConnectedProps> = (props: Aler
             return <div>
                 <div className={baseStyle["panel-content-row"]}>
                     Server: <span className={baseStyle["panel-content-row-highlight"]}>{props.object[1].name}</span>
-                    <a href={`/container/${props.object[1].id}`} className={baseStyle["panel-link"]}>(Jump)</a>
+                    <a href={`/server/${props.object[1].id}`} className={baseStyle["panel-link"]}>(Jump)</a>
                 </div>
                 <div className={baseStyle["panel-content-row"]}>
                     Partition: <span className={baseStyle["panel-content-row-highlight"]}>{props.object[0].name}</span>
-                    <a href={`/server/${props.object[0].server}`} className={baseStyle["panel-link"]}>(Jump)</a>
+                    <a href={`/server/${props.object[0].server}#partition-${props.object[0].id}`} className={baseStyle["panel-link"]}>(Jump)</a>
                 </div>
             </div>;
 
@@ -54,7 +54,7 @@ const AlertObject: FunctionalComponent<AlertObjectConnectedProps> = (props: Aler
                 </div>
                 <div className={baseStyle["panel-content-row"]}>
                     Container: <span className={baseStyle["panel-content-row-highlight"]}>{props.object[0].name}</span>
-                    <a href={`/container/${props.object[0].id}`} className={baseStyle["panel-link"]}>(Jump)</a>
+                    <a href={`/container/${props.object[0].id}#container-${props.object[0].id}`} className={baseStyle["panel-link"]}>(Jump)</a>
                 </div>
             </div>;
 

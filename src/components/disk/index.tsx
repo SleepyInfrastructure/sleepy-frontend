@@ -9,7 +9,7 @@ import Partition from "../partition";
 
 const Disk: FunctionalComponent<DiskConnectedProps> = (props: DiskConnectedProps) => {
     return (
-        <div className={baseStyle.panel}>
+        <div id={`disk-${props.item.id}`} className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
                 <div className={style["icon-disk"]} />
                 <div className={baseStyle["panel-name"]}>{props.item.model} ({humanFileSize(props.item.size)})</div>

@@ -1,6 +1,5 @@
 /* Base */
 import { h, FunctionalComponent } from "preact";
-import { useEffect } from "react";
 import { getContainerConnectedProps } from "../../scripts/util/server";
 /* Redux */
 import { connect } from "react-redux";

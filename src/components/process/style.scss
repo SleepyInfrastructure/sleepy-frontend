@@ -1,0 +1,36 @@
+/* Macros */
+%align-y {
+    display: flex;
+    align-items: center;
+}
+
+/* Content */
+.panel {
+    padding: 8px 12px 12px 12px;
+    background-color: var(--color-primary-dark);
+    border-radius: 10px;
+}
+
+.process-name {
+    color: var(--color-primary-text);
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.process-row {
+    color: #ff7680;
+    font-size: 11px;
+}
+.process-row-highlight {
+    color: #66f;
+}
+
+/* Icons */
+.icon-process {
+    width: 24px;
+    height: 24px;
+    background: var(--color-secondary);
+    transform: scale(0.65);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0H24V24H0z'/%3E%3Cpath d='M9 7.539L15 21.539 18.659 13 23 13 23 11 17.341 11 15 16.461 9 2.461 5.341 11 1 11 1 13 6.659 13z'/%3E%3C/svg%3E");
+}

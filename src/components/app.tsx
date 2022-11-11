@@ -66,7 +66,7 @@ const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
         <div id="app">
             <Header user={user} actions={props.actions} />
             <div class={pageStyle.page}>
-                <Sidebar servers={props.servers} alerts={props.alerts.size} tasks={runTasks} actions={props.actions} />
+                <Sidebar servers={props.servers} uptimeEndpoints={props.uptimeEndpoints} alerts={props.alerts.size} tasks={runTasks} actions={props.actions} />
                 <AppRouter {...props} />
             </div>
         </div>

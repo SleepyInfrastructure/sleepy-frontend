@@ -7,31 +7,11 @@
 /* Content */
 .header {
     @extend %align-y;
-
     width: 100%;
     height: 56px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     padding: 10px;
-
     background: var(--color-primary);
-}
-.header-start {
-    @extend %align-y;
-    display: flex;
-    cursor: pointer;
-}
-.header-icon {
-    width: 32px;
-    height: 32px;
-}
-.header-title {
-    float: left;
-    margin: 0;
-    padding: 0 15px;
-    font-size: 24px;
-    line-height: 56px;
-    font-weight: 400;
-    color: var(--color-secondary-text);
 }
 
 .header-nav {

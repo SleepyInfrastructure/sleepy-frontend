@@ -3,7 +3,6 @@ import { StatisticTypePreviousMapping } from "../../ts/common/const";
 import { h, FunctionalComponent, Fragment } from "preact";
 import { useEffect, useState } from "react";
 /* Styles */
-import baseStyle from "../style.scss";
 import style from "./style.scss";
 import networkStyle from "../network/style.scss";
 import diskStyle from "../disk/style.scss";
@@ -12,6 +11,9 @@ import databaseStyle from "../database/style.scss";
 import smbStyle from "../smb-instance/style.scss";
 /* Components */
 import Button from "../ui/button";
+import Process from "../process";
+import Hardware from "../hardware";
+import Software from "../software";
 import Network from "../network";
 import Disk from "../disk";
 import ZFSPool from "../zfs-pool";
@@ -24,6 +26,7 @@ import CPUChart from "../charts/cpu";
 import MemoryChart from "../charts/memory";
 import NetworkChart from "../charts/network";
 import DiskChart from "../charts/disk";
+import { humanFileSize } from "../../scripts/util/util";
 
 const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props: ServerSectionsConnectedProps) => {
     const containerProjects = props.containerProjects.map((e) => {
@@ -76,7 +79,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
 
     return (
         <div className={style["server-sections"]}>
-            <div className={style["server-section"]}>
+            <div id="charts" className={style["server-section"]}>
                 <div className={style["server-section-title-wrapper"]}>
                     <div className={style["icon-chart"]} />
                     <div className={style["server-section-title"]}>Charts</div>
@@ -116,7 +119,44 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     })}
                 </div>}
             </div>
-            <div className={style["server-section"]}>
+            <div id="hardware" className={style["server-section"]}>
+                <div className={style["server-section-title-wrapper"]}>
+                    <div className={style["icon-hardware"]} />
+                    <div className={style["server-section-title"]}>Hardware</div>
+                </div>
+                <div className={style["server-section-items-grid"]} data="small">
+                    <Hardware icon="cpu" name="Processor" data={[
+                        { name: "CPU", text: "test" },
+                        { name: "Speed", text: "test" },
+                        { name: "Cores/Threads", text: "test/test" },
+                        { name: "L1/L2/L3 cache", text: "test/test/test" }
+                    ]} actions={props.actions} />
+                    <Hardware icon="memory" name="Memory" data={[
+                        { name: "RAM", text: "test" },
+                        { name: "Capacity", text: humanFileSize(props.item.memory) },
+                        { name: "Speed", text: "test" }
+                    ]} actions={props.actions} />
+                </div>
+            </div>
+            <div id="software" className={style["server-section"]}>
+                <div className={style["server-section-title-wrapper"]}>
+                    <div className={style["icon-software"]} />
+                    <div className={style["server-section-title"]}>Software ({props.software.length})</div>
+                </div>
+                {props.software.length < 1 ? null : <div className={style["server-section-items-grid"]} data="small">
+                    {props.software.map((e, i) => <Software key={i} item={e} actions={props.actions} />)}
+                </div>}
+            </div>
+            <div id="processes" className={style["server-section"]}>
+                <div className={style["server-section-title-wrapper"]}>
+                    <div className={style["icon-process"]} />
+                    <div className={style["server-section-title"]}>Process List ({props.processes.length})</div>
+                </div>
+                {props.processes.length < 1 ? null : <div className={style["server-section-items-grid"]} data="small">
+                    {props.processes.map((e, i) => <Process key={i} item={e} actions={props.actions} />)}
+                </div>}
+            </div>
+            <div id="actions" className={style["server-section"]}>
                 <div className={style["server-section-title-wrapper"]}>
                     <div className={style["icon-action"]} />
                     <div className={style["server-section-title"]}>Actions</div>
@@ -136,7 +176,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     </Button>
                 </div>
             </div>
-            <div className={style["server-section"]}>
+            <div id="resources" className={style["server-section"]}>
                 <div className={style["server-section-title-wrapper"]}>
                     <div className={style["icon-resource"]} />
                     <div className={style["server-section-title"]}>Resources</div>
@@ -165,7 +205,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 </div>
                 <div className={style["server-section-items"]}>
                     {!networksOpen || props.network === null ? null : <Network item={props.network} actions={props.actions} />}
-                    <div className={style["server-section-items-grid"]}>
+                    <div id="disks" className={style["server-section-items-grid"]}>
                         {!disksOpen || props.disks.length < 1 ? null : props.disks.map((e, i) => <Disk key={i} item={e} actions={props.actions} />)}
                         {!disksOpen || props.zfs.length < 1 ? null : props.zfs.map((e, i) => <ZFSPool key={i} item={e} actions={props.actions} />)}
                     </div>

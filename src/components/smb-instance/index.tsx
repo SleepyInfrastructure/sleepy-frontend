@@ -9,7 +9,7 @@ import style from "./style.scss";
 
 const SMBInstance: FunctionalComponent<SMBInstanceConnectedProps> = (props: SMBInstanceConnectedProps) => {
     return (
-        <div className={baseStyle.panel}>
+        <div id={`smb-instance-${props.item.id}`} className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
                 <div className={style["icon-smb"]} />
                 <div className={baseStyle["panel-name"]}>{props.item.name}</div>

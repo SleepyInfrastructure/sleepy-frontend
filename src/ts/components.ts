@@ -10,6 +10,7 @@ type PanelHeaderTagConnectedProps = {
 };
 type SidebarConnectedProps = {
     servers: Map<string, Server>;
+    uptimeEndpoints: Map<string, UptimeEndpoint>;
     alerts: number;
     tasks: number;
     actions: ConnectedActions;
@@ -20,6 +21,8 @@ type ServerConnectedProps = {
     item: Server;
     config: ServerConfig | null;
     network: Network | null;
+    processes: Process[];
+    software: ServerSoftware[];
     disks: DiskConnectedPropsItem[];
     zfs: ZFSPoolConnectedPropsItem[];
     containers: ContainerConnectedProps[];
@@ -113,6 +116,23 @@ type SMBShareConnectedProps = {
 };
 type SMBUserConnectedProps = {
     item: SMBUser;
+    actions: ConnectedActions;
+};
+
+type ProcessConnectedProps = {
+    item: Process;
+    actions: ConnectedActions;
+};
+
+type SoftwareConnectedProps = {
+    item: ServerSoftware;
+    actions: ConnectedActions;
+};
+
+type HardwareConnectedProps = {
+    icon: string;
+    name: string;
+    data: { name: string; text: string; }[];
     actions: ConnectedActions;
 };
 

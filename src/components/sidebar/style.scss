@@ -11,8 +11,29 @@
 
 /* Content */
 .sidebar {
+    position: fixed;
     width: 148px;
     background: var(--color-primary-light);
+    min-height: calc(100vh);
+    top: 0px;
+}
+.sidebar-header {
+    @extend %align-y;
+    cursor: pointer;
+    background: var(--color-primary);
+    padding-left: 10px;
+}
+.sidebar-icon {
+    width: 32px;
+    height: 32px;
+}
+.sidebar-title {
+    margin: 0;
+    padding: 0 15px;
+    font-size: 24px;
+    line-height: 56px;
+    font-weight: 400;
+    color: var(--color-secondary-text);
 }
 
 .sidebar-item {
@@ -22,6 +43,9 @@
     text-decoration: none;
     font-size: 13px;
     padding-left: 16px;
+}
+.sidebar-item[data="blue"] {
+    color: #66f;
 }
 .sidebar-item:hover,
 .sidebar-item:active {

@@ -6,7 +6,7 @@ import style from "./style.scss";
 
 const Network: FunctionalComponent<NetworkConnectedProps> = (props: NetworkConnectedProps) => {
     return (
-        <div className={baseStyle.panel}>
+        <div id={`network-${props.item.id}`} className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
                 <div className={style["icon-network"]} />
                 <div className={baseStyle["panel-name"]}>{props.item.name}</div>

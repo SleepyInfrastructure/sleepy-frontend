@@ -13,7 +13,7 @@ const ZFSPool: FunctionalComponent<ZFSPoolConnectedProps> = (props: ZFSPoolConne
     const size = props.item.partitions.reduce((acc, curr) => acc + curr.size, 0);
 
     return (
-        <div className={baseStyle.panel}>
+        <div id={`pool-${props.item.id}`} className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
                 <div className={diskStyle["disk-icon"]} data="zfs" />
                 <div className={baseStyle["panel-name"]}>{props.item.name} ({humanFileSize(size)})</div>
