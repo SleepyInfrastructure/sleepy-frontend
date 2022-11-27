@@ -101,8 +101,16 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.config;
                 state = cacheResource(state, server.network, ResourceType.NETWORK);
                 server.network = server.network.id;
+
+                state.processes.forEach(e => {
+                    if(e.server === server.id) {
+                        state.processes.delete(e.id);
+                    }
+                });
+
                 state = cacheResources(state, server.processes, ResourceType.PROCESS);
                 delete server.processes;
+
                 state = cacheResources(state, server.software, ResourceType.SOFTWARE);
                 delete server.software;
                 state = cacheResources(state, server.disks, ResourceType.DISK_STRUCTURED);

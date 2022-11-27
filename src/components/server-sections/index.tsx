@@ -21,6 +21,7 @@ import SmallContainer from "../small-container";
 import SmallContainerProject from "../small-container-project";
 import Database from "../database";
 import SMBInstance from "../smb-instance";
+import ProcessTreeMap from "./process";
 /* Charts */
 import CPUChart from "../charts/cpu";
 import MemoryChart from "../charts/memory";
@@ -152,6 +153,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     <div className={style["icon-process"]} />
                     <div className={style["server-section-title"]}>Process List ({props.processes.length})</div>
                 </div>
+                {props.processes.length < 1 ? null : <ProcessTreeMap server={props.item} processes={props.processes} />}
                 {props.processes.length < 1 ? null : <div className={style["server-section-items-grid"]} data="small">
                     {props.processes.map((e, i) => <Process key={i} item={e} actions={props.actions} />)}
                 </div>}

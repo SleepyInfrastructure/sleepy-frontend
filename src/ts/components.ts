@@ -136,6 +136,11 @@ type HardwareConnectedProps = {
     actions: ConnectedActions;
 };
 
+type ProcessTreeMapConnectedProps = {
+    server: Server;
+    processes: Process[];
+};
+
 /* Public */
 type PublicServerConnectedProps = {
     item: PublicServer;

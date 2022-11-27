@@ -30,6 +30,7 @@ import EditNetwork from "../routes/edit-network";
 import ServerMap from "../routes/server-map";
 import Servers from "../routes/servers";
 import UptimeEndpoints from "../routes/uptime-endpoints";
+import SSH from "../routes/ssh";
 
 const AppRouter: FunctionalComponent<any> = (props: AppConnectedProps) => {
     return (
@@ -62,6 +63,7 @@ const AppRouter: FunctionalComponent<any> = (props: AppConnectedProps) => {
             <EditSmbUser path="/edit-smb-user/:id" session={props.session} smbUsers={props.smbUsers} actions={props.actions} />
             <Servers path="/servers" {...props} />
             <UptimeEndpoints path="/uptime-endpoints" {...props} />
+            <SSH path="/ssh" host="localhost" username="root" {...props} />
         </Router>
     );
 };

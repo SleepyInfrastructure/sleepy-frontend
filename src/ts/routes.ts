@@ -91,5 +91,9 @@ type EditNetworkConnectedProps = RouteProps & {
     networks: Map<string, Network>;
 };
 
+type SSHConnectedProps = RouteProps & {
+    host: string;
+    username: string;
+};
 
 

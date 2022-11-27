@@ -33,7 +33,7 @@ const Register: FunctionalComponent<RegisterConnectedProps> = (props: RegisterCo
     }, [usernameSatisfies, passwordSatisfies, passwordAgainMatches]);
 
     return (
-        <div className={baseStyle["auth-content"]}>
+        <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
                 <div className={style["icon-auth"]} />
                 <div className={baseStyle["page-title"]}>Register</div>
