@@ -7,12 +7,12 @@ import { mapState, mapDispatch } from "../redux/util";
 import * as actions from "../redux/actions";
 /* Components */
 import Header from "./header";
+import Sidebar from "./sidebar";
 import AppRouter from "./router";
 /* Styles */
 import pageStyle from "../routes/style.scss";
 import * as dark from "../style/themes/dark";
 import * as light from "../style/themes/light";
-import Sidebar from "./sidebar";
 
 const App: FunctionalComponent<any> = (props: AppConnectedProps) => {
     const [ruleID, setRuleID] = useState(-1);

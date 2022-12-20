@@ -351,6 +351,9 @@ export function daemonConnectContainerProjectLog(id: string): ReduxAction {
 export function addContainerLog(id: string, message: string): ReduxAction {
     return getAction("ADD_CONTAINER_LOG", { id, message });
 }
+export function daemonRequestContainerAction(id: string, project: boolean, action: ContainerAction): ReduxAction {
+    return getAction("DAEMON_REQUEST_CONTAINER_ACTION", { id, project, action });
+}
 export function daemonBuildSmbConfig(id: string): ReduxAction {
     return getAction("DAEMON_BUILD_SMB_CONFIG", { id });
 }

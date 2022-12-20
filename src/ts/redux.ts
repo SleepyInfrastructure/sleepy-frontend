@@ -86,6 +86,11 @@ type ConnectedActions = {
     fetchAllTasks(): ReduxAction;
     fetchAllAlerts(): ReduxAction;
     fetchUserFile(id: string): ReduxAction;
+    createServerDaemonToken(id: string): ReduxAction;
+    deleteDaemonToken(id: string): ReduxAction;
+    fetchServerDaemonTokens(id: string): ReduxAction;
+    fetchPublicServerListings(): ReduxAction;
+    fetchPublicServer(id: string): ReduxAction;
     connectWebsocket(): ReduxAction;
     daemonRequestResources(id: string, resources: string[]): ReduxAction;
     daemonRequestDatabaseBackup(id: string, database: string, data: boolean): ReduxAction;
@@ -93,10 +98,6 @@ type ConnectedActions = {
     daemonConnectContainerLog(id: string): ReduxAction;
     daemonConnectContainerProjectLog(id: string): ReduxAction;
     addContainerLog(id: string, message: string): ReduxAction;
-    createServerDaemonToken(id: string): ReduxAction;
-    deleteDaemonToken(id: string): ReduxAction;
-    fetchServerDaemonTokens(id: string): ReduxAction;
+    daemonRequestContainerAction(id: string, project: boolean, action: ContainerAction): ReduxAction;
     daemonBuildSmbConfig(id: string): ReduxAction;
-    fetchPublicServerListings(): ReduxAction;
-    fetchPublicServer(id: string): ReduxAction;
 };

@@ -49,8 +49,14 @@
 .panel-link[data="green"] {
     color: #3ece3e;
 }
+.panel-link[data="rose"] {
+    color: #ff7680;
+}
 .panel-link[data="red"] {
-    color: var(--color-primary-text);
+    color: #ff3645;
+}
+.panel-link[data="purple"] {
+    color: #ae5eff;
 }
 .panel-link[data="no-margin"] {
     margin-left: 0px;

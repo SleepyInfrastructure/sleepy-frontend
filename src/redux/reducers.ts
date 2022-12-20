@@ -414,6 +414,14 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_CONNECT_CONTAINER_LOG, ...action.data });
     },
 
+    DAEMON_REQUEST_CONTAINER_ACTION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_REQUEST_CONTAINER_ACTION, ...action.data });
+    },
+
+    DAEMON_BUILD_SMB_CONFIG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_BUILD_SMB_CONFIG, ...action.data });
+    },
+
     CREATE_SERVER_DAEMON_TOKEN: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.createServerDaemonToken, actions.createServerDaemonTokenSuccess);
     },
@@ -427,10 +435,6 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     FETCH_SERVER_DAEMON_TOKENS: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetchMultiple(dispatch, action.data, routes.fetchServerDaemonTokens, actions.fetchServerDaemonTokensSuccess);
-    },
-
-    DAEMON_BUILD_SMB_CONFIG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
-        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_BUILD_SMB_CONFIG, ...action.data });
     },
 
     FETCH_PUBLIC_SERVER_LISTINGS: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
