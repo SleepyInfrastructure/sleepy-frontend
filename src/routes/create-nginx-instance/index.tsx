@@ -12,14 +12,14 @@ import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
 
-const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: CreateSMBUserConnectedProps) => {
+const CreateNginxInstance: FunctionalComponent<CreateNginxInstanceConnectedProps> = (props: CreateNginxInstanceConnectedProps) => {
     const [satisfies, setSatisfies] = useState(false);
-    const smbUsers = Array.from(props.smbUsers.values());
+    const nginxInstances = Array.from(props.nginxInstances.values());
 
     const [name, setName] = useState("");
     const nameSatisfies = useCallback(() => {
-        return name.length < 3 ? "(is not atleast 3 characters)" : (smbUsers.some(e => e.parent === props.id && e.name === name) ? "(user with same name exists)" : "(satisfies)");
-    }, [name, props.id, smbUsers]);
+        return name.length < 3 ? "(is not atleast 3 characters)" : (nginxInstances.some(e => e.name === name) ? "(instance with same name exists)" : "(satisfies)");
+    }, [name, nginxInstances]);
 
     useEffect(() => {
         setSatisfies(nameSatisfies() === "(satisfies)");
@@ -28,17 +28,17 @@ const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: 
     return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["icon-user"]} />
-                <div className={baseStyle["page-title"]}>Create SMB User</div>
+                <div className={style["icon-nginx"]} />
+                <div className={baseStyle["page-title"]}>Create Nginx Instance</div>
             </div>
             <div className={formStyle["page-form"]}>
                 <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>User name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-smb-user..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
+                    <div className={formStyle["page-form-text"]}>Instance name: </div>
+                    <input className={formStyle["page-form-input"]} placeholder="my-nginx-instance..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
                     <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.createSmbUser({ parent: props.id ?? "", name });
+                        props.actions.createNginxInstance({ server: props.id ?? "", name, networks: [`${name}-network`] });
                         setTimeout(() => { location.href = "/"; }, 1000);
                     }}>
                     Create!
@@ -48,4 +48,4 @@ const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: 
     );
 };
 
-export default connect(mapState, mapDispatch(actions))(CreateSMBUser);
+export default connect(mapState, mapDispatch(actions))(CreateNginxInstance);

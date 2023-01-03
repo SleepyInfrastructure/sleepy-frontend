@@ -14,6 +14,9 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
     const smbInstances = Array.from(props.smbInstances.values());
     const smbShares = Array.from(props.smbShares.values());
     const smbUsers = Array.from(props.smbUsers.values());
+    const nginxInstances = Array.from(props.nginxInstances.values());
+    const nginxServers = Array.from(props.nginxServers.values());
+    const nginxLocations = Array.from(props.nginxLocations.values());
     const statistics = Array.from(props.statistics.values());
     const diskStatistics = Array.from(props.diskStatistics.values());
     
@@ -49,6 +52,14 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
             users: smbUsers.filter(el => el.parent === e.id)
         };
     });
+    const serverNginxInstances = nginxInstances.filter(e => e.server === server.id).map(e => {
+        return {
+            ...e,
+            servers: nginxServers.filter(el => el.parent === e.id).map(el => {
+                return { ...el, locations: nginxLocations.filter(ele => ele.parent === el.id) }
+            })
+        };
+    });
     const publicServerListing = props.publicServerListings.get(server.id);
     const serverStatistics = statistics.filter(el => el.server === server.id);
     const daemon = props.daemons.get(server.id);
@@ -65,6 +76,7 @@ export function getServerConnectedProps(server: Server, props: ServersProps): Se
         containerProjects: serverContainerProjects,
         databases: serverDatabases,
         smb: serverSmbInstances,
+        nginx: serverNginxInstances,
         public: publicServerListing ?? null,
         statistics: serverStatistics,
         daemon: daemon ?? null,

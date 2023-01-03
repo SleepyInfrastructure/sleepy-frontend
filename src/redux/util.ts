@@ -20,6 +20,9 @@ export const INITIAL: ReduxState = {
     smbInstances: new Map(),
     smbShares: new Map(),
     smbUsers: new Map(),
+    nginxInstances: new Map(),
+    nginxServers: new Map(),
+    nginxLocations: new Map(),
     uptimeEndpoints: new Map(),
     statistics: new Map(),
     diskStatistics: new Map(),
@@ -50,6 +53,7 @@ export enum ResourceType {
     CONTAINER_PROJECT,
     DATABASE,
     SMB_INSTANCE, SMB_INSTANCE_STRUCTURED, SMB_SHARE, SMB_USER,
+    NGINX_INSTANCE, NGINX_INSTANCE_STRUCTURED, NGINX_SERVER, NGINX_SERVER_STRUCTURED, NGINX_LOCATION,
     STATISTIC,
     UPTIME_ENDPOINT, UPTIME_ENDPOINT_STRUCTURED, UPTIME_ENDPOINT_STATISTIC,
     TASK,
@@ -125,6 +129,8 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
                 delete server.databases;
                 state = cacheResources(state, server.smb, ResourceType.SMB_INSTANCE_STRUCTURED);
                 delete server.smb;
+                state = cacheResources(state, server.nginx, ResourceType.NGINX_INSTANCE_STRUCTURED);
+                delete server.nginx;
                 if(server.public !== null) {
                     state = cacheResource(state, server.public, ResourceType.PUBLIC_SERVER_LISTING);
                     delete server.public;
@@ -231,6 +237,37 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
 
         case ResourceType.SMB_USER:
             return saveResources(state, "smbUsers", resources);
+
+        case ResourceType.NGINX_INSTANCE:
+            return saveResources(state, "nginxInstances", resources);
+        
+        case ResourceType.NGINX_INSTANCE_STRUCTURED: {
+            const newNginxInstances = new Map(state.nginxInstances);
+            resources.forEach(nginxInstance => {
+                state = cacheResources(state, nginxInstance.servers, ResourceType.NGINX_SERVER_STRUCTURED);
+                delete nginxInstance.servers;
+                newNginxInstances.set(nginxInstance.id, nginxInstance);
+            });
+
+            return { ...state, nginxInstances: newNginxInstances };
+        }
+
+        case ResourceType.NGINX_SERVER:
+            return saveResources(state, "nginxServers", resources);
+
+        case ResourceType.NGINX_SERVER_STRUCTURED: {
+            const newNginxServers = new Map(state.nginxServers);
+            resources.forEach(nginxServer => {
+                state = cacheResources(state, nginxServer.locations, ResourceType.NGINX_LOCATION);
+                delete nginxServer.locations;
+                newNginxServers.set(nginxServer.id, nginxServer);
+            });
+
+            return { ...state, nginxServers: newNginxServers };
+        }
+
+        case ResourceType.NGINX_LOCATION:
+            return saveResources(state, "nginxLocations", resources);
 
         case ResourceType.STATISTIC:
             return saveResources(state, "statistics", resources);

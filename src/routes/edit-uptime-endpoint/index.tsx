@@ -11,7 +11,7 @@ import formStyle from "../form.scss";
 import endpointStyle from "../../components/uptime-endpoint/style.scss";
 /* Components */
 import Button from "../../components/ui/button";
-import { endpointSatisfies, hostSatisfies } from "../../scripts/util/satisfy";
+import { endpointHostSatisfies, hostEndpointSatisfies } from "../../scripts/util/satisfy";
 
 const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> = (props: EditUptimeEndpointConnectedProps) => {
     const [didSetDefaults, setDidSetDefaults] = useState(false);
@@ -27,7 +27,7 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
     }, [name, uptimeEndpoint?.name, uptimeEndpoints]);
 
     useEffect(() => {
-        setSatisfies(nameSatisfies() === "(satisfies)" && hostSatisfies(host, requestEndpoint) === "(satisfies)" && endpointSatisfies(host, requestEndpoint) === "(satisfies)");
+        setSatisfies(nameSatisfies() === "(satisfies)" && hostEndpointSatisfies(host, requestEndpoint) === "(satisfies)" && endpointHostSatisfies(host, requestEndpoint) === "(satisfies)");
     }, [host, requestEndpoint, nameSatisfies]);
     if(uptimeEndpoint === undefined) {
         return null;
@@ -58,12 +58,12 @@ const EditUptimeEndpoint: FunctionalComponent<EditUptimeEndpointConnectedProps> 
                 <div className={formStyle["page-form-row"]}>
                     <div className={formStyle["page-form-text"]}>Endpoint host: </div>
                     <input className={formStyle["page-form-input"]} placeholder="https://..." onInput={(e) => { setHost(e.currentTarget.value); }} value={host} />
-                    <div className={formStyle["page-form-error"]} data={hostSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{hostSatisfies(host, requestEndpoint)}</div>
+                    <div className={formStyle["page-form-error"]} data={hostEndpointSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{hostEndpointSatisfies(host, requestEndpoint)}</div>
                 </div>
                 <div className={formStyle["page-form-row"]}>
                     <div className={formStyle["page-form-text"]}>Endpoint request url: </div>
                     <input className={formStyle["page-form-input"]} placeholder="xxx.com..." onInput={(e) => { setRequestEndpoint(e.currentTarget.value); }} value={requestEndpoint} />
-                    <div className={formStyle["page-form-error"]} data={endpointSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{endpointSatisfies(host, requestEndpoint)}</div>
+                    <div className={formStyle["page-form-error"]} data={endpointHostSatisfies(host, requestEndpoint) === "(satisfies)" ? "false" : "true"}>{endpointHostSatisfies(host, requestEndpoint)}</div>
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
                     props.actions.editUptimeEndpoint({

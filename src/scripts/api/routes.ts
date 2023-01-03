@@ -25,6 +25,7 @@ export async function deleteSession(): Promise<boolean> {
     return response.status === 200;
 }
 
+// Servers
 export async function createServer(create: ServerCreate): Promise<Server | undefined> {
     return await createResource("/servers", create);
 }
@@ -47,6 +48,7 @@ export async function fetchAllServersStructured(): Promise<ServerStructured[]> {
     return await fetchResources("/servers/all/structured");
 }
 
+// Networks
 export async function createNetwork(create: NetworkCreate): Promise<Network | undefined> {
     return await createResource("/networks", create);
 }
@@ -57,22 +59,23 @@ export async function fetchNetwork(id: string): Promise<Network | undefined> {
     return await fetchResource("/networks", id);
 }
 
+// Disks
 export async function fetchDisk(id: string): Promise<Disk | undefined> {
     return await fetchResource("/disks", id);
 }
-
 export async function fetchPartition(id: string): Promise<Partition | undefined> {
     return await fetchResource("/partitions", id);
 }
 
+// Containers
 export async function fetchContainer(id: string): Promise<Container | undefined> {
     return await fetchResource("/containers", id);
 }
-
 export async function fetchContainerProject(id: string): Promise<ContainerProject | undefined> {
     return await fetchResource("/containerProjects", id);
 }
 
+// Databases
 export async function createDatabase(create: DatabaseCreate): Promise<Database | undefined> {
     return await createResource("/databases", create);
 }
@@ -86,6 +89,7 @@ export async function fetchDatabase(id: string): Promise<Database | undefined> {
     return await fetchResource("/databases", id);
 }
 
+// SMB Instances
 export async function createSmbInstance(create: SMBInstanceCreate): Promise<SMBInstance | undefined> {
     return await createResource("/smbInstances", create);
 }
@@ -99,6 +103,7 @@ export async function fetchSmbInstance(id: string): Promise<SMBInstance | undefi
     return await fetchResource("/smbInstances", id);
 }
 
+// SMB Shares
 export async function createSmbShare(create: SMBShareCreate): Promise<SMBShare | undefined> {
     return await createResource("/smbShares", create);
 }
@@ -112,6 +117,7 @@ export async function fetchSmbShare(id: string): Promise<SMBShare | undefined> {
     return await fetchResource("/smbShares", id);
 }
 
+// SMB Users
 export async function createSmbUser(create: SMBUserCreate): Promise<SMBUser | undefined> {
     return await createResource("/smbUsers", create);
 }
@@ -125,6 +131,7 @@ export async function fetchSmbUser(id: string): Promise<SMBUser | undefined> {
     return await fetchResource("/smbUsers", id);
 }
 
+// Uptime Endpoints
 export async function createUptimeEndpoint(create: UptimeEndpointCreate): Promise<UptimeEndpoint | undefined> {
     return await createResource("/uptimeEndpoints", create);
 }
@@ -141,6 +148,7 @@ export async function fetchAllUptimeEndpointsStructured(): Promise<UptimeEndpoin
     return await fetchResources("/uptimeEndpoints/all/structured");
 }
 
+// Tasks
 export async function deleteTask(id: string): Promise<boolean> {
     return await deleteResource("/tasks", id);
 }
@@ -151,27 +159,28 @@ export async function fetchAllTasks(): Promise<Task[]> {
     return await fetchResources("/tasks/all");
 }
 
+// Alerts
 export async function fetchAllAlerts(): Promise<Alert[]> {
     return await fetchResources("/alerts/all");
 }
 
+// User Files
 export async function fetchUserFile(id: string): Promise<UserFile | undefined> {
     return await fetchResource("/user/files", id);
 }
 
+// Daemon Tokens
 export async function createServerDaemonToken(id: string): Promise<DaemonToken | undefined> {
     return await createResource("/servers/daemon/tokens", { id });
 }
-
 export async function deleteDeamonToken(id: string): Promise<boolean> {
     return await deleteResource("/daemon/tokens", id);
 }
-
 export async function fetchServerDaemonTokens(id: string): Promise<DaemonToken[]> {
     return await fetchResources("/servers/daemon/tokens", id);
 }
 
-/* Public */
+// Public Listings
 export async function fetchPublicServerListings(): Promise<PublicServerListing[]> {
     return await fetchResources("/servers/public");
 }
@@ -179,3 +188,42 @@ export async function fetchPublicServer(id: string): Promise<PublicServer | unde
     return await fetchResource("/servers/public/structured", id);
 }
 
+// Nginx Instances
+export async function createNginxInstance(create: NginxInstanceCreate): Promise<NginxInstance | undefined> {
+    return await createResource("/nginxInstances", create);
+}
+export async function editNginxInstance(edit: NginxInstanceEdit): Promise<NginxInstance | undefined> {
+    return await editResource("/nginxInstances", edit);
+}
+export async function deleteNginxInstance(id: string): Promise<boolean> {
+    return await deleteResource("/nginxInstances", id);
+}
+export async function fetchNginxInstance(id: string): Promise<NginxInstance | undefined> {
+    return await fetchResource("/nginxInstances", id);
+}
+
+export async function createNginxServer(create: NginxServerCreate): Promise<NginxServer | undefined> {
+    return await createResource("/nginxServers", create);
+}
+export async function editNginxServer(edit: NginxServerEdit): Promise<NginxServer | undefined> {
+    return await editResource("/nginxServers", edit);
+}
+export async function deleteNginxServer(id: string): Promise<boolean> {
+    return await deleteResource("/nginxServers", id);
+}
+export async function fetchNginxServer(id: string): Promise<NginxServer | undefined> {
+    return await fetchResource("/nginxServers", id);
+}
+
+export async function createNginxLocation(create: NginxLocationCreate): Promise<NginxLocation | undefined> {
+    return await createResource("/nginxLocations", create);
+}
+export async function editNginxLocation(edit: NginxLocationEdit): Promise<NginxLocation | undefined> {
+    return await editResource("/nginxLocations", edit);
+}
+export async function deleteNginxLocation(id: string): Promise<boolean> {
+    return await deleteResource("/nginxLocations", id);
+}
+export async function fetchNginxLocation(id: string): Promise<NginxLocation | undefined> {
+    return await fetchResource("/nginxLocations", id);
+}

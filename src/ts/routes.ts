@@ -25,6 +25,9 @@ type ServersProps = {
     smbInstances: Map<string, SMBInstance>;
     smbShares: Map<string, SMBShare>;
     smbUsers: Map<string, SMBUser>;
+    nginxInstances: Map<string, NginxInstance>;
+    nginxServers: Map<string, NginxServer>;
+    nginxLocations: Map<string, NginxLocation>;
     publicServerListings: Map<string, PublicServerListing>;
     statistics: Map<string, Statistic>;
     diskStatistics: Map<string, DiskStatistic>;
@@ -73,6 +76,7 @@ type EditUptimeEndpointConnectedProps = CreateUptimeEndpointConnectedProps;
 type CreateDatabaseConnectedProps = RouteProps & {
     databases: Map<string, Database>;
 };
+
 type CreateSMBInstanceConnectedProps = RouteProps & {
     smbInstances: Map<string, SMBInstance>;
 };
@@ -86,6 +90,19 @@ type CreateSMBUserConnectedProps = RouteProps & {
     smbUsers: Map<string, SMBUser>;
 };
 type EditSMBUserConnectedProps = CreateSMBUserConnectedProps;
+
+type CreateNginxInstanceConnectedProps = RouteProps & {
+    nginxInstances: Map<string, NginxInstance>;
+};
+type EditNginxInstanceConnectedProps = CreateNginxInstanceConnectedProps;
+type CreateNginxServerConnectedProps = RouteProps & {
+    nginxServers: Map<string, NginxServer>;
+};
+type EditNginxServerConnectedProps = CreateNginxServerConnectedProps;
+type CreateNginxLocationConnectedProps = RouteProps & {
+    nginxLocations: Map<string, NginxLocation>;
+};
+type EditNginxLocationConnectedProps = CreateNginxLocationConnectedProps;
 
 type EditNetworkConnectedProps = RouteProps & {
     networks: Map<string, Network>;

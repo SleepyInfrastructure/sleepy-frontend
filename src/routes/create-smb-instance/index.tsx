@@ -47,7 +47,7 @@ const CreateSMBInstance: FunctionalComponent<CreateSMBInstanceConnectedProps> = 
                 </div>
                 <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
                         props.actions.createSmbInstance({ server: props.id ?? "", name, recycle });
-                        setTimeout(() => { location.href = `/smb-instance/${props.id}`; }, 1000);
+                        setTimeout(() => { location.href = "/"; }, 1000);
                     }}>
                     Create!
                 </Button>

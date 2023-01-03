@@ -29,6 +29,7 @@ type ServerConnectedProps = {
     containerProjects: ContainerProjectConnectedProps[];
     databases: Database[];
     smb: SMBInstanceStructured[];
+    nginx: NginxInstanceStructured[];
     public: PublicServerListing | null;
     statistics: Statistic[];
     daemon: Daemon | null;
@@ -116,6 +117,19 @@ type SMBShareConnectedProps = {
 };
 type SMBUserConnectedProps = {
     item: SMBUser;
+    actions: ConnectedActions;
+};
+
+type NginxInstanceConnectedProps = {
+    item: NginxInstanceStructured;
+    actions: ConnectedActions;
+};
+type NginxServerConnectedProps = {
+    item: NginxServerStructured;
+    actions: ConnectedActions;
+};
+type NginxLocationConnectedProps = {
+    item: NginxLocation;
     actions: ConnectedActions;
 };
 

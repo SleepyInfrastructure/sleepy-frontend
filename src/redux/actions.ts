@@ -357,6 +357,9 @@ export function daemonRequestContainerAction(id: string, project: boolean, actio
 export function daemonBuildSmbConfig(id: string): ReduxAction {
     return getAction("DAEMON_BUILD_SMB_CONFIG", { id });
 }
+export function daemonBuildNginxConfig(id: string): ReduxAction {
+    return getAction("DAEMON_BUILD_NGINX_CONFIG", { id });
+}
 
 /* Public */
 export function fetchPublicServerListings(): ReduxAction {
@@ -365,10 +368,87 @@ export function fetchPublicServerListings(): ReduxAction {
 export function fetchPublicServerListingsSuccess(servers: PublicServerListing[]): ReduxAction {
     return getAction("FETCH_PUBLIC_SERVER_LISTINGS_SUCCESS", servers);
 }
-
 export function fetchPublicServer(id: string): ReduxAction {
     return getAction("FETCH_PUBLIC_SERVER", id);
 }
 export function fetchPublicServerSuccess(server: PublicServer): ReduxAction {
     return getAction("FETCH_PUBLIC_SERVER_SUCCESS", server);
+}
+
+/* Nginx Instances */
+export function createNginxInstance(create: NginxInstanceCreate): ReduxAction {
+    return getAction("CREATE_NGINX_INSTANCE", create);
+}
+export function createNginxInstanceSuccess(instance: NginxInstance): ReduxAction {
+    return getAction("CREATE_NGINX_INSTANCE_SUCCESS", instance);
+}
+export function editNginxInstance(edit: NginxInstanceEdit): ReduxAction {
+    return getAction("EDIT_NGINX_INSTANCE", edit);
+}
+export function editNginxInstanceSuccess(instance: NginxInstance): ReduxAction {
+    return getAction("EDIT_NGINX_INSTANCE_SUCCESS", instance);
+}
+export function deleteNginxInstance(id: string): ReduxAction {
+    return getAction("DELETE_NGINX_INSTANCE", id);
+}
+export function deleteNginxInstanceSuccess(id: string): ReduxAction {
+    return getAction("DELETE_NGINX_INSTANCE_SUCCESS", id);
+}
+export function fetchNginxInstance(id: string): ReduxAction {
+    return getAction("FETCH_NGINX_INSTANCE", id);
+}
+export function fetchNginxInstanceSuccess(instance: NginxInstance): ReduxAction {
+    return getAction("FETCH_NGINX_INSTANCE_SUCCESS", instance);
+}
+
+/* SMB Shares */
+export function createNginxServer(create: SMBShareCreate): ReduxAction {
+    return getAction("CREATE_NGINX_SERVER", create);
+}
+export function createNginxServerSuccess(server: NginxServer): ReduxAction {
+    return getAction("CREATE_NGINX_SERVER_SUCCESS", server);
+}
+export function editNginxServer(edit: NginxServerEdit): ReduxAction {
+    return getAction("EDIT_NGINX_SERVER", edit);
+}
+export function editNginxServerSuccess(server: NginxServer): ReduxAction {
+    return getAction("EDIT_NGINX_SERVER_SUCCESS", server);
+}
+export function deleteNginxServer(id: string): ReduxAction {
+    return getAction("DELETE_NGINX_SERVER", id);
+}
+export function deleteNginxServerSuccess(id: string): ReduxAction {
+    return getAction("DELETE_NGINX_SERVER_SUCCESS", id);
+}
+export function fetchNginxServer(id: string): ReduxAction {
+    return getAction("FETCH_NGINX_SERVER", id);
+}
+export function fetchNginxServerSuccess(server: NginxServer): ReduxAction {
+    return getAction("FETCH_NGINX_SERVER_SUCCESS", server);
+}
+
+/* Nginx Locations */
+export function createNginxLocation(create: NginxLocationCreate): ReduxAction {
+    return getAction("CREATE_NGINX_LOCATION", create);
+}
+export function createNginxLocationSuccess(location: NginxLocation): ReduxAction {
+    return getAction("CREATE_NGINX_LOCATION_SUCCESS", location);
+}
+export function editNginxLocation(edit: NginxLocationEdit): ReduxAction {
+    return getAction("EDIT_NGINX_LOCATION", edit);
+}
+export function editNginxLocationSuccess(location: NginxLocation): ReduxAction {
+    return getAction("EDIT_NGINX_LOCATION_SUCCESS", location);
+}
+export function deleteNginxLocation(id: string): ReduxAction {
+    return getAction("DELETE_NGINX_LOCATION", id);
+}
+export function deleteNginxLocationSuccess(id: string): ReduxAction {
+    return getAction("DELETE_NGINX_LOCATION_SUCCESS", id);
+}
+export function fetchNginxLocation(id: string): ReduxAction {
+    return getAction("FETCH_NGINX_LOCATION", id);
+}
+export function fetchNginxLocationSuccess(location: NginxLocation): ReduxAction {
+    return getAction("FETCH_NGINX_LOCATION_SUCCESS", location);
 }

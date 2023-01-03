@@ -76,7 +76,7 @@ const CreateSMBShare: FunctionalComponent<CreateSMBShareConnectedProps> = (props
                             browsable: browsable === true, readonly: readonly === true, guest: guest === true,
                             users: [], admins: []
                         });
-                        setTimeout(() => { location.href = `/smb-instance/${props.id}`; }, 1000);
+                        setTimeout(() => { location.href = "/"; }, 1000);
                     }}>
                     Create!
                 </Button>

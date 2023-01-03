@@ -9,6 +9,7 @@ import diskStyle from "../disk/style.scss";
 import containerStyle from "../container/style.scss";
 import databaseStyle from "../database/style.scss";
 import smbStyle from "../smb-instance/style.scss";
+import nginxStyle from "../nginx-instance/style.scss";
 /* Components */
 import Button from "../ui/button";
 import Process from "../process";
@@ -21,6 +22,7 @@ import SmallContainer from "../small-container";
 import SmallContainerProject from "../small-container-project";
 import Database from "../database";
 import SMBInstance from "../smb-instance";
+import NginxInstance from "../nginx-instance";
 import ProcessTreeMap from "./process";
 /* Charts */
 import CPUChart from "../charts/cpu";
@@ -51,13 +53,15 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
     const [containersOpen, setContainersOpen] = useState(true);
     const [databasesOpen, setDatabasesOpen] = useState(true);
     const [smbOpen, setSmbOpen] = useState(true);
-    const processSwitch = (e: React.MouseEvent, type: "NETWORK" | "DISK" | "CONTAINER" | "DATABASE" | "SMB") => {
+    const [nginxOpen, setNginxOpen] = useState(true);
+    const processSwitch = (e: React.MouseEvent, type: "NETWORK" | "DISK" | "CONTAINER" | "DATABASE" | "SMB" | "NGINX") => {
         if(!e.shiftKey) {
             setNetworksOpen(false);
             setDisksOpen(false);
             setContainersOpen(false);
             setDatabasesOpen(false);
             setSmbOpen(false);
+            setNginxOpen(false);
         }
         switch(type) {
             case "NETWORK":
@@ -74,6 +78,9 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 break;
             case "SMB":
                 setSmbOpen(!e.shiftKey ? true : !smbOpen);
+                break;
+            case "NGINX":
+                setNginxOpen(!e.shiftKey ? true : !nginxOpen);
                 break;
         }
     };
@@ -176,6 +183,14 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                         <div className={smbStyle["icon-smb"]} />
                         Rebuild SMB
                     </Button>
+                    <Button className={style["server-section-button"]} onClick={() => { location.href = `/create-nginx-instance/${props.item.id}`; }}>
+                        <div className={nginxStyle["icon-nginx"]} />
+                        Add Nginx Instance
+                    </Button>
+                    <Button className={style["server-section-button"]} onClick={() => { props.actions.daemonBuildNginxConfig(props.item.id); }}>
+                        <div className={nginxStyle["icon-nginx"]} />
+                        Rebuild Nginx
+                    </Button>
                 </div>
             </div>
             <div id="resources" className={style["server-section"]}>
@@ -204,6 +219,10 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                         <div className={smbStyle["icon-smb"]} style={smbOpen ? { background: "var(--color-secondary-text)" } : {}} />
                         SMB Instances
                     </Button>
+                    <Button className={style["server-section-button"]} secondary={nginxOpen} onClick={(e) => { processSwitch(e, "NGINX");  }}>
+                        <div className={nginxStyle["icon-nginx"]} style={nginxOpen ? { background: "var(--color-secondary-text)" } : {}} />
+                        Nginx Instances
+                    </Button>
                 </div>
                 <div className={style["server-section-items"]}>
                     {!networksOpen || props.network === null ? null : <Network item={props.network} actions={props.actions} />}
@@ -215,6 +234,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                     {!containersOpen || props.containers.length < 1 ? null : props.containers.filter(e => e.item.parent === null).map((e, i) => <SmallContainer key={i} {...e} />)}
                     {!databasesOpen || props.databases.length < 1 ? null : props.databases.map((e, i) => <Database key={i} item={e} actions={props.actions} />)}
                     {!smbOpen || props.smb.length < 1 ? null : props.smb.map((e, i) => <SMBInstance key={i} item={e} actions={props.actions} />)}
+                    {!nginxOpen || props.nginx.length < 1 ? null : props.nginx.map((e, i) => <NginxInstance key={i} item={e} actions={props.actions} />)}
                 </div>
             </div>
         </div>

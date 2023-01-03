@@ -125,6 +125,14 @@ const REDUCERS: Record<string, (state: ReduxState, action: ReduxAction) => any> 
         return cacheResource(state, action.data, ResourceType.SMB_INSTANCE_STRUCTURED);
     },
 
+    CREATE_NGINX_INSTANCE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResource(state, action.data, ResourceType.NGINX_INSTANCE);
+    },
+
+    FETCH_NGINX_INSTANCE_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
+        return cacheResource(state, action.data, ResourceType.NGINX_INSTANCE_STRUCTURED);
+    },
+
     CREATE_UPTIME_ENDPOINT_SUCCESS: (state: ReduxState, action: ReduxAction): ReduxState => {
         return cacheResource(state, action.data, ResourceType.UPTIME_ENDPOINT);
     },
@@ -354,6 +362,54 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await reducerFetch(dispatch, action.data, routes.createSmbUser, actions.createSmbUserSuccess);
     },
 
+    FETCH_NGINX_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.fetchNginxInstance, actions.fetchNginxInstanceSuccess);
+    },
+
+    EDIT_NGINX_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.editNginxInstance, actions.editNginxInstanceSuccess);
+    },
+
+    DELETE_NGINX_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteNginxInstance, actions.deleteNginxInstanceSuccess);
+    },
+
+    CREATE_NGINX_INSTANCE: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.createNginxInstance, actions.createNginxInstanceSuccess);
+    },
+
+    FETCH_NGINX_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.fetchNginxServer, actions.fetchNginxServerSuccess);
+    },
+
+    EDIT_NGINX_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.editNginxServer, actions.editNginxServerSuccess);
+    },
+
+    DELETE_NGINX_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteNginxServer, actions.deleteNginxServerSuccess);
+    },
+
+    CREATE_NGINX_SERVER: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.createNginxServer, actions.createNginxServerSuccess);
+    },
+
+    FETCH_NGINX_LOCATION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.fetchNginxLocation, actions.fetchNginxLocationSuccess);
+    },
+
+    EDIT_NGINX_LOCATION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.editNginxLocation, actions.editNginxLocationSuccess);
+    },
+
+    DELETE_NGINX_LOCATION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerDelete(dispatch, action.data, routes.deleteNginxLocation, actions.deleteNginxLocationSuccess);
+    },
+
+    CREATE_NGINX_LOCATION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetch(dispatch, action.data, routes.createNginxLocation, actions.createNginxLocationSuccess);
+    },
+
     CREATE_UPTIME_ENDPOINT: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.createUptimeEndpoint, actions.createUptimeEndpointSuccess);
     },
@@ -420,6 +476,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     DAEMON_BUILD_SMB_CONFIG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_BUILD_SMB_CONFIG, ...action.data });
+    },
+
+    DAEMON_BUILD_NGINX_CONFIG: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await sendWebsocketMessage({ type: DaemonWebsocketMessageType.DAEMON_CLIENT_BUILD_NGINX_CONFIG, ...action.data });
     },
 
     CREATE_SERVER_DAEMON_TOKEN: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
