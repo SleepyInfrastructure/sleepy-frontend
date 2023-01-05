@@ -11,6 +11,9 @@ import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
+import FormRowSwitch from "../../components/ui/form-row-switch";
 
 const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (props: EditSMBInstanceConnectedProps) => {
     const [didSetDefaults, setDidSetDefaults] = useState(false);
@@ -47,24 +50,12 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
                     <div className={formStyle["page-form-text"]}>Instance ID: </div>
                     <input className={formStyle["page-form-input"]} value={instance.id} disabled />
                 </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Instance name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-smb-instance..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Bin enabled: </div>
-                    <div className={formStyle["page-form-switch"]} onClick={() => { setRecycle(!recycle); }}>
-                        <input type="checkbox" checked={recycle} />
-                        <div className={formStyle["page-form-switch-slider"]} />
-                    </div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
+                <FormRowInput name="Instance name" placeholder="my-smb-instance..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowSwitch name="Bin enabled" checked={recycle} onClick={setRecycle} />
+                <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
                     props.actions.editSmbInstance({ id: instance.id, name, recycle });
                     setTimeout(() => { location.href = "/"; }, 1000);
-                }}>
-                    Edit!
-                </Button>
+                }} />
             </div>
         </div>
     );

@@ -12,6 +12,9 @@ import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
 import { hostnameSatisfies } from "../../scripts/util/satisfy";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
+import FormRowSwitch from "../../components/ui/form-row-switch";
 
 const EditNginxServer: FunctionalComponent<EditNginxServerConnectedProps> = (props: EditNginxServerConnectedProps) => {
     const [didSetDefaults, setDidSetDefaults] = useState(false);
@@ -52,7 +55,7 @@ const EditNginxServer: FunctionalComponent<EditNginxServerConnectedProps> = (pro
     return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["icon-nginx"]} />
+                <div className={style["icon-nginx-server"]} />
                 <div className={baseStyle["page-title"]}>Edit Nginx Server</div>
             </div>
             <div className={formStyle["page-form"]}>
@@ -60,44 +63,18 @@ const EditNginxServer: FunctionalComponent<EditNginxServerConnectedProps> = (pro
                     <div className={formStyle["page-form-text"]}>Server ID: </div>
                     <input className={formStyle["page-form-input"]} value={server.id} disabled />
                 </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Server name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-nginx-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Server domain: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="google.com..." onInput={(e) => { setDomain(e.currentTarget.value); }} value={domain} />
-                    <div className={formStyle["page-form-error"]} data={domainSatisfies() === "(satisfies)" ? "false" : "true"}>{domainSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Server SSL: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="google.com..." onInput={(e) => { setSsl(e.currentTarget.value); }} value={ssl} />
-                    <div className={formStyle["page-form-error"]} data={sslSatisfies() === "(satisfies)" ? "false" : "true"}>{sslSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Redirects HTTP: </div>
-                    <div className={formStyle["page-form-switch"]} onClick={() => { setHttpRedirect(!httpRedirect); }}>
-                        <input type="checkbox" checked={httpRedirect} />
-                        <div className={formStyle["page-form-switch-slider"]} />
-                    </div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>HTTP2 enabled: </div>
-                    <div className={formStyle["page-form-switch"]} onClick={() => { setHttp2(!http2); }}>
-                        <input type="checkbox" checked={http2} />
-                        <div className={formStyle["page-form-switch-slider"]} />
-                    </div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.editNginxServer({
-                            id: server.id, name, domain,
-                            httpRedirect: httpRedirect === true, http2: http2 === true
-                        });
-                        setTimeout(() => { location.href = "/"; }, 1000);
-                    }}>
-                    Edit!
-                </Button>
+                <FormRowInput name="Server name" placeholder="my-nginx-server..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowInput name="Server domain" placeholder="google.com..." value={domain} satisfies={domainSatisfies} set={setDomain} />
+                <FormRowInput name="Server SSL" placeholder="google.com..." value={ssl} satisfies={sslSatisfies} set={setSsl} />
+                <FormRowSwitch name="Redirects HTTP" checked={httpRedirect} onClick={setHttpRedirect} />
+                <FormRowSwitch name="HTTP2 enabled" checked={http2} onClick={setHttp2} />
+                <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
+                    props.actions.editNginxServer({
+                        id: server.id, name, domain,
+                        httpRedirect: httpRedirect === true, http2: http2 === true
+                    });
+                    setTimeout(() => { location.href = "/"; }, 1000);
+                }} />
             </div>
         </div>
     );

@@ -3,7 +3,7 @@ import { h, FunctionalComponent } from "preact";
 import { Router } from "preact-router";
 /* Components */
 import Home from "../routes/home";
-import PublicServers from "../routes/public-servers";
+import PublicDashboards from "../routes/public-dashboards";
 import Overview from "../routes/overview";
 import Alerts from "../routes/alerts";
 import Tasks from "../routes/tasks";
@@ -45,7 +45,7 @@ const AppRouter: FunctionalComponent<any> = (props: AppConnectedProps) => {
     return (
         <Router>
             <Home path="/" {...props} />
-            <PublicServers path="/public-dashboards" session={props.session} publicServers={props.publicServers} publicServerListings={props.publicServerListings} statistics={props.statistics} actions={props.actions} />
+            <PublicDashboards path="/public-dashboards" session={props.session} publicServers={props.publicServers} publicServerListings={props.publicServerListings} statistics={props.statistics} actions={props.actions} />
             <Overview path="/overview" {...props} />
             <Login path="/login" session={props.session} actions={props.actions} />
             <Register path="/register" session={props.session} actions={props.actions} />

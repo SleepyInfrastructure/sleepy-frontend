@@ -11,6 +11,9 @@ import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
+import FormRowSwitch from "../../components/ui/form-row-switch";
 
 const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: EditSMBShareConnectedProps) => {
     const [didSetDefaults, setDidSetDefaults] = useState(false);
@@ -63,37 +66,11 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
                     <div className={formStyle["page-form-text"]}>Share ID: </div>
                     <input className={formStyle["page-form-input"]} value={share.id} disabled />
                 </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Share name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-smb-instance..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Share path: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="/mnt/my-disk..." onInput={(e) => { setPath(e.currentTarget.value); }} value={path} />
-                    <div className={formStyle["page-form-error"]} data={pathSatisfies() === "(satisfies)" ? "false" : "true"}>{pathSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Browsable: </div>
-                    <div className={formStyle["page-form-switch"]} onClick={() => { setBrowsable(!browsable); }}>
-                        <input type="checkbox" checked={browsable} />
-                        <div className={formStyle["page-form-switch-slider"]} />
-                    </div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Read-only: </div>
-                    <div className={formStyle["page-form-switch"]} onClick={() => { setReadonly(!readonly); }}>
-                        <input type="checkbox" checked={readonly} />
-                        <div className={formStyle["page-form-switch-slider"]} />
-                    </div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Allow guests: </div>
-                    <div className={formStyle["page-form-switch"]} onClick={() => { setGuest(!guest); }}>
-                        <input type="checkbox" checked={guest} />
-                        <div className={formStyle["page-form-switch-slider"]} />
-                    </div>
-                </div>
+                <FormRowInput name="Share name" placeholder="my-smb-share..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowInput name="Share path" placeholder="/mnt/my-disk..." value={path} satisfies={pathSatisfies} set={setPath} />
+                <FormRowSwitch name="Browsable" checked={browsable} onClick={setBrowsable} />
+                <FormRowSwitch name="Read-only" checked={readonly} onClick={setReadonly} />
+                <FormRowSwitch name="Allow guests" checked={guest} onClick={setGuest} />
                 <div className={formStyle["page-form-row"]}>
                     <div className={formStyle["page-form-text"]}>Share users: </div>
                     <div className={formStyle["page-form-dropdown"]}>
@@ -142,16 +119,14 @@ const EditSmbShare: FunctionalComponent<EditSMBShareConnectedProps> = (props: Ed
                         </div>
                     </div>
                 </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
+                <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
                     props.actions.editSmbShare({
                         id: share.id, name, path,
                         browsable: browsable === true, readonly: readonly === true, guest: guest === true,
                         users, admins
                     });
                     setTimeout(() => { location.href = "/"; }, 1000);
-                }}>
-                    Edit!
-                </Button>
+                }} />
             </div>
         </div>
     );

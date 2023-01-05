@@ -10,7 +10,7 @@ const NginxInstance: FunctionalComponent<NginxInstanceConnectedProps> = (props: 
     return (
         <div id={`nginx-instance-${props.item.id}`} className={baseStyle.panel}>
             <div className={baseStyle["panel-header"]}>
-                <div className={style["icon-nginx"]} />
+                <div className={style["icon-nginx-instance"]} />
                 <div className={baseStyle["panel-name"]}>{props.item.name}</div>
                 <a className={baseStyle["panel-link"]} data="green" onClick={() => { location.href = `/create-nginx-server/${props.item.id}`; }}>(Add server)</a>
                 <a className={baseStyle["panel-link"]} onClick={() => { location.href = `/edit-nginx-instance/${props.item.id}`; }}>(Edit)</a>

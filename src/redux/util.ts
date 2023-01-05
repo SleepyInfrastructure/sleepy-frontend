@@ -162,8 +162,6 @@ export function cacheResources(state: ReduxState, resources: any[], resourceType
             resources.forEach(disk => {
                 state = cacheResources(state, disk.partitions, ResourceType.PARTITION);
                 delete disk.partitions;
-                state = cacheResources(state, disk.statistics, ResourceType.DISK_STATISTIC);
-                delete disk.statistics;
                 newDisks.set(disk.id, disk);
             });
 

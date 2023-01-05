@@ -106,6 +106,12 @@ export function fetchDisk(id: string): ReduxAction {
 export function fetchDiskSuccess(disk: Disk): ReduxAction {
     return getAction("FETCH_DISK_SUCCESS", disk);
 }
+export function fetchDiskStatistics(data: { id: string, type: string }): ReduxAction {
+    return getAction("FETCH_DISK_STATISTICS", data);
+}
+export function fetchDiskStatisticsSuccess(statistics: DiskStatistic[]): ReduxAction {
+    return getAction("FETCH_DISK_STATISTICS_SUCCESS", statistics);
+}
 
 /* Partitions */
 export function fetchPartition(id: string): ReduxAction {

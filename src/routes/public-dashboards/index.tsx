@@ -6,12 +6,13 @@ import { connect } from "react-redux";
 import { mapState, mapDispatch } from "../../redux/util";
 import * as actions from "../../redux/actions";
 /* Styles */
+import baseStyle from "../style.scss";
 import style from "./style.scss";
 /* Components */
 import SmallPublicServer from "../../components/small-public-server";
 import EmptyPanel from "../../components/empty-panel";
 
-const PublicServers: FunctionalComponent<PublicServersConnectedProps> = (props: PublicServersConnectedProps) => {
+const PublicDashboards: FunctionalComponent<PublicDashboardsConnectedProps> = (props: PublicDashboardsConnectedProps) => {
     useEffect(() => {
         props.actions.fetchPublicServerListings();
     }, [props.actions]);
@@ -24,23 +25,26 @@ const PublicServers: FunctionalComponent<PublicServersConnectedProps> = (props: 
     }, [props.actions, props.publicServerListings]);
     const servers = Array.from(props.publicServers.values());
     const serverStatistics = Array.from(props.statistics.values());
+    console.log(serverStatistics);
     
     return (
-        <div className={style["public-servers-content"]}>
-            <div className={style["public-servers-section"]}>
-                <div className={style["home-title"]}>
-                    Public dashboards
-                </div>
-                <div className={style["public-servers-section-items"]}>
-                    {servers.map((e, i) => {
-                        const statistics = serverStatistics.filter(el => el.server === e.id);
-                        return statistics.length === 0 ? null : <SmallPublicServer key={i} item={e} statistics={statistics} actions={props.actions} />;
-                    })}
-                    {servers.length > 0 ? null : <EmptyPanel />}
+        <div className={baseStyle["page-content"]}>
+            <div className={style["public-servers-content"]}>
+                <div className={style["public-servers-section"]}>
+                    <div className={style["home-title"]}>
+                        Public dashboards
+                    </div>
+                    <div className={style["public-servers-section-items"]}>
+                        {servers.map((e, i) => {
+                            const statistics = serverStatistics.filter(el => el.server === e.id);
+                            return statistics.length === 0 ? null : <SmallPublicServer key={i} item={e} statistics={statistics} actions={props.actions} />;
+                        })}
+                        {servers.length > 0 ? null : <EmptyPanel />}
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default connect(mapState, mapDispatch(actions))(PublicServers);
+export default connect(mapState, mapDispatch(actions))(PublicDashboards);

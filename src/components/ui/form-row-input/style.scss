@@ -1,0 +1,14 @@
+.page-form-input {
+    width: 200px;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-text);
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+}
+.page-form-input::placeholder {
+    color: gray;
+}
+.page-form-input:disabled {
+    filter: grayscale(1);
+}

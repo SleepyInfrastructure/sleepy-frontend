@@ -12,6 +12,8 @@ import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
 import { ipv4Satisfies } from "../../scripts/util/satisfy";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
 
 const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: EditNetworkConnectedProps) => {
     const [didSetDefaults, setDidSetDefaults] = useState(false);
@@ -48,25 +50,15 @@ const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: Edit
                     <div className={formStyle["page-form-text"]}>Network ID: </div>
                     <input className={formStyle["page-form-input"]} value={network.id} disabled />
                 </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Network name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-network..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Network IPv4: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="1.1.1.1..." onInput={(e) => { setIPV4(e.currentTarget.value); }} value={ipv4} />
-                    <div className={formStyle["page-form-error"]} data={ipv4Satisfies(ipv4) === "(satisfies)" ? "false" : "true"}>{ipv4Satisfies(ipv4)}</div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.editNetwork({
-                            id: network.id,
-                            name, ipv4
-                        });
-                        setTimeout(() => { location.href = "/"; }, 1000);
-                    }}>
-                    Edit!
-                </Button>
+                <FormRowInput name="Network name" placeholder="my-network..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowInput name="Network IPv4" placeholder="1.1.1.1..." value={ipv4} satisfies={() => { return ipv4Satisfies(ipv4); }} set={setIPV4} />
+                <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
+                    props.actions.editNetwork({
+                        id: network.id,
+                        name, ipv4
+                    });
+                    setTimeout(() => { location.href = "/"; }, 1000);
+                }} />
             </div>
         </div>
     );

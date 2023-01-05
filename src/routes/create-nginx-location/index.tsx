@@ -10,8 +10,9 @@ import baseStyle from "../style.scss";
 import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
-import Button from "../../components/ui/button";
 import { hostSatisfies } from "../../scripts/util/satisfy";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
 
 const CreateNginxLocation: FunctionalComponent<CreateNginxLocationConnectedProps> = (props: CreateNginxLocationConnectedProps) => {
     const [satisfies, setSatisfies] = useState(false);
@@ -36,15 +37,11 @@ const CreateNginxLocation: FunctionalComponent<CreateNginxLocationConnectedProps
     return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["icon-nginx"]} />
+                <div className={style["icon-nginx-location"]} />
                 <div className={baseStyle["page-title"]}>Create Nginx Location</div>
             </div>
             <div className={formStyle["page-form"]}>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Location name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-nginx-location..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
+                <FormRowInput name="Location name" placeholder="my-nginx-location..." value={name} satisfies={nameSatisfies} set={setName} />
                 <div className={formStyle["page-form-row"]}>
                     <div className={formStyle["page-form-text"]}>Location type: </div>
                     <div className={formStyle["page-form-dropdown"]}>
@@ -61,24 +58,15 @@ const CreateNginxLocation: FunctionalComponent<CreateNginxLocationConnectedProps
                         </div>
                     </div>
                 </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Location path: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="path or empty for root..." onInput={(e) => { setPath(e.currentTarget.value); }} value={path} />
-                    <div className={formStyle["page-form-error"]} data="false">(satisfies)</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Location endpoint: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="127.0.0.1:8080..." onInput={(e) => { setEndpoint(e.currentTarget.value); }} value={endpoint} />
-                    <div className={formStyle["page-form-error"]} data={endpointSatisfies() === "(satisfies)" ? "false" : "true"}>{endpointSatisfies()}</div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.createNginxLocation({
-                            parent: props.id ?? "", name, type, path, endpoint
-                        });
-                        setTimeout(() => { location.href = "/"; }, 1000);
-                    }}>
-                    Create!
-                </Button>
+                <FormRowInput name="Location path" placeholder="path or empty for root..." value={path} set={setPath} />
+                <FormRowInput name="Location endpoint" placeholder="127.0.0.1:8080..." value={endpoint} satisfies={endpointSatisfies} set={setEndpoint} />
+                <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
+                    props.actions.createNginxLocation({
+                        parent: props.id ?? "", name, type, path, endpoint,
+                        cors: true
+                    });
+                    setTimeout(() => { location.href = "/"; }, 1000);
+                }} />
             </div>
         </div>
     );

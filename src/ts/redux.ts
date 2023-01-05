@@ -65,6 +65,7 @@ type ConnectedActions = {
     fetchNetwork(id: string): ReduxAction;
 
     fetchDisk(id: string): ReduxAction;
+    fetchDiskStatistics(data: { id: string, type: string }): ReduxAction;
     fetchPartition(id: string): ReduxAction;
 
     fetchContainer(id: string): ReduxAction;

@@ -63,6 +63,9 @@ export async function fetchNetwork(id: string): Promise<Network | undefined> {
 export async function fetchDisk(id: string): Promise<Disk | undefined> {
     return await fetchResource("/disks", id);
 }
+export async function fetchDiskStatistics(data: { id: string, type: string }): Promise<DiskStatistic[]> {
+    return await fetchResources(`/disks/statistics/${data.type}`, data.id);
+}
 export async function fetchPartition(id: string): Promise<Partition | undefined> {
     return await fetchResource("/partitions", id);
 }

@@ -11,6 +11,8 @@ import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
 
 const EditSmbUser: FunctionalComponent<EditSMBUserConnectedProps> = (props: EditSMBUserConnectedProps) => {
     const [didSetDefaults, setDidSetDefaults] = useState(false);
@@ -45,17 +47,11 @@ const EditSmbUser: FunctionalComponent<EditSMBUserConnectedProps> = (props: Edit
                     <div className={formStyle["page-form-text"]}>User ID: </div>
                     <input className={formStyle["page-form-input"]} value={user.id} disabled />
                 </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-smb-user..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
+                <FormRowInput name="User name" placeholder="my-smb-user..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
                     props.actions.editSmbUser({ id: user.id, name });
                     setTimeout(() => { location.href = "/"; }, 1000);
-                }}>
-                    Edit!
-                </Button>
+                }} />
             </div>
         </div>
     );

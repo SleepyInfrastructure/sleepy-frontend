@@ -10,6 +10,7 @@ import baseStyle from "../style.scss";
 import formStyle from "../form.scss";
 import style from "./style.scss";
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
 /* Components */
 
 const Login: FunctionalComponent<LoginConnectedProps> = (props: LoginConnectedProps) => {
@@ -45,9 +46,9 @@ const Login: FunctionalComponent<LoginConnectedProps> = (props: LoginConnectedPr
                     <input className={formStyle["page-form-input"]} type="password" placeholder="..." onInput={(e) => { setPassword(e.currentTarget.value); }} value={password} />
                     <div className={formStyle["page-form-error"]} data={passwordSatisfies() === "(satisfies)" ? "false" : "true"}>{passwordSatisfies()}</div>
                 </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => { props.actions.createSession("classic", username, password); }}>
-                    Login!
-                </Button>
+                <FormRowButton name="Login!" satisfies={satisfies} onClick={() => {
+                    props.actions.createSession("classic", username, password);
+                }} />
             </div>
         </div>
     );

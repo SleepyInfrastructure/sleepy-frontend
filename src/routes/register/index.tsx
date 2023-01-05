@@ -10,6 +10,7 @@ import baseStyle from "../style.scss";
 import formStyle from "../form.scss";
 import style from "./style.scss";
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
 /* Components */
 
 const Register: FunctionalComponent<RegisterConnectedProps> = (props: RegisterConnectedProps) => {
@@ -54,9 +55,9 @@ const Register: FunctionalComponent<RegisterConnectedProps> = (props: RegisterCo
                     <input className={formStyle["page-form-input"]} type="password" placeholder="..." onInput={(e) => { setPasswordAgain(e.currentTarget.value); }} value={passwordAgain} />
                     <div className={formStyle["page-form-error"]} data={passwordAgainMatches() === "(matches)" ? "false" : "true"}>{passwordAgainMatches()}</div>
                 </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => { props.actions.createUser({ username, password }); }}>
-                    Register!
-                </Button>
+                <FormRowButton name="Register!" satisfies={satisfies} onClick={() => {
+                    props.actions.createUser({ username, password });
+                }} />
             </div>
         </div>
     );

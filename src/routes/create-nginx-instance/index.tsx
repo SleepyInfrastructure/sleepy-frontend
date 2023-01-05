@@ -11,6 +11,8 @@ import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
+import FormRowInput from "../../components/ui/form-row-input";
+import FormRowButton from "../../components/ui/form-row-button";
 
 const CreateNginxInstance: FunctionalComponent<CreateNginxInstanceConnectedProps> = (props: CreateNginxInstanceConnectedProps) => {
     const [satisfies, setSatisfies] = useState(false);
@@ -28,21 +30,15 @@ const CreateNginxInstance: FunctionalComponent<CreateNginxInstanceConnectedProps
     return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["icon-nginx"]} />
+                <div className={style["icon-nginx-instance"]} />
                 <div className={baseStyle["page-title"]}>Create Nginx Instance</div>
             </div>
             <div className={formStyle["page-form"]}>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Instance name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-nginx-instance..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
+                <FormRowInput name="Instance name" placeholder="my-nginx-instance..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
                         props.actions.createNginxInstance({ server: props.id ?? "", name, networks: [`${name}-network`] });
                         setTimeout(() => { location.href = "/"; }, 1000);
-                    }}>
-                    Create!
-                </Button>
+                }} />
             </div>
         </div>
     );

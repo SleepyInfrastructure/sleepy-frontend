@@ -36,7 +36,7 @@ type ServersProps = {
 };
 
 type HomeConnectedProps = RouteProps;
-type PublicServersConnectedProps = RouteProps & {
+type PublicDashboardsConnectedProps = RouteProps & {
     publicServerListings: Map<string, PublicServerListing>;
     publicServers: Map<string, PublicServer>;
     statistics: Map<string, Statistic>;

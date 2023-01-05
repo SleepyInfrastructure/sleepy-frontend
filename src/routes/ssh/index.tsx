@@ -17,6 +17,7 @@ import baseStyle from "../style.scss";
 import formStyle from "../form.scss";
 import style from "./style.scss";
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
 /* Components */
 
 const SSH: FunctionalComponent<SSHConnectedProps> = (props: SSHConnectedProps) => {
@@ -79,11 +80,9 @@ const SSH: FunctionalComponent<SSHConnectedProps> = (props: SSHConnectedProps) =
                     <input className={formStyle["page-form-input"]} placeholder="..." onInput={(e) => { setPassword(e.currentTarget.value); }} value={password} type="password" />
                     <div className={formStyle["page-form-error"]} data={"false"}>(satisfies)</div>
                 </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
+                <FormRowButton name="Connect!" satisfies={satisfies} onClick={() => {
                     //
-                }}>
-                    Connect!
-                </Button>
+                }} />
             </div>
             <XTerm className={style["log-view-terminal"]} addons={addons} ref={xtermRef} options={{ cursorBlink: true, allowProposedApi: true }} />
         </div>

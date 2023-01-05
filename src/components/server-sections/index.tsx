@@ -44,6 +44,9 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
         if(!fetchedTypes.includes(statType)) {
             setFetchedTypes([...fetchedTypes, statType]);
             props.actions.fetchServerStatistics({ id: props.item.id, type: statType.toLowerCase() });
+            props.disks.forEach(disk => {
+                props.actions.fetchDiskStatistics({ id: disk.id, type: statType.toLowerCase() });
+            });
         }
     }, [fetchedTypes, props.actions, props.item.id, statType]);
     const statistics = props.statistics.filter(e => e.type === StatisticTypePreviousMapping[statType]).sort((a, b) => a.timestamp - b.timestamp);
@@ -184,11 +187,11 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                         Rebuild SMB
                     </Button>
                     <Button className={style["server-section-button"]} onClick={() => { location.href = `/create-nginx-instance/${props.item.id}`; }}>
-                        <div className={nginxStyle["icon-nginx"]} />
+                        <div className={nginxStyle["icon-nginx-instance"]} />
                         Add Nginx Instance
                     </Button>
                     <Button className={style["server-section-button"]} onClick={() => { props.actions.daemonBuildNginxConfig(props.item.id); }}>
-                        <div className={nginxStyle["icon-nginx"]} />
+                        <div className={nginxStyle["icon-nginx-instance"]} />
                         Rebuild Nginx
                     </Button>
                 </div>
@@ -220,7 +223,7 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                         SMB Instances
                     </Button>
                     <Button className={style["server-section-button"]} secondary={nginxOpen} onClick={(e) => { processSwitch(e, "NGINX");  }}>
-                        <div className={nginxStyle["icon-nginx"]} style={nginxOpen ? { background: "var(--color-secondary-text)" } : {}} />
+                        <div className={nginxStyle["icon-nginx-instance"]} style={nginxOpen ? { background: "var(--color-secondary-text)" } : {}} />
                         Nginx Instances
                     </Button>
                 </div>

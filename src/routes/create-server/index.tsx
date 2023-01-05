@@ -12,6 +12,8 @@ import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
 
 const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: CreateServerConnectedProps) => {
     const [satisfies, setSatisfies] = useState(false);
@@ -34,22 +36,16 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
                 <div className={baseStyle["page-title"]}>Create Server</div>
             </div>
             <div className={formStyle["page-form"]}>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Server name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-server..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
+                <FormRowInput name="Server name" placeholder="my-server..." value={name} satisfies={nameSatisfies} set={setName} />
                 <div className={formStyle["page-form-row"]}>
                     <div className={formStyle["page-form-text"]}>Server color: </div>
                     <HexColorPicker className={formStyle["page-form-color-picker"]} color={color} onChange={setColor} />
                     <div className={formStyle["page-form-color-picker-stripe"]} style={{ backgroundColor: color }} />
                 </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.createServer({ name, color: color.substring(1) });
-                        setTimeout(() => { location.href = "/"; }, 1000);
-                    }}>
-                    Create!
-                </Button>
+                <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
+                    props.actions.createServer({ name, color: color.substring(1) });
+                    setTimeout(() => { location.href = "/"; }, 1000);
+                }} />
             </div>
         </div>
     );

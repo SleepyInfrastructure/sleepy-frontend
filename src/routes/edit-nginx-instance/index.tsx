@@ -11,6 +11,8 @@ import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
 
 const EditNginxInstance: FunctionalComponent<EditNginxInstanceConnectedProps> = (props: EditNginxInstanceConnectedProps) => {
     const [didSetDefaults, setDidSetDefaults] = useState(false);
@@ -37,7 +39,7 @@ const EditNginxInstance: FunctionalComponent<EditNginxInstanceConnectedProps> = 
     return (
         <div className={baseStyle["page-content"]}>
             <div className={baseStyle["page-header"]}>
-                <div className={style["icon-nginx"]} />
+                <div className={style["icon-nginx-instance"]} />
                 <div className={baseStyle["page-title"]}>Edit Nginx Instance</div>
             </div>
             <div className={formStyle["page-form"]}>
@@ -45,17 +47,11 @@ const EditNginxInstance: FunctionalComponent<EditNginxInstanceConnectedProps> = 
                     <div className={formStyle["page-form-text"]}>Instance ID: </div>
                     <input className={formStyle["page-form-input"]} value={instance.id} disabled />
                 </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Instance name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-nginx-instance..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.editNginxInstance({ id: instance.id, name });
-                        setTimeout(() => { location.href = "/"; }, 1000);
-                    }}>
-                    Edit!
-                </Button>
+                <FormRowInput name="Instance name" placeholder="my-nginx-instance..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
+                    props.actions.editNginxInstance({ id: instance.id, name });
+                    setTimeout(() => { location.href = "/"; }, 1000);
+                }} />
             </div>
         </div>
     );

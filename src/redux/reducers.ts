@@ -264,6 +264,9 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
         await reducerFetchMultiple(dispatch, {}, routes.fetchAllServersStructured, (servers) => {
             for(const server of servers) {
                 dispatch(actions.fetchServerStatistics({ id: server.id, type: "hour" }))
+                for(const disk of server.disks) {
+                    dispatch(actions.fetchDiskStatistics({ id: disk.id, type: "hour" }))
+                }
             }
 
             return actions.fetchAllServersStructuredSuccess(servers);
@@ -284,6 +287,10 @@ const ASYNC_REDUCERS: Record<string, (dispatch: Dispatch<ReduxAction>, getState:
 
     FETCH_DISK: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
         await reducerFetch(dispatch, action.data, routes.fetchDisk, actions.fetchDiskSuccess);
+    },
+
+    FETCH_DISK_STATISTICS: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {
+        await reducerFetchMultiple(dispatch, action.data, routes.fetchDiskStatistics, actions.fetchDiskStatisticsSuccess);
     },
 
     FETCH_PARTITION: async (dispatch: Dispatch<ReduxAction>, getState: () => ReduxState, action: ReduxAction): Promise<void> => {

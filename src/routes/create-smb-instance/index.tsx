@@ -11,6 +11,9 @@ import formStyle from "../form.scss";
 import style from "./style.scss";
 /* Components */
 import Button from "../../components/ui/button";
+import FormRowButton from "../../components/ui/form-row-button";
+import FormRowInput from "../../components/ui/form-row-input";
+import FormRowSwitch from "../../components/ui/form-row-switch";
 
 const CreateSMBInstance: FunctionalComponent<CreateSMBInstanceConnectedProps> = (props: CreateSMBInstanceConnectedProps) => {
     const [satisfies, setSatisfies] = useState(false);
@@ -33,24 +36,12 @@ const CreateSMBInstance: FunctionalComponent<CreateSMBInstanceConnectedProps> = 
                 <div className={baseStyle["page-title"]}>Create SMB Instance</div>
             </div>
             <div className={formStyle["page-form"]}>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Instance name: </div>
-                    <input className={formStyle["page-form-input"]} placeholder="my-smb-instance..." onInput={(e) => { setName(e.currentTarget.value); }} value={name} />
-                    <div className={formStyle["page-form-error"]} data={nameSatisfies() === "(satisfies)" ? "false" : "true"}>{nameSatisfies()}</div>
-                </div>
-                <div className={formStyle["page-form-row"]}>
-                    <div className={formStyle["page-form-text"]}>Bin enabled: </div>
-                    <div className={formStyle["page-form-switch"]} onClick={() => { setRecycle(!recycle); }}>
-                        <input type="checkbox" checked={recycle} />
-                        <div className={formStyle["page-form-switch-slider"]} />
-                    </div>
-                </div>
-                <Button disabled={!satisfies} className={formStyle["page-form-button"]} secondary onClick={() => {
-                        props.actions.createSmbInstance({ server: props.id ?? "", name, recycle });
-                        setTimeout(() => { location.href = "/"; }, 1000);
-                    }}>
-                    Create!
-                </Button>
+                <FormRowInput name="Instance name" placeholder="my-smb-instance..." value={name} satisfies={nameSatisfies} set={setName} />
+                <FormRowSwitch name="Bin enabled" checked={recycle} onClick={setRecycle} />
+                <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
+                    props.actions.createSmbInstance({ server: props.id ?? "", name, recycle });
+                    setTimeout(() => { location.href = "/"; }, 1000);
+                }} />
             </div>
         </div>
     );
