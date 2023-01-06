@@ -60,11 +60,7 @@ type PartitionConnectedProps = {
     item: PartitionConnectedPropsItem;
     actions: ConnectedActions;
 };
-type PartitionConnectedPropsItem = {
-    id: string;
-    name: string;
-    size: number;
-    used: number | null;
+type PartitionConnectedPropsItem = Partition & {
     zfs?: string;
 };
 

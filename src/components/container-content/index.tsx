@@ -13,8 +13,7 @@ const ContainerContent: FunctionalComponent<ContainerContentConnectedProps> = (p
 
     return (
         <div className={baseStyle["panel-content"]}>
-            <div className={baseStyle["panel-content-row"]}>ID: <span className={baseStyle["panel-content-row-highlight"]}>{props.item.id}</span></div>
-            <div className={baseStyle["panel-content-row"]}>Container ID: <span className={baseStyle["panel-content-row-highlight"]}>{props.item.rawId}</span></div>
+            <div className={baseStyle["panel-content-row"]}>ID: <span className={baseStyle["panel-content-row-highlight"]}>{props.item.id} ({props.item.rawId})</span></div>
             <div className={baseStyle["panel-content-row"]}>Image: <span className={baseStyle["panel-content-row-highlight"]}>{props.item.image}</span></div>
             <div className={baseStyle["panel-content-row"]}>Status: <span className={baseStyle["panel-content-row-highlight"]} data={props.item.status === "running" ? "green" : "red"}>{props.item.status} ({formatDurationNow(props.item.creation)})</span></div>
             <div className={style["container-content-stats"]}>

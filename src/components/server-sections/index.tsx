@@ -4,6 +4,7 @@ import { h, FunctionalComponent, Fragment } from "preact";
 import { useEffect, useState } from "react";
 /* Styles */
 import style from "./style.scss";
+import baseStyle from "../style.scss";
 import networkStyle from "../network/style.scss";
 import diskStyle from "../disk/style.scss";
 import containerStyle from "../container/style.scss";
@@ -87,6 +88,8 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 break;
         }
     };
+    
+    const [processMapType, setProcessMapType] = useState<"MAP" | "LIST">("MAP");
 
     return (
         <div className={style["server-sections"]}>
@@ -162,11 +165,16 @@ const ServerSections: FunctionalComponent<ServerSectionsConnectedProps> = (props
                 <div className={style["server-section-title-wrapper"]}>
                     <div className={style["icon-process"]} />
                     <div className={style["server-section-title"]}>Process List ({props.processes.length})</div>
+                    <div className={baseStyle["panel-link"]} onClick={() => { setProcessMapType(processMapType === "LIST" ? "MAP" : "LIST"); }}>
+                        (Show {processMapType === "LIST" ? "map" : "list"})
+                    </div>
                 </div>
-                {props.processes.length < 1 ? null : <ProcessTreeMap server={props.item} processes={props.processes} />}
-                {props.processes.length < 1 ? null : <div className={style["server-section-items-grid"]} data="small">
-                    {props.processes.map((e, i) => <Process key={i} item={e} actions={props.actions} />)}
-                </div>}
+                {props.processes.length < 1 ? null :
+                    processMapType === "MAP" ? <ProcessTreeMap server={props.item} processes={props.processes} /> :
+                    <div className={style["server-section-items-grid"]} data="small">
+                        {props.processes.map((e, i) => <Process key={i} item={e} actions={props.actions} />)}
+                    </div>
+                }
             </div>
             <div id="actions" className={style["server-section"]}>
                 <div className={style["server-section-title-wrapper"]}>

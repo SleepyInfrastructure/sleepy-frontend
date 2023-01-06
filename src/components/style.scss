@@ -40,6 +40,8 @@
     font-size: 16px;
 }
 .panel-link {
+    @extend %align-y;
+    grid-gap: 10px;
     color: #66f;
     cursor: pointer;
     font-size: 14px;
@@ -63,6 +65,8 @@
 }
 
 .panel-content-row {
+    display: flex;
+    grid-gap: 5px;
     color: #ff7680;
     font-size: 14px;
 }

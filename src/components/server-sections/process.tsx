@@ -7,17 +7,18 @@ import * as c from "../../routes/server-map/models/const";
 const CustomizedContent: FunctionalComponent<any> = (props: any) => {
     const { root, depth, x, y, width, height, index, colors, sizes } = props;
     let { name } = props;
-    const fontSize = Math.max(Math.min(28, width / 11), 10);
-    const maxAllowed = Math.round((width / (fontSize * 0.8)));
+    const fontSize = Math.max(Math.min(26, width / 11), 10);
+    const maxAllowed = Math.round((width / (fontSize * 0.6)));
     if(name !== undefined && name.length > maxAllowed) {
         name = `${name.substring(0, maxAllowed)}...`;
     }
 
     return (
-        <g>
+        depth === 1 ? <g>
             <rect
                 x={x}
                 y={y}
+                rx={5}
                 width={width}
                 height={height}
                 style={{
@@ -25,24 +26,25 @@ const CustomizedContent: FunctionalComponent<any> = (props: any) => {
                     stroke: '#282828',
                     strokeWidth: 2 / (depth + 1e-10),
                     strokeOpacity: 1 / (depth + 1e-10),
+                    borderRadius: 10
                 }}
             />
-            {depth === 1 ? (
+            {width > 50 ? (
             <text x={x + width / 2} y={y + height / 2} textAnchor="middle" fill="#fff" fontSize={fontSize} strokeWidth={0}>
                 {name}
             </text>
             ) : null}
-            {depth === 1 ? (
+            {width > 50 ? (
             <text x={x + width / 2} y={y + height / 2 + fontSize + 3} textAnchor="middle" fill="#fff" fontSize={fontSize * 0.75} strokeWidth={0}>
             ({sizes[index]})
             </text>
             ) : null}
-            {depth === 1 ? (
+            {width > 50 ? (
             <text x={x + Math.max(8, fontSize / 2)} y={y + fontSize + 7} fill="#fff" fontSize={fontSize} fillOpacity={0.9}>
                 {index + 1}
             </text>
             ) : null}
-        </g>
+        </g> : null
     );
 }
 
@@ -54,8 +56,8 @@ const ProcessTreeMap: FunctionalComponent<ProcessTreeMapConnectedProps> = (props
         });
     }, []);
 
-    const processHighMemoryLoad = (props.server.memory) / 4;
-    const colors = props.processes.map(e => pickHex([255, 0, 0], [0, 255, 0], Math.min(1, e.memory / processHighMemoryLoad)));
+    const processHighMemoryLoad = (props.server.memory) / 4.5;
+    const colors = props.processes.map(e => pickHex([252, 64, 58], [68, 252, 68], Math.min(1, e.memory / processHighMemoryLoad)));
     const sizes = props.processes.map(e => humanFileSize(e.memory));
     return (
         <Treemap
