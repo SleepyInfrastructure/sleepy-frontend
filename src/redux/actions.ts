@@ -242,8 +242,8 @@ export function fetchSmbUserSuccess(user: SMBUser): ReduxAction {
 }
 
 /* Uptime endpoints */
-export function createUptimeEndpoint(name: string, host?: string, requestEndpoint?: string): ReduxAction {
-    return getAction("CREATE_UPTIME_ENDPOINT", { name, host, requestEndpoint });
+export function createUptimeEndpoint(create: UptimeEndpointCreate): ReduxAction {
+    return getAction("CREATE_UPTIME_ENDPOINT", create);
 }
 export function createUptimeEndpointSuccess(endpoint: UptimeEndpoint): ReduxAction {
     return getAction("CREATE_UPTIME_ENDPOINT_SUCCESS", endpoint);

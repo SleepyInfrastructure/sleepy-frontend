@@ -3,7 +3,7 @@ export function getApiEndpoint() {
     return location.host === "sleepy.lamkas.dev" ? "https://api.sleepy.lamkas.dev" : "https://localhost:9001";
 }
 export function getSSHEndpoint() {
-    return location.host === "sleepy.lamkas.dev" ? "https://ssh.sleepy.lamkas.dev" : "https://localhost:8888";
+    return location.host === "sleepy.lamkas.dev" ? "https://ssh.sleepy.lamkas.dev" : "http://localhost:8888";
 }
 
 export async function get(descriptor: APIGetRequest): Promise<APIResponse> {

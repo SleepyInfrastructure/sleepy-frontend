@@ -9,6 +9,7 @@ type PanelHeaderTagConnectedProps = {
     text?: string;
 };
 type SidebarConnectedProps = {
+    user: User | null;
     servers: Map<string, Server>;
     uptimeEndpoints: Map<string, UptimeEndpoint>;
     alerts: number;

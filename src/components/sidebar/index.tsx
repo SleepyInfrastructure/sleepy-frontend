@@ -11,12 +11,23 @@ import serverStyle from "../server/style.scss";
 import endpointStyle from "../uptime-endpoint/style.scss";
 
 const Sidebar: FunctionalComponent<SidebarConnectedProps> = (props: SidebarConnectedProps) => {
+    const icon = <div className={style["sidebar-header"]} onClick={() => { location.href = "/"; }}>
+        <img alt="logo" className={style["sidebar-icon"]} src="/assets/icons/icon-32x32.webp" />
+        <h1 className={style["sidebar-title"]}>Sleepy</h1>
+    </div>;
+
     return (
+        props.user === null ?
         <div className={style.sidebar}>
-            <div className={style["sidebar-header"]} onClick={() => { location.href = "/"; }}>
-                <img alt="logo" className={style["sidebar-icon"]} src="/assets/icons/icon-32x32.webp" />
-                <h1 className={style["sidebar-title"]}>Sleepy</h1>
-            </div>
+            {icon}
+            <Link className={style["sidebar-item"]} style={{ pointerEvents: "none" }}>
+                <div className={tokenStyle["icon-token"]} style={{ transform: "scale(0.75)", marginRight: 5 }} />
+                Login to access
+            </Link>
+        </div>
+        : 
+        <div className={style.sidebar}>
+            {icon}
             <Link className={style["sidebar-item"]} activeClassName={style["sidebar-item-active"]} href="/overview">
                 <div className={overviewStyle["icon-overview"]} style={{ transform: "scale(0.75)", marginRight: 5 }} />
                 Overview

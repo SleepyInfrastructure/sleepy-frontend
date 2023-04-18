@@ -2,7 +2,7 @@
 import { h, FunctionalComponent } from "preact";
 /* Styles */
 import baseStyle from "../style.scss";
-import style from "./style.scss";
+import endpointStyle from "./style.scss";
 /* Components */
 import UptimeEndpointChart from "../charts/uptime-endpoint";
 
@@ -11,26 +11,26 @@ const UptimeEndpoint: FunctionalComponent<UptimeEndpointConnectedProps> = (props
     const avgRequestTime = props.item.statistics.length < 1 ? 0 : (props.item.statistics.reduce((acc, curr) => acc + (curr.requestTime === null ? 0 : curr.requestTime), 0) / props.item.statistics.length).toFixed(2);
 
     return (
-        <div className={style.endpoint}>
+        <div className={baseStyle.panel} data="big">
             <div className={baseStyle["panel-header"]}>
-                <div className={style["icon-endpoint"]} />
-                <div className={style["endpoint-name"]}>{props.item.name}</div>
-                <a href={`/edit-uptime-endpoint/${props.item.id}`} className={style["endpoint-link"]}>(Edit)</a>
-                <a className={style["endpoint-link"]} data="red" onClick={() => { props.actions.deleteUptimeEndpoint(props.item.id); }}>(Delete)</a>
+                <div className={endpointStyle["icon-endpoint"]} />
+                <div className={endpointStyle["endpoint-name"]}>{props.item.name}</div>
+                <a href={`/edit-uptime-endpoint/${props.item.id}`} className={baseStyle["panel-link"]}>(Edit)</a>
+                <a className={baseStyle["panel-link"]} data="red" onClick={() => { props.actions.deleteUptimeEndpoint(props.item.id); }}>(Delete)</a>
             </div>
-            <div className={style["endpoint-content"]}>
+            <div className={endpointStyle["endpoint-content"]}>
                 {props.item.host === null ? null : 
-                    <div className={style["endpoint-field"]}>
-                        Host: <span className={style["endpoint-field-highlight"]}>{props.item.host}</span>
+                    <div className={endpointStyle["endpoint-field"]}>
+                        Host: <span className={endpointStyle["endpoint-field-highlight"]}>{props.item.host}</span>
                     </div>
                 }
                 {props.item.requestEndpoint === null ? null : 
-                    <div className={style["endpoint-field"]}>
-                        Request Endpoint: <span className={style["endpoint-field-highlight"]}>{props.item.requestEndpoint}</span>
+                    <div className={endpointStyle["endpoint-field"]}>
+                        Request Endpoint: <span className={endpointStyle["endpoint-field-highlight"]}>{props.item.requestEndpoint}</span>
                     </div>
                 }
-                <div className={style["endpoint-field"]}>
-                    Average Times: <span className={style["endpoint-field-highlight"]}>
+                <div className={endpointStyle["endpoint-field"]}>
+                    Average Times: <span className={endpointStyle["endpoint-field-highlight"]}>
                         <span style={{ color: "#3bff6f" }}>{avgTime}ms</span>/<span style={{ color: "#ff8121" }}>{avgRequestTime}ms</span>
                     </span>
                 </div>
