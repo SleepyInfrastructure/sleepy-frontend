@@ -27,7 +27,7 @@ const ZFSPool: FunctionalComponent<ZFSPoolConnectedProps> = (props: ZFSPoolConne
             <div className={baseStyle["panel-content"]}>
                 {props.item.partitions.length < 1 ? null :<div className={diskStyle["disk-content-items"]}>
                     {props.item.partitions.map((e, i) => {
-                        return <Partition key={i} item={{ ...e, name: e.partition === undefined ? "??" : e.partition.name }} actions={props.actions} />
+                        return e.partition !== undefined ? <Partition key={i} item={e.partition} actions={props.actions} /> : null;
                     })}
                 </div>}
             </div>
