@@ -37,7 +37,7 @@ const CreateNginxInstance: FunctionalComponent<CreateNginxInstanceConnectedProps
                 <FormRowInput name="Instance name" placeholder="my-nginx-instance..." value={name} satisfies={nameSatisfies} set={setName} />
                 <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
                         props.actions.createNginxInstance({ server: props.id ?? "", name, networks: [`${name}-network`] });
-                        setTimeout(() => { location.href = "/"; }, 1000);
+                        setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

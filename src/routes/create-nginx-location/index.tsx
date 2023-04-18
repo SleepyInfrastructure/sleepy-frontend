@@ -65,7 +65,7 @@ const CreateNginxLocation: FunctionalComponent<CreateNginxLocationConnectedProps
                         parent: props.id ?? "", name, type, path, endpoint,
                         cors: true
                     });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

@@ -50,7 +50,7 @@ const EditNginxInstance: FunctionalComponent<EditNginxInstanceConnectedProps> = 
                 <FormRowInput name="Instance name" placeholder="my-nginx-instance..." value={name} satisfies={nameSatisfies} set={setName} />
                 <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
                     props.actions.editNginxInstance({ id: instance.id, name });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

@@ -50,7 +50,7 @@ const EditSmbUser: FunctionalComponent<EditSMBUserConnectedProps> = (props: Edit
                 <FormRowInput name="User name" placeholder="my-smb-user..." value={name} satisfies={nameSatisfies} set={setName} />
                 <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
                     props.actions.editSmbUser({ id: user.id, name });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

@@ -73,7 +73,7 @@ const EditNginxServer: FunctionalComponent<EditNginxServerConnectedProps> = (pro
                         id: server.id, name, domain,
                         httpRedirect: httpRedirect === true, http2: http2 === true
                     });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

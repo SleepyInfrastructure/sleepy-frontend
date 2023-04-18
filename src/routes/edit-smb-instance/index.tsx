@@ -54,7 +54,7 @@ const EditSmbInstance: FunctionalComponent<EditSMBInstanceConnectedProps> = (pro
                 <FormRowSwitch name="Bin enabled" checked={recycle} onClick={setRecycle} />
                 <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
                     props.actions.editSmbInstance({ id: instance.id, name, recycle });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

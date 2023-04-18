@@ -37,7 +37,7 @@ const CreateSMBUser: FunctionalComponent<CreateSMBUserConnectedProps> = (props: 
                 <FormRowInput name="User name" placeholder="my-smb-user..." value={name} satisfies={nameSatisfies} set={setName} />
                 <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
                     props.actions.createSmbUser({ parent: props.id ?? "", name });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

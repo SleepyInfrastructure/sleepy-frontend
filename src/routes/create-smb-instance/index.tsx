@@ -40,7 +40,7 @@ const CreateSMBInstance: FunctionalComponent<CreateSMBInstanceConnectedProps> = 
                 <FormRowSwitch name="Bin enabled" checked={recycle} onClick={setRecycle} />
                 <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
                     props.actions.createSmbInstance({ server: props.id ?? "", name, recycle });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

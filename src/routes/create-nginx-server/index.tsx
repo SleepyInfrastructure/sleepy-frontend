@@ -57,7 +57,7 @@ const CreateNginxServer: FunctionalComponent<CreateNginxServerConnectedProps> = 
                         expires: "7d", origins: [domain], ssl,
                         httpRedirect: httpRedirect === true, http2: http2 === true
                     });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

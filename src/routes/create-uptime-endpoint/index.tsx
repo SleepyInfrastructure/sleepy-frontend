@@ -46,7 +46,7 @@ const CreateUptimeEndpoint: FunctionalComponent<CreateUptimeEndpointConnectedPro
                         host: host === "" ? undefined : host,
                         requestEndpoint: requestEndpoint === "" ? undefined : requestEndpoint
                     });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

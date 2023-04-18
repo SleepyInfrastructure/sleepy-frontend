@@ -81,7 +81,7 @@ const EditNginxLocation: FunctionalComponent<EditNginxLocationConnectedProps> = 
                     props.actions.editNginxLocation({
                         id: nlocation.id, name, type, path, endpoint
                     });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

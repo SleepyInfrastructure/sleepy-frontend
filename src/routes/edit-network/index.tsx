@@ -57,7 +57,7 @@ const EditNetwork: FunctionalComponent<EditNetworkConnectedProps> = (props: Edit
                         id: network.id,
                         name, ipv4
                     });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

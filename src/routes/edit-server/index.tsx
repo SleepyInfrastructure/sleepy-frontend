@@ -58,7 +58,7 @@ const EditServer: FunctionalComponent<EditServerConnectedProps> = (props: EditSe
                 </div>
                 <FormRowButton name="Edit!" satisfies={satisfies} onClick={() => {
                     props.actions.editServer({ id: server.id, name, color: color.substring(1) });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>

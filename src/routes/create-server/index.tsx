@@ -44,7 +44,7 @@ const CreateServer: FunctionalComponent<CreateServerConnectedProps> = (props: Cr
                 </div>
                 <FormRowButton name="Create!" satisfies={satisfies} onClick={() => {
                     props.actions.createServer({ name, color: color.substring(1) });
-                    setTimeout(() => { location.href = "/"; }, 1000);
+                    setTimeout(() => { location.href = "/overview"; }, 1000);
                 }} />
             </div>
         </div>
